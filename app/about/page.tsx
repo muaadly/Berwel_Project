@@ -57,8 +57,39 @@ export default function AboutPage() {
             Join us in building something meaningful. Let's reconnect the sounds of Libya—together.
           </p>
         </div>
+        {/* GoFundMe Section */}
+        <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-orange-500 flex flex-col items-center text-center">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-orange-400 transition-colors duration-200">💚 Support Berwel on GoFundMe</h2>
+          <p className="mb-6 text-white">Help us document and preserve the metadata of traditional Libyan music. Your support makes a difference!</p>
+          <a
+            href="https://www.gofundme.com/f/documenting-metadata-of-traditional-libyan-music?utm_campaign=p_cp+share-sheet&utm_medium=copy_link_all&utm_source=customer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-3 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-lg shadow-lg transition-colors duration-200"
+          >
+            Donate on GoFundMe
+          </a>
+        </div>
         <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-6 shadow-lg text-center text-white text-sm transition-colors duration-200 group hover:border-orange-500">
-          This is a <span className="font-semibold group-hover:text-orange-400 transition-colors duration-200">Libyan House for Oud Studies</span> project, with support from <span className="font-semibold group-hover:text-orange-400 transition-colors duration-200">Boursa for trading and investment</span>, and <span className="font-semibold group-hover:text-orange-400 transition-colors duration-200">Alfadaia co. for web development</span>.
+          <div className="mb-6 text-white text-sm text-center">
+            This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, and Alfadaia AI for Software Development.
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
+            <a href="https://www.lhos.ly/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <img src="/Partners Logos/Libyan Houes.png" alt="Libyan House for Oud Studies" className="max-h-28 md:max-h-36 w-auto object-contain" />
+            </a>
+            <a href="https://boursa.io/en" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <img src="/Partners Logos/Boursa AII.png" alt="Boursa" className="max-h-36 md:max-h-44 w-auto object-contain" />
+            </a>
+            <a href="https://www.alfadaia.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <img src="/Partners Logos/Alfadaia ai.png" alt="Alfadaia AI" className="max-h-36 md:max-h-44 w-auto object-contain" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Libyan House for Oud Studies</span>
+            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Boursa</span>
+            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Alfadaia AI</span>
+          </div>
         </div>
       </div>
       <Footer />

@@ -1,15 +1,37 @@
+"use client"
 import Navigation from "@/components/navigation"
 import Hero from "@/components/hero"
 import SingersSection from "@/components/singers-section"
 import MaloofSection from "@/components/maloof-section"
 import ContactForm from "@/components/contact-form"
 import Footer from "@/components/footer"
+import { useState } from "react"
+import { Search } from "lucide-react"
 
 export default function Home() {
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState("")
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navigation />
+      <Navigation searchOpen={searchOpen} setSearchOpen={setSearchOpen} searchValue={searchValue} setSearchValue={setSearchValue} />
       <Hero />
+      {/* Search Our Library Section */}
+      <section className="max-w-7xl mx-auto mt-8 mb-12 px-4">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl font-bold text-white">Search Our Library</h2>
+        </div>
+        <div className="bg-gray-900 border-2 border-gray-700 rounded-lg shadow-lg flex flex-col items-start py-10 px-8">
+          <button
+            className="w-full flex items-center gap-4 bg-black border border-gray-700 rounded-lg px-6 py-4 text-2xl font-semibold text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-colors group"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Open global search"
+            style={{ maxWidth: '100%' }}
+          >
+            <Search className="h-8 w-8 text-orange-500 group-hover:text-orange-600 transition-colors" />
+            <span className="flex-1 text-left">Search Berwel...</span>
+          </button>
+        </div>
+      </section>
       <SingersSection />
       <MaloofSection />
       {/* Berwel Soundcloud Playlist Section */}

@@ -7,6 +7,13 @@ import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { DialogTitle } from "@radix-ui/react-dialog"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
+
+interface CommandDialogProps extends DialogProps {
+  searchValue?: string;
+  onSearchValueChange?: (value: string) => void;
+}
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
@@ -15,7 +22,7 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
+      "flex h-full w-full flex-col overflow-hidden rounded-md bg-black text-white",
       className
     )}
     {...props}
@@ -23,33 +30,70 @@ const Command = React.forwardRef<
 ))
 Command.displayName = CommandPrimitive.displayName
 
-const CommandDialog = ({ children, ...props }: DialogProps) => {
+const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 shadow-lg">
-        <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-          {children}
+      <DialogContent className="overflow-hidden p-0 bg-black shadow-none border-none max-w-2xl w-full rounded-none md:rounded-2xl">
+        <DialogTitle asChild>
+          <VisuallyHidden>Global Search</VisuallyHidden>
+        </DialogTitle>
+        <Command className="w-full">
+          <div className="flex flex-col items-center w-full p-8 pt-8">
+            {/* Logo at the top center */}
+            <div className="w-full flex justify-center mb-6">
+              <img src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" className="h-16 w-16 object-contain" />
+            </div>
+            {/* Search bar with icon */}
+            <div className="w-full mb-8 flex items-center border-b border-gray-700 px-3">
+              <Search className="mr-3 h-8 w-8 text-orange-500" />
+              <CommandInput
+                autoFocus
+                value={searchValue}
+                onValueChange={onSearchValueChange}
+                className="flex-1 h-16 text-3xl font-bold bg-black border-none outline-none text-white placeholder:text-gray-400 placeholder:font-bold placeholder:text-3xl px-0"
+                placeholder="Search Berwel..."
+              />
+            </div>
+            <div className="w-full">
+              <div className="text-white text-lg font-semibold mb-4">Quick Links</div>
+              <CommandList>
+                <CommandGroup>
+                  <CommandItem asChild>
+                    <a href="/library" className="text-xl font-bold text-white hover:text-orange-500 transition-colors">Libyan Songs</a>
+                  </CommandItem>
+                  <CommandItem asChild>
+                    <a href="/library?tab=maloof" className="text-xl font-bold text-white hover:text-orange-500 transition-colors">Maloof Entries</a>
+                  </CommandItem>
+                </CommandGroup>
+                {/* Suggestions will be rendered here by children */}
+                {children}
+              </CommandList>
+            </div>
+          </div>
         </Command>
       </DialogContent>
     </Dialog>
   )
 }
 
+interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {
+  value?: string;
+  onValueChange?: (value: string) => void;
+}
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-    <CommandPrimitive.Input
-      ref={ref}
-      className={cn(
-        "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
-      {...props}
-    />
-  </div>
+  CommandInputProps
+>(({ className, value, onValueChange, ...props }, ref) => (
+  <CommandPrimitive.Input
+    ref={ref}
+    value={value}
+    onValueChange={onValueChange}
+    className={cn(
+      "flex h-16 w-full rounded-md bg-black py-3 text-3xl font-bold text-white placeholder:text-gray-400 outline-none border-none disabled:cursor-not-allowed disabled:opacity-50 px-0",
+      className
+    )}
+    {...props}
+  />
 ))
 
 CommandInput.displayName = CommandPrimitive.Input.displayName

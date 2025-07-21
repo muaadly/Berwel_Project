@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Heart, Share2, ExternalLink, ChevronRight, Clock } from "lucide-react"
+import { Heart, Share2, ExternalLink, ChevronRight, Clock, BookOpen } from "lucide-react"
 import { fetchLibyanSongById, getSingerImagePath, LibyanSong, fetchLibyanSongs } from "@/lib/data"
 import {
   Dialog,
@@ -15,6 +15,7 @@ import {
   DialogDescription,
   DialogClose,
 } from "@/components/ui/dialog"
+import { Facebook, Instagram, Link as LinkIcon, MessageCircle, MessageSquare } from "lucide-react"
 
 interface SongDetailProps {
   songId: string
@@ -132,44 +133,38 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <img
                 src={getSingerImagePath(song.imageName)}
                 alt={song.singer}
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-cover select-none pointer-events-none"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement
                   target.src = '/placeholder-user.jpg'
                 }}
+                onContextMenu={e => e.preventDefault()}
+                draggable={false}
               />
-            </div>
-            {/* Add/Edit Request Button */}
-            <div className="mt-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors">
-                    Add/Edit Request
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="bg-gray-900 border-none rounded-xl p-10 max-w-xs text-center">
-                  <DialogTitle className="sr-only">Coming Soon!</DialogTitle>
-                  <div className="flex flex-col items-center">
-                    <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center mb-6">
-                      <Clock className="w-10 h-10 text-white" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-white mb-2">Coming Soon!</h2>
-                    <p className="text-gray-300 mb-6">This feature will be live soon</p>
-                    <DialogClose asChild>
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md text-lg">Got it</Button>
-                    </DialogClose>
-                  </div>
-                </DialogContent>
-              </Dialog>
             </div>
           </div>
 
           {/* Right Column */}
           <div className="lg:col-span-2 space-y-6">
             {/* Song Name with Orange Border */}
-            <div className="bg-black border border-gray-700 p-6 rounded-lg">
+            <div className="bg-black border border-gray-700 p-6 rounded-lg mb-4">
               <h1 className="text-3xl font-bold text-white text-center">{song.songName}</h1>
             </div>
+
+            {/* SoundCloud Button at the top */}
+            {song.soundcloudLink && (
+              <div className="mb-4 flex justify-center">
+                <Button
+                  asChild
+                  className="bg-orange-500 hover:bg-orange-600 text-white transition-colors"
+                >
+                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Listen on SoundCloud
+                  </a>
+                </Button>
+              </div>
+            )}
 
             {/* Lyrics Box */}
             <div className="bg-black border border-gray-700 rounded-lg overflow-hidden">
@@ -180,7 +175,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
               <div className="p-6">
                 <div className="bg-gray-900 rounded-lg p-6 max-h-64 overflow-y-auto">
-                  <pre className="text-white text-lg leading-relaxed whitespace-pre-wrap font-arabic">
+                  <pre className="text-white text-lg leading-relaxed whitespace-pre-wrap font-arabic select-none" style={{ userSelect: 'none' }} onCopy={e => e.preventDefault()} onContextMenu={e => e.preventDefault()}>
                     {song.lyrics}
                   </pre>
                 </div>
@@ -208,11 +203,91 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       </div>
                     </DialogContent>
                   </Dialog>
+                  {/* Share Button and Add Lyrics next to each other */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors">
-                        <Share2 className="h-4 w-4 mr-2" />
-                        Share
+                      <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2">
+                        <Share2 className="h-4 w-4" /> Share
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-md w-full bg-gray-900 border-none rounded-2xl p-8">
+                      <DialogTitle className="text-2xl font-bold text-white mb-4">Share music with your friends</DialogTitle>
+                      <div className="flex flex-col items-center">
+                        <img
+                          src={getSingerImagePath(song.imageName)}
+                          alt={song.singer}
+                          className="w-24 h-24 object-cover rounded-lg mb-4 select-none pointer-events-none"
+                          onContextMenu={e => e.preventDefault()}
+                          draggable={false}
+                        />
+                        <div className="text-xl font-bold text-white mb-1">{song.songName}</div>
+                        <div className="text-md text-orange-500 mb-6">{song.singer}</div>
+                        <div className="flex flex-wrap gap-3 justify-center mb-2">
+                          {/* Copy Link */}
+                          <Button
+                            variant="outline"
+                            className="rounded-full border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white flex items-center gap-2"
+                            onClick={() => { navigator.clipboard.writeText(window.location.href) }}
+                          >
+                            <LinkIcon className="h-5 w-5" />
+                            <span className="hidden sm:inline">Copy Link</span>
+                          </Button>
+                          {/* Facebook */}
+                          <Button
+                            variant="outline"
+                            className="rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center gap-2"
+                            asChild
+                          >
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
+                              <Facebook className="h-5 w-5" />
+                              <span className="hidden sm:inline">Facebook</span>
+                            </a>
+                          </Button>
+                          {/* WhatsApp */}
+                          <Button
+                            variant="outline"
+                            className="rounded-full border-green-600 text-green-600 hover:bg-green-600 hover:text-white flex items-center gap-2"
+                            asChild
+                          >
+                            <a href={`https://wa.me/?text=${encodeURIComponent(song.songName + ' - ' + window.location.href)}`} target="_blank" rel="noopener noreferrer">
+                              <MessageSquare className="h-5 w-5" />
+                              <span className="hidden sm:inline">WhatsApp</span>
+                            </a>
+                          </Button>
+                          {/* Instagram (just open Instagram for now) */}
+                          <Button
+                            variant="outline"
+                            className="rounded-full border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white flex items-center gap-2"
+                            asChild
+                          >
+                            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                              <Instagram className="h-5 w-5" />
+                              <span className="hidden sm:inline">Instagram</span>
+                            </a>
+                          </Button>
+                          {/* SMS */}
+                          <Button
+                            variant="outline"
+                            className="rounded-full border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white flex items-center gap-2"
+                            asChild
+                          >
+                            <a href={`sms:?body=${encodeURIComponent(song.songName + ' - ' + window.location.href)}`}>
+                              <MessageCircle className="h-5 w-5" />
+                              <span className="hidden sm:inline">SMS</span>
+                            </a>
+                          </Button>
+                        </div>
+                      </div>
+                      <DialogClose asChild>
+                        <Button variant="ghost" className="absolute top-4 right-4 text-gray-400 hover:text-white">✕</Button>
+                      </DialogClose>
+                    </DialogContent>
+                  </Dialog>
+                  {/* Add Lyrics Button */}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
+                        <BookOpen className="h-4 w-4" /> Add Lyrics
                       </Button>
                     </DialogTrigger>
                     <DialogContent className="bg-gray-900 border-none rounded-xl p-10 max-w-xs text-center">
@@ -274,22 +349,6 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <h3 className="text-sm font-semibold text-gray-400 mb-1">Lyrics Status</h3>
               <p className="text-white">{song.lyricsStatus}</p>
             </div>
-
-            {/* SoundCloud Link */}
-            {song.soundcloudLink && (
-              <div className="mt-6">
-                <h3 className="text-sm font-semibold text-gray-400 mb-2">Listen on SoundCloud</h3>
-                <Button
-                  asChild
-                  className="bg-orange-500 hover:bg-orange-600 text-white transition-colors"
-                >
-                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Open in SoundCloud
-                  </a>
-                </Button>
-              </div>
-            )}
           </div>
         </div>
 

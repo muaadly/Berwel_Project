@@ -64,7 +64,7 @@ export default function MaloofSection() {
           </div>
         </div>
 
-        <div className="bg-gray-900 border-2 border-gray-700 rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div ref={scrollRef} className="bg-gray-900 border-2 border-gray-700 rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex w-max space-x-6 pb-4">
             {entryImages.map((img, idx) => {
               const entryType = entryTypeMap[img] || "";

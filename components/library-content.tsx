@@ -21,6 +21,7 @@ export default function LibraryContent() {
   const [mounted, setMounted] = useState(false)
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [showFilters, setShowFilters] = useState(false);
 
   // Filter state
   const [songSearch, setSongSearch] = useState("")
@@ -165,7 +166,7 @@ export default function LibraryContent() {
 
     return (
       <div className="flex items-center justify-between px-6 py-4 bg-gray-800 border-t border-gray-700">
-        <div className="flex items-center text-sm text-gray-300">
+        <div className="hidden md:flex items-center text-sm text-gray-300">
           <span>
             Showing {startItem} to {endItem} of {totalItems} {itemType}
           </span>
@@ -179,8 +180,8 @@ export default function LibraryContent() {
             size="sm"
             className="text-gray-300 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Previous
+            <ChevronLeft className="h-4 w-4 md:mr-1" />
+            <span className="hidden md:inline">Previous</span>
           </Button>
 
           <div className="flex items-center space-x-1">
@@ -241,8 +242,8 @@ export default function LibraryContent() {
             size="sm"
             className="text-gray-300 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Next
-            <ChevronRight className="h-4 w-4 ml-1" />
+            <span className="hidden md:inline">Next</span>
+            <ChevronRight className="h-4 w-4 md:ml-1" />
           </Button>
         </div>
       </div>
@@ -319,65 +320,94 @@ export default function LibraryContent() {
 
         {/* Content */}
         <div className="bg-gray-900 rounded-lg p-6 mt-4">
-          {activeTab === "songs" ? (
-            <>
-              {/* Search Bar */}
+          {/* Search Bar and Filter Button - inline */}
+          <div className="mb-4 flex flex-row items-center gap-4">
+            {activeTab === "songs" ? (
               <input
                 type="text"
                 placeholder="Search Libyan songs..."
                 value={songSearch}
                 onChange={e => setSongSearch(e.target.value)}
-                className="w-full mb-4 px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-              {/* Active Singer Filter Pill */}
-              {selectedSingers.length > 0 && (
-                <div className="mb-4 flex flex-wrap gap-2 items-center">
-                  {selectedSingers.map(singer => (
-                    <span key={singer} className="flex items-center bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {singer}
-                      <button
-                        className="ml-2 text-white hover:text-gray-200 focus:outline-none"
-                        onClick={() => setSelectedSingers(selectedSingers.filter(s => s !== singer))}
-                        aria-label={`Remove ${singer}`}
-                      >
-                        ×
-                      </button>
-                    </span>
-                  ))}
-                </div>
+            ) : (
+              <input
+                type="text"
+                placeholder="Search Maloof entries..."
+                value={maloofSearch}
+                onChange={e => setMaloofSearch(e.target.value)}
+                className="flex-1 px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+            )}
+            <Button
+              variant="outline"
+              className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors"
+              onClick={() => setShowFilters((prev) => !prev)}
+            >
+              {showFilters ? "Hide Filters" : "Show Filters"}
+            </Button>
+          </div>
+          {activeTab === "songs" ? (
+            <>
+              {showFilters && (
+                <>
+                  {/* Active Singer Filter Pill */}
+                  {selectedSingers.length > 0 && (
+                    <div className="mb-4 flex flex-wrap gap-2 items-center">
+                      {selectedSingers.map(singer => (
+                        <span key={singer} className="flex items-center bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {singer}
+                          <button
+                            className="ml-2 text-white hover:text-gray-200 focus:outline-none"
+                            onClick={() => setSelectedSingers(selectedSingers.filter(s => s !== singer))}
+                            aria-label={`Remove ${singer}`}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {/* Singer Filter */}
+                  <div className="mb-4">
+                    <div className="mb-2 text-gray-300 font-semibold">Filter by Singer:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {allSingers.map(singer => (
+                        <button
+                          key={singer}
+                          className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedSingers.includes(singer) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                          onClick={() => {
+                            setSelectedSingers(sel => sel.includes(singer) ? sel.filter(s => s !== singer) : [...sel, singer]);
+                            setShowFilters(false);
+                          }}
+                          type="button"
+                        >
+                          {singer}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Category Filter */}
+                  <div className="mb-4">
+                    <div className="mb-2 text-gray-300 font-semibold">Filter by Category:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {allCategories.map(category => (
+                        <button
+                          key={category}
+                          className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedCategories.includes(category) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                          onClick={() => {
+                            setSelectedCategories(sel => sel.includes(category) ? sel.filter(c => c !== category) : [...sel, category]);
+                            setShowFilters(false);
+                          }}
+                          type="button"
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
-              {/* Singer Filter */}
-              <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Singer:</div>
-                <div className="flex flex-wrap gap-2">
-                  {allSingers.map(singer => (
-                    <button
-                      key={singer}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedSingers.includes(singer) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
-                      onClick={() => setSelectedSingers(sel => sel.includes(singer) ? sel.filter(s => s !== singer) : [...sel, singer])}
-                      type="button"
-                    >
-                      {singer}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              {/* Category Filter */}
-              <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Category:</div>
-                <div className="flex flex-wrap gap-2">
-                  {allCategories.map(category => (
-                    <button
-                      key={category}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedCategories.includes(category) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
-                      onClick={() => setSelectedCategories(sel => sel.includes(category) ? sel.filter(c => c !== category) : [...sel, category])}
-                      type="button"
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
               {/* Table and Pagination (filteredSongs) */}
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -393,15 +423,12 @@ export default function LibraryContent() {
                         Category
                       </th>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
-                        Year
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
                         Play
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-700">
-                    {filteredSongs.map((song, index) => (
+                    {currentSongs.map((song, index) => (
                       <tr
                         key={song.id}
                         className={`hover:bg-gray-800 transition-colors ${index % 2 === 0 ? "bg-gray-900" : "bg-gray-850"} cursor-pointer`}
@@ -419,9 +446,6 @@ export default function LibraryContent() {
                           <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">
                             {song.category}
                           </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-gray-300">{song.year}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <Button
@@ -446,63 +470,65 @@ export default function LibraryContent() {
             </>
           ) : (
             <>
-              {/* Search Bar */}
-              <input
-                type="text"
-                placeholder="Search Maloof entries..."
-                value={maloofSearch}
-                onChange={e => setMaloofSearch(e.target.value)}
-                className="w-full mb-4 px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-              {/* Active Entry Type Filter Pill */}
-              {selectedEntryTypes.length > 0 && (
-                <div className="mb-4 flex flex-wrap gap-2 items-center">
-                  {selectedEntryTypes.map(type => (
-                    <span key={type} className="flex items-center bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {type}
-                      <button
-                        className="ml-2 text-white hover:text-gray-200 focus:outline-none"
-                        onClick={() => setSelectedEntryTypes(selectedEntryTypes.filter(t => t !== type))}
-                        aria-label={`Remove ${type}`}
-                      >
-                        ×
-                      </button>
-                    </span>
-                  ))}
-                </div>
+              {showFilters && (
+                <>
+                  {/* Active Entry Type Filter Pill */}
+                  {selectedEntryTypes.length > 0 && (
+                    <div className="mb-4 flex flex-wrap gap-2 items-center">
+                      {selectedEntryTypes.map(type => (
+                        <span key={type} className="flex items-center bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {type}
+                          <button
+                            className="ml-2 text-white hover:text-gray-200 focus:outline-none"
+                            onClick={() => setSelectedEntryTypes(selectedEntryTypes.filter(t => t !== type))}
+                            aria-label={`Remove ${type}`}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {/* Entry Type Filter */}
+                  <div className="mb-4">
+                    <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Type:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {allEntryTypes.map(type => (
+                        <button
+                          key={type}
+                          className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryTypes.includes(type) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                          onClick={() => {
+                            setSelectedEntryTypes(sel => sel.includes(type) ? sel.filter(t => t !== type) : [...sel, type]);
+                            setShowFilters(false);
+                          }}
+                          type="button"
+                        >
+                          {type}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Entry Rhythm Filter */}
+                  <div className="mb-4">
+                    <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Rhythm:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {allEntryRhythms.map(rhythm => (
+                        <button
+                          key={rhythm}
+                          className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryRhythms.includes(rhythm) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                          onClick={() => {
+                            setSelectedEntryRhythms(sel => sel.includes(rhythm) ? sel.filter(r => r !== rhythm) : [...sel, rhythm]);
+                            setShowFilters(false);
+                          }}
+                          type="button"
+                        >
+                          {rhythm}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
-              {/* Entry Type Filter */}
-              <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Type:</div>
-                <div className="flex flex-wrap gap-2">
-                  {allEntryTypes.map(type => (
-                    <button
-                      key={type}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryTypes.includes(type) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
-                      onClick={() => setSelectedEntryTypes(sel => sel.includes(type) ? sel.filter(t => t !== type) : [...sel, type])}
-                      type="button"
-                    >
-                      {type}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              {/* Entry Rhythm Filter */}
-              <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Rhythm:</div>
-                <div className="flex flex-wrap gap-2">
-                  {allEntryRhythms.map(rhythm => (
-                    <button
-                      key={rhythm}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryRhythms.includes(rhythm) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
-                      onClick={() => setSelectedEntryRhythms(sel => sel.includes(rhythm) ? sel.filter(r => r !== rhythm) : [...sel, rhythm])}
-                      type="button"
-                    >
-                      {rhythm}
-                    </button>
-                  ))}
-                </div>
-              </div>
               {/* Table and Pagination (filteredMaloof) */}
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -523,7 +549,7 @@ export default function LibraryContent() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-700">
-                    {filteredMaloof.map((entry, index) => (
+                    {currentMaloofEntries.map((entry, index) => (
                       <tr
                         key={entry.id}
                         className={`hover:bg-gray-800 transition-colors cursor-pointer ${index % 2 === 0 ? "bg-gray-900" : "bg-gray-850"}`}

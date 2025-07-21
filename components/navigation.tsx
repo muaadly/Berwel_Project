@@ -3,10 +3,46 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
+import { Drawer, DrawerContent, DrawerClose } from "@/components/ui/drawer"
+import { DialogTitle } from "@radix-ui/react-dialog"
+import { CommandDialog } from "@/components/ui/command"
+import { Search } from "lucide-react"
+import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
+import { useEffect } from "react"
 
-export default function Navigation() {
+interface NavigationProps {
+  searchOpen: boolean;
+  setSearchOpen: Dispatch<SetStateAction<boolean>>;
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
+}
+
+export default function Navigation({ searchOpen, setSearchOpen, searchValue, setSearchValue }: NavigationProps) {
   const [showRegisterModal, setShowRegisterModal] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
+  const [maloofEntries, setMaloofEntries] = useState<MaloofEntry[]>([])
+
+  useEffect(() => {
+    if (searchOpen) {
+      fetchLibyanSongs().then(setLibyanSongs)
+      fetchMaloofEntries().then(setMaloofEntries)
+    }
+  }, [searchOpen])
+
+  // Filtered suggestions
+  const filteredSongs = searchValue
+    ? libyanSongs.filter((song: LibyanSong) =>
+        song.songName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        song.singer.toLowerCase().includes(searchValue.toLowerCase())
+      ).slice(0, 5)
+    : []
+  const filteredMaloof = searchValue
+    ? maloofEntries.filter((entry: MaloofEntry) =>
+        entry.entryName.toLowerCase().includes(searchValue.toLowerCase())
+      ).slice(0, 5)
+    : []
 
   return (
     <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
@@ -55,26 +91,129 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Register Button */}
-          <div className="hidden md:block">
+          {/* Right-side actions */}
+          <div className="flex items-center gap-2">
+            {/* Global Search Button */}
             <Button
-              onClick={() => setShowRegisterModal(true)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
+              variant="ghost"
+              size="icon"
+              className="text-white hover:text-orange-500"
+              aria-label="Open search"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search className="h-6 w-6" />
+            </Button>
+            {/* Register Button */}
+            <div className="hidden md:block">
+              <Button
+                onClick={() => setShowRegisterModal(true)}
+                className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
+              >
+                Register Now
+              </Button>
+            </div>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                className="text-white hover:text-orange-500"
+                size="sm"
+                onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open menu"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Global Search Command Palette */}
+      <CommandDialog
+        open={searchOpen}
+        onOpenChange={setSearchOpen}
+        searchValue={searchValue}
+        onSearchValueChange={setSearchValue}
+      >
+        {/* Suggestions for Libyan Songs */}
+        {searchValue && (filteredSongs.length > 0 || filteredMaloof.length > 0) && (
+          <>
+            {filteredSongs.length > 0 && (
+              <>
+                <div className="text-gray-400 text-xs font-semibold px-4 pt-4 pb-1">Libyan Songs</div>
+                {filteredSongs.map((song: LibyanSong) => (
+                  <a
+                    key={song.id}
+                    href={`/songs/${song.id}`}
+                    className="block px-4 py-2 text-white hover:text-orange-500 hover:bg-gray-800 transition-colors text-base"
+                  >
+                    {song.songName} <span className="text-gray-400">({song.singer})</span>
+                  </a>
+                ))}
+              </>
+            )}
+            {filteredMaloof.length > 0 && (
+              <>
+                <div className="text-gray-400 text-xs font-semibold px-4 pt-4 pb-1">Maloof Entries</div>
+                {filteredMaloof.map((entry: MaloofEntry) => (
+                  <a
+                    key={entry.id}
+                    href={`/maloof/${entry.id}`}
+                    className="block px-4 py-2 text-white hover:text-orange-500 hover:bg-gray-800 transition-colors text-base"
+                  >
+                    {entry.entryName}
+                  </a>
+                ))}
+              </>
+            )}
+          </>
+        )}
+      </CommandDialog>
+
+      {/* Mobile Drawer Menu */}
+      <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <DrawerContent className="bg-black border-none text-white">
+          <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
+          <div className="flex flex-col gap-6 p-6">
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-2xl font-bold">Menu</span>
+              <DrawerClose asChild>
+                <Button variant="ghost" size="icon" aria-label="Close menu">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </Button>
+              </DrawerClose>
+            </div>
+            <Link href="/" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+              Home
+            </Link>
+            <Link href="/library" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+              Library
+            </Link>
+            <Link href="/analytics" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+              Analytics
+            </Link>
+            <Link href="/about" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+              About
+            </Link>
+            <Link href="/contact" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+              Contact
+            </Link>
+            <Button
+              className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors mt-4"
+              onClick={() => {
+                setShowRegisterModal(true)
+                setMobileMenuOpen(false)
+              }}
             >
               Register Now
             </Button>
           </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" className="text-white hover:text-orange-500" size="sm">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </Button>
-          </div>
-        </div>
-      </div>
+        </DrawerContent>
+      </Drawer>
 
       {/* Register Modal */}
       {showRegisterModal && (
