@@ -103,17 +103,17 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             >
               <Search className="h-6 w-6" />
             </Button>
-            {/* Register Button */}
-            <div className="hidden md:block">
-              <Button
-                onClick={() => setShowRegisterModal(true)}
-                className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
-              >
-                Register Now
-              </Button>
-            </div>
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+          {/* Register Button */}
+          <div className="hidden md:block">
+            <Button
+              onClick={() => setShowRegisterModal(true)}
+              className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
+            >
+              Register Now
+            </Button>
+          </div>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
               <Button
                 variant="ghost"
                 className="text-white hover:text-orange-500"
@@ -121,13 +121,13 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Open menu"
               >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </Button>
-            </div>
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </Button>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Global Search Command Palette */}

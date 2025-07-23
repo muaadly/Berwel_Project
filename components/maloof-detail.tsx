@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Heart, Share2, ChevronRight, Clock } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { fetchMaloofEntryById, getEntryTypeImagePath, getNoteImagePath, MaloofEntry, fetchMaloofEntries } from "@/lib/data"
 import {
   Dialog,
@@ -42,6 +43,7 @@ const entryTypeMap: Record<string, string> = {
 }
 
 export default function MaloofDetail({ entryId }: MaloofDetailProps) {
+  const router = useRouter();
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(3)
   const [comment, setComment] = useState("")
@@ -97,6 +99,17 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
     )
   }
 
+  // Back button above entry image
+  const BackButton = () => (
+    <button
+      onClick={() => router.back()}
+      className="flex items-center gap-2 mb-4 px-4 py-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors"
+    >
+      <ArrowLeft className="w-5 h-5" />
+      <span>Back</span>
+    </button>
+  );
+
   const handleLike = () => {
     if (liked) {
       setLikes(likes - 1)
@@ -130,7 +143,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   const sameTypeEntries = allEntries.filter(e => e.entryType === entry?.entryType && e.id !== entry?.id).slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-black py-8 px-4">
+    <div className="min-h-screen bg-black text-white pb-16">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
@@ -144,6 +157,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
           <ChevronRight className="h-4 w-4" />
           <span className="text-white">{entry.entryName}</span>
         </nav>
+        <BackButton />
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

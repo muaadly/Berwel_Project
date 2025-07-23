@@ -1,11 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Heart, Share2, ExternalLink, ChevronRight, Clock, BookOpen } from "lucide-react"
+import { Heart, Share2, ExternalLink, ChevronRight, Clock, BookOpen, ChevronLeft } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { fetchLibyanSongById, getSingerImagePath, LibyanSong, fetchLibyanSongs } from "@/lib/data"
+import { useRouter } from "next/navigation"
 import {
   Dialog,
   DialogTrigger,
@@ -22,6 +24,7 @@ interface SongDetailProps {
 }
 
 export default function SongDetail({ songId }: SongDetailProps) {
+  const router = useRouter();
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState(2)
   const [comment, setComment] = useState("")
@@ -29,6 +32,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
   const [song, setSong] = useState<LibyanSong | null>(null)
   const [loading, setLoading] = useState(true)
   const [allSongs, setAllSongs] = useState<LibyanSong[]>([])
+  // Carousel scroll refs (must be before any return)
+  const otherSongsScrollRef = useRef<any>(null);
+  const otherSingersScrollRef = useRef<any>(null);
 
   useEffect(() => {
     const loadSong = async () => {
@@ -69,6 +75,17 @@ export default function SongDetail({ songId }: SongDetailProps) {
     )
   }
 
+  // Back button above singer image
+  const BackButton = () => (
+    <button
+      onClick={() => router.back()}
+      className="flex items-center gap-2 mb-4 px-4 py-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors"
+    >
+      <ArrowLeft className="w-5 h-5" />
+      <span>Back</span>
+    </button>
+  );
+
   const handleLike = () => {
     if (liked) {
       setLikes(likes - 1)
@@ -98,8 +115,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
     }
   }
 
-  // Section 1: Other Songs (any, excluding current)
-  const otherSongs = allSongs.filter(s => String(s.id) !== String(songId)).slice(0, 4)
+  // Section 1: Other Songs (random, same category, excluding current)
+  function shuffleArray<T>(array: T[]): T[] {
+    return array
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  }
+  const otherSongs = shuffleArray(
+    allSongs.filter(s => String(s.id) !== String(songId) && s.category === song.category)
+  ).slice(0, 10);
 
   // Section 2: Other Singers (unique singers, excluding current song's singer)
   const otherSingers = Array.from(
@@ -107,10 +132,22 @@ export default function SongDetail({ songId }: SongDetailProps) {
       .filter(s => s.singer !== song?.singer)
       .reduce((map, s) => map.has(s.singer) ? map : map.set(s.singer, s), new Map())
       .values()
-  ).slice(0, 4)
+  ).slice(0, 10)
+
+  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
+    const el = ref.current as HTMLDivElement | null;
+    if (el) {
+      const { scrollLeft, clientWidth } = el;
+      const scrollAmount = clientWidth * 0.8;
+      el.scrollTo({
+        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-black py-8 px-4">
+    <div className="min-h-screen bg-black text-white pb-16">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
@@ -124,6 +161,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
           <ChevronRight className="h-4 w-4" />
           <span className="text-white">{song.songName}</span>
         </nav>
+        <BackButton />
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -405,50 +443,94 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Section 1: Other Songs */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-white mb-6">Other Songs</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {otherSongs.length === 0 ? (
-              <div className="text-gray-400 col-span-full">No other songs found.</div>
-            ) : (
-              otherSongs.map(s => (
-                <Link key={s.id} href={`/songs/${s.id}`} className="block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
-                  <div className="flex flex-col items-center justify-center">
-                    <img
-                      src={getSingerImagePath(s.imageName)}
-                      alt={s.singer}
-                      className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
-                      onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
-                    />
-                    <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.songName}</div>
-                    <div className="text-gray-400 text-sm text-center">{s.singer}</div>
-                  </div>
-                </Link>
-              ))
-            )}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-white">Other Songs</h2>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-gray-600 text-white bg-transparent border-2"
+                onClick={() => scroll(otherSongsScrollRef, 'left')}
+              >
+                <ChevronLeft className="h-4 w-4 text-orange-500" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-gray-600 text-white bg-transparent border-2"
+                onClick={() => scroll(otherSongsScrollRef, 'right')}
+              >
+                <ChevronRight className="h-4 w-4 text-orange-500" />
+              </Button>
+            </div>
+          </div>
+          <div ref={otherSongsScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
+              {otherSongs.length === 0 ? (
+                <div className="text-gray-400">No other songs found.</div>
+              ) : (
+                otherSongs.map(s => (
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                    <div className="flex flex-col items-center justify-center">
+                      <img
+                        src={getSingerImagePath(s.imageName)}
+                        alt={s.singer}
+                        className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
+                        onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
+                      />
+                      <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.songName}</div>
+                      <div className="text-gray-400 text-sm text-center">{s.singer}</div>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </div>
           </div>
         </div>
 
         {/* Section 2: Other Singers */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-white mb-6">Other Singers</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {otherSingers.length === 0 ? (
-              <div className="text-gray-400 col-span-full">No other singers found.</div>
-            ) : (
-              otherSingers.map(s => (
-                <Link key={s.singer} href={`/songs/${s.id}`} className="block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
-                  <div className="flex flex-col items-center justify-center">
-                    <img
-                      src={getSingerImagePath(s.imageName)}
-                      alt={s.singer}
-                      className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
-                      onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
-                    />
-                    <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.singer}</div>
-                  </div>
-                </Link>
-              ))
-            )}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-white">Other Singers</h2>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-gray-600 text-white bg-transparent border-2"
+                onClick={() => scroll(otherSingersScrollRef, 'left')}
+              >
+                <ChevronLeft className="h-4 w-4 text-orange-500" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-gray-600 text-white bg-transparent border-2"
+                onClick={() => scroll(otherSingersScrollRef, 'right')}
+              >
+                <ChevronRight className="h-4 w-4 text-orange-500" />
+              </Button>
+            </div>
+          </div>
+          <div ref={otherSingersScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
+              {otherSingers.length === 0 ? (
+                <div className="text-gray-400">No other singers found.</div>
+              ) : (
+                otherSingers.map(s => (
+                  <Link key={s.singer} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                    <div className="flex flex-col items-center justify-center">
+                      <img
+                        src={getSingerImagePath(s.imageName)}
+                        alt={s.singer}
+                        className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
+                        onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
+                      />
+                      <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.singer}</div>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

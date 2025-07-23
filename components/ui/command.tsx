@@ -66,7 +66,7 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
                   </CommandItem>
                 </CommandGroup>
                 {/* Suggestions will be rendered here by children */}
-                {children}
+          {children}
               </CommandList>
             </div>
           </div>
@@ -84,16 +84,16 @@ const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   CommandInputProps
 >(({ className, value, onValueChange, ...props }, ref) => (
-  <CommandPrimitive.Input
-    ref={ref}
+    <CommandPrimitive.Input
+      ref={ref}
     value={value}
     onValueChange={onValueChange}
-    className={cn(
+      className={cn(
       "flex h-16 w-full rounded-md bg-black py-3 text-3xl font-bold text-white placeholder:text-gray-400 outline-none border-none disabled:cursor-not-allowed disabled:opacity-50 px-0",
-      className
-    )}
-    {...props}
-  />
+        className
+      )}
+      {...props}
+    />
 ))
 
 CommandInput.displayName = CommandPrimitive.Input.displayName
