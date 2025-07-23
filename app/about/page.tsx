@@ -1,11 +1,19 @@
 "use client";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer"
+import { useState } from "react"
 
 export default function AboutPage() {
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState("")
   return (
     <main className="min-h-screen bg-black text-white pb-16">
-      <Navigation />
+      <Navigation
+        searchOpen={searchOpen}
+        setSearchOpen={setSearchOpen}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <div className="max-w-3xl mx-auto px-4 pt-16 space-y-8 pb-20">
         <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-orange-500">
           <h1 className="text-4xl font-bold mb-6 text-center group-hover:text-orange-500 transition-colors duration-200">About Berwel</h1>
@@ -75,20 +83,30 @@ export default function AboutPage() {
             This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, and Alfadaia AI for Software Development.
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
-            <a href="https://www.lhos.ly/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
-              <img src="/Partners Logos/Libyan Houes.png" alt="Libyan House for Oud Studies" className="max-h-28 md:max-h-36 w-auto object-contain" />
-            </a>
-            <a href="https://boursa.io/en" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
-              <img src="/Partners Logos/Boursa AII.png" alt="Boursa" className="max-h-36 md:max-h-44 w-auto object-contain" />
-            </a>
-            <a href="https://www.alfadaia.com/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
-              <img src="/Partners Logos/Alfadaia ai.png" alt="Alfadaia AI" className="max-h-36 md:max-h-44 w-auto object-contain" />
-            </a>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Libyan House for Oud Studies</span>
-            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Boursa</span>
-            <span className="block text-white text-base font-semibold text-center transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Alfadaia AI</span>
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <a href="https://www.lhos.ly/" target="_blank" rel="noopener noreferrer">
+                  <img src="/Partners Logos/Libyan Houes.png" alt="Libyan House for Oud Studies" className="max-h-28 md:max-h-36 w-auto object-contain mx-auto" />
+                </a>
+              </div>
+              <span className="block text-white text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Libyan House for Oud Studies</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <a href="https://boursa.io/en" target="_blank" rel="noopener noreferrer">
+                  <img src="/Partners Logos/Boursa AII.png" alt="Boursa" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
+                </a>
+              </div>
+              <span className="block text-white text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Boursa</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <a href="https://www.alfadaia.com/" target="_blank" rel="noopener noreferrer">
+                  <img src="/Partners Logos/Alfadaia ai.png" alt="Alfadaia AI" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
+                </a>
+              </div>
+              <span className="block text-white text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-orange-500 hover:text-orange-500 cursor-pointer">Alfadaia AI</span>
+            </div>
           </div>
         </div>
       </div>
