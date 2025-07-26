@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { AuthProvider } from '@/components/auth-provider'
 
 export const metadata: Metadata = {
   title: 'Berwel',
@@ -17,7 +18,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/Data/Berwel Data Org/Logoo.png" type="image/png" />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   )
 }

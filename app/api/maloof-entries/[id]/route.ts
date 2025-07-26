@@ -2,14 +2,15 @@ import { NextResponse } from 'next/server'
 import { getMaloofEntryById } from '@/lib/server-data'
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function GET(request: Request, { params }: RouteParams) {
   try {
-    const entry = getMaloofEntryById(params.id)
+    const { id } = await params
+    const entry = getMaloofEntryById(id)
     
     if (!entry) {
       return NextResponse.json({ error: 'Entry not found' }, { status: 404 })

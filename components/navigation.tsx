@@ -7,9 +7,12 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { Drawer, DrawerContent, DrawerClose } from "@/components/ui/drawer"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import { CommandDialog } from "@/components/ui/command"
-import { Search } from "lucide-react"
+import { Search, LogOut, User } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
 import { useEffect } from "react"
+import { useAuth } from "./auth-provider"
+import { signIn, signOut } from "next-auth/react"
 
 interface NavigationProps {
   searchOpen: boolean;
@@ -19,7 +22,7 @@ interface NavigationProps {
 }
 
 export default function Navigation({ searchOpen, setSearchOpen, searchValue, setSearchValue }: NavigationProps) {
-  const [showRegisterModal, setShowRegisterModal] = useState(false)
+  const { user, isLoading } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
   const [maloofEntries, setMaloofEntries] = useState<MaloofEntry[]>([])
@@ -43,6 +46,14 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
         entry.entryName.toLowerCase().includes(searchValue.toLowerCase())
       ).slice(0, 5)
     : []
+
+  const handleSignIn = () => {
+    signIn('google')
+  }
+
+  const handleSignOut = () => {
+    signOut()
+  }
 
   return (
     <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
@@ -103,14 +114,45 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             >
               <Search className="h-6 w-6" />
             </Button>
-          {/* Register Button */}
+          {/* Register Button or User Profile */}
           <div className="hidden md:block">
-            <Button
-              onClick={() => setShowRegisterModal(true)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
-            >
-              Register Now
-            </Button>
+            {!isLoading && (
+              user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="p-0 h-auto">
+                      <Image
+                        src={user.image}
+                        alt={user.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                      />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48 bg-gray-900 border-gray-700">
+                    <DropdownMenuItem className="text-white hover:bg-gray-800 cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      {user.name}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={handleSignOut}
+                      className="text-white hover:bg-gray-800 cursor-pointer"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  onClick={handleSignIn}
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
+                >
+                  Register Now
+                </Button>
+              )
+            )}
           </div>
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -202,48 +244,42 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <Link href="/contact" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               Contact
             </Link>
-            <Button
-              className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors mt-4"
-              onClick={() => {
-                setShowRegisterModal(true)
-                setMobileMenuOpen(false)
-              }}
-            >
-              Register Now
-            </Button>
+            {!isLoading && (
+              user ? (
+                <div className="flex items-center gap-2 mt-4">
+                  <Image
+                    src={user.image}
+                    alt={user.name}
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
+                  <span className="text-white">{user.name}</span>
+                  <Button
+                    onClick={() => {
+                      handleSignOut()
+                      setMobileMenuOpen(false)
+                    }}
+                    className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-md transition-colors"
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors mt-4"
+                  onClick={() => {
+                    handleSignIn()
+                    setMobileMenuOpen(false)
+                  }}
+                >
+                  Register Now
+                </Button>
+              )
+            )}
           </div>
         </DrawerContent>
       </Drawer>
-
-      {/* Register Modal */}
-      {showRegisterModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gray-900 border border-gray-700 rounded-lg p-8 max-w-md mx-4">
-            <div className="text-center">
-              <div className="mb-4">
-                <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Coming Soon!</h3>
-                <p className="text-gray-300">This feature will be live soon</p>
-              </div>
-              <Button
-                onClick={() => setShowRegisterModal(false)}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md transition-colors"
-              >
-                Got it
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   )
 }

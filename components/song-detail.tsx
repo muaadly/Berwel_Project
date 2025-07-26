@@ -1,201 +1,162 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Heart, Share2, ExternalLink, ChevronRight, Clock, BookOpen, ChevronLeft } from "lucide-react"
-import { ArrowLeft } from "lucide-react"
-import { fetchLibyanSongById, getSingerImagePath, LibyanSong, fetchLibyanSongs } from "@/lib/data"
-import { useRouter } from "next/navigation"
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "@/components/ui/dialog"
-import { Facebook, Instagram, Link as LinkIcon, MessageCircle, MessageSquare } from "lucide-react"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog"
+import { Heart, Share2, BookOpen, Clock, LinkIcon, Facebook, MessageSquare, Instagram, MessageCircle, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
+import { LibyanSong, fetchLibyanSongById, fetchLibyanSongs } from "@/lib/data"
+import Link from "next/link"
+import { useAuth } from "./auth-provider"
+import { getSongData, toggleSongLike, addSongComment, Comment } from "@/lib/user-data"
 
 interface SongDetailProps {
   songId: string
 }
 
 export default function SongDetail({ songId }: SongDetailProps) {
-  const router = useRouter();
-  const [liked, setLiked] = useState(false)
-  const [likes, setLikes] = useState(2)
-  const [comment, setComment] = useState("")
-  const [comments, setComments] = useState<string[]>([])
+  const { user, isLoading } = useAuth()
   const [song, setSong] = useState<LibyanSong | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [allSongs, setAllSongs] = useState<LibyanSong[]>([])
-  // Carousel scroll refs (must be before any return)
-  const otherSongsScrollRef = useRef<any>(null);
-  const otherSingersScrollRef = useRef<any>(null);
+  const [otherSongs, setOtherSongs] = useState<LibyanSong[]>([])
+  const [otherSingers, setOtherSingers] = useState<LibyanSong[]>([])
+  const [comment, setComment] = useState("")
+  const [comments, setComments] = useState<Comment[]>([])
+  const [likes, setLikes] = useState<string[]>([])
+  const [isLiked, setIsLiked] = useState(false)
+  const otherSongsScrollRef = useRef<HTMLDivElement>(null)
+  const otherSingersScrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const loadSong = async () => {
       try {
         const songData = await fetchLibyanSongById(songId)
+        if (!songData) return
+        
         setSong(songData)
+        
+        // Load user data (likes and comments)
+        const userData = getSongData(songId)
+        setLikes(userData.likes)
+        setComments(userData.comments)
+        
+        // Check if current user has liked this song
+        if (user) {
+          setIsLiked(userData.likes.includes(user.id))
+        }
+        
+        // Load other songs and singers
+        const allSongs = await fetchLibyanSongs()
+        const sameCategorySongs = allSongs.filter(s => s.category === songData.category && String(s.id) !== String(songId))
+        const shuffledSongs = shuffleArray(sameCategorySongs).slice(0, 10)
+        setOtherSongs(shuffledSongs)
+        
+        const sameSingerSongs = allSongs.filter(s => s.singer === songData.singer && String(s.id) !== String(songId))
+        const shuffledSingers = shuffleArray(sameSingerSongs).slice(0, 10)
+        setOtherSingers(shuffledSingers)
       } catch (error) {
-        console.error('Error loading song:', error)
-      } finally {
-        setLoading(false)
+        console.error("Error loading song:", error)
       }
     }
-
+    
     loadSong()
-    fetchLibyanSongs().then(setAllSongs)
-  }, [songId])
+  }, [songId, user])
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Loading song...</h1>
-        </div>
-      </div>
-    )
+  const BackButton = () => (
+    <Link href="/library" className="inline-flex items-center text-orange-500 hover:text-orange-400 mb-4">
+      <ChevronLeft className="h-4 w-4 mr-1" />
+      Back to Library
+    </Link>
+  )
+
+  const handleLike = () => {
+    if (!user) {
+      alert("Please sign in to like songs")
+      return
+    }
+    
+    const newData = toggleSongLike(songId, user.id)
+    setLikes(newData.likes)
+    setIsLiked(newData.likes.includes(user.id))
+  }
+
+  const handleCommentSubmit = () => {
+    if (!user) {
+      alert("Please sign in to comment")
+      return
+    }
+    
+    if (!comment.trim()) {
+      alert("Please enter a comment")
+      return
+    }
+    
+    const newData = addSongComment(songId, user.id, comment.trim(), user.name)
+    setComments(newData.comments)
+    setComment("")
+  }
+
+  function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
+
+  const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = 300
+      const currentScroll = ref.current.scrollLeft
+      const newScroll = direction === 'left' 
+        ? Math.max(0, currentScroll - scrollAmount)
+        : currentScroll + scrollAmount
+      ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+    }
+  }
+
+  const getSingerImagePath = (imageName: string) => {
+    return `/Data/Berwel Data Org/R_Images/Singers_Images/${imageName}`
   }
 
   if (!song) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Song not found</h1>
-          <Link href="/library" className="text-orange-500 hover:text-orange-400">
-            Back to Library
-          </Link>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500 mx-auto"></div>
+          <p className="mt-4 text-xl">Loading song...</p>
         </div>
       </div>
     )
   }
 
-  // Back button above singer image
-  const BackButton = () => (
-    <button
-      onClick={() => router.back()}
-      className="flex items-center gap-2 mb-4 px-4 py-2 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors"
-    >
-      <ArrowLeft className="w-5 h-5" />
-      <span>Back</span>
-    </button>
-  );
-
-  const handleLike = () => {
-    if (liked) {
-      setLikes(likes - 1)
-    } else {
-      setLikes(likes + 1)
-    }
-    setLiked(!liked)
-  }
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: song.songName,
-        text: `Listen to ${song.songName} by ${song.singer}`,
-        url: window.location.href,
-      })
-    } else {
-      navigator.clipboard.writeText(window.location.href)
-      alert("Link copied to clipboard!")
-    }
-  }
-
-  const handleCommentSubmit = () => {
-    if (comment.trim()) {
-      setComments([...comments, comment])
-      setComment("")
-    }
-  }
-
-  // Section 1: Other Songs (random, same category, excluding current)
-  function shuffleArray<T>(array: T[]): T[] {
-    return array
-      .map(value => ({ value, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
-  }
-  const otherSongs = shuffleArray(
-    allSongs.filter(s => String(s.id) !== String(songId) && s.category === song.category)
-  ).slice(0, 10);
-
-  // Section 2: Other Singers (unique singers, excluding current song's singer)
-  const otherSingers = Array.from(
-    allSongs
-      .filter(s => s.singer !== song?.singer)
-      .reduce((map, s) => map.has(s.singer) ? map : map.set(s.singer, s), new Map())
-      .values()
-  ).slice(0, 10)
-
-  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
-    const el = ref.current as HTMLDivElement | null;
-    if (el) {
-      const { scrollLeft, clientWidth } = el;
-      const scrollAmount = clientWidth * 0.8;
-      el.scrollTo({
-        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-black text-white pb-16">
-      <div className="max-w-7xl mx-auto">
-        {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-400 mb-8">
-          <Link href="/library" className="hover:text-orange-500 transition-colors">
-            Library
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <Link href="/library" className="hover:text-orange-500 transition-colors">
-            Libyan Songs
-          </Link>
-          <ChevronRight className="h-4 w-4" />
-          <span className="text-white">{song.songName}</span>
-        </nav>
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         <BackButton />
-
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Singer Image */}
-          <div className="lg:col-span-1">
-            <div className="border border-gray-700 rounded-lg overflow-hidden">
-              <img
-                src={getSingerImagePath(song.imageName)}
-                alt={song.singer}
-                className="w-full h-96 object-cover select-none pointer-events-none"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.src = '/placeholder-user.jpg'
-                }}
-                onContextMenu={e => e.preventDefault()}
-                draggable={false}
-              />
-            </div>
+        
+        {/* Song Header */}
+        <div className="flex flex-col md:flex-row gap-8 mb-8">
+          {/* Song Image */}
+          <div className="flex-shrink-0">
+            <img
+              src={getSingerImagePath(song.imageName)}
+              alt={song.singer}
+              className="w-64 h-64 object-cover rounded-lg bg-gray-800"
+              onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
+            />
           </div>
 
-          {/* Right Column */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Song Name with Orange Border */}
-            <div className="bg-black border border-gray-700 p-6 rounded-lg mb-4">
-              <h1 className="text-3xl font-bold text-white text-center">{song.songName}</h1>
-            </div>
+          {/* Song Info */}
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold text-white mb-2">{song.songName}</h1>
+            <p className="text-2xl text-orange-500 mb-4">{song.singer}</p>
+            <p className="text-gray-400 mb-6">{song.category}</p>
 
-            {/* SoundCloud Button at the top */}
+            {/* SoundCloud Link */}
             {song.soundcloudLink && (
-              <div className="mb-4 flex justify-center">
-                <Button
-                  asChild
-                  className="bg-orange-500 hover:bg-orange-600 text-white transition-colors"
-                >
+              <div className="mb-6">
+                <Button asChild className="bg-orange-500 hover:bg-orange-600 text-white">
                   <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Listen on SoundCloud
@@ -220,128 +181,29 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
                 {/* Centered Like and Share Buttons */}
                 <div className="flex items-center justify-center gap-4 mt-4">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors">
-                        <Heart className="h-4 w-4 mr-2" />
-                        Like
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="bg-gray-900 border-none rounded-xl p-10 max-w-xs text-center">
-                      <DialogTitle className="sr-only">Coming Soon!</DialogTitle>
-                      <div className="flex flex-col items-center">
-                        <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center mb-6">
-                          <Clock className="w-10 h-10 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-white mb-2">Coming Soon!</h2>
-                        <p className="text-gray-300 mb-6">This feature will be live soon</p>
-                        <DialogClose asChild>
-                          <Button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md text-lg">Got it</Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                  {/* Share Button and Add Lyrics next to each other */}
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2">
-                        <Share2 className="h-4 w-4" /> Share
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-md w-full bg-gray-900 border-none rounded-2xl p-8">
-                      <DialogTitle className="text-2xl font-bold text-white mb-4">Share music with your friends</DialogTitle>
-                      <div className="flex flex-col items-center">
-                        <img
-                          src={getSingerImagePath(song.imageName)}
-                          alt={song.singer}
-                          className="w-24 h-24 object-cover rounded-lg mb-4 select-none pointer-events-none"
-                          onContextMenu={e => e.preventDefault()}
-                          draggable={false}
-                        />
-                        <div className="text-xl font-bold text-white mb-1">{song.songName}</div>
-                        <div className="text-md text-orange-500 mb-6">{song.singer}</div>
-                        <div className="flex flex-wrap gap-3 justify-center mb-2">
-                          {/* Copy Link */}
-                          <Button
-                            variant="outline"
-                            className="rounded-full border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white flex items-center gap-2"
-                            onClick={() => { navigator.clipboard.writeText(window.location.href) }}
-                          >
-                            <LinkIcon className="h-5 w-5" />
-                            <span className="hidden sm:inline">Copy Link</span>
-                          </Button>
-                          {/* Facebook */}
-                          <Button
-                            variant="outline"
-                            className="rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white flex items-center gap-2"
-                            asChild
-                          >
-                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noopener noreferrer">
-                              <Facebook className="h-5 w-5" />
-                              <span className="hidden sm:inline">Facebook</span>
-                            </a>
-                          </Button>
-                          {/* WhatsApp */}
-                          <Button
-                            variant="outline"
-                            className="rounded-full border-green-600 text-green-600 hover:bg-green-600 hover:text-white flex items-center gap-2"
-                            asChild
-                          >
-                            <a href={`https://wa.me/?text=${encodeURIComponent(song.songName + ' - ' + window.location.href)}`} target="_blank" rel="noopener noreferrer">
-                              <MessageSquare className="h-5 w-5" />
-                              <span className="hidden sm:inline">WhatsApp</span>
-                            </a>
-                          </Button>
-                          {/* Instagram (just open Instagram for now) */}
-                          <Button
-                            variant="outline"
-                            className="rounded-full border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white flex items-center gap-2"
-                            asChild
-                          >
-                            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                              <Instagram className="h-5 w-5" />
-                              <span className="hidden sm:inline">Instagram</span>
-                            </a>
-                          </Button>
-                          {/* SMS */}
-                          <Button
-                            variant="outline"
-                            className="rounded-full border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white flex items-center gap-2"
-                            asChild
-                          >
-                            <a href={`sms:?body=${encodeURIComponent(song.songName + ' - ' + window.location.href)}`}>
-                              <MessageCircle className="h-5 w-5" />
-                              <span className="hidden sm:inline">SMS</span>
-                            </a>
-                          </Button>
-                        </div>
-                      </div>
-                      <DialogClose asChild>
-                        <Button variant="ghost" className="absolute top-4 right-4 text-gray-400 hover:text-white">✕</Button>
-                      </DialogClose>
-                    </DialogContent>
-                  </Dialog>
+                  {/* Likes Count Circle */}
+                  <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                    {likes.length}
+                  </div>
+                  <Button 
+                    onClick={handleLike}
+                    className={`transition-colors flex items-center gap-2 ${
+                      isLiked 
+                        ? 'bg-red-500 hover:bg-red-600 text-white' 
+                        : 'bg-orange-500 hover:bg-orange-600 text-white'
+                    }`}
+                  >
+                    <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
+                    {isLiked ? 'Liked' : 'Like'}
+                  </Button>
+                  {/* Share Button */}
+                  <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2">
+                    <Share2 className="h-4 w-4" /> Share
+                  </Button>
                   {/* Add Lyrics Button */}
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
-                        <BookOpen className="h-4 w-4" /> Add Lyrics
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="bg-gray-900 border-none rounded-xl p-10 max-w-xs text-center">
-                      <DialogTitle className="sr-only">Coming Soon!</DialogTitle>
-                      <div className="flex flex-col items-center">
-                        <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center mb-6">
-                          <Clock className="w-10 h-10 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-white mb-2">Coming Soon!</h2>
-                        <p className="text-gray-300 mb-6">This feature will be live soon</p>
-                        <DialogClose asChild>
-                          <Button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md text-lg">Got it</Button>
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                  <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
+                    <BookOpen className="h-4 w-4" /> Add Lyrics
+                  </Button>
                 </div>
               </div>
             </div>
@@ -405,38 +267,30 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 rows={3}
               />
               <Button
-                asChild
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-orange-500 hover:bg-orange-600 text-white"
               >
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button className="mt-2 bg-orange-500 hover:bg-orange-600 text-white">
-                      Post Comment
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-gray-900 border-none rounded-xl p-10 max-w-xs text-center">
-                    <DialogTitle className="sr-only">Coming Soon!</DialogTitle>
-                    <div className="flex flex-col items-center">
-                      <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center mb-6">
-                        <Clock className="w-10 h-10 text-white" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-white mb-2">Coming Soon!</h2>
-                      <p className="text-gray-300 mb-6">This feature will be live soon</p>
-                      <DialogClose asChild>
-                        <Button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md text-lg">Got it</Button>
-                      </DialogClose>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                Post Comment
               </Button>
             </div>
 
             {/* Comments List */}
             <div className="space-y-4">
-              {comments.map((comment, index) => (
-                <div key={index} className="bg-gray-900 rounded-lg p-4">
-                  <p className="text-white">{comment}</p>
-                </div>
-              ))}
+              {comments.length === 0 ? (
+                <p className="text-gray-400">No comments yet. Be the first to comment!</p>
+              ) : (
+                comments.map((comment, index) => (
+                  <div key={index} className="bg-gray-900 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-orange-500 font-semibold">{comment.name}</span>
+                      <span className="text-gray-400 text-sm">
+                        {new Date(comment.timestamp).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="text-white">{comment.text}</p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -517,7 +371,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 <div className="text-gray-400">No other singers found.</div>
               ) : (
                 otherSingers.map(s => (
-                  <Link key={s.singer} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
                     <div className="flex flex-col items-center justify-center">
                       <img
                         src={getSingerImagePath(s.imageName)}

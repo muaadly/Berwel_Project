@@ -2,14 +2,15 @@ import { NextResponse } from 'next/server'
 import { getLibyanSongById } from '@/lib/server-data'
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export async function GET(request: Request, { params }: RouteParams) {
   try {
-    const song = getLibyanSongById(params.id)
+    const { id } = await params
+    const song = getLibyanSongById(id)
     
     if (!song) {
       return NextResponse.json({ error: 'Song not found' }, { status: 404 })
