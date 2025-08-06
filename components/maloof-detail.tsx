@@ -246,9 +246,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
     if (!imageName) return '/placeholder-user.jpg'
     // Convert to lowercase extension to match actual files
     const cleanImageName = imageName.trim().toLowerCase()
-    // Use a hardcoded path to avoid encoding issues
-    const imagePath = `/Data/Berwel%20Data%20Org/R_Images/Entry_Images/${cleanImageName}`
-    console.log('Generated image path:', imagePath, 'from:', imageName)
+    // Use a completely different approach - direct path without encoding
+    const imagePath = `/Data/Berwel Data Org/R_Images/Entry_Images/${cleanImageName}?v=${Date.now()}`
+    console.log('FIXED - Generated image path:', imagePath, 'from:', imageName)
     return imagePath
   }
 
