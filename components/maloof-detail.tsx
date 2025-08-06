@@ -244,8 +244,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
   const getEntryImagePath = (imageName: string) => {
     if (!imageName) return '/placeholder-user.jpg'
-    // Ensure proper case sensitivity and file extension
-    const cleanImageName = imageName.trim().toUpperCase()
+    // Convert to lowercase extension to match actual files
+    const cleanImageName = imageName.trim().toLowerCase()
     return `/Data/Berwel Data Org/R_Images/Entry_Images/${cleanImageName}`
   }
 
@@ -513,7 +513,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                         src={getEntryImagePath(e.typeEntryImage)}
                         alt={e.entryName}
                         className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
-                        onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
+                        onError={ev => { 
+                          console.log('Other entry image failed to load:', e.typeEntryImage)
+                          ;(ev.target as HTMLImageElement).src = '/placeholder-user.jpg' 
+                        }}
                       />
                       <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{e.entryName}</div>
                       <div className="text-gray-400 text-sm text-center">{e.entryType}</div>
