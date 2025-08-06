@@ -43,6 +43,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         const entryData = await fetchMaloofEntryById(entryId)
         if (!entryData) return
         
+        console.log('Loaded entry data:', entryData)
         setEntry(entryData)
         
         // Load likes and comments from database
@@ -242,7 +243,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const getEntryImagePath = (imageName: string) => {
-    return `/Data/Berwel Data Org/R_Images/Entry_Images/${imageName}`
+    if (!imageName) return '/placeholder-user.jpg'
+    // Ensure proper case sensitivity and file extension
+    const cleanImageName = imageName.trim().toUpperCase()
+    return `/Data/Berwel Data Org/R_Images/Entry_Images/${cleanImageName}`
   }
 
   const getNoteImagePath = (imageName: string) => {
@@ -273,7 +277,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               src={getEntryImagePath(entry.typeEntryImage)}
               alt={entry.entryName}
               className="w-64 h-64 object-cover rounded-lg bg-gray-800"
-              onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
+              onError={ev => { 
+                console.log('Image failed to load:', entry.typeEntryImage)
+                ;(ev.target as HTMLImageElement).src = '/placeholder-user.jpg' 
+              }}
             />
           </div>
 
@@ -336,6 +343,20 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             </div>
           </div>
         </div>
+
+        {/* Entry Lyrics */}
+        {entry.entryLyrics && (
+          <div className="mt-8">
+            <div className="bg-black border border-gray-700 rounded-lg p-6">
+              <h2 className="text-xl font-bold text-white mb-4">Entry Lyrics</h2>
+              <div className="bg-gray-900 rounded-lg p-4">
+                <p className="text-white text-lg leading-relaxed whitespace-pre-line font-arabic">
+                  {entry.entryLyrics}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Comments Section */}
         <div className="mt-8">
