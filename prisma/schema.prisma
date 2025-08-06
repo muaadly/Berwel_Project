@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_DATABASE_URL")
+}
+
+// User model for registered users
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  songLikes     SongLike[]
+  songComments  SongComment[]
+  maloofLikes   MaloofLike[]
+  maloofComments MaloofComment[]
+
+  @@map("users")
+}
+
+// Song model (from your existing data)
+model Song {
+  id             String   @id
+  songName       String
+  singer         String
+  category       String
+  year           String
+  writer         String?
+  composer       String?
+  recordingStatus String
+  lyricsStatus   String
+  imageName      String
+
+  // Relations
+  likes    SongLike[]
+  comments SongComment[]
+
+  @@map("songs")
+}
+
+// Maloof Entry model (from your existing data)
+model MaloofEntry {
+  id              String   @id
+  entryName       String
+  entryType       String
+  entryRhythm     String
+  typeEntryImage  String
+
+  // Relations
+  likes    MaloofLike[]
+  comments MaloofComment[]
+
+  @@map("maloof_entries")
+}
+
+// Song Like model (many-to-many relationship)
+model SongLike {
+  id     String @id @default(cuid())
+  userId String
+  songId String
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
+  @@map("song_likes")
+}
+
+// Song Comment model
+model SongComment {
+  id        String   @id @default(cuid())
+  text      String
+  userId    String
+  songId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@map("song_comments")
+}
+
+// Maloof Like model (many-to-many relationship)
+model MaloofLike {
+  id        String   @id @default(cuid())
+  userId    String
+  entryId   String
+  createdAt DateTime @default(now())
+
+  // Relations
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  entry MaloofEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, entryId])
+  @@map("maloof_likes")
+}
+
+// Maloof Comment model
+model MaloofComment {
+  id        String   @id @default(cuid())
+  text      String
+  userId    String
+  entryId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  entry MaloofEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@map("maloof_comments")
+}

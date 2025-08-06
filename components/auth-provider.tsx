@@ -28,12 +28,51 @@ function AuthProviderInner({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (session?.user) {
-      setUser({
-        id: session.user.email || "",
-        name: session.user.name || "",
-        email: session.user.email || "",
-        image: session.user.image || "",
-      })
+      // First, create or get the user from the database
+      const createOrGetUser = async () => {
+        try {
+          const response = await fetch('/api/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: session.user?.email || "",
+              name: session.user?.name || "",
+              image: session.user?.image || ""
+            }),
+          })
+          
+          if (response.ok) {
+            const userData = await response.json()
+            setUser({
+              id: userData.id, // Use the actual database ID
+              name: userData.name,
+              email: userData.email,
+              image: userData.image,
+            })
+          } else {
+            // Fallback to email if API fails
+            setUser({
+              id: session.user?.email || "",
+              name: session.user?.name || "",
+              email: session.user?.email || "",
+              image: session.user?.image || "",
+            })
+          }
+        } catch (error) {
+          console.error('Error creating/getting user:', error)
+          // Fallback to email if API fails
+          setUser({
+            id: session.user?.email || "",
+            name: session.user?.name || "",
+            email: session.user?.email || "",
+            image: session.user?.image || "",
+          })
+        }
+      }
+      
+      createOrGetUser()
     } else {
       setUser(null)
     }

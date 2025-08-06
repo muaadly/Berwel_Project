@@ -8,7 +8,17 @@ import { Heart, Share2, BookOpen, Clock, LinkIcon, Facebook, MessageSquare, Inst
 import { LibyanSong, fetchLibyanSongById, fetchLibyanSongs } from "@/lib/data"
 import Link from "next/link"
 import { useAuth } from "./auth-provider"
-import { getSongData, toggleSongLike, addSongComment, Comment } from "@/lib/user-data"
+type CommentWithUser = {
+  id: string
+  userId: string
+  text: string
+  createdAt: string
+  user: {
+    name: string
+    image: string | null
+  }
+}
+import ShareModal from '@/components/share-modal'
 
 interface SongDetailProps {
   songId: string
@@ -20,9 +30,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
   const [otherSongs, setOtherSongs] = useState<LibyanSong[]>([])
   const [otherSingers, setOtherSingers] = useState<LibyanSong[]>([])
   const [comment, setComment] = useState("")
-  const [comments, setComments] = useState<Comment[]>([])
+  const [comments, setComments] = useState<CommentWithUser[]>([])
   const [likes, setLikes] = useState<string[]>([])
   const [isLiked, setIsLiked] = useState(false)
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false)
+  const [editingCommentIndex, setEditingCommentIndex] = useState<number | null>(null)
+  const [editingCommentText, setEditingCommentText] = useState("")
   const otherSongsScrollRef = useRef<HTMLDivElement>(null)
   const otherSingersScrollRef = useRef<HTMLDivElement>(null)
 
@@ -34,14 +47,28 @@ export default function SongDetail({ songId }: SongDetailProps) {
         
         setSong(songData)
         
-        // Load user data (likes and comments)
-        const userData = getSongData(songId)
-        setLikes(userData.likes)
-        setComments(userData.comments)
-        
-        // Check if current user has liked this song
+        // Load likes and comments from database
         if (user) {
-          setIsLiked(userData.likes.includes(user.id))
+          // Get user's like status
+          const likeResponse = await fetch(`/api/songs/${songId}/likes`)
+          if (likeResponse.ok) {
+            const likeData = await likeResponse.json()
+            setIsLiked(likeData.isLiked)
+          }
+        }
+        
+        // Get all likes count
+        const likesResponse = await fetch(`/api/songs/${songId}/likes`)
+        if (likesResponse.ok) {
+          const likesData = await likesResponse.json()
+          setLikes(Array(likesData.count).fill('liked'))
+        }
+        
+        // Get comments
+        const commentsResponse = await fetch(`/api/songs/${songId}/comments`)
+        if (commentsResponse.ok) {
+          const commentsData = await commentsResponse.json()
+          setComments(commentsData)
         }
         
         // Load other songs and singers
@@ -68,18 +95,32 @@ export default function SongDetail({ songId }: SongDetailProps) {
     </Link>
   )
 
-  const handleLike = () => {
+  const handleLike = async () => {
     if (!user) {
       alert("Please sign in to like songs")
       return
     }
     
-    const newData = toggleSongLike(songId, user.id)
-    setLikes(newData.likes)
-    setIsLiked(newData.likes.includes(user.id))
+    try {
+      const response = await fetch(`/api/songs/${songId}/likes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: user.id }),
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setIsLiked(data.liked)
+        setLikes(Array(data.count).fill('liked'))
+      }
+    } catch (error) {
+      console.error('Error toggling like:', error)
+    }
   }
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     if (!user) {
       alert("Please sign in to comment")
       return
@@ -90,9 +131,110 @@ export default function SongDetail({ songId }: SongDetailProps) {
       return
     }
     
-    const newData = addSongComment(songId, user.id, comment.trim(), user.name)
-    setComments(newData.comments)
-    setComment("")
+    try {
+      const response = await fetch(`/api/songs/${songId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          text: comment.trim(),
+          userName: user.name
+        }),
+      })
+      
+      if (response.ok) {
+        const newComment = await response.json()
+        setComments(prev => [...prev, newComment])
+        setComment("")
+      }
+    } catch (error) {
+      console.error('Error adding comment:', error)
+    }
+  }
+
+  const handleEditComment = (index: number, currentText: string) => {
+    if (!user) {
+      alert("Please sign in to edit comments")
+      return
+    }
+    
+    setEditingCommentIndex(index)
+    setEditingCommentText(currentText)
+  }
+
+  const handleSaveEdit = async () => {
+    if (!user || editingCommentIndex === null) return
+    
+    if (!editingCommentText.trim()) {
+      alert("Please enter a comment")
+      return
+    }
+    
+    try {
+      const commentToEdit = comments[editingCommentIndex]
+      const response = await fetch(`/api/songs/${songId}/comments`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          commentId: commentToEdit.id,
+          userId: user.id,
+          text: editingCommentText.trim()
+        }),
+      })
+      
+      if (response.ok) {
+        const updatedComment = await response.json()
+        setComments(prev => prev.map((comment, index) => 
+          index === editingCommentIndex ? updatedComment : comment
+        ))
+        setEditingCommentIndex(null)
+        setEditingCommentText("")
+      }
+    } catch (error) {
+      console.error('Error editing comment:', error)
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setEditingCommentIndex(null)
+    setEditingCommentText("")
+  }
+
+  const handleDeleteComment = async (index: number) => {
+    if (!user) {
+      alert("Please sign in to delete comments")
+      return
+    }
+    
+    if (confirm("Are you sure you want to delete this comment?")) {
+      try {
+        const commentToDelete = comments[index]
+        const response = await fetch(`/api/songs/${songId}/comments`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            commentId: commentToDelete.id,
+            userId: user.id
+          }),
+        })
+        
+        if (response.ok) {
+          setComments(prev => prev.filter((_, i) => i !== index))
+        }
+      } catch (error) {
+        console.error('Error deleting comment:', error)
+      }
+    }
+  }
+
+  const handleShare = () => {
+    setIsShareModalOpen(true)
   }
 
   function shuffleArray<T>(array: T[]): T[] {
@@ -179,31 +321,39 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   </pre>
                 </div>
 
-                {/* Centered Like and Share Buttons */}
-                <div className="flex items-center justify-center gap-4 mt-4">
-                  {/* Likes Count Circle */}
-                  <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
-                    {likes.length}
+                {/* Mobile-friendly Action Buttons */}
+                <div className="mt-4">
+                  {/* First Row: Like count, Like button, Share button */}
+                  <div className="flex items-center justify-center gap-4 mb-3">
+                    {/* Likes Count Circle */}
+                    <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                      {likes.length}
+                    </div>
+                    <Button 
+                      onClick={handleLike}
+                      className={`transition-colors flex items-center gap-2 ${
+                        isLiked 
+                          ? 'bg-red-500 hover:bg-red-600 text-white' 
+                          : 'bg-orange-500 hover:bg-orange-600 text-white'
+                      }`}
+                    >
+                      <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
+                      {isLiked ? 'Liked' : 'Like'}
+                    </Button>
+                    {/* Share Button */}
+                    <Button 
+                      onClick={handleShare}
+                      className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                    >
+                      <Share2 className="h-4 w-4" /> Share
+                    </Button>
                   </div>
-                  <Button 
-                    onClick={handleLike}
-                    className={`transition-colors flex items-center gap-2 ${
-                      isLiked 
-                        ? 'bg-red-500 hover:bg-red-600 text-white' 
-                        : 'bg-orange-500 hover:bg-orange-600 text-white'
-                    }`}
-                  >
-                    <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-                    {isLiked ? 'Liked' : 'Like'}
-                  </Button>
-                  {/* Share Button */}
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2">
-                    <Share2 className="h-4 w-4" /> Share
-                  </Button>
-                  {/* Add Lyrics Button */}
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
-                    <BookOpen className="h-4 w-4" /> Add Lyrics
-                  </Button>
+                  {/* Second Row: Add Lyrics Button (full width) */}
+                  <div className="flex justify-center">
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
+                      <BookOpen className="h-4 w-4" /> Add Lyrics
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -281,13 +431,90 @@ export default function SongDetail({ songId }: SongDetailProps) {
               ) : (
                 comments.map((comment, index) => (
                   <div key={index} className="bg-gray-900 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-orange-500 font-semibold">{comment.name}</span>
-                      <span className="text-gray-400 text-sm">
-                        {new Date(comment.timestamp).toLocaleDateString()}
-                      </span>
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        {/* User Avatar */}
+                        <div className="flex-shrink-0">
+                          <img
+                            src={comment.user?.image || '/placeholder-user.jpg'}
+                            alt={comment.user?.name || 'User'}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-700"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
+                            }}
+                          />
+                        </div>
+                        {/* User Info */}
+                        <div className="flex flex-col">
+                          <span className="text-white font-semibold text-sm">
+                            {comment.user?.name || 'Anonymous User'}
+                          </span>
+                          <span className="text-gray-400 text-xs">
+                            {new Date(comment.createdAt).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Edit/Delete Buttons */}
+                      {user && (comment.userId === user.id || comment.userId === user.email) && (
+                        <div className="flex gap-2">
+                          {editingCommentIndex === index ? (
+                            <>
+                              <Button
+                                onClick={handleSaveEdit}
+                                size="sm"
+                                className="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1"
+                              >
+                                Save
+                              </Button>
+                              <Button
+                                onClick={handleCancelEdit}
+                                size="sm"
+                                variant="outline"
+                                className="border-gray-600 text-gray-300 hover:bg-gray-800 text-xs px-3 py-1"
+                              >
+                                Cancel
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                onClick={() => handleEditComment(index, comment.text)}
+                                size="sm"
+                                className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1"
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                onClick={() => handleDeleteComment(index)}
+                                size="sm"
+                                className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1"
+                              >
+                                Delete
+                              </Button>
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
-                    <p className="text-white">{comment.text}</p>
+                    {/* Comment Text */}
+                    {editingCommentIndex === index ? (
+                      <div className="space-y-2">
+                        <Textarea
+                          value={editingCommentText}
+                          onChange={(e) => setEditingCommentText(e.target.value)}
+                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                          rows={2}
+                        />
+                      </div>
+                    ) : (
+                      <p className="text-white text-sm leading-relaxed">{comment.text}</p>
+                    )}
                   </div>
                 ))
               )}
@@ -388,6 +615,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
           </div>
         </div>
       </div>
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        songName={song.songName}
+        singerName={song.singer}
+        singerImage={getSingerImagePath(song.imageName)}
+        currentUrl={typeof window !== 'undefined' ? window.location.href : ''}
+      />
     </div>
   )
 }
