@@ -35,6 +35,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false)
   const [editingCommentIndex, setEditingCommentIndex] = useState<number | null>(null)
   const [editingCommentText, setEditingCommentText] = useState("")
+  const [activeTab, setActiveTab] = useState<'lyrics' | 'notes'>('lyrics')
   const otherEntriesScrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -347,19 +348,74 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
           </div>
         </div>
 
-        {/* Entry Lyrics */}
-        {entry.entryLyrics && (
-          <div className="mt-8">
-            <div className="bg-black border border-gray-700 rounded-lg p-6">
-              <h2 className="text-xl font-bold text-white mb-4">Entry Lyrics</h2>
-              <div className="bg-gray-900 rounded-lg p-4">
-                <p className="text-white text-lg leading-relaxed whitespace-pre-line font-arabic">
-                  {entry.entryLyrics}
-                </p>
-              </div>
+        {/* Entry Content Tabs */}
+        <div className="mt-8">
+          <div className="bg-black border border-gray-700 rounded-lg">
+            {/* Tab Headers */}
+            <div className="flex border-b border-gray-700">
+              <button
+                onClick={() => setActiveTab('lyrics')}
+                className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
+                  activeTab === 'lyrics'
+                    ? 'bg-black text-white border-b-2 border-orange-500'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                }`}
+              >
+                Lyrics
+              </button>
+              <button
+                onClick={() => setActiveTab('notes')}
+                className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
+                  activeTab === 'notes'
+                    ? 'bg-black text-white border-b-2 border-orange-500'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                }`}
+              >
+                Notes
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="p-6">
+              {activeTab === 'lyrics' && entry.entryLyrics && (
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-4">Entry Lyrics</h2>
+                  <div className="bg-gray-900 rounded-lg p-4">
+                    <p className="text-white text-lg leading-relaxed whitespace-pre-line font-arabic">
+                      {entry.entryLyrics}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'notes' && entry.noteImageName && (
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-4">Notes {entry.entryName}</h2>
+                  <div className="bg-gray-900 rounded-lg p-4">
+                    <img
+                      src={getNoteImagePath(entry.noteImageName)}
+                      alt={`Notes for ${entry.entryName}`}
+                      className="w-full h-auto max-w-full rounded-lg"
+                      onError={(ev) => {
+                        console.log('Note image failed to load:', entry.noteImageName)
+                        ;(ev.target as HTMLImageElement).src = '/placeholder.svg'
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'notes' && !entry.noteImageName && (
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-4">Notes</h2>
+                  <div className="bg-gray-900 rounded-lg p-4">
+                    <p className="text-gray-400 text-center">No notes available for this entry.</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
 
         {/* Comments Section */}
         <div className="mt-8">
