@@ -357,8 +357,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 onClick={() => setActiveTab('lyrics')}
                 className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
                   activeTab === 'lyrics'
-                    ? 'bg-black text-white border-b-2 border-orange-500'
-                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                    ? 'bg-orange-500 text-white border-b-2 border-orange-500'
+                    : 'bg-black text-white hover:bg-gray-800'
                 }`}
               >
                 Lyrics
@@ -367,11 +367,11 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 onClick={() => setActiveTab('notes')}
                 className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
                   activeTab === 'notes'
-                    ? 'bg-black text-white border-b-2 border-orange-500'
-                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                    ? 'bg-orange-500 text-white border-b-2 border-orange-500'
+                    : 'bg-black text-white hover:bg-gray-800'
                 }`}
               >
-                Notes
+                Note
               </button>
             </div>
 
@@ -390,11 +390,11 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Notes {entry.entryName}</h2>
+                  <h2 className="text-xl font-bold text-white mb-4">Note</h2>
                   <div className="bg-gray-900 rounded-lg p-4">
                     <img
                       src={getNoteImagePath(entry.noteImageName)}
-                      alt={`Notes for ${entry.entryName}`}
+                      alt={`Note for ${entry.entryName}`}
                       className="w-full h-auto max-w-full rounded-lg"
                       onError={(ev) => {
                         console.log('Note image failed to load:', entry.noteImageName)
@@ -407,9 +407,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && !entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Notes</h2>
+                  <h2 className="text-xl font-bold text-white mb-4">Note</h2>
                   <div className="bg-gray-900 rounded-lg p-4">
-                    <p className="text-gray-400 text-center">No notes available for this entry.</p>
+                    <p className="text-gray-400 text-center">No note available for this entry.</p>
                   </div>
                 </div>
               )}
