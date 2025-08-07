@@ -390,7 +390,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Note</h2>
+                  <h2 className="text-xl font-bold text-white mb-4 !text-white !border-none !outline-none">Note</h2>
                   <div className="bg-gray-900 rounded-lg p-4">
                     <img
                       src={getNoteImagePath(entry.noteImageName)}
@@ -407,7 +407,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && !entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Note</h2>
+                  <h2 className="text-xl font-bold text-white mb-4 !text-white !border-none !outline-none">Note</h2>
                   <div className="bg-gray-900 rounded-lg p-4">
                     <p className="text-gray-400 text-center">No note available for this entry.</p>
                   </div>
