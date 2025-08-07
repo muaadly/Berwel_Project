@@ -77,8 +77,23 @@ export default function SongDetail({ songId }: SongDetailProps) {
         const shuffledSongs = shuffleArray(sameCategorySongs).slice(0, 10)
         setOtherSongs(shuffledSongs)
         
-        const sameSingerSongs = allSongs.filter(s => s.singer === songData.singer && String(s.id) !== String(songId))
-        const shuffledSingers = shuffleArray(sameSingerSongs).slice(0, 10)
+        // Get unique singers in the same category (excluding current singer)
+        const sameCategorySongsForSingers = allSongs.filter(s => 
+          s.category === songData.category && 
+          s.singer !== songData.singer &&
+          s.singer.trim() !== '' // Ensure singer name is not empty
+        )
+        
+        // Create a Map to ensure unique singers with their first occurrence
+        const uniqueSingersMap = new Map<string, LibyanSong>()
+        sameCategorySongsForSingers.forEach(song => {
+          if (!uniqueSingersMap.has(song.singer)) {
+            uniqueSingersMap.set(song.singer, song)
+          }
+        })
+        
+        const uniqueSingers = Array.from(uniqueSingersMap.values())
+        const shuffledSingers = shuffleArray(uniqueSingers).slice(0, 10)
         setOtherSingers(shuffledSingers)
       } catch (error) {
         console.error("Error loading song:", error)
@@ -321,10 +336,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   </pre>
                 </div>
 
-                {/* Mobile-friendly Action Buttons */}
+                {/* Action Buttons */}
                 <div className="mt-4">
-                  {/* First Row: Like count, Like button, Share button */}
-                  <div className="flex items-center justify-center gap-4 mb-3">
+                  {/* Desktop: Single line layout */}
+                  <div className="hidden md:flex items-center justify-center gap-4">
                     {/* Likes Count Circle */}
                     <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
                       {likes.length}
@@ -347,12 +362,45 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     >
                       <Share2 className="h-4 w-4" /> Share
                     </Button>
-                  </div>
-                  {/* Second Row: Add Lyrics Button (full width) */}
-                  <div className="flex justify-center">
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
+                    {/* Add Lyrics Button */}
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
                       <BookOpen className="h-4 w-4" /> Add Lyrics
                     </Button>
+                  </div>
+
+                  {/* Mobile: Stacked layout */}
+                  <div className="md:hidden">
+                    {/* First Row: Like count, Like button, Share button */}
+                    <div className="flex items-center justify-center gap-4 mb-3">
+                      {/* Likes Count Circle */}
+                      <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                        {likes.length}
+                      </div>
+                      <Button 
+                        onClick={handleLike}
+                        className={`transition-colors flex items-center gap-2 ${
+                          isLiked 
+                            ? 'bg-red-500 hover:bg-red-600 text-white' 
+                            : 'bg-orange-500 hover:bg-orange-600 text-white'
+                        }`}
+                      >
+                        <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
+                        {isLiked ? 'Liked' : 'Like'}
+                      </Button>
+                      {/* Share Button */}
+                      <Button 
+                        onClick={handleShare}
+                        className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                      >
+                        <Share2 className="h-4 w-4" /> Share
+                      </Button>
+                    </div>
+                    {/* Second Row: Add Lyrics Button (full width) */}
+                    <div className="flex justify-center">
+                      <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
+                        <BookOpen className="h-4 w-4" /> Add Lyrics
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -607,6 +655,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
                       />
                       <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.singer}</div>
+                      <div className="text-gray-400 text-sm text-center">{s.category}</div>
                     </div>
                   </Link>
                 ))
