@@ -1,19 +1,31 @@
+"use client"
+
 import Image from "next/image"
 import { useTheme } from "next-themes"
+import { useState, useEffect } from "react"
 
 export default function Hero() {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <section className="bg-background py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8">
-          <Image 
-            src={theme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
-            alt="Berwel Logo" 
-            width={300} 
-            height={300} 
-            className="mx-auto rounded-lg" 
-          />
+          {mounted && (
+            <Image 
+              src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
+              alt="Berwel Logo" 
+              width={300} 
+              height={300} 
+              className="mx-auto rounded-lg" 
+              priority
+            />
+          )}
         </div>
 
         <div className="space-y-6">
