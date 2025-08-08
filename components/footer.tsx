@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
               <Image 
-                src={theme === "dark" ? "/images/Dark_Mode_Logo.png" : "/images/Light_Mode_Logo.jpeg"} 
+                src={theme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
                 alt="Berwel Logo" 
                 width={40} 
                 height={40} 
