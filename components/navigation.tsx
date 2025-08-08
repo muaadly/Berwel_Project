@@ -134,7 +134,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:text-orange-500"
+              className="text-foreground hover:text-primary"
               aria-label="Open search"
               onClick={() => setSearchOpen(true)}
             >
@@ -184,7 +184,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
           <div className="md:hidden">
               <Button
                 variant="ghost"
-                className="text-white hover:text-orange-500"
+                className="text-foreground hover:text-primary"
                 size="sm"
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Open menu"
