@@ -162,7 +162,7 @@ export default function LibraryContent() {
     const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems)
 
     return (
-      <div className="flex items-center justify-between px-6 py-4 bg-gray-800 border-t border-gray-700">
+      <div className="flex items-center justify-between px-6 py-4 bg-muted border-t border-border">
         <div className="hidden md:flex items-center text-sm text-gray-300">
           <span>
             Showing {startItem} to {endItem} of {totalItems} {itemType}
@@ -306,10 +306,10 @@ export default function LibraryContent() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-black py-16 px-4">
+      <div className="min-h-screen bg-background py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Loading...
             </h1>
           </div>
@@ -320,10 +320,10 @@ export default function LibraryContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black py-16 px-4">
+      <div className="min-h-screen bg-background py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Loading Library...
             </h1>
             <p className="text-gray-400 text-lg">Please wait while we load the data</p>
@@ -334,7 +334,7 @@ export default function LibraryContent() {
   }
 
   return (
-    <div className="min-h-screen bg-black py-16 px-4">
+    <div className="min-h-screen bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <div className="text-center mb-12">
@@ -348,13 +348,13 @@ export default function LibraryContent() {
 
         {/* Tab Buttons - Full Width */}
         <div className="mb-8">
-          <div className="bg-gray-900 rounded-lg p-1 flex w-full">
+          <div className="bg-card rounded-lg p-1 flex w-full">
             <Button
               onClick={() => setActiveTab("songs")}
               className={`flex-1 px-6 py-3 rounded-md font-medium transition-all ${
                 activeTab === "songs"
-                  ? "bg-orange-500 text-white shadow-lg"
-                  : "bg-transparent text-gray-400 hover:text-white hover:bg-gray-800"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               Libyan Songs ({libyanSongs.length})
@@ -363,8 +363,8 @@ export default function LibraryContent() {
               onClick={() => setActiveTab("maloof")}
               className={`flex-1 px-6 py-3 rounded-md font-medium transition-all ${
                 activeTab === "maloof"
-                  ? "bg-orange-500 text-white shadow-lg"
-                  : "bg-transparent text-gray-400 hover:text-white hover:bg-gray-800"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               Maloof Entries ({maloofEntries.length})
@@ -373,7 +373,7 @@ export default function LibraryContent() {
         </div>
 
         {/* Content */}
-        <div className="bg-gray-900 rounded-lg p-6 mt-4">
+        <div className="bg-card rounded-lg p-6 mt-4">
           {/* Search Bar and Filter Button - inline */}
           <div className="mb-4 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
             <div className="w-full">
@@ -383,7 +383,7 @@ export default function LibraryContent() {
                   placeholder="Search Libyan songs..."
                   value={songSearch}
                   onChange={e => setSongSearch(e.target.value)}
-                  className="w-full px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               ) : (
                 <input
@@ -391,21 +391,21 @@ export default function LibraryContent() {
                   placeholder="Search Maloof entries..."
                   value={maloofSearch}
                   onChange={e => setMaloofSearch(e.target.value)}
-                  className="w-full px-4 py-2 rounded-md bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               )}
             </div>
             <div className="flex flex-row gap-2 md:gap-4 w-full md:w-auto">
               <Button
                 variant="outline"
-                className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors w-full md:w-auto"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors w-full md:w-auto"
                 onClick={() => setShowFilters((prev) => !prev)}
               >
                 {showFilters ? "Hide Filters" : "Show Filters"}
               </Button>
               <Button
                 variant="outline"
-                className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors w-full md:w-auto"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors w-full md:w-auto"
                 onClick={() => {
                   if (activeTab === "songs") {
                     setSongSearch("");
@@ -430,7 +430,7 @@ export default function LibraryContent() {
               {selectedSingers.length > 0 && (
                 <div className="mb-4 flex flex-wrap gap-2 items-center">
                   {selectedSingers.map(singer => (
-                    <span key={singer} className="flex items-center bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span key={singer} className="flex items-center bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                       {singer}
                       <button
                         className="ml-2 text-white hover:text-gray-200 focus:outline-none"
@@ -486,18 +486,18 @@ export default function LibraryContent() {
               {/* Table and Pagination (filteredSongs) */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-800">
+                  <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Song Name
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Singer Name
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Category
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Play
                       </th>
                     </tr>
@@ -506,11 +506,11 @@ export default function LibraryContent() {
                     {currentSongs.map((song, index) => (
                       <tr
                         key={song.id}
-                        className={`hover:bg-gray-800 transition-colors ${index % 2 === 0 ? "bg-gray-900" : "bg-gray-850"} cursor-pointer`}
+                        className={`hover:bg-muted transition-colors ${index % 2 === 0 ? "bg-card" : "bg-background"} cursor-pointer`}
                         onClick={() => router.push(`/songs/${song.id}`)}
                       >
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="text-white font-medium hover:text-orange-500 transition-colors cursor-pointer">
+                          <span className="text-foreground font-medium hover:text-primary transition-colors cursor-pointer">
                             {song.songName}
                           </span>
                         </td>
@@ -607,18 +607,18 @@ export default function LibraryContent() {
               {/* Table and Pagination (filteredMaloof) */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-800">
+                  <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Entry Name
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Entry Type
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Entry Rhythm
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                         Entry Number
                       </th>
                     </tr>
@@ -631,7 +631,7 @@ export default function LibraryContent() {
                         onClick={() => router.push(`/maloof/${entry.id}`)}
                       >
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="text-white font-medium hover:text-orange-500 transition-colors cursor-pointer">
+                          <span className="text-foreground font-medium hover:text-primary transition-colors cursor-pointer">
                             {entry.entryName}
                           </span>
                         </td>

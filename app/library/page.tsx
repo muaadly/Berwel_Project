@@ -9,7 +9,7 @@ export default function LibraryPage() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navigation
         searchOpen={searchOpen}
         setSearchOpen={setSearchOpen}
