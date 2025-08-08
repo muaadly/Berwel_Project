@@ -1,6 +1,6 @@
 import { prisma } from './prisma'
 import { User, Song, MaloofEntry, SongLike, SongComment, MaloofLike, MaloofComment } from '@prisma/client'
-import { getLibyanSongs } from './server-data'
+import { getLibyanSongs, getMaloofEntries } from './server-data'
 
 // Sync songs from CSV to database
 export async function syncSongsToDatabase() {
@@ -40,6 +40,38 @@ export async function syncSongsToDatabase() {
     console.log(`Synced ${songs.length} songs to database`)
   } catch (error) {
     console.error('Error syncing songs to database:', error)
+    throw error
+  }
+}
+
+// Sync Maloof entries from CSV to database
+export async function syncMaloofEntriesToDatabase() {
+  try {
+    console.log('Starting Maloof entries sync to database...')
+    const entries = getMaloofEntries()
+    
+    for (const entry of entries) {
+      await prisma.maloofEntry.upsert({
+        where: { id: entry.id },
+        update: {
+          entryName: entry.entryName,
+          entryType: entry.entryType,
+          entryRhythm: entry.entryRhythm,
+          typeEntryImage: entry.typeEntryImage
+        },
+        create: {
+          id: entry.id,
+          entryName: entry.entryName,
+          entryType: entry.entryType,
+          entryRhythm: entry.entryRhythm,
+          typeEntryImage: entry.typeEntryImage
+        }
+      })
+    }
+    
+    console.log(`Synced ${entries.length} Maloof entries to database`)
+  } catch (error) {
+    console.error('Error syncing Maloof entries to database:', error)
     throw error
   }
 }
@@ -174,6 +206,16 @@ export async function getUserSongLike(songId: string, userId: string): Promise<b
 
 // Song Comments
 export async function addSongComment(songId: string, userId: string, text: string): Promise<SongComment> {
+  // Check if song exists, sync if needed
+  const song = await prisma.song.findUnique({
+    where: { id: songId }
+  })
+  
+  if (!song) {
+    console.log(`Song with ID ${songId} not found, attempting to sync...`)
+    await syncSongsToDatabase()
+  }
+  
   return await prisma.songComment.create({
     data: {
       songId,
@@ -235,16 +277,62 @@ export async function deleteSongComment(commentId: string, userId: string): Prom
 
 // Maloof Likes
 export async function toggleMaloofLike(entryId: string, userId: string): Promise<{ liked: boolean; count: number }> {
-  const existingLike = await prisma.maloofLike.findUnique({
-    where: {
-      userId_entryId: {
-        userId,
-        entryId
+  console.log('toggleMaloofLike called with entryId:', entryId, 'userId:', userId)
+  
+  try {
+    // First, check if the user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId }
+    })
+    console.log('User found:', user ? 'Yes' : 'No')
+    
+    if (!user) {
+      console.log('User not found, creating user...')
+      // Create user if not exists (this shouldn't happen but let's handle it)
+      await prisma.user.create({
+        data: {
+          id: userId,
+          email: `user-${userId}@temp.com`,
+          name: `User ${userId}`
+        }
+      })
+    }
+    
+    // Check if the entry exists
+    const entry = await prisma.maloofEntry.findUnique({
+      where: { id: entryId }
+    })
+    console.log('Entry found:', entry ? 'Yes' : 'No')
+    
+    if (!entry) {
+      console.log(`Entry with ID ${entryId} not found, attempting to sync...`)
+      try {
+        await syncMaloofEntriesToDatabase()
+        // Check again after sync
+        const entryAfterSync = await prisma.maloofEntry.findUnique({
+          where: { id: entryId }
+        })
+        if (!entryAfterSync) {
+          throw new Error(`Entry with ID ${entryId} not found even after sync`)
+        }
+      } catch (syncError) {
+        console.error('Error syncing entries:', syncError)
+        throw new Error(`Entry with ID ${entryId} not found and sync failed`)
       }
     }
-  })
+    
+    const existingLike = await prisma.maloofLike.findUnique({
+      where: {
+        userId_entryId: {
+          userId,
+          entryId
+        }
+      }
+    })
+    
+    console.log('Existing like found:', existingLike ? 'Yes' : 'No')
 
-  if (existingLike) {
+    if (existingLike) {
     // Unlike
     await prisma.maloofLike.delete({
       where: {
@@ -289,6 +377,16 @@ export async function getUserMaloofLike(entryId: string, userId: string): Promis
 
 // Maloof Comments
 export async function addMaloofComment(entryId: string, userId: string, text: string): Promise<MaloofComment> {
+  // Check if entry exists, sync if needed
+  const entry = await prisma.maloofEntry.findUnique({
+    where: { id: entryId }
+  })
+  
+  if (!entry) {
+    console.log(`Entry with ID ${entryId} not found, attempting to sync...`)
+    await syncMaloofEntriesToDatabase()
+  }
+  
   return await prisma.maloofComment.create({
     data: {
       entryId,
