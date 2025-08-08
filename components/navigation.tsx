@@ -7,7 +7,8 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { Drawer, DrawerContent, DrawerClose } from "@/components/ui/drawer"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import { CommandDialog } from "@/components/ui/command"
-import { Search, LogOut, User } from "lucide-react"
+import { Search, LogOut, User, Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
 import { useEffect } from "react"
@@ -23,6 +24,7 @@ interface NavigationProps {
 
 export default function Navigation({ searchOpen, setSearchOpen, searchValue, setSearchValue }: NavigationProps) {
   const { user, isLoading } = useAuth()
+  const { theme, setTheme } = useTheme()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
   const [maloofEntries, setMaloofEntries] = useState<MaloofEntry[]>([])
@@ -56,14 +58,24 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
   }
 
   return (
-    <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
+    <nav className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
+          {/* Logo and Theme Toggle */}
+          <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center">
               <Image src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" width={60} height={60} className="rounded" />
             </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="ml-2 text-gray-400 hover:text-orange-500"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
           </div>
 
           {/* Navigation Links */}

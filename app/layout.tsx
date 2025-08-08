@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { AuthProvider } from '@/components/auth-provider'
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
   title: 'Berwel - A Website for Libyan Music',
@@ -44,9 +45,16 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/Data/Berwel Data Org/Logoo.png" />
       </head>
       <body>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
