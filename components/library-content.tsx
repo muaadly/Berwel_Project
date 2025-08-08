@@ -189,8 +189,8 @@ export default function LibraryContent() {
               size="sm"
               className={
                 currentPage === 1
-                  ? "bg-orange-500 hover:bg-orange-600 text-white"
-                  : "text-gray-300 hover:text-white hover:bg-gray-700"
+                  ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                  : "text-foreground hover:text-primary-foreground hover:bg-primary"
               }
             >
               1
@@ -215,7 +215,7 @@ export default function LibraryContent() {
             {/* Show ellipsis and last page if we have many pages */}
             {totalPages > 3 && (
               <>
-                {totalPages > 4 && <span className="text-gray-400 px-2">...</span>}
+                {totalPages > 4 && <span className="text-foreground px-2">...</span>}
                 <Button
                   onClick={() => onPageChange(totalPages)}
                   variant={currentPage === totalPages ? "default" : "ghost"}
@@ -338,7 +338,7 @@ export default function LibraryContent() {
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Discover the Libyan Songs and Maloof Entries
           </h1>
           <p className="text-muted-foreground text-lg">
@@ -450,7 +450,7 @@ export default function LibraryContent() {
                   {allSingers.map(singer => (
                     <button
                       key={singer}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedSingers.includes(singer) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedSingers.includes(singer) ? "bg-primary text-primary-foreground border-primary" : "bg-muted text-foreground border-border hover:bg-primary hover:text-primary-foreground"}`}
                           onClick={() => {
                             setSelectedSingers(sel => sel.includes(singer) ? sel.filter(s => s !== singer) : [...sel, singer]);
                             setShowFilters(false);
@@ -469,7 +469,7 @@ export default function LibraryContent() {
                   {allCategories.map(category => (
                     <button
                       key={category}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedCategories.includes(category) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedCategories.includes(category) ? "bg-primary text-primary-foreground border-primary" : "bg-muted text-foreground border-border hover:bg-primary hover:text-primary-foreground"}`}
                           onClick={() => {
                             setSelectedCategories(sel => sel.includes(category) ? sel.filter(c => c !== category) : [...sel, category]);
                             setShowFilters(false);
@@ -571,7 +571,7 @@ export default function LibraryContent() {
                   {allEntryTypes.map(type => (
                     <button
                       key={type}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryTypes.includes(type) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryTypes.includes(type) ? "bg-primary text-primary-foreground border-primary" : "bg-muted text-foreground border-border hover:bg-primary hover:text-primary-foreground"}`}
                           onClick={() => {
                             setSelectedEntryTypes(sel => sel.includes(type) ? sel.filter(t => t !== type) : [...sel, type]);
                             setShowFilters(false);
@@ -590,7 +590,7 @@ export default function LibraryContent() {
                   {allEntryRhythms.map(rhythm => (
                     <button
                       key={rhythm}
-                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryRhythms.includes(rhythm) ? "bg-orange-500 text-white border-orange-500" : "bg-gray-800 text-gray-300 border-gray-700 hover:bg-orange-500 hover:text-white"}`}
+                      className={`px-4 py-1 rounded-full border transition-colors text-sm font-medium ${selectedEntryRhythms.includes(rhythm) ? "bg-primary text-primary-foreground border-primary" : "bg-muted text-foreground border-border hover:bg-primary hover:text-primary-foreground"}`}
                           onClick={() => {
                             setSelectedEntryRhythms(sel => sel.includes(rhythm) ? sel.filter(r => r !== rhythm) : [...sel, rhythm]);
                             setShowFilters(false);
@@ -636,7 +636,7 @@ export default function LibraryContent() {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
                             {entry.entryType}
                           </span>
                         </td>

@@ -12,22 +12,22 @@ export default function Home() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navigation searchOpen={searchOpen} setSearchOpen={setSearchOpen} searchValue={searchValue} setSearchValue={setSearchValue} />
       <Hero />
       {/* Search Our Library Section */}
       <section className="max-w-7xl mx-auto mt-8 mb-12 px-4">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-white">Search Our Library</h2>
+          <h2 className="text-3xl font-bold text-foreground">Search Our Library</h2>
         </div>
-        <div className="bg-gray-900 border-2 border-gray-700 rounded-lg shadow-lg flex flex-col items-start py-10 px-8">
+        <div className="bg-card border-2 border-border rounded-lg shadow-lg flex flex-col items-start py-10 px-8">
           <button
-            className="w-full flex items-center gap-4 bg-black border border-gray-700 rounded-lg px-6 py-4 text-2xl font-semibold text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-colors group"
+            className="w-full flex items-center gap-4 bg-muted border border-border rounded-lg px-6 py-4 text-2xl font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-ring hover:border-ring transition-colors group"
             onClick={() => setSearchOpen(true)}
             aria-label="Open global search"
             style={{ maxWidth: '100%' }}
           >
-            <Search className="h-8 w-8 text-orange-500 group-hover:text-orange-600 transition-colors" />
+            <Search className="h-8 w-8 text-primary group-hover:text-primary/80 transition-colors" />
             <span className="flex-1 text-left">Search Berwel...</span>
           </button>
         </div>
@@ -37,13 +37,13 @@ export default function Home() {
       {/* Berwel Soundcloud Playlist Section */}
       <section className="mt-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-6">Berwel Soundcloud Playlist</h2>
-          <div className="bg-gray-900 border-2 border-gray-700 rounded-lg px-8 pt-6 pb-4 shadow-lg flex flex-col items-center">
+          <h2 className="text-3xl font-bold text-foreground mb-6">Berwel Soundcloud Playlist</h2>
+          <div className="bg-card border-2 border-border rounded-lg px-8 pt-6 pb-4 shadow-lg flex flex-col items-center">
             <a
               href="https://soundcloud.com/berwel-ly"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg mt-2"
+              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg mt-2"
               style={{ textDecoration: 'none' }}
             >
               {/* SoundCloud SVG icon */}
@@ -52,7 +52,7 @@ export default function Home() {
               </svg>
               Listen on SoundCloud
             </a>
-            <p className="mt-4 text-gray-400 text-center max-w-xl">Discover Berwel's curated Libyan music playlist and more on our official SoundCloud channel.</p>
+            <p className="mt-4 text-muted-foreground text-center max-w-xl">Discover Berwel's curated Libyan music playlist and more on our official SoundCloud channel.</p>
           </div>
         </div>
       </section>
