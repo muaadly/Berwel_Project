@@ -194,65 +194,87 @@ export default function LibraryContent() {
           </Button>
 
           <div className="flex items-center space-x-1">
-            {/* First page */}
-            <Button
-              onClick={() => handlePageChange(1)}
-              variant={currentPage === 1 ? "default" : "ghost"}
-              size="sm"
-              className={
-                currentPage === 1
-                  ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                  : "text-foreground hover:text-primary-foreground hover:bg-primary"
+            {/* Generate page numbers with proper logic */}
+            {(() => {
+              const pages = []
+              
+              // Always show first page
+              pages.push(
+                <Button
+                  key={1}
+                  onClick={() => handlePageChange(1)}
+                  variant={currentPage === 1 ? "default" : "ghost"}
+                  size="sm"
+                  className={
+                    currentPage === 1
+                      ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                      : "text-foreground hover:text-primary-foreground hover:bg-primary"
+                  }
+                >
+                  1
+                </Button>
+              )
+
+              // Show pages around current page
+              const startPage = Math.max(2, currentPage - 1)
+              const endPage = Math.min(totalPages - 1, currentPage + 1)
+
+              // Add ellipsis if there's a gap after page 1
+              if (startPage > 2) {
+                pages.push(
+                  <span key="ellipsis1" className="text-foreground px-2">...</span>
+                )
               }
-            >
-              1
-            </Button>
 
-            {/* Show ellipsis if current page is > 3 */}
-            {currentPage > 3 && (
-              <span className="text-foreground px-2">...</span>
-            )}
+              // Add pages around current page
+              for (let i = startPage; i <= endPage; i++) {
+                if (i === 1 || i === totalPages) continue // Skip first and last as they're handled separately
+                
+                pages.push(
+                  <Button
+                    key={i}
+                    onClick={() => handlePageChange(i)}
+                    variant={currentPage === i ? "default" : "ghost"}
+                    size="sm"
+                    className={
+                      currentPage === i
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "text-foreground hover:text-primary-foreground hover:bg-primary"
+                    }
+                  >
+                    {i}
+                  </Button>
+                )
+              }
 
-            {/* Show current page if it's not 1, 2, or last page */}
-            {currentPage > 2 && currentPage < totalPages && (
-              <Button
-                onClick={() => handlePageChange(currentPage)}
-                variant="default"
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                {currentPage}
-              </Button>
-            )}
+              // Add ellipsis if there's a gap before last page
+              if (endPage < totalPages - 1) {
+                pages.push(
+                  <span key="ellipsis2" className="text-foreground px-2">...</span>
+                )
+              }
 
-            {/* Show second page if we have more than 1 page and current page is not 2 */}
-            {totalPages > 1 && currentPage !== 2 && (
-              <Button
-                onClick={() => handlePageChange(2)}
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-primary-foreground hover:bg-primary"
-              >
-                2
-              </Button>
-            )}
+              // Always show last page if there's more than 1 page
+              if (totalPages > 1) {
+                pages.push(
+                  <Button
+                    key={totalPages}
+                    onClick={() => handlePageChange(totalPages)}
+                    variant={currentPage === totalPages ? "default" : "ghost"}
+                    size="sm"
+                    className={
+                      currentPage === totalPages
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "text-foreground hover:text-primary-foreground hover:bg-primary"
+                    }
+                  >
+                    {totalPages}
+                  </Button>
+                )
+              }
 
-            {/* Show ellipsis before last page if current page is < totalPages - 2 */}
-            {currentPage < totalPages - 2 && (
-              <span className="text-foreground px-2">...</span>
-            )}
-
-            {/* Show last page if we have more than 2 pages and current page is not last */}
-            {totalPages > 2 && currentPage !== totalPages && (
-              <Button
-                onClick={() => handlePageChange(totalPages)}
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-primary-foreground hover:bg-primary"
-              >
-                {totalPages}
-              </Button>
-            )}
+              return pages
+            })()}
           </div>
 
           <Button
