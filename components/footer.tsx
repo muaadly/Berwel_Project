@@ -52,8 +52,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contributions" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                  Contributions
+                <Link href="/analytics" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                  Analytics
                 </Link>
               </li>
               <li>
