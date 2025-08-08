@@ -1,7 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
+import { useTheme } from "next-themes"
 
 export default function Footer() {
+  const { theme } = useTheme()
   return (
     <footer className="bg-card border-t border-border py-12 px-4">
       <div className="max-w-7xl mx-auto">
@@ -9,7 +11,13 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <Image src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" width={40} height={40} className="rounded mr-3" />
+              <Image 
+                src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/Data/Berwel Data Org/Logo.jpeg"} 
+                alt="Berwel Logo" 
+                width={40} 
+                height={40} 
+                className="rounded mr-3" 
+              />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Preserving and celebrating Libya's rich musical heritage through an interactive digital platform that

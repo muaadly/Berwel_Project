@@ -1,11 +1,19 @@
 import Image from "next/image"
+import { useTheme } from "next-themes"
 
 export default function Hero() {
+  const { theme } = useTheme()
   return (
     <section className="bg-background py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8">
-          <Image src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" width={300} height={300} className="mx-auto rounded-lg" />
+          <Image 
+            src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/Data/Berwel Data Org/Logo.jpeg"} 
+            alt="Berwel Logo" 
+            width={300} 
+            height={300} 
+            className="mx-auto rounded-lg" 
+          />
         </div>
 
         <div className="space-y-6">
