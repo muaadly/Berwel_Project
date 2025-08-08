@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8">
           <Image 
-            src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/Data/Berwel Data Org/Logo.jpeg"} 
+            src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/images/logo.jpeg"} 
             alt="Berwel Logo" 
             width={300} 
             height={300} 

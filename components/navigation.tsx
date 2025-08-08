@@ -65,7 +65,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center">
               <Image 
-                src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/Data/Berwel Data Org/Logo.jpeg"} 
+                src={theme === "dark" ? "/Data/Berwel Data Org/Logoo.png" : "/images/logo.jpeg"} 
                 alt="Berwel Logo" 
                 width={60} 
                 height={60} 
