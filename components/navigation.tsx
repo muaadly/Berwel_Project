@@ -24,10 +24,15 @@ interface NavigationProps {
 
 export default function Navigation({ searchOpen, setSearchOpen, searchValue, setSearchValue }: NavigationProps) {
   const { user, isLoading } = useAuth()
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
   const [maloofEntries, setMaloofEntries] = useState<MaloofEntry[]>([])
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (searchOpen) {
@@ -64,18 +69,21 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
           {/* Logo and Theme Toggle */}
           <div className="flex items-center gap-2">
             <Link href="/" className="flex items-center">
-              <Image 
-                src={theme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
-                alt="Berwel Logo" 
-                width={60} 
-                height={60} 
-                className="rounded" 
-              />
+              {mounted && (
+                <Image 
+                  src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
+                  alt="Berwel Logo" 
+                  width={60} 
+                  height={60} 
+                  className="rounded" 
+                  priority
+                />
+              )}
             </Link>
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
               className="ml-2 text-gray-400 hover:text-orange-500"
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
