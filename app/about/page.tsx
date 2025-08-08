@@ -79,10 +79,11 @@ export default function AboutPage() {
           </a>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-6 shadow-lg text-center text-foreground text-sm transition-colors duration-200 group hover:border-primary">
+          <h3 className="text-xl font-bold mb-4 text-foreground">Sponsors</h3>
           <div className="mb-6 text-foreground text-sm text-center">
-            This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, and Alfadaia AI for Software Development.
+            This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, Creative Solution for advertising, and Alfadaia AI for Software Development.
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-2">
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
                 <a href="https://www.lhos.ly/" target="_blank" rel="noopener noreferrer">
@@ -106,6 +107,14 @@ export default function AboutPage() {
                 </a>
               </div>
               <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Alfadaia AI</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <a href="https://csmedia.ly" target="_blank" rel="noopener noreferrer">
+                  <img src="/Partners Logos/CreativeSolution.png" alt="Creative Solution" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
+                </a>
+              </div>
+              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Creative Solution</span>
             </div>
           </div>
         </div>
