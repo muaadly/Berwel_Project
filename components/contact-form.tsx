@@ -48,13 +48,13 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="bg-gray-900 border-gray-600 text-white focus:border-orange-500 focus:ring-orange-500"
+                  className="bg-background border-border text-foreground focus:border-ring focus:ring-ring"
                   required
                 />
               </div>
 
               <div className="bg-muted border border-border rounded-lg p-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                   Email
                 </label>
                 <Input
@@ -63,14 +63,14 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="bg-gray-900 border-gray-600 text-white focus:border-orange-500 focus:ring-orange-500"
+                  className="bg-background border-border text-foreground focus:border-ring focus:ring-ring"
                   required
                 />
               </div>
             </div>
 
             <div className="bg-muted border border-border rounded-lg p-4">
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
                 Subject
               </label>
               <Input
@@ -79,13 +79,13 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="bg-gray-900 border-gray-600 text-white focus:border-orange-500 focus:ring-orange-500"
+                className="bg-background border-border text-foreground focus:border-ring focus:ring-ring"
                 required
               />
             </div>
 
             <div className="bg-muted border border-border rounded-lg p-4">
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                 Message
               </label>
               <Textarea
@@ -94,7 +94,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
-                className="bg-gray-900 border-gray-600 text-white focus:border-orange-500 focus:ring-orange-500"
+                className="bg-background border-border text-foreground focus:border-ring focus:ring-ring"
                 required
               />
             </div>
@@ -102,7 +102,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
             <div className="text-center">
               <Button
                 type="submit"
-                className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-8 py-3 rounded-md transition-colors"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-3 rounded-md transition-colors"
               >
                 Send Message
               </Button>
