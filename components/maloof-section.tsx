@@ -40,31 +40,31 @@ export default function MaloofSection() {
   }
 
   return (
-    <section className="bg-black py-16 px-4">
+    <section className="bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-white">Maloof Entries</h2>
+          <h2 className="text-3xl font-bold text-foreground">Maloof Entries</h2>
           <div className="flex space-x-2">
             <Button
               variant="outline"
               size="icon"
-              className="border-gray-600 text-white bg-transparent border-2"
+              className="border-border text-foreground bg-transparent border-2"
               onClick={() => scroll('left')}
             >
-              <ChevronLeft className="h-4 w-4 text-orange-500" />
+              <ChevronLeft className="h-4 w-4 text-primary" />
             </Button>
             <Button
               variant="outline"
               size="icon"
-              className="border-gray-600 text-white bg-transparent border-2"
+              className="border-border text-foreground bg-transparent border-2"
               onClick={() => scroll('right')}
             >
-              <ChevronRight className="h-4 w-4 text-orange-500" />
+              <ChevronRight className="h-4 w-4 text-primary" />
             </Button>
           </div>
         </div>
 
-        <div ref={scrollRef} className="bg-gray-900 border-2 border-gray-700 rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div ref={scrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex w-max space-x-6 pb-4">
             {entryImages.map((img, idx) => {
               const entryType = entryTypeMap[img] || "";
