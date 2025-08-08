@@ -48,7 +48,7 @@ export default function MaloofSection() {
             <Button
               variant="outline"
               size="icon"
-              className="border-border text-foreground bg-transparent border-2"
+              className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
               onClick={() => scroll('left')}
             >
               <ChevronLeft className="h-4 w-4 text-primary" />
@@ -56,7 +56,7 @@ export default function MaloofSection() {
             <Button
               variant="outline"
               size="icon"
-              className="border-border text-foreground bg-transparent border-2"
+              className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
               onClick={() => scroll('right')}
             >
               <ChevronRight className="h-4 w-4 text-primary" />
