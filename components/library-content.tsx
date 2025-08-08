@@ -161,6 +161,18 @@ export default function LibraryContent() {
     const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1
     const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems)
 
+    // Enhanced page change handler that prevents scroll
+    const handlePageChange = (page: number) => {
+      onPageChange(page)
+      // Prevent scroll to top by maintaining scroll position
+      setTimeout(() => {
+        const tableElement = document.querySelector('.overflow-x-auto')
+        if (tableElement) {
+          tableElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+
     return (
       <div className="flex items-center justify-between px-6 py-4 bg-muted border-t border-border">
         <div className="hidden md:flex items-center text-sm text-foreground">
@@ -171,7 +183,7 @@ export default function LibraryContent() {
 
         <div className="flex items-center space-x-2">
           <Button
-            onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
             variant="ghost"
             size="sm"
@@ -184,7 +196,7 @@ export default function LibraryContent() {
           <div className="flex items-center space-x-1">
             {/* First page */}
             <Button
-              onClick={() => onPageChange(1)}
+              onClick={() => handlePageChange(1)}
               variant={currentPage === 1 ? "default" : "ghost"}
               size="sm"
               className={
@@ -196,44 +208,55 @@ export default function LibraryContent() {
               1
             </Button>
 
-            {/* Show second page if we have more than 1 page */}
-            {totalPages > 1 && (
+            {/* Show ellipsis if current page is > 3 */}
+            {currentPage > 3 && (
+              <span className="text-foreground px-2">...</span>
+            )}
+
+            {/* Show current page if it's not 1, 2, or last page */}
+            {currentPage > 2 && currentPage < totalPages && (
               <Button
-                onClick={() => onPageChange(2)}
-                variant={currentPage === 2 ? "default" : "ghost"}
+                onClick={() => handlePageChange(currentPage)}
+                variant="default"
                 size="sm"
-                className={
-                  currentPage === 2
-                    ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                    : "text-foreground hover:text-primary-foreground hover:bg-primary"
-                }
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                {currentPage}
+              </Button>
+            )}
+
+            {/* Show second page if we have more than 1 page and current page is not 2 */}
+            {totalPages > 1 && currentPage !== 2 && (
+              <Button
+                onClick={() => handlePageChange(2)}
+                variant="ghost"
+                size="sm"
+                className="text-foreground hover:text-primary-foreground hover:bg-primary"
               >
                 2
               </Button>
             )}
 
-            {/* Show ellipsis and last page if we have many pages */}
-            {totalPages > 3 && (
-              <>
-                {totalPages > 4 && <span className="text-foreground px-2">...</span>}
-                <Button
-                  onClick={() => onPageChange(totalPages)}
-                  variant={currentPage === totalPages ? "default" : "ghost"}
-                  size="sm"
-                                  className={
-                  currentPage === totalPages
-                    ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                    : "text-foreground hover:text-primary-foreground hover:bg-primary"
-                }
-                >
-                  {totalPages}
-                </Button>
-              </>
+            {/* Show ellipsis before last page if current page is < totalPages - 2 */}
+            {currentPage < totalPages - 2 && (
+              <span className="text-foreground px-2">...</span>
+            )}
+
+            {/* Show last page if we have more than 2 pages and current page is not last */}
+            {totalPages > 2 && currentPage !== totalPages && (
+              <Button
+                onClick={() => handlePageChange(totalPages)}
+                variant="ghost"
+                size="sm"
+                className="text-foreground hover:text-primary-foreground hover:bg-primary"
+              >
+                {totalPages}
+              </Button>
             )}
           </div>
 
           <Button
-            onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+            onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
             disabled={currentPage === totalPages}
             variant="ghost"
             size="sm"
