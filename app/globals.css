@@ -71,7 +71,7 @@
   line-height: 2;
 }
 
-/* Custom scrollbar for better Arabic text reading */
+/* Custom scrollbar for better Arabic text reading - Updated */
 .font-arabic::-webkit-scrollbar {
   width: 8px;
 }
