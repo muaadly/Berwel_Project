@@ -6,20 +6,32 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { userId } = await request.json()
+    console.log('POST /api/songs/[id]/likes - Starting request')
+    
+    const body = await request.json()
+    console.log('Request body:', body)
+    
+    const { userId } = body
     const { id } = await params
     
+    console.log('Extracted userId:', userId, 'songId:', id)
+    
     if (!userId) {
+      console.log('Error: User ID is missing')
       return NextResponse.json(
         { error: 'User ID is required' },
         { status: 400 }
       )
     }
 
+    console.log('Calling toggleSongLike with songId:', id, 'userId:', userId)
     const result = await toggleSongLike(id, userId)
+    console.log('toggleSongLike result:', result)
+    
     return NextResponse.json(result)
   } catch (error) {
     console.error('Error toggling song like:', error)
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
     return NextResponse.json(
       { error: 'Failed to toggle like', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

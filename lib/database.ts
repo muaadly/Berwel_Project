@@ -18,18 +18,38 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 
 // Song Likes
 export async function toggleSongLike(songId: string, userId: string): Promise<{ liked: boolean; count: number }> {
-  const existingLike = await prisma.songLike.findUnique({
-    where: {
-      userId_songId: {
-        userId,
-        songId
-      }
+  console.log('toggleSongLike called with songId:', songId, 'userId:', userId)
+  
+  try {
+    // First, check if the user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId }
+    })
+    console.log('User found:', user ? 'Yes' : 'No')
+    
+    if (!user) {
+      console.log('User not found, creating user...')
+      // Create user if not exists (this shouldn't happen but let's handle it)
+      await prisma.user.create({
+        data: {
+          id: userId,
+          email: `user-${userId}@temp.com`,
+          name: `User ${userId}`
+        }
+      })
     }
-  })
-
-  if (existingLike) {
-    // Unlike
-    await prisma.songLike.delete({
+    
+    // Check if the song exists
+    const song = await prisma.song.findUnique({
+      where: { id: songId }
+    })
+    console.log('Song found:', song ? 'Yes' : 'No')
+    
+    if (!song) {
+      throw new Error(`Song with ID ${songId} not found`)
+    }
+    
+    const existingLike = await prisma.songLike.findUnique({
       where: {
         userId_songId: {
           userId,
@@ -37,24 +57,45 @@ export async function toggleSongLike(songId: string, userId: string): Promise<{ 
         }
       }
     })
-  } else {
-    // Like
-    await prisma.songLike.create({
-      data: {
-        userId,
-        songId
-      }
+    
+    console.log('Existing like found:', existingLike ? 'Yes' : 'No')
+
+    if (existingLike) {
+      // Unlike
+      console.log('Deleting existing like...')
+      await prisma.songLike.delete({
+        where: {
+          userId_songId: {
+            userId,
+            songId
+          }
+        }
+      })
+    } else {
+      // Like
+      console.log('Creating new like...')
+      await prisma.songLike.create({
+        data: {
+          userId,
+          songId
+        }
+      })
+    }
+
+    // Get updated count
+    const count = await prisma.songLike.count({
+      where: { songId }
     })
-  }
+    
+    console.log('Final like count:', count)
 
-  // Get updated count
-  const count = await prisma.songLike.count({
-    where: { songId }
-  })
-
-  return {
-    liked: !existingLike,
-    count
+    return {
+      liked: !existingLike,
+      count
+    }
+  } catch (error) {
+    console.error('Error in toggleSongLike:', error)
+    throw error
   }
 }
 
