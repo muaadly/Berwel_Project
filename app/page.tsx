@@ -35,7 +35,7 @@ export default function Home() {
       <SingersSection />
       <MaloofSection />
       {/* Berwel Soundcloud Playlist Section */}
-      <section className="mt-12">
+      <section className="mt-12 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-foreground mb-6">Berwel Soundcloud Playlist</h2>
           <div className="bg-card border-2 border-border rounded-lg px-8 pt-6 pb-4 shadow-lg flex flex-col items-center">
