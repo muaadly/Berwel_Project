@@ -43,8 +43,14 @@ export default function Home() {
               href="https://soundcloud.com/berwel-ly"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg mt-2"
-              style={{ textDecoration: 'none' }}
+              className="flex items-center gap-3 font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg mt-2 text-white"
+              style={{ 
+                textDecoration: 'none',
+                backgroundColor: '#f97316',
+                color: 'white'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ea580c'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f97316'}
             >
               {/* SoundCloud SVG icon */}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="currentColor">

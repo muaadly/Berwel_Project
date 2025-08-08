@@ -102,7 +102,13 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
             <div className="text-center">
               <Button
                 type="submit"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-3 rounded-md transition-colors"
+                className="font-medium px-8 py-3 rounded-md transition-colors text-white"
+                style={{
+                  backgroundColor: '#f97316',
+                  color: 'white'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#ea580c'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f97316'}
               >
                 Send Message
               </Button>
