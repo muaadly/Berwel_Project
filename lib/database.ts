@@ -361,6 +361,10 @@ export async function toggleMaloofLike(entryId: string, userId: string): Promise
     liked: !existingLike,
     count
   }
+  } catch (error) {
+    console.error('Error in toggleMaloofLike:', error)
+    throw error
+  }
 }
 
 export async function getUserMaloofLike(entryId: string, userId: string): Promise<boolean> {
