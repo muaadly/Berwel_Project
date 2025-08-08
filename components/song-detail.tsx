@@ -578,7 +578,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherSongsScrollRef, 'left')}
               >
                 <ChevronLeft className="h-4 w-4 text-primary" />
@@ -586,7 +586,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherSongsScrollRef, 'right')}
               >
                 <ChevronRight className="h-4 w-4 text-primary" />
@@ -625,7 +625,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherSingersScrollRef, 'left')}
               >
                 <ChevronLeft className="h-4 w-4 text-primary" />
@@ -633,7 +633,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherSingersScrollRef, 'right')}
               >
                 <ChevronRight className="h-4 w-4 text-primary" />

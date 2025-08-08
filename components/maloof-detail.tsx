@@ -598,7 +598,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherEntriesScrollRef, 'left')}
               >
                 <ChevronLeft className="h-4 w-4 text-primary" />
@@ -606,7 +606,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(otherEntriesScrollRef, 'right')}
               >
                 <ChevronRight className="h-4 w-4 text-primary" />
@@ -648,7 +648,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(maloofEntriesScrollRef, 'left')}
               >
                 <ChevronLeft className="h-4 w-4 text-primary" />
@@ -656,7 +656,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-border text-foreground bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                 onClick={() => scroll(maloofEntriesScrollRef, 'right')}
               >
                 <ChevronRight className="h-4 w-4 text-primary" />
