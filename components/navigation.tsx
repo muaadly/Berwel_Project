@@ -58,7 +58,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
   }
 
   return (
-    <nav className="bg-background border-b border-border sticky top-0 z-50">
+    <nav className="bg-card border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Theme Toggle */}
@@ -83,7 +83,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <div className="ml-10 flex items-baseline space-x-8">
               <Link
                 href="/"
-                className="text-white hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 Home
               </Link>
@@ -95,19 +95,19 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               </Link>
               <Link
                 href="/analytics"
-                className="text-white hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 Analytics
               </Link>
               <Link
                 href="/about"
-                className="text-white hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="text-white hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 Contact
               </Link>
@@ -142,8 +142,8 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                       />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48 bg-gray-900 border-gray-700">
-                    <DropdownMenuItem className="text-white hover:bg-gray-800 cursor-pointer">
+                  <DropdownMenuContent align="end" className="w-48 bg-card border-border">
+                    <DropdownMenuItem className="text-foreground hover:bg-muted cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
                       {user.name}
                     </DropdownMenuItem>
