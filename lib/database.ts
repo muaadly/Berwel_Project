@@ -1,5 +1,48 @@
 import { prisma } from './prisma'
 import { User, Song, MaloofEntry, SongLike, SongComment, MaloofLike, MaloofComment } from '@prisma/client'
+import { getLibyanSongs } from './server-data'
+
+// Sync songs from CSV to database
+export async function syncSongsToDatabase() {
+  try {
+    console.log('Starting song sync to database...')
+    const songs = getLibyanSongs()
+    
+    for (const song of songs) {
+      await prisma.song.upsert({
+        where: { id: String(song.id) },
+        update: {
+          songName: song.songName,
+          singer: song.singer,
+          category: song.category,
+          year: song.year,
+          writer: song.writer || '',
+          composer: song.composer || '',
+          recordingStatus: song.recordingStatus,
+          lyricsStatus: song.lyricsStatus,
+          imageName: song.imageName
+        },
+        create: {
+          id: String(song.id),
+          songName: song.songName,
+          singer: song.singer,
+          category: song.category,
+          year: song.year,
+          writer: song.writer || '',
+          composer: song.composer || '',
+          recordingStatus: song.recordingStatus,
+          lyricsStatus: song.lyricsStatus,
+          imageName: song.imageName
+        }
+      })
+    }
+    
+    console.log(`Synced ${songs.length} songs to database`)
+  } catch (error) {
+    console.error('Error syncing songs to database:', error)
+    throw error
+  }
+}
 
 // User Management
 export async function createOrUpdateUser(email: string, name: string, image?: string): Promise<User> {
@@ -46,7 +89,20 @@ export async function toggleSongLike(songId: string, userId: string): Promise<{ 
     console.log('Song found:', song ? 'Yes' : 'No')
     
     if (!song) {
-      throw new Error(`Song with ID ${songId} not found`)
+      console.log(`Song with ID ${songId} not found, attempting to sync...`)
+      try {
+        await syncSongsToDatabase()
+        // Check again after sync
+        const songAfterSync = await prisma.song.findUnique({
+          where: { id: songId }
+        })
+        if (!songAfterSync) {
+          throw new Error(`Song with ID ${songId} not found even after sync`)
+        }
+      } catch (syncError) {
+        console.error('Error syncing songs:', syncError)
+        throw new Error(`Song with ID ${songId} not found and sync failed`)
+      }
     }
     
     const existingLike = await prisma.songLike.findUnique({
