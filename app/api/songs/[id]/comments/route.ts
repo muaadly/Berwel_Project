@@ -21,7 +21,7 @@ export async function POST(
   } catch (error) {
     console.error('Error adding song comment:', error)
     return NextResponse.json(
-      { error: 'Failed to add comment' },
+      { error: 'Failed to add comment', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

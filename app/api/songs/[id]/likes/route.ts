@@ -21,7 +21,7 @@ export async function POST(
   } catch (error) {
     console.error('Error toggling song like:', error)
     return NextResponse.json(
-      { error: 'Failed to toggle like' },
+      { error: 'Failed to toggle like', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

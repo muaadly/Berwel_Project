@@ -52,23 +52,15 @@ function AuthProviderInner({ children }: { children: React.ReactNode }) {
               image: userData.image,
             })
           } else {
-            // Fallback to email if API fails
-            setUser({
-              id: session.user?.email || "",
-              name: session.user?.name || "",
-              email: session.user?.email || "",
-              image: session.user?.image || "",
-            })
+            // Don't set user if API fails - this will prevent likes/comments from working
+            // but it's better than using incorrect user ID format
+            setUser(null)
           }
         } catch (error) {
           console.error('Error creating/getting user:', error)
-          // Fallback to email if API fails
-          setUser({
-            id: session.user?.email || "",
-            name: session.user?.name || "",
-            email: session.user?.email || "",
-            image: session.user?.image || "",
-          })
+          // Don't set user if API fails - this will prevent likes/comments from working
+          // but it's better than using incorrect user ID format
+          setUser(null)
         }
       }
       
