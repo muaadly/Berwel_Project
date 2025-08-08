@@ -163,7 +163,7 @@ export default function LibraryContent() {
 
     return (
       <div className="flex items-center justify-between px-6 py-4 bg-muted border-t border-border">
-        <div className="hidden md:flex items-center text-sm text-gray-300">
+        <div className="hidden md:flex items-center text-sm text-foreground">
           <span>
             Showing {startItem} to {endItem} of {totalItems} {itemType}
           </span>
@@ -175,7 +175,7 @@ export default function LibraryContent() {
             disabled={currentPage === 1}
             variant="ghost"
             size="sm"
-            className="text-gray-300 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-foreground hover:text-primary-foreground hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="h-4 w-4 md:mr-1" />
             <span className="hidden md:inline">Previous</span>
@@ -237,7 +237,7 @@ export default function LibraryContent() {
             disabled={currentPage === totalPages}
             variant="ghost"
             size="sm"
-            className="text-gray-300 hover:text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-foreground hover:text-primary-foreground hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="hidden md:inline">Next</span>
             <ChevronRight className="h-4 w-4 md:ml-1" />
@@ -326,7 +326,7 @@ export default function LibraryContent() {
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Loading Library...
             </h1>
-            <p className="text-gray-400 text-lg">Please wait while we load the data</p>
+            <p className="text-muted-foreground text-lg">Please wait while we load the data</p>
           </div>
         </div>
       </div>
@@ -341,7 +341,7 @@ export default function LibraryContent() {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Discover the Libyan Songs and Maloof Entries
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-muted-foreground text-lg">
             Explore our rich collection of traditional and contemporary Libyan music
           </p>
         </div>
@@ -445,7 +445,7 @@ export default function LibraryContent() {
               )}
               {/* Singer Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Singer:</div>
+                <div className="mb-2 text-foreground font-semibold">Filter by Singer:</div>
                 <div className="flex flex-wrap gap-2">
                   {allSingers.map(singer => (
                     <button
@@ -464,7 +464,7 @@ export default function LibraryContent() {
               </div>
               {/* Category Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Category:</div>
+                <div className="mb-2 text-foreground font-semibold">Filter by Category:</div>
                 <div className="flex flex-wrap gap-2">
                   {allCategories.map(category => (
                     <button
@@ -515,10 +515,10 @@ export default function LibraryContent() {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-gray-300">{song.singer}</div>
+                          <div className="text-foreground">{song.singer}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">
+                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
                             {song.category}
                           </span>
                         </td>
@@ -566,7 +566,7 @@ export default function LibraryContent() {
               )}
               {/* Entry Type Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Type:</div>
+                <div className="mb-2 text-foreground font-semibold">Filter by Entry Type:</div>
                 <div className="flex flex-wrap gap-2">
                   {allEntryTypes.map(type => (
                     <button
@@ -585,7 +585,7 @@ export default function LibraryContent() {
               </div>
               {/* Entry Rhythm Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-gray-300 font-semibold">Filter by Entry Rhythm:</div>
+                <div className="mb-2 text-foreground font-semibold">Filter by Entry Rhythm:</div>
                 <div className="flex flex-wrap gap-2">
                   {allEntryRhythms.map(rhythm => (
                     <button
@@ -641,10 +641,10 @@ export default function LibraryContent() {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-gray-300">{entry.entryRhythm}</div>
+                          <div className="text-foreground">{entry.entryRhythm}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-gray-300">{entry.entryNumber}</div>
+                          <div className="text-foreground">{entry.entryNumber}</div>
                         </td>
                       </tr>
                     ))}

@@ -89,7 +89,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               </Link>
               <Link
                 href="/library"
-                className="text-white hover:text-orange-500 px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-orange-500"
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-primary"
               >
                 Library
               </Link>
