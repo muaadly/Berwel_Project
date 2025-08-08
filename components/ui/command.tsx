@@ -22,7 +22,7 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-black text-white",
+      "flex h-full w-full flex-col overflow-hidden rounded-md bg-card text-foreground",
       className
     )}
     {...props}
@@ -33,7 +33,7 @@ Command.displayName = CommandPrimitive.displayName
 const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 bg-black shadow-none border-none max-w-2xl w-full rounded-none md:rounded-2xl">
+      <DialogContent className="overflow-hidden p-0 bg-card shadow-none border border-border max-w-2xl w-full rounded-none md:rounded-2xl">
         <DialogTitle asChild>
           <VisuallyHidden>Global Search</VisuallyHidden>
         </DialogTitle>
@@ -44,25 +44,25 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
               <img src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
             {/* Search bar with icon */}
-            <div className="w-full mb-8 flex items-center border-b border-gray-700 px-3">
-              <Search className="mr-3 h-8 w-8 text-orange-500" />
+            <div className="w-full mb-8 flex items-center border-b border-border px-3">
+              <Search className="mr-3 h-8 w-8 text-primary" />
               <CommandInput
                 autoFocus
                 value={searchValue}
                 onValueChange={onSearchValueChange}
-                className="flex-1 h-16 text-3xl font-bold bg-black border-none outline-none text-white placeholder:text-gray-400 placeholder:font-bold placeholder:text-3xl px-0"
+                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0"
                 placeholder="Search Berwel..."
               />
             </div>
             <div className="w-full">
-              <div className="text-white text-lg font-semibold mb-4">Quick Links</div>
+              <div className="text-foreground text-lg font-semibold mb-4">Quick Links</div>
               <CommandList>
                 <CommandGroup>
                   <CommandItem asChild>
-                    <a href="/library" className="text-xl font-bold text-white hover:text-orange-500 transition-colors">Libyan Songs</a>
+                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors">Libyan Songs</a>
                   </CommandItem>
                   <CommandItem asChild>
-                    <a href="/library?tab=maloof" className="text-xl font-bold text-white hover:text-orange-500 transition-colors">Maloof Entries</a>
+                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors">Maloof Entries</a>
                   </CommandItem>
                 </CommandGroup>
                 {/* Suggestions will be rendered here by children */}
@@ -89,7 +89,7 @@ const CommandInput = React.forwardRef<
     value={value}
     onValueChange={onValueChange}
       className={cn(
-      "flex h-16 w-full rounded-md bg-black py-3 text-3xl font-bold text-white placeholder:text-gray-400 outline-none border-none disabled:cursor-not-allowed disabled:opacity-50 px-0",
+      "flex h-16 w-full rounded-md bg-transparent py-3 text-3xl font-bold text-foreground placeholder:text-muted-foreground outline-none border-none disabled:cursor-not-allowed disabled:opacity-50 px-0",
         className
       )}
       {...props}
