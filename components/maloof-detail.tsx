@@ -279,9 +279,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
   if (!entry) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-xl">Loading entry...</p>
         </div>
       </div>
@@ -289,7 +289,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <BackButton />
         
@@ -300,7 +300,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             <img
               src={getEntryImagePath(entry.typeEntryImage)}
               alt={entry.entryName}
-              className="w-64 h-64 object-cover rounded-lg bg-gray-800"
+              className="w-64 h-64 object-cover rounded-lg bg-muted"
               onError={ev => { 
                 console.log('Image failed to load:', entry.typeEntryImage)
                 ;(ev.target as HTMLImageElement).src = '/placeholder-user.jpg' 
@@ -310,24 +310,24 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
           {/* Entry Info */}
           <div className="flex-1">
-            <h1 className="text-4xl font-bold text-white mb-2">{entry.entryName}</h1>
-            <p className="text-2xl text-orange-500 mb-4">{entry.entryType}</p>
-            <p className="text-gray-400 mb-6">{entry.entryRhythm}</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">{entry.entryName}</h1>
+            <p className="text-2xl text-primary mb-4">{entry.entryType}</p>
+            <p className="text-muted-foreground mb-6">{entry.entryRhythm}</p>
 
             {/* Responsive Action Buttons */}
             <div className="mt-4">
               {/* Desktop: Single line layout */}
               <div className="hidden md:flex items-center justify-center gap-4">
                 {/* Likes Count Circle */}
-                <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
                   {likes.length}
                 </div>
                 <Button 
                   onClick={handleLike}
                   className={`transition-colors flex items-center gap-2 ${
                     isLiked 
-                      ? 'bg-red-500 hover:bg-red-600 text-white' 
-                      : 'bg-orange-500 hover:bg-orange-600 text-white'
+                      ? 'bg-red-500 hover:bg-red-600 text-primary-foreground' 
+                      : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                   }`}
                 >
                   <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
@@ -336,12 +336,12 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 {/* Share Button */}
                 <Button 
                   onClick={handleShare}
-                  className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                 >
                   <Share2 className="h-4 w-4" /> Share
                 </Button>
                 {/* Add Notes Button */}
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
                   <BookOpen className="h-4 w-4" /> Add Notes
                 </Button>
               </div>
@@ -351,15 +351,15 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 {/* First Row: Like count, Like button, Share button */}
                 <div className="flex items-center justify-center gap-4 mb-3">
                   {/* Likes Count Circle */}
-                  <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
                     {likes.length}
                   </div>
                   <Button 
                     onClick={handleLike}
                     className={`transition-colors flex items-center gap-2 ${
                       isLiked 
-                        ? 'bg-red-500 hover:bg-red-600 text-white' 
-                        : 'bg-orange-500 hover:bg-orange-600 text-white'
+                        ? 'bg-red-500 hover:bg-red-600 text-primary-foreground' 
+                        : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                     }`}
                   >
                     <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
@@ -368,14 +368,14 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                   {/* Share Button */}
                   <Button 
                     onClick={handleShare}
-                    className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                   >
                     <Share2 className="h-4 w-4" /> Share
                   </Button>
                 </div>
                 {/* Second Row: Add Notes Button (full width) */}
                 <div className="flex justify-center">
-                  <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
+                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
                     <BookOpen className="h-4 w-4" /> Add Notes
                   </Button>
                 </div>
@@ -386,16 +386,16 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Entry Details */}
         <div className="mt-8">
-          <div className="bg-black border border-gray-700 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Entry Information</h2>
+          <div className="bg-card border border-border rounded-lg p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Entry Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Entry Type</h3>
-                <p className="text-white">{entry.entryType}</p>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Entry Type</h3>
+                <p className="text-foreground">{entry.entryType}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Entry Rhythm</h3>
-                <p className="text-white">{entry.entryRhythm}</p>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Entry Rhythm</h3>
+                <p className="text-foreground">{entry.entryRhythm}</p>
               </div>
             </div>
           </div>
@@ -403,15 +403,15 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Entry Content Tabs */}
         <div className="mt-8">
-          <div className="bg-black border border-gray-700 rounded-lg">
+          <div className="bg-card border border-border rounded-lg">
             {/* Tab Headers */}
-            <div className="flex border-b border-gray-700">
+            <div className="flex border-b border-border">
               <button
                 onClick={() => setActiveTab('lyrics')}
                 className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
                   activeTab === 'lyrics'
-                    ? 'bg-orange-500 text-white border-b-2 border-orange-500'
-                    : 'bg-black text-white hover:bg-gray-800'
+                    ? 'bg-primary text-primary-foreground border-b-2 border-primary'
+                    : 'bg-card text-foreground hover:bg-muted'
                 }`}
               >
                 Lyrics
@@ -420,8 +420,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 onClick={() => setActiveTab('notes')}
                 className={`flex-1 px-6 py-4 text-lg font-semibold transition-colors ${
                   activeTab === 'notes'
-                    ? 'bg-orange-500 text-white border-b-2 border-orange-500'
-                    : 'bg-black text-white hover:bg-gray-800'
+                    ? 'bg-primary text-primary-foreground border-b-2 border-primary'
+                    : 'bg-card text-foreground hover:bg-muted'
                 }`}
               >
                 Note
@@ -432,9 +432,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             <div className="p-6">
               {activeTab === 'lyrics' && entry.entryLyrics && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4">Entry Lyrics</h2>
-                  <div className="bg-gray-900 rounded-lg p-4">
-                    <p className="text-white text-lg leading-relaxed whitespace-pre-line font-arabic">
+                  <h2 className="text-xl font-bold text-foreground mb-4">Entry Lyrics</h2>
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-foreground text-lg leading-relaxed whitespace-pre-line font-arabic">
                       {entry.entryLyrics}
                     </p>
                   </div>
@@ -443,8 +443,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4 !text-white !border-none !outline-none">Note</h2>
-                  <div className="bg-gray-900 rounded-lg p-4">
+                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">Note</h2>
+                  <div className="bg-muted rounded-lg p-4">
                     <img
                       src={getNoteImagePath(entry.noteImageName)}
                       alt={`Note for ${entry.entryName}`}
@@ -460,9 +460,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && !entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-white mb-4 !text-white !border-none !outline-none">Note</h2>
-                  <div className="bg-gray-900 rounded-lg p-4">
-                    <p className="text-gray-400 text-center">No note available for this entry.</p>
+                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">Note</h2>
+                  <div className="bg-muted rounded-lg p-4">
+                    <p className="text-muted-foreground text-center">No note available for this entry.</p>
                   </div>
                 </div>
               )}
@@ -472,8 +472,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Comments Section */}
         <div className="mt-8">
-          <div className="bg-black border border-gray-700 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Comments</h2>
+          <div className="bg-card border border-border rounded-lg p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Comments</h2>
             
             {/* Comment Input */}
             <div className="mb-4">
@@ -481,12 +481,12 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add a comment..."
-                className="bg-gray-900 border-gray-700 text-white placeholder-gray-400"
+                className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
               />
               <Button
                 onClick={handleCommentSubmit}
-                className="mt-2 bg-orange-500 hover:bg-orange-600 text-white"
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Post Comment
               </Button>
@@ -495,10 +495,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             {/* Comments List */}
             <div className="space-y-4">
               {comments.length === 0 ? (
-                <p className="text-gray-400">No comments yet. Be the first to comment!</p>
+                <p className="text-muted-foreground">No comments yet. Be the first to comment!</p>
               ) : (
                 comments.map((comment, index) => (
-                  <div key={index} className="bg-gray-900 rounded-lg p-4">
+                  <div key={index} className="bg-muted rounded-lg p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         {/* User Avatar */}
@@ -506,7 +506,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                           <img
                             src={comment.user?.image || '/placeholder-user.jpg'}
                             alt={comment.user?.name || 'User'}
-                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-700"
+                            className="w-10 h-10 rounded-full object-cover border-2 border-border"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                             }}
@@ -514,10 +514,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                         </div>
                         {/* User Info */}
                         <div className="flex flex-col">
-                          <span className="text-white font-semibold text-sm">
+                          <span className="text-foreground font-semibold text-sm">
                             {comment.user?.name || 'Anonymous User'}
                           </span>
-                          <span className="text-gray-400 text-xs">
+                          <span className="text-muted-foreground text-xs">
                             {new Date(comment.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
@@ -536,7 +536,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                               <Button
                                 onClick={handleSaveEdit}
                                 size="sm"
-                                className="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1"
+                                className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Save
                               </Button>
@@ -544,7 +544,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                                 onClick={handleCancelEdit}
                                 size="sm"
                                 variant="outline"
-                                className="border-gray-600 text-gray-300 hover:bg-gray-800 text-xs px-3 py-1"
+                                className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
                               >
                                 Cancel
                               </Button>
@@ -554,14 +554,14 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                               <Button
                                 onClick={() => handleEditComment(index, comment.text)}
                                 size="sm"
-                                className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1"
+                                className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Edit
                               </Button>
                               <Button
                                 onClick={() => handleDeleteComment(index)}
                                 size="sm"
-                                className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1"
+                                className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Delete
                               </Button>
@@ -576,12 +576,12 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                         <Textarea
                           value={editingCommentText}
                           onChange={(e) => setEditingCommentText(e.target.value)}
-                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                          className="bg-muted border-border text-foreground placeholder-muted-foreground"
                           rows={2}
                         />
                       </div>
                     ) : (
-                      <p className="text-white text-sm leading-relaxed">{comment.text}</p>
+                      <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
                     )}
                   </div>
                 ))
@@ -593,45 +593,45 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Other Entries Section */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">Other Entries</h2>
+            <h2 className="text-2xl font-bold text-foreground">Other Entries</h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherEntriesScrollRef, 'left')}
               >
-                <ChevronLeft className="h-4 w-4 text-orange-500" />
+                <ChevronLeft className="h-4 w-4 text-primary" />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherEntriesScrollRef, 'right')}
               >
-                <ChevronRight className="h-4 w-4 text-orange-500" />
+                <ChevronRight className="h-4 w-4 text-primary" />
               </Button>
             </div>
           </div>
           <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
               {otherEntries.length === 0 ? (
-                <div className="text-gray-400">No other entries found.</div>
+                <div className="text-muted-foreground">No other entries found.</div>
               ) : (
                 otherEntries.map(e => (
-                  <Link key={e.id} href={`/maloof/${e.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                  <Link key={e.id} href={`/maloof/${e.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
                     <div className="flex flex-col items-center justify-center">
                       <img
                         src={getEntryImagePath(e.typeEntryImage)}
                         alt={e.entryName}
-                        className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
+                        className="w-24 h-24 object-cover rounded mb-4 bg-muted"
                         onError={ev => { 
                           console.log('Other entry image failed to load:', e.typeEntryImage)
                           ;(ev.target as HTMLImageElement).src = '/placeholder-user.jpg' 
                         }}
                       />
-                      <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{e.entryName}</div>
-                      <div className="text-gray-400 text-sm text-center">{e.entryType}</div>
+                      <div className="text-foreground font-bold text-lg text-center mb-1 group-hover:text-primary transition-colors">{e.entryName}</div>
+                      <div className="text-muted-foreground text-sm text-center">{e.entryType}</div>
                     </div>
                   </Link>
                 ))
@@ -643,27 +643,27 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Maloof Entries Section */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-white">Maloof Entries</h2>
+            <h2 className="text-3xl font-bold text-foreground">Maloof Entries</h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(maloofEntriesScrollRef, 'left')}
               >
-                <ChevronLeft className="h-4 w-4 text-orange-500" />
+                <ChevronLeft className="h-4 w-4 text-primary" />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(maloofEntriesScrollRef, 'right')}
               >
-                <ChevronRight className="h-4 w-4 text-orange-500" />
+                <ChevronRight className="h-4 w-4 text-primary" />
               </Button>
             </div>
           </div>
-          <div ref={maloofEntriesScrollRef} className="bg-gray-900 border-2 border-gray-700 rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div ref={maloofEntriesScrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex w-max space-x-6 pb-4">
               {entryImages.map((img, idx) => {
                 const entryType = entryTypeMap[img] || "";

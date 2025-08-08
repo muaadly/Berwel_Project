@@ -278,9 +278,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
   if (!song) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-500 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-xl">Loading song...</p>
         </div>
       </div>
@@ -288,7 +288,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <BackButton />
         
@@ -299,21 +299,21 @@ export default function SongDetail({ songId }: SongDetailProps) {
             <img
               src={getSingerImagePath(song.imageName)}
               alt={song.singer}
-              className="w-64 h-64 object-cover rounded-lg bg-gray-800"
+              className="w-64 h-64 object-cover rounded-lg bg-muted"
               onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
             />
           </div>
 
           {/* Song Info */}
           <div className="flex-1">
-            <h1 className="text-4xl font-bold text-white mb-2">{song.songName}</h1>
-            <p className="text-2xl text-orange-500 mb-4">{song.singer}</p>
-            <p className="text-gray-400 mb-6">{song.category}</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">{song.songName}</h1>
+            <p className="text-2xl text-primary mb-4">{song.singer}</p>
+            <p className="text-muted-foreground mb-6">{song.category}</p>
 
             {/* SoundCloud Link */}
             {song.soundcloudLink && (
               <div className="mb-6">
-                <Button asChild className="bg-orange-500 hover:bg-orange-600 text-white">
+                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Listen on SoundCloud
@@ -323,15 +323,15 @@ export default function SongDetail({ songId }: SongDetailProps) {
             )}
 
             {/* Lyrics Box */}
-            <div className="bg-black border border-gray-700 rounded-lg overflow-hidden">
+            <div className="bg-card border border-border rounded-lg overflow-hidden">
               {/* Stretched Lyrics Tab */}
-              <div className="w-full bg-black border border-gray-700 rounded-t-lg">
-                <h2 className="text-white font-bold text-center py-3">Lyrics</h2>
+              <div className="w-full bg-card border border-border rounded-t-lg">
+                <h2 className="text-foreground font-bold text-center py-3">Lyrics</h2>
               </div>
 
               <div className="p-6">
-                <div className="bg-gray-900 rounded-lg p-6 max-h-64 overflow-y-auto">
-                  <pre className="text-white text-lg leading-relaxed whitespace-pre-wrap font-arabic select-none" style={{ userSelect: 'none' }} onCopy={e => e.preventDefault()} onContextMenu={e => e.preventDefault()}>
+                <div className="bg-muted rounded-lg p-6 max-h-64 overflow-y-auto">
+                  <pre className="text-foreground text-lg leading-relaxed whitespace-pre-wrap font-arabic select-none" style={{ userSelect: 'none' }} onCopy={e => e.preventDefault()} onContextMenu={e => e.preventDefault()}>
                     {song.lyrics}
                   </pre>
                 </div>
@@ -341,15 +341,15 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   {/* Desktop: Single line layout */}
                   <div className="hidden md:flex items-center justify-center gap-4">
                     {/* Likes Count Circle */}
-                    <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
                       {likes.length}
                     </div>
                     <Button 
                       onClick={handleLike}
                       className={`transition-colors flex items-center gap-2 ${
                         isLiked 
-                          ? 'bg-red-500 hover:bg-red-600 text-white' 
-                          : 'bg-orange-500 hover:bg-orange-600 text-white'
+                          ? 'bg-red-500 hover:bg-red-600 text-primary-foreground' 
+                          : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                       }`}
                     >
                       <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
@@ -358,12 +358,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     {/* Share Button */}
                     <Button 
                       onClick={handleShare}
-                      className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                     >
                       <Share2 className="h-4 w-4" /> Share
                     </Button>
                     {/* Add Lyrics Button */}
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
+                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
                       <BookOpen className="h-4 w-4" /> Add Lyrics
                     </Button>
                   </div>
@@ -373,15 +373,15 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     {/* First Row: Like count, Like button, Share button */}
                     <div className="flex items-center justify-center gap-4 mb-3">
                       {/* Likes Count Circle */}
-                      <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                      <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
                         {likes.length}
                       </div>
                       <Button 
                         onClick={handleLike}
                         className={`transition-colors flex items-center gap-2 ${
                           isLiked 
-                            ? 'bg-red-500 hover:bg-red-600 text-white' 
-                            : 'bg-orange-500 hover:bg-orange-600 text-white'
+                            ? 'bg-red-500 hover:bg-red-600 text-primary-foreground' 
+                            : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                         }`}
                       >
                         <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
@@ -390,14 +390,14 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       {/* Share Button */}
                       <Button 
                         onClick={handleShare}
-                        className="bg-orange-500 hover:bg-orange-600 text-white transition-colors flex items-center gap-2"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                       >
                         <Share2 className="h-4 w-4" /> Share
                       </Button>
                     </div>
                     {/* Second Row: Add Lyrics Button (full width) */}
                     <div className="flex justify-center">
-                      <Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
+                      <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
                         <BookOpen className="h-4 w-4" /> Add Lyrics
                       </Button>
                     </div>
@@ -410,50 +410,50 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Song Details (Full Width) */}
         <div className="mt-8">
-          <div className="bg-black border border-gray-700 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Song Information</h2>
+          <div className="bg-card border border-border rounded-lg p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Song Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="border-r border-gray-700 pr-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Singer</h3>
-                <p className="text-white">{song.singer}</p>
+              <div className="border-r border-border pr-4">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Singer</h3>
+                <p className="text-foreground">{song.singer}</p>
               </div>
-              <div className="border-r border-gray-700 pr-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Category</h3>
-                <p className="text-white">{song.category}</p>
+              <div className="border-r border-border pr-4">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Category</h3>
+                <p className="text-foreground">{song.category}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Year</h3>
-                <p className="text-white">{song.year}</p>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Year</h3>
+                <p className="text-foreground">{song.year}</p>
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-              <div className="border-r border-gray-700 pr-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Writer</h3>
-                <p className="text-white">{song.writer || 'Unknown'}</p>
+              <div className="border-r border-border pr-4">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Writer</h3>
+                <p className="text-foreground">{song.writer || 'Unknown'}</p>
               </div>
-              <div className="border-r border-gray-700 pr-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Composer</h3>
-                <p className="text-white">{song.composer || 'Unknown'}</p>
+              <div className="border-r border-border pr-4">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Composer</h3>
+                <p className="text-foreground">{song.composer || 'Unknown'}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-400 mb-1">Recording Status</h3>
-                <p className="text-white">{song.recordingStatus}</p>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Recording Status</h3>
+                <p className="text-foreground">{song.recordingStatus}</p>
               </div>
             </div>
 
             {/* Lyrics Status */}
             <div className="mt-6">
-              <h3 className="text-sm font-semibold text-gray-400 mb-1">Lyrics Status</h3>
-              <p className="text-white">{song.lyricsStatus}</p>
+              <h3 className="text-sm font-semibold text-muted-foreground mb-1">Lyrics Status</h3>
+              <p className="text-foreground">{song.lyricsStatus}</p>
             </div>
           </div>
         </div>
 
         {/* Comments Section */}
         <div className="mt-8">
-          <div className="bg-black border border-gray-700 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Comments</h2>
+          <div className="bg-card border border-border rounded-lg p-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Comments</h2>
             
             {/* Comment Input */}
             <div className="mb-4">
@@ -461,12 +461,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add a comment..."
-                className="bg-gray-900 border-gray-700 text-white placeholder-gray-400"
+                className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
               />
               <Button
                 onClick={handleCommentSubmit}
-                className="mt-2 bg-orange-500 hover:bg-orange-600 text-white"
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Post Comment
               </Button>
@@ -475,10 +475,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
             {/* Comments List */}
             <div className="space-y-4">
               {comments.length === 0 ? (
-                <p className="text-gray-400">No comments yet. Be the first to comment!</p>
+                <p className="text-muted-foreground">No comments yet. Be the first to comment!</p>
               ) : (
                 comments.map((comment, index) => (
-                  <div key={index} className="bg-gray-900 rounded-lg p-4">
+                  <div key={index} className="bg-muted rounded-lg p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         {/* User Avatar */}
@@ -486,7 +486,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                           <img
                             src={comment.user?.image || '/placeholder-user.jpg'}
                             alt={comment.user?.name || 'User'}
-                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-700"
+                            className="w-10 h-10 rounded-full object-cover border-2 border-border"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                             }}
@@ -494,10 +494,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         </div>
                         {/* User Info */}
                         <div className="flex flex-col">
-                          <span className="text-white font-semibold text-sm">
+                          <span className="text-foreground font-semibold text-sm">
                             {comment.user?.name || 'Anonymous User'}
                           </span>
-                          <span className="text-gray-400 text-xs">
+                          <span className="text-muted-foreground text-xs">
                             {new Date(comment.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
@@ -516,7 +516,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               <Button
                                 onClick={handleSaveEdit}
                                 size="sm"
-                                className="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1"
+                                className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Save
                               </Button>
@@ -524,7 +524,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                                 onClick={handleCancelEdit}
                                 size="sm"
                                 variant="outline"
-                                className="border-gray-600 text-gray-300 hover:bg-gray-800 text-xs px-3 py-1"
+                                className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
                               >
                                 Cancel
                               </Button>
@@ -534,14 +534,14 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               <Button
                                 onClick={() => handleEditComment(index, comment.text)}
                                 size="sm"
-                                className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1"
+                                className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Edit
                               </Button>
                               <Button
                                 onClick={() => handleDeleteComment(index)}
                                 size="sm"
-                                className="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1"
+                                className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
                               >
                                 Delete
                               </Button>
@@ -556,12 +556,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         <Textarea
                           value={editingCommentText}
                           onChange={(e) => setEditingCommentText(e.target.value)}
-                          className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                          className="bg-muted border-border text-foreground placeholder-muted-foreground"
                           rows={2}
                         />
                       </div>
                     ) : (
-                      <p className="text-white text-sm leading-relaxed">{comment.text}</p>
+                      <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
                     )}
                   </div>
                 ))
@@ -573,42 +573,42 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Section 1: Other Songs */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">Other Songs</h2>
+            <h2 className="text-2xl font-bold text-foreground">Other Songs</h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherSongsScrollRef, 'left')}
               >
-                <ChevronLeft className="h-4 w-4 text-orange-500" />
+                <ChevronLeft className="h-4 w-4 text-primary" />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherSongsScrollRef, 'right')}
               >
-                <ChevronRight className="h-4 w-4 text-orange-500" />
+                <ChevronRight className="h-4 w-4 text-primary" />
               </Button>
             </div>
           </div>
           <div ref={otherSongsScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
               {otherSongs.length === 0 ? (
-                <div className="text-gray-400">No other songs found.</div>
+                <div className="text-muted-foreground">No other songs found.</div>
               ) : (
                 otherSongs.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
                     <div className="flex flex-col items-center justify-center">
                       <img
                         src={getSingerImagePath(s.imageName)}
                         alt={s.singer}
-                        className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
+                        className="w-24 h-24 object-cover rounded mb-4 bg-muted"
                         onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
                       />
-                      <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.songName}</div>
-                      <div className="text-gray-400 text-sm text-center">{s.singer}</div>
+                      <div className="text-foreground font-bold text-lg text-center mb-1 group-hover:text-primary transition-colors">{s.songName}</div>
+                      <div className="text-muted-foreground text-sm text-center">{s.singer}</div>
                     </div>
                   </Link>
                 ))
@@ -620,42 +620,42 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Section 2: Other Singers */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">Other Singers</h2>
+            <h2 className="text-2xl font-bold text-foreground">Other Singers</h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherSingersScrollRef, 'left')}
               >
-                <ChevronLeft className="h-4 w-4 text-orange-500" />
+                <ChevronLeft className="h-4 w-4 text-primary" />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="border-gray-600 text-white bg-transparent border-2"
+                className="border-border text-foreground bg-transparent border-2"
                 onClick={() => scroll(otherSingersScrollRef, 'right')}
               >
-                <ChevronRight className="h-4 w-4 text-orange-500" />
+                <ChevronRight className="h-4 w-4 text-primary" />
               </Button>
             </div>
           </div>
           <div ref={otherSingersScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
               {otherSingers.length === 0 ? (
-                <div className="text-gray-400">No other singers found.</div>
+                <div className="text-muted-foreground">No other singers found.</div>
               ) : (
                 otherSingers.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-gray-700 rounded-lg p-4 bg-gray-900 hover:border-orange-500 transition-colors">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
                     <div className="flex flex-col items-center justify-center">
                       <img
                         src={getSingerImagePath(s.imageName)}
                         alt={s.singer}
-                        className="w-24 h-24 object-cover rounded mb-4 bg-gray-800"
+                        className="w-24 h-24 object-cover rounded mb-4 bg-muted"
                         onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
                       />
-                      <div className="text-white font-bold text-lg text-center mb-1 group-hover:text-orange-500 transition-colors">{s.singer}</div>
-                      <div className="text-gray-400 text-sm text-center">{s.category}</div>
+                      <div className="text-foreground font-bold text-lg text-center mb-1 group-hover:text-primary transition-colors">{s.singer}</div>
+                      <div className="text-muted-foreground text-sm text-center">{s.category}</div>
                     </div>
                   </Link>
                 ))
