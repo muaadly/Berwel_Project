@@ -242,32 +242,32 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
 
       {/* Mobile Drawer Menu */}
       <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <DrawerContent className="bg-black border-none text-white">
+        <DrawerContent className="bg-card border border-border text-foreground">
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <div className="flex flex-col gap-6 p-6">
             <div className="flex justify-between items-center mb-4">
               <span className="text-2xl font-bold">Menu</span>
               <DrawerClose asChild>
-                <Button variant="ghost" size="icon" aria-label="Close menu">
+                <Button variant="ghost" size="icon" aria-label="Close menu" className="text-foreground hover:text-primary hover:bg-muted/50">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </Button>
               </DrawerClose>
             </div>
-            <Link href="/" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               Home
             </Link>
-            <Link href="/library" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/library" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               Library
             </Link>
-            <Link href="/analytics" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/analytics" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               Analytics
             </Link>
-            <Link href="/about" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/about" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               About
             </Link>
-            <Link href="/contact" className="text-white hover:text-orange-500 text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/contact" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
               Contact
             </Link>
             {!isLoading && (
@@ -280,7 +280,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                     height={32}
                     className="rounded-full"
                   />
-                  <span className="text-white">{user.name}</span>
+                  <span className="text-foreground">{user.name}</span>
                   <Button
                     onClick={() => {
                       handleSignOut()
