@@ -204,8 +204,8 @@ export default function LibraryContent() {
                 size="sm"
                 className={
                   currentPage === 2
-                    ? "bg-orange-500 hover:bg-orange-600 text-white"
-                    : "text-gray-300 hover:text-white hover:bg-gray-700"
+                    ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                    : "text-foreground hover:text-primary-foreground hover:bg-primary"
                 }
               >
                 2
@@ -220,11 +220,11 @@ export default function LibraryContent() {
                   onClick={() => onPageChange(totalPages)}
                   variant={currentPage === totalPages ? "default" : "ghost"}
                   size="sm"
-                  className={
-                    currentPage === totalPages
-                      ? "bg-orange-500 hover:bg-orange-600 text-white"
-                      : "text-gray-300 hover:text-white hover:bg-gray-700"
-                  }
+                                  className={
+                  currentPage === totalPages
+                    ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                    : "text-foreground hover:text-primary-foreground hover:bg-primary"
+                }
                 >
                   {totalPages}
                 </Button>
@@ -623,11 +623,11 @@ export default function LibraryContent() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-700">
+                  <tbody className="divide-y divide-border">
                     {currentMaloofEntries.map((entry, index) => (
                       <tr
                         key={entry.id}
-                        className={`hover:bg-gray-800 transition-colors cursor-pointer ${index % 2 === 0 ? "bg-gray-900" : "bg-gray-850"}`}
+                        className={`hover:bg-muted transition-colors cursor-pointer ${index % 2 === 0 ? "bg-card" : "bg-background"}`}
                         onClick={() => router.push(`/maloof/${entry.id}`)}
                       >
                         <td className="px-6 py-4 whitespace-nowrap">
