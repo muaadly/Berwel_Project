@@ -41,7 +41,7 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
           <div className="flex flex-col items-center w-full p-8 pt-8">
             {/* Logo at the top center */}
             <div className="w-full flex justify-center mb-6">
-              <img src="/Data/Berwel Data Org/Logoo.png" alt="Berwel Logo" className="h-16 w-16 object-contain" />
+              <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
             {/* Search bar with icon */}
             <div className="w-full mb-8 flex items-center border-b border-border px-3">
