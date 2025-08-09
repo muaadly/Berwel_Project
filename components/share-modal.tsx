@@ -22,6 +22,9 @@ export default function ShareModal({
 }: ShareModalProps) {
   const [copied, setCopied] = useState(false)
 
+  const shareTitle = `${songName} — ${singerName}`
+  const shareText = `Check out "${songName}" by ${singerName} on Berwel - A Website for Libyan Music`
+
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(currentUrl)
@@ -32,21 +35,38 @@ export default function ShareModal({
     }
   }
 
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: shareTitle, text: shareText, url: currentUrl })
+      } catch {
+        // user cancelled or error; no-op
+      }
+    } else {
+      // Fallback: copy link
+      await handleCopyLink()
+      alert('Link copied. Share it in any app you like!')
+    }
+  }
+
   const handleFacebookShare = () => {
-    const shareText = `Check out "${songName}" by ${singerName} on Berwel - A Website for Libyan Music`
     const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`
     window.open(url, '_blank', 'width=600,height=400')
   }
 
   const handleInstagramShare = () => {
-    // Instagram doesn't support direct URL sharing, so we copy the link
+    // Instagram doesn't support direct URL sharing from web – use native share / copy fallback
+    if (navigator.share) {
+      handleNativeShare()
+      return
+    }
     handleCopyLink()
-    alert(`Instagram sharing: Copy the link and share it in your Instagram story or post!\n\nSuggested caption: Check out "${songName}" by ${singerName} on Berwel - A Website for Libyan Music`)
+    alert(`Instagram sharing: Copy the link and share it in your Instagram story or post!\n\nSuggested caption: ${shareText}`)
   }
 
   const handleWhatsAppShare = () => {
-    const shareText = `Check out "${songName}" by ${singerName} on Berwel - A Website for Libyan Music\n\n${currentUrl}`
-    const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`
+    const text = `${shareText}\n\n${currentUrl}`
+    const url = `https://wa.me/?text=${encodeURIComponent(text)}`
     window.open(url, '_blank', 'width=600,height=400')
   }
 
@@ -80,6 +100,15 @@ export default function ShareModal({
 
           {/* Share Options */}
           <div className="flex justify-center gap-4">
+            {/* Native Share (best for phones) */}
+            <Button
+              onClick={handleNativeShare}
+              className="bg-orange-500 hover:bg-orange-600 text-white p-3 w-12 h-12 rounded-lg flex items-center justify-center"
+              title="Share"
+            >
+              <Share2 className="h-6 w-6" />
+            </Button>
+
             {/* Facebook */}
             <Button
               onClick={handleFacebookShare}
