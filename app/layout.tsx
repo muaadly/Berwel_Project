@@ -4,6 +4,7 @@ import { AuthProvider } from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.berwel.ly'),
   title: 'Berwel - A Website for Libyan Music',
   description: 'A Website for Libyan Music',
   generator: 'Berwel Music Library',
@@ -11,9 +12,10 @@ export const metadata: Metadata = {
     title: 'Berwel - A Website for Libyan Music',
     description: 'A Website for Libyan Music',
     type: 'website',
+    siteName: 'Berwel',
     images: [
       {
-        url: '/Data/Berwel Data Org/Logoo.png',
+        url: '/images/logo.jpeg',
         width: 1200,
         height: 630,
         alt: 'Berwel Logo',
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Berwel - A Website for Libyan Music',
     description: 'A Website for Libyan Music',
-    images: ['/Data/Berwel Data Org/Logoo.png'],
+    images: ['/images/logo.jpeg'],
   },
   icons: {
     icon: '/Data/Berwel Data Org/Logoo.png',
