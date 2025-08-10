@@ -174,14 +174,14 @@ export default function LibraryContent() {
     }
 
     return (
-      <div className="flex items-center justify-between px-6 py-4 bg-muted border-t border-border">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-6 py-4 bg-muted border-t border-border">
         <div className="hidden md:flex items-center text-sm text-foreground">
           <span>
             Showing {startItem} to {endItem} of {totalItems} {itemType}
           </span>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-center md:justify-end space-x-1 md:space-x-2 w-full md:w-auto">
           <Button
             onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
@@ -215,18 +215,18 @@ export default function LibraryContent() {
                 </Button>
               )
 
-              // Show pages around current page
+              // Show pages around current page (simplified for mobile)
               const startPage = Math.max(2, currentPage - 1)
               const endPage = Math.min(totalPages - 1, currentPage + 1)
 
               // Add ellipsis if there's a gap after page 1
               if (startPage > 2) {
                 pages.push(
-                  <span key="ellipsis1" className="text-foreground px-2">...</span>
+                  <span key="ellipsis1" className="text-foreground px-1 md:px-2">...</span>
                 )
               }
 
-              // Add pages around current page
+              // Add pages around current page (hide some on very small screens)
               for (let i = startPage; i <= endPage; i++) {
                 if (i === 1 || i === totalPages) continue // Skip first and last as they're handled separately
                 
@@ -250,7 +250,7 @@ export default function LibraryContent() {
               // Add ellipsis if there's a gap before last page
               if (endPage < totalPages - 1) {
                 pages.push(
-                  <span key="ellipsis2" className="text-foreground px-2">...</span>
+                  <span key="ellipsis2" className="text-foreground px-1 md:px-2">...</span>
                 )
               }
 
