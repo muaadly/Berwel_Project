@@ -34,12 +34,14 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       description: `Explore "${entry.entryName}" - A Maloof Entry on Berwel - A Website for Libyan Music. Type: ${entry.entryType}, Rhythm: ${entry.entryRhythm}`,
       type: 'article',
       siteName: 'Berwel',
+      url: `https://www.berwel.ly/maloof/${entry.id}`,
       images: [
         {
           url: fullImageUrl,
-          width: 400,
-          height: 400,
+          width: 1200,
+          height: 630,
           alt: `${entry.entryName} - Maloof Entry`,
+          type: 'image/png',
         },
       ],
     },
@@ -48,6 +50,11 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       title: `${entry.entryName} - Maloof Entry`,
       description: `Explore "${entry.entryName}" - A Maloof Entry on Berwel - A Website for Libyan Music. Type: ${entry.entryType}, Rhythm: ${entry.entryRhythm}`,
       images: [fullImageUrl],
+      creator: '@berwel_ly',
+    },
+    other: {
+      'image:width': '1200',
+      'image:height': '630',
     },
   }
 }

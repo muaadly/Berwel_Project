@@ -34,12 +34,14 @@ export async function generateMetadata({ params }: SongPageProps): Promise<Metad
       description: `Listen to "${song.songName}" by ${song.singer} on Berwel - A Website for Libyan Music. Category: ${song.category}`,
       type: 'music.song',
       siteName: 'Berwel',
+      url: `https://www.berwel.ly/songs/${song.id}`,
       images: [
         {
           url: fullImageUrl,
-          width: 400,
-          height: 400,
+          width: 1200,
+          height: 630,
           alt: `${song.singer} - ${song.songName}`,
+          type: 'image/jpeg',
         },
       ],
     },
@@ -48,6 +50,11 @@ export async function generateMetadata({ params }: SongPageProps): Promise<Metad
       title: `${song.songName} by ${song.singer}`,
       description: `Listen to "${song.songName}" by ${song.singer} on Berwel - A Website for Libyan Music. Category: ${song.category}`,
       images: [fullImageUrl],
+      creator: '@berwel_ly',
+    },
+    other: {
+      'image:width': '1200',
+      'image:height': '630',
     },
   }
 }

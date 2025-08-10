@@ -86,7 +86,7 @@ export function getSingerImagePath(imageName: string): string {
 
 // Function to get image path for entry type
 export function getEntryTypeImagePath(imageName: string): string {
-  if (!imageName) return '/placeholder.svg'
+  if (!imageName) return '/images/Light_Mode_Logo.jpeg'
   const trimmedName = imageName.trim()
   return `/Data/Berwel Data Org/R_Images/Entry_Images/${trimmedName}`
 }
