@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
           width: 1200,
           height: 630,
           alt: `${entry.entryName} - Maloof Entry`,
-          type: 'image/png',
+          type: 'image/jpeg',
         },
       ],
     },
