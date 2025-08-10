@@ -13,12 +13,14 @@ export const metadata: Metadata = {
     description: 'A Website for Libyan Music',
     type: 'website',
     siteName: 'Berwel',
+    url: 'https://www.berwel.ly',
     images: [
       {
-        url: '/images/logo.jpeg',
+        url: '/images/Light_Mode_Logo.jpeg',
         width: 1200,
         height: 630,
         alt: 'Berwel Logo',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Berwel - A Website for Libyan Music',
     description: 'A Website for Libyan Music',
-    images: ['/images/logo.jpeg'],
+    images: ['/images/Light_Mode_Logo.jpeg'],
+    creator: '@berwel_ly',
   },
   icons: {
     icon: '/Data/Berwel Data Org/Logoo.png',
