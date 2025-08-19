@@ -64,6 +64,8 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       'og:image:type': 'image/png',
       'og:image:secure_url': simpleImageUrl,
       'twitter:image:alt': `${entry.entryName} - Maloof Entry`,
+      'og:image:url': simpleImageUrl,
+      'twitter:image:src': simpleImageUrl,
     },
   }
 }
