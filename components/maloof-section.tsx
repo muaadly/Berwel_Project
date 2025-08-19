@@ -77,7 +77,7 @@ export default function MaloofSection() {
                 >
                   <div className="w-48 h-48 rounded-lg overflow-hidden mb-3 transition-transform group-hover:scale-105">
                     <img
-                      src={`/Data/Berwel Data Org/R_Images/Entry_Images/${img}`}
+                      src={`/images/maloof/${img}`}
                       alt={`Maloof Entry ${idx + 1}`}
                       className="w-full h-full object-cover rounded-lg"
                     />

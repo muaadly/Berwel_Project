@@ -23,8 +23,9 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
     }
   }
 
-  const entryImageUrl = getEntryTypeImagePath(entry.typeEntryImage)
-  const fullImageUrl = `https://www.berwel.ly${entryImageUrl}`
+  const simpleImageUrl = `https://www.berwel.ly/images/maloof/${entry.typeEntryImage}`
+  
+
 
   return {
     title: `${entry.entryName} - Maloof Entry - Berwel`,
@@ -37,24 +38,29 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       url: `https://www.berwel.ly/maloof/${entry.id}`,
       images: [
         {
-          url: fullImageUrl,
-          width: 1200,
-          height: 630,
+          url: simpleImageUrl,
+          width: 800,
+          height: 800,
           alt: `${entry.entryName} - Maloof Entry`,
-          type: 'image/jpeg',
+          type: 'image/png',
         },
       ],
+      locale: 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title: `${entry.entryName} - Maloof Entry`,
       description: `Explore "${entry.entryName}" - A Maloof Entry on Berwel - A Website for Libyan Music. Type: ${entry.entryType}, Rhythm: ${entry.entryRhythm}`,
-      images: [fullImageUrl],
+      images: [simpleImageUrl],
       creator: '@berwel_ly',
     },
     other: {
-      'image:width': '1200',
-      'image:height': '630',
+      'image:width': '800',
+      'image:height': '800',
+      'og:image': simpleImageUrl,
+      'og:image:width': '800',
+      'og:image:height': '800',
+      'og:image:type': 'image/png',
     },
   }
 }

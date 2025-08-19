@@ -267,8 +267,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
     if (!imageName) return '/placeholder-user.jpg'
     // Keep original case - the files are actually uppercase
     const cleanImageName = imageName.trim()
-    // Use a completely different approach - direct path without encoding
-    const imagePath = `/Data/Berwel Data Org/R_Images/Entry_Images/${cleanImageName}?v=${Date.now()}`
+    // Use the simpler path without spaces for better compatibility
+    const imagePath = `/images/maloof/${cleanImageName}?v=${Date.now()}`
     console.log('FIXED - Generated image path:', imagePath, 'from:', imageName)
     return imagePath
   }
@@ -676,7 +676,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                   >
                     <div className="w-48 h-48 rounded-lg overflow-hidden mb-3 transition-transform group-hover:scale-105">
                       <img
-                        src={`/Data/Berwel Data Org/R_Images/Entry_Images/${img}`}
+                        src={`/images/maloof/${img}`}
                         alt={`Maloof Entry ${idx + 1}`}
                         className="w-full h-full object-cover rounded-lg"
                       />
