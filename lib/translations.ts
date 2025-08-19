@@ -237,6 +237,33 @@ export const translations: Record<Language, Translations> = {
     likeRemoved: 'Removed from likes',
     profileUpdated: 'Profile updated successfully',
     messageSent: 'Message sent successfully',
+    
+    // About page
+    aboutTitle: 'About Berwel',
+    aboutDescription: 'Berwel is an interactive digital platform dedicated to documenting, preserving, and sharing Libya\'s musical heritage—from folk songs to Malouf and Muwashahat. Built by a community of music lovers, researchers, and technologists, Berwel brings Libya\'s diverse sonic history into the digital age.',
+    aboutPlatform: 'The platform allows users to listen to Libyan songs, explore lyrics, discover the stories behind them, and learn about the artists, poets, composers, and cultural movements that shaped them. With a searchable and growing database of more than 1,200 songs, 170 Malouf entries, and a rich set of artist profiles and musical metadata, Berwel offers a living archive of Libya\'s voice—accessible to all.',
+    projectTitle: 'The Berwel Project',
+    projectDescription: 'Berwel was born in 2021 from a simple question: Why isn\'t there a central online space for Libyan music? What started as a passion project among friends—writing down lyrics, collecting songs, and sharing stories—grew into a larger mission to preserve and revitalize Libya\'s musical identity.',
+    projectMission: 'In a time when much of our cultural memory is at risk of being lost or scattered, Berwel offers a new kind of archive: one that is open, participatory, and rooted in love for this art. The project seeks to bridge generations by making traditional music more discoverable, searchable, and meaningful for new audiences.',
+    libraryTitle: 'What You\'ll Find in this version',
+    libraryItems: ['A searchable digital library of Libyan songs', 'Song lyrics, artist bios, composer credits, and musical context', 'Malouf and Muwashahat entries with maqam, rhythm, and lyrical breakdowns'],
+    contributeTitle: 'How You Can Contribute',
+    contributeDescription: 'Berwel is not a closed archive—it\'s a living platform. We welcome anyone passionate about Libyan music, language, or cultural history to join us.',
+    contributeItems: [
+      'Add and correct content: If you know lyrics or details we\'re missing, submit them! Every entry goes through review before publishing.',
+      'Help with transcription: Listen to rare or old recordings and help us write out the lyrics.',
+      'Collect and curate: Help us gather content from books, recordings, social media, or your family\'s oral history.',
+      'Join our digital team: If you have web, design, or audio editing skills, your help is especially valuable.'
+    ],
+    contributeEnd: 'No matter your background—whether you\'re a student, artist, techie, or someone who just loves Libyan music—your input matters.',
+    whyMattersTitle: 'Why It Matters',
+    whyMattersDescription: 'Libya\'s musical traditions are as diverse as its geography, dialects, and communities. But decades of instability, neglect, and the lack of formal digital archives have left this heritage vulnerable. Berwel aims to change that—not just by saving the past, but by making it part of the future.',
+    whyMattersEnd: 'Join us in building something meaningful. Let\'s reconnect the sounds of Libya—together.',
+    supportTitle: 'Support Berwel on GoFundMe',
+    supportDescription: 'Help us document and preserve the metadata of traditional Libyan music. Your support makes a difference!',
+    donateButton: 'Donate on GoFundMe',
+    sponsorsTitle: 'Sponsors',
+    sponsorsDescription: 'This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, Creative Solution for advertising, and Alfadaia AI for Software Development.',
   },
   ar: {
     // Navigation
@@ -266,9 +293,9 @@ export const translations: Record<Language, Translations> = {
     remove: 'إزالة',
     
     // Home page
-    heroTitle: 'برول - موقع للموسيقى الليبية',
-    heroSubtitle: 'الحفاظ على التراث الموسيقي الليبي الغني والاحتفال به',
-    heroDescription: 'منصة رقمية تفاعلية تربط الناس بجذورهم الثقافية من خلال الموسيقى الليبية التقليدية ومداخل الملوف.',
+    heroTitle: 'موقع للموسيقا الليبية',
+    heroSubtitle: 'برول هو منصّة رقمية تفاعلية تهدف إلى توثيق وإحياء الموروث الموسيقي الليبي.',
+    heroDescription: 'أكثر من 1200 أغنية ليبية و170 دخلة مالوف ليبي موثقة على موقعنا. يتيح الموقع للجميع استكشاف الأغاني الليبية، الاستماع إليها، قراءة كلماتها، والتعرّف على القصص والسياقات الثقافية خلفها. نرحب بكل مساهمة في سبيل بناء مكتبة موسيقية متكاملة حيّة تُعبّر عن تنوّع ليبيا وصوتها الأصيل.',
     exploreButton: 'استكشف المكتبة',
     learnMoreButton: 'اعرف المزيد',
     
@@ -355,6 +382,33 @@ export const translations: Record<Language, Translations> = {
     likeRemoved: 'تمت الإزالة من الإعجابات',
     profileUpdated: 'تم تحديث الملف الشخصي بنجاح',
     messageSent: 'تم إرسال الرسالة بنجاح',
+    
+    // About page
+    aboutTitle: 'منصة برول',
+    aboutDescription: 'برول هو منصة رقمية تفاعلية متخصصة في الموروث الموسيقي الليبي من أغاني، مالوف، موشحات، وموسيقا شعبية. يسهّل على المهتمين والباحثين والمحبين الوصول إلى هذا التراث ومشاركته مع الأجيال الجديدة والقديمة، عبر تجربة سلسة لاكتشاف الفنانين، الاستماع لأعمالهم الخالدة، وقراءة كلمات الأغاني والمعلومات المتعلقة بها من ملحنين، شعراء، ومؤدين.',
+    aboutPlatform: 'مشروع برول',
+    projectTitle: 'مشروع برول',
+    projectDescription: 'جاء مشروع برول انطلاقًا من تنوع فنوننا الشعبية وأهمية الحفاظ عليها وتوثيقها، وهو نتاج مبادرة مجتمعية تحت اسم "مشروع برول". يهدف إلى أرشفة التراث الغنائي الليبي رقميًا، ونشره إلى العالم كجزء حيّ من الهوية الثقافية الليبية، في صورة أرشيف ثقافي نابض يعكس تنوّع وبراعة الفنانين الليبيين، ويمثّل مرجعًا مهمًا للباحثين والموسيقيين والمهتمين في دراساتهم ومشاريعهم.',
+    projectMission: '📅 كيف بدأ؟ انطلقت فكرة برول عام 2021 بعد ملاحظة الغياب شبه التام لأرشيف رقمي شامل يوثق جماليات الأغنية الليبية بمختلف ألوانها. دفعنا هذا الغياب إلى التحرك بدافع الشغف والتراث، وبدأنا رحلة طويلة في جمع الأغاني والمعلومات من مصادر متفرقة: من الإنترنت، والكتب، والباحثين المختصين. بعد سنوات من الجهد والعمل في الظل، يخرج هذا المشروع اليوم إلى النور كبوابة إلكترونية تتيح للجميع تذوّق جمال الألحان والكلمات، والوصول إلى هذا الفن من منظور حديث، يربط الماضي بالحاضر ويعرّف العالم بروح ليبيا.',
+    libraryTitle: '📚 مكتبة برول',
+    libraryItems: ['تضم المكتبة الرقمية في برول أكثر من 1200 أغنية و170 دخلة مالوف وموشحات، بالإضافة إلى معلومات تفصيلية عن أكثر من 20 فنانًا ليبيًا. تشمل المكتبة كلمات الأغاني، معلومات عن الشعراء والملحنين، نوتات موسيقية، ومقابلات صوتية ومرئية مع باحثين وفنانين ليبيين مختصين. وتستمر المكتبة بالتحديث والنمو عبر مساهمات الفريق والمجتمع.'],
+    contributeTitle: '🧑‍🤝‍🧑 المساهمون',
+    contributeDescription: 'هذا المشروع ثمرة تعاون بين مجموعة من عشاق التراث الليبي: موسيقيين، مبرمجين، باحثين، ومهتمين بالإرث الثقافي. تولّى بعضهم مهمة جمع وتوثيق الأغاني من مصادر إلكترونية ومكتوبة، بينما تكفّل فريق من المطوّرين ببناء الموقع وتصميمه وبرمجته ليعكس روح الموسيقا التي يحتويها بأسلوب بسيط وحديث.',
+    contributeItems: [
+      '✋ ادعم التراث وساهم معنا هل لديك شغف بالموسيقا الليبية؟ هل تتقن لهجة محلية أو تحب كتابة كلمات الأغاني؟ هل تجيد البحث أو التعامل مع أدوات رقمية بسيطة؟ برول يرحّب بك.',
+      'برول ليس أرشيفًا مغلقًا، بل مشروع حيّ يمكن لكل فرد المساهمة في تطويره وتوسيعه. نحن نبحث على الدوام عن مساهمين شغوفين قادرين على المشاركة في مراحل التجميع، التصحيح، أو التوثيق.',
+      '🛠️ كيف تساهم؟ تنقسم المساهمة إلى ثلاث مراحل رئيسية: الإدخال والمراجعة: يمكن لأي مستخدم اقتراح إضافات أو تصحيحات على محتوى الأغاني، وتتم مراجعتها من قبل فريق مختص قبل النشر.',
+      'المسح والتجميع الإلكتروني: يقوم المتطوعون بجمع المعلومات من الإنترنت، ومنصات التواصل، والتعليقات، ثم يتم تنقيحها وإدخالها إلى قاعدة البيانات. رقمنة الكلمات: فريق من المتطوعين يستمعون إلى الأغاني ويكتبون كلماتها بدقة، ليتم تحويلها إلى نصوص قابلة للبحث والقراءة.'
+    ],
+    contributeEnd: 'ساهم معنا في إحياء تراثنا الليبي!',
+    whyMattersTitle: 'لماذا تهمنا مساهمتك؟',
+    whyMattersDescription: 'تتنوع التقاليد الموسيقية في ليبيا بتنوع جغرافيتها ولهجاتها ومجتمعاتها. لكن عقودًا من الاضطراب والإهمال، إلى جانب غياب الأرشفة الرسمية، جعلت هذا التراث عرضة للضياع. يسعى برول إلى تغيير ذلك — لا بمجرد إنقاذ الماضي، بل بجعله جزءًا من المستقبل.',
+    whyMattersEnd: 'هذا المشروع هو مشروع للدار الليبية لدراسات العود، بدعم من شركة بورصة المالية، وشركة الحل البديع للدعاية والإعلان، وتطوير الموقع الالكتروني من قبل شركة الفضائية.',
+    supportTitle: '💚 Support Berwel on GoFundMe',
+    supportDescription: 'Help us document and preserve the metadata of traditional Libyan music. Your support makes a difference!',
+    donateButton: 'Donate on GoFundMe',
+    sponsorsTitle: 'Sponsors',
+    sponsorsDescription: 'This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, Creative Solution for advertising, and Alfadaia AI for Software Development.',
   }
 }
 
