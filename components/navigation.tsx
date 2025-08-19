@@ -7,12 +7,14 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { Drawer, DrawerContent, DrawerClose } from "@/components/ui/drawer"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import { CommandDialog } from "@/components/ui/command"
-import { Search, LogOut, User, Moon, Sun } from "lucide-react"
+import { Search, LogOut, User, Moon, Sun, Languages } from "lucide-react"
 import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
 import { useEffect } from "react"
 import { useAuth } from "./auth-provider"
+import { useLanguage } from "./language-provider"
+import { useTranslations } from "@/lib/translations"
 import { signIn, signOut } from "next-auth/react"
 
 interface NavigationProps {
@@ -25,6 +27,8 @@ interface NavigationProps {
 export default function Navigation({ searchOpen, setSearchOpen, searchValue, setSearchValue }: NavigationProps) {
   const { user, isLoading } = useAuth()
   const { theme, setTheme, resolvedTheme } = useTheme()
+  const { language, setLanguage } = useLanguage()
+  const { t } = useTranslations()
   const [mounted, setMounted] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
@@ -91,6 +95,15 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               <Moon className="absolute h-5 w-5 rotate-0 scale-100 transition-all dark:scale-0" />
               <span className="sr-only">Toggle theme</span>
             </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setLanguage(language === "en" ? "ar" : "en")}
+              className="ml-2 text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
+            >
+              <Languages className="h-5 w-5" />
+              <span className="sr-only">Toggle language</span>
+            </Button>
           </div>
 
           {/* Navigation Links */}
@@ -100,31 +113,31 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                 href="/"
                 className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
-                Home
+                {t('home')}
               </Link>
               <Link
                 href="/library"
                 className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-primary"
               >
-                Library
+                {t('library')}
               </Link>
               <Link
                 href="/analytics"
                 className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
-                Analytics
+                {t('analytics')}
               </Link>
               <Link
                 href="/about"
                 className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
-                About
+                {t('about')}
               </Link>
               <Link
                 href="/contact"
                 className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
-                Contact
+                {t('contact')}
               </Link>
             </div>
           </div>
@@ -167,7 +180,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                       className="text-white hover:bg-gray-800 cursor-pointer"
                     >
                       <LogOut className="mr-2 h-4 w-4" />
-                      Sign Out
+                      {t('signOut')}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -176,7 +189,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                   onClick={handleSignIn}
                   className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
                 >
-                  Register Now
+                  {t('registerNow')}
                 </Button>
               )
             )}
@@ -257,20 +270,31 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               </DrawerClose>
             </div>
             <Link href="/" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              Home
+              {t('home')}
             </Link>
             <Link href="/library" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              Library
+              {t('library')}
             </Link>
             <Link href="/analytics" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              Analytics
+              {t('analytics')}
             </Link>
             <Link href="/about" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              About
+              {t('about')}
             </Link>
             <Link href="/contact" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              Contact
+              {t('contact')}
             </Link>
+            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLanguage(language === "en" ? "ar" : "en")}
+                className="text-foreground hover:text-primary hover:bg-muted/50 transition-colors"
+              >
+                <Languages className="h-4 w-4 mr-2" />
+                {language === "en" ? "العربية" : "English"}
+              </Button>
+            </div>
             {!isLoading && (
               user ? (
                 <div className="flex items-center gap-2 mt-4">
@@ -300,7 +324,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                     setMobileMenuOpen(false)
                   }}
                 >
-                  Register Now
+                  {t('registerNow')}
                 </Button>
               )
             )}

@@ -3,10 +3,12 @@
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
+import { useTranslations } from "@/lib/translations"
 
 export default function Hero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const { t } = useTranslations()
 
   useEffect(() => {
     setMounted(true)
@@ -29,18 +31,11 @@ export default function Hero() {
         </div>
 
         <div className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">A Website for Libyan Music</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">{t('heroTitle')}</h1>
 
           <div className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto space-y-4">
-            <p>Berwel is an interactive digital platform for Libya's musical heritage.</p>
-            <p>
-              It allows everyone to explore Libyan songs, listen to them, read their lyrics, and discover the cultural
-              stories and contexts behind them.
-            </p>
-            <p>
-              We welcome all contributions in building a rich, living musical library that reflects Libya's diversity
-              and authentic voice.
-            </p>
+            <p>{t('heroSubtitle')}</p>
+            <p>{t('heroDescription')}</p>
           </div>
         </div>
       </div>

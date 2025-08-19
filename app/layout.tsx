@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { AuthProvider } from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import { LanguageProvider } from '@/components/language-provider'
+import { RTLProvider } from '@/components/rtl-provider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.berwel.ly'),
@@ -56,9 +58,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          <LanguageProvider>
+            <RTLProvider>
+              <AuthProvider>
+                {children}
+              </AuthProvider>
+            </RTLProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
