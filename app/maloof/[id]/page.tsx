@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
     }
   }
 
-  const simpleImageUrl = `https://www.berwel.ly/images/maloof/${entry.typeEntryImage}`
+  // Add cache-busting parameter to force social media platforms to re-fetch
+  const simpleImageUrl = `https://www.berwel.ly/images/maloof/${entry.typeEntryImage}?v=2`
   
 
 
@@ -39,8 +40,8 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       images: [
         {
           url: simpleImageUrl,
-          width: 800,
-          height: 800,
+          width: 1200,
+          height: 630,
           alt: `${entry.entryName} - Maloof Entry`,
           type: 'image/png',
         },
@@ -55,12 +56,14 @@ export async function generateMetadata({ params }: MaloofPageProps): Promise<Met
       creator: '@berwel_ly',
     },
     other: {
-      'image:width': '800',
-      'image:height': '800',
+      'image:width': '1200',
+      'image:height': '630',
       'og:image': simpleImageUrl,
-      'og:image:width': '800',
-      'og:image:height': '800',
+      'og:image:width': '1200',
+      'og:image:height': '630',
       'og:image:type': 'image/png',
+      'og:image:secure_url': simpleImageUrl,
+      'twitter:image:alt': `${entry.entryName} - Maloof Entry`,
     },
   }
 }
