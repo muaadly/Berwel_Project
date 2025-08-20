@@ -91,18 +91,12 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Libyan Houes.png" alt="Libyan House for Oud Studies" className="max-h-28 md:max-h-36 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <div className="mt-3 text-center">
-                <span className="block text-foreground text-base font-semibold transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('libyanHouseForOudStudies')}</span>
-              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
                 <a href="https://boursa.io/en" target="_blank" rel="noopener noreferrer">
                   <img src="/Partners Logos/Boursa AII.png" alt="Boursa" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
-              </div>
-              <div className="mt-3 text-center">
-                <span className="block text-foreground text-base font-semibold transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('boursa')}</span>
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -111,18 +105,12 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Alfadaia ai.png" alt="Alfadaia AI" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <div className="mt-3 text-center">
-                <span className="block text-foreground text-base font-semibold transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('alfadaiaAI')}</span>
-              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
                 <a href="https://csmedia.ly" target="_blank" rel="noopener noreferrer">
                   <img src="/Partners Logos/Creative Solution Logo.png" alt="Creative Solution" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
-              </div>
-              <div className="mt-3 text-center">
-                <span className="block text-foreground text-base font-semibold transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('creativeSolution')}</span>
               </div>
             </div>
           </div>
