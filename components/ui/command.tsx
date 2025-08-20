@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { DialogTitle } from "@radix-ui/react-dialog"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
+import { useLanguage } from "@/components/language-provider"
+import { useTranslations } from "@/lib/translations"
 
 interface CommandDialogProps extends DialogProps {
   searchValue?: string;
@@ -31,6 +33,9 @@ const Command = React.forwardRef<
 Command.displayName = CommandPrimitive.displayName
 
 const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }: CommandDialogProps) => {
+  const { language } = useLanguage()
+  const { t } = useTranslations()
+  
   return (
     <Dialog {...props}>
       <DialogContent className="overflow-hidden p-0 bg-card shadow-none border border-border max-w-2xl w-full rounded-none md:rounded-2xl">
@@ -44,25 +49,25 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
               <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
             {/* Search bar with icon */}
-            <div className="w-full mb-8 flex items-center border-b border-border px-3">
-              <Search className="mr-3 h-8 w-8 text-primary" />
+            <div className={`w-full mb-8 flex items-center border-b border-border px-3 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+              <Search className={`h-8 w-8 text-primary ${language === 'ar' ? 'ml-3' : 'mr-3'}`} />
               <CommandInput
                 autoFocus
                 value={searchValue}
                 onValueChange={onSearchValueChange}
-                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0"
-                placeholder="Search Berwel..."
+                className={`flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                placeholder={t('searchBerwel')}
               />
             </div>
             <div className="w-full">
-              <div className="text-foreground text-lg font-semibold mb-4">Quick Links</div>
+              <div className={`text-foreground text-lg font-semibold mb-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('quickLinks')}</div>
               <CommandList>
                 <CommandGroup>
                   <CommandItem asChild>
-                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors">Libyan Songs</a>
+                    <a href="/library" className={`text-xl font-bold text-foreground hover:text-primary transition-colors ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('libyanSongs')}</a>
                   </CommandItem>
                   <CommandItem asChild>
-                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors">Maloof Entries</a>
+                    <a href="/library?tab=maloof" className={`text-xl font-bold text-foreground hover:text-primary transition-colors ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('maloofEntries')}</a>
                   </CommandItem>
                 </CommandGroup>
                 {/* Suggestions will be rendered here by children */}

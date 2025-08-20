@@ -224,12 +224,12 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
           <>
             {filteredSongs.length > 0 && (
               <>
-                <div className="text-muted-foreground text-xs font-semibold px-4 pt-4 pb-1">Libyan Songs</div>
+                <div className={`text-muted-foreground text-xs font-semibold px-4 pt-4 pb-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('libyanSongs')}</div>
                 {filteredSongs.map((song: LibyanSong) => (
                   <a
                     key={song.id}
                     href={`/songs/${song.id}`}
-                    className="block px-4 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors text-base"
+                    className={`block px-4 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors text-base ${language === 'ar' ? 'text-right' : 'text-left'}`}
                   >
                     {song.songName} <span className="text-muted-foreground">({song.singer})</span>
                   </a>
@@ -238,12 +238,12 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             )}
             {filteredMaloof.length > 0 && (
               <>
-                <div className="text-muted-foreground text-xs font-semibold px-4 pt-4 pb-1">Maloof Entries</div>
+                <div className={`text-muted-foreground text-xs font-semibold px-4 pt-4 pb-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('maloofEntries')}</div>
                 {filteredMaloof.map((entry: MaloofEntry) => (
                   <a
                     key={entry.id}
                     href={`/maloof/${entry.id}`}
-                    className="block px-4 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors text-base"
+                    className={`block px-4 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors text-base ${language === 'ar' ? 'text-right' : 'text-left'}`}
                   >
                     {entry.entryName}
                   </a>
