@@ -25,61 +25,63 @@ export default function AboutPage() {
 
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('projectTitle')}</h2>
-          <p className="mb-4 text-foreground">
+          <h2 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 text-right">{t('projectTitle')}</h2>
+          <p className="mb-4 text-foreground text-right">
             {t('projectDescription')}
           </p>
-          <p className="mb-0 text-foreground">
+          <p className="mb-0 text-foreground text-right">
             {t('projectMission')}
           </p>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('libraryTitle')}</h2>
+          <h2 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 text-right">{t('libraryTitle')}</h2>
           <div className="mb-0 text-foreground space-y-2">
             {t('libraryItems').map((item, index) => (
-              <p key={index} className="text-foreground">{item}</p>
+              <p key={index} className="text-foreground text-right">{item}</p>
             ))}
           </div>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('contributeTitle')}</h2>
-          <p className="mb-4 text-foreground">
+          <h2 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 text-right">{t('contributeTitle')}</h2>
+          <p className="mb-4 text-foreground text-right">
             {t('contributeDescription')}
           </p>
           <div className="mb-4 text-foreground space-y-4">
             {t('contributeItems').map((item, index) => (
-              <p key={index} className="text-foreground">{item}</p>
+              <p key={index} className="text-foreground text-right">{item}</p>
             ))}
           </div>
-          <p className="mb-0 text-foreground">
+          <p className="mb-0 text-foreground text-right">
             {t('contributeEnd')}
           </p>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('whyMattersTitle')}</h2>
-          <p className="mb-4 text-foreground">
+          <h2 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 text-right">{t('whyMattersTitle')}</h2>
+          <p className="mb-4 text-foreground text-right">
             {t('whyMattersDescription')}
           </p>
-          <p className="mb-0 text-foreground">
+          <p className="mb-0 text-foreground text-right">
             {t('whyMattersEnd')}
           </p>
         </div>
         {/* GoFundMe Section */}
-        <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary flex flex-col items-center text-center">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('supportTitle')}</h2>
+        <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
+          <h2 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200">{t('supportTitle')}</h2>
           <p className="mb-6 text-foreground">{t('supportDescription')}</p>
-          <a
-            href="https://www.gofundme.com/f/documenting-metadata-of-traditional-libyan-music?utm_campaign=p_cp+share-sheet&utm_medium=copy_link_all&utm_source=customer"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-3 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-lg shadow-lg transition-colors duration-200"
-          >
-            {t('donateButton')}
-          </a>
+          <div className="text-center">
+            <a
+              href="https://www.gofundme.com/f/documenting-metadata-of-traditional-libyan-music?utm_campaign=p_cp+share-sheet&utm_medium=copy_link_all&utm_source=customer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-3 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-lg shadow-lg transition-colors duration-200"
+            >
+              {t('donateButton')}
+            </a>
+          </div>
         </div>
-        <div className="bg-card border-2 border-border rounded-lg p-6 shadow-lg text-center text-foreground text-sm transition-colors duration-200 group hover:border-primary">
+        <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
           <h3 className="text-xl font-bold mb-4 text-foreground">{t('sponsorsTitle')}</h3>
-          <div className="mb-6 text-foreground text-sm text-center">
+          <div className="mb-6 text-foreground text-sm">
             {t('sponsorsDescription')}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-2">
