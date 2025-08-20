@@ -46,26 +46,52 @@ export default function MaloofSection() {
   return (
     <section className="bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-          <h2 className={`text-3xl font-bold text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('maloofEntries')}</h2>
-          <div className={`flex ${language === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-            <Button
-              variant="outline"
-              size="icon"
-              className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-              onClick={() => scroll('left')}
-            >
-              <ChevronLeft className="h-4 w-4 text-primary" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-              onClick={() => scroll('right')}
-            >
-              <ChevronRight className="h-4 w-4 text-primary" />
-            </Button>
-          </div>
+        <div className="flex items-center justify-between mb-8">
+          {language === 'ar' ? (
+            <>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('left')}
+                >
+                  <ChevronLeft className="h-4 w-4 text-primary" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('right')}
+                >
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </Button>
+              </div>
+              <h2 className="text-3xl font-bold text-foreground text-right">{t('maloofEntries')}</h2>
+            </>
+          ) : (
+            <>
+              <h2 className="text-3xl font-bold text-foreground text-left">{t('maloofEntries')}</h2>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('left')}
+                >
+                  <ChevronLeft className="h-4 w-4 text-primary" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('right')}
+                >
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </Button>
+              </div>
+            </>
+          )}
         </div>
 
         <div ref={scrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>

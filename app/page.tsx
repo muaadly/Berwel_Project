@@ -21,8 +21,15 @@ export default function Home() {
       <Hero />
       {/* Search Our Library Section */}
       <section className="max-w-7xl mx-auto mt-8 mb-12 px-4">
-        <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-          <h2 className={`text-3xl font-bold text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('searchOurLibrary')}</h2>
+        <div className="flex items-center justify-between mb-8">
+          {language === 'ar' ? (
+            <>
+              <div></div>
+              <h2 className="text-3xl font-bold text-foreground text-right">{t('searchOurLibrary')}</h2>
+            </>
+          ) : (
+            <h2 className="text-3xl font-bold text-foreground text-left">{t('searchOurLibrary')}</h2>
+          )}
         </div>
         <div className="bg-card border-2 border-border rounded-lg shadow-lg flex flex-col items-start py-10 px-8">
           <button
