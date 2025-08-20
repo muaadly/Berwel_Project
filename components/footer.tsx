@@ -5,11 +5,13 @@ import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
 import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 
 export default function Footer() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const { t } = useTranslations()
+  const { language } = useLanguage()
 
   useEffect(() => {
     setMounted(true)
@@ -21,21 +23,45 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex justify-start mb-4">
-              {mounted && (
-                <Image 
-                  src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
-                  alt="Berwel Logo" 
-                  width={40} 
-                  height={40} 
-                  className="rounded" 
-                  priority
-                />
-              )}
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              {t('footerDescription')}
-            </p>
+            {language === 'ar' ? (
+              // Arabic: Logo above text, right-aligned
+              <>
+                <div className="flex justify-end mb-4">
+                  {mounted && (
+                    <Image 
+                      src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
+                      alt="Berwel Logo" 
+                      width={40} 
+                      height={40} 
+                      className="rounded" 
+                      priority
+                    />
+                  )}
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed text-right">
+                  {t('footerDescription')}
+                </p>
+              </>
+            ) : (
+              // English: Logo above text, left-aligned (keep as is)
+              <>
+                <div className="flex justify-start mb-4">
+                  {mounted && (
+                    <Image 
+                      src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
+                      alt="Berwel Logo" 
+                      width={40} 
+                      height={40} 
+                      className="rounded" 
+                      priority
+                    />
+                  )}
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {t('footerDescription')}
+                </p>
+              </>
+            )}
           </div>
 
           {/* Quick Links */}
