@@ -102,6 +102,8 @@ export interface Translations {
   quickLinks: string
   socialMedia: string
   copyright: string
+  email: string
+  phone: string
   
   // Errors
   error404: string
@@ -248,6 +250,8 @@ export const translations: Record<Language, Translations> = {
     quickLinks: 'Quick Links',
     socialMedia: 'Social Media',
     copyright: '© 2025 Berwel. All rights reserved. Preserving Libyan musical heritage.',
+    email: 'Email',
+    phone: 'Phone',
     
     // Errors
     error404: '404: This page could not be found.',
@@ -393,6 +397,8 @@ export const translations: Record<Language, Translations> = {
     quickLinks: 'روابط سريعة',
     socialMedia: 'وسائل التواصل الاجتماعي',
     copyright: '© 2025 برول. جميع الحقوق محفوظة. الحفاظ على التراث الموسيقي الليبي.',
+    email: 'البريد الإلكتروني',
+    phone: 'رقم الهاتف المحمول',
     
     // Errors
     error404: '404: لم يتم العثور على هذه الصفحة.',

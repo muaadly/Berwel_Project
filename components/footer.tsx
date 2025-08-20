@@ -21,21 +21,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center mb-4">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+              {t('footerDescription')}
+            </p>
+            <div className="flex justify-end">
               {mounted && (
                 <Image 
                   src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
                   alt="Berwel Logo" 
                   width={40} 
                   height={40} 
-                  className="rounded mr-3" 
+                  className="rounded" 
                   priority
                 />
               )}
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              {t('footerDescription')}
-            </p>
           </div>
 
           {/* Quick Links */}
@@ -69,8 +69,8 @@ export default function Footer() {
           <div>
             <h3 className="text-foreground font-semibold mb-4">{t('contact')}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Email: info@berwel.ly</li>
-              <li>Phone: +218 91 234 5678</li>
+              <li>{t('email')}: info@berwel.ly</li>
+              <li>{t('phone')}: +218 91 234 5678</li>
               <li>{t('address')}</li>
             </ul>
           </div>
