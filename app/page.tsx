@@ -47,7 +47,7 @@ export default function Home() {
               href="https://soundcloud.com/berwel-ly"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg mt-2 text-white"
+              className="flex items-center gap-3 font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors text-lg text-white"
               style={{ 
                 textDecoration: 'none',
                 backgroundColor: '#f97316',
