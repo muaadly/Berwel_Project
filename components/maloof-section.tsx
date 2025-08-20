@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState, useRef } from "react"
 import { fetchMaloofEntries, getEntryTypeImagePath, MaloofEntry } from "@/lib/data"
 import Link from "next/link"
+import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 
 const entryImages = [
   "SKA.png",
@@ -27,6 +29,8 @@ const entryTypeMap: Record<string, string> = {
 
 export default function MaloofSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslations()
+  const { language } = useLanguage()
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -43,7 +47,7 @@ export default function MaloofSection() {
     <section className="bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-foreground">Maloof Entries</h2>
+          <h2 className={`text-3xl font-bold text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('maloofEntries')}</h2>
           <div className="flex space-x-2">
             <Button
               variant="outline"

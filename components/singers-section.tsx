@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState, useRef } from "react"
 import { fetchSingers, getSingerImagePath } from "@/lib/data"
 import Link from "next/link"
+import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 
 export default function SingersSection() {
   const [singers, setSingers] = useState<{ name: string, imageName: string }[]>([])
   const scrollRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslations()
+  const { language } = useLanguage()
 
   useEffect(() => {
     fetchSingers().then(setSingers)
@@ -29,7 +33,7 @@ export default function SingersSection() {
     <section className="bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-foreground">Singers</h2>
+          <h2 className={`text-3xl font-bold text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('singers')}</h2>
           <div className="flex space-x-2">
             <Button
               variant="outline"

@@ -33,6 +33,13 @@ export interface Translations {
   heroDescription: string
   exploreButton: string
   learnMoreButton: string
+  searchOurLibrary: string
+  searchBerwel: string
+  singers: string
+  maloofEntries: string
+  berwelSoundcloudPlaylist: string
+  listenOnSoundcloud: string
+  soundcloudDescription: string
   
   // Library
   libyanSongs: string
@@ -181,6 +188,13 @@ export const translations: Record<Language, Translations> = {
     heroDescription: 'An interactive digital platform that connects people with their cultural roots through traditional Libyan music and Maloof entries.',
     exploreButton: 'Explore Library',
     learnMoreButton: 'Learn More',
+    searchOurLibrary: 'Search Our Library',
+    searchBerwel: 'Search Berwel...',
+    singers: 'Singers',
+    maloofEntries: 'Maloof Entries',
+    berwelSoundcloudPlaylist: 'Berwel Soundcloud Playlist',
+    listenOnSoundcloud: 'Listen on SoundCloud',
+    soundcloudDescription: 'Discover Berwel\'s curated Libyan music playlist and more on our official SoundCloud channel.',
     
     // Library
     libyanSongs: 'Libyan Songs',
@@ -328,6 +342,13 @@ export const translations: Record<Language, Translations> = {
     heroDescription: 'أكثر من 1200 أغنية ليبية و170 دخلة مالوف ليبي موثقة على موقعنا. يتيح الموقع للجميع استكشاف الأغاني الليبية، الاستماع إليها، قراءة كلماتها، والتعرّف على القصص والسياقات الثقافية خلفها. نرحب بكل مساهمة في سبيل بناء مكتبة موسيقية متكاملة حيّة تُعبّر عن تنوّع ليبيا وصوتها الأصيل.',
     exploreButton: 'استكشف المكتبة',
     learnMoreButton: 'اعرف المزيد',
+    searchOurLibrary: 'ابحث في مكتبتنا',
+    searchBerwel: 'ابحث في برول...',
+    singers: 'المطربون',
+    maloofEntries: 'مداخل الملوف',
+    berwelSoundcloudPlaylist: 'قائمة تشغيل برول على SoundCloud',
+    listenOnSoundcloud: 'استمع على SoundCloud',
+    soundcloudDescription: 'اكتشف قائمة تشغيل برول المختارة للموسيقى الليبية والمزيد على قناتنا الرسمية على SoundCloud.',
     
     // Library
     libyanSongs: 'الأغاني الليبية',
