@@ -21,10 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              {t('footerDescription')}
-            </p>
-            <div className="flex justify-end">
+            <div className="flex justify-start mb-4">
               {mounted && (
                 <Image 
                   src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
@@ -36,6 +33,9 @@ export default function Footer() {
                 />
               )}
             </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {t('footerDescription')}
+            </p>
           </div>
 
           {/* Quick Links */}
