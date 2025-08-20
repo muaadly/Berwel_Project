@@ -80,7 +80,7 @@ export default function AboutPage() {
           </div>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h3 className="text-xl font-bold mb-4 text-foreground">{t('sponsorsTitle')}</h3>
+          <h3 className="text-2xl font-bold mb-4 text-foreground">{t('sponsorsTitle')}</h3>
           <div className="mb-6 text-foreground text-sm">
             {t('sponsorsDescription')}
           </div>
