@@ -4,10 +4,12 @@ import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
+import { useTranslations } from "@/lib/translations"
 
 export default function Footer() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const { t } = useTranslations()
 
   useEffect(() => {
     setMounted(true)
@@ -32,33 +34,32 @@ export default function Footer() {
               )}
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Preserving and celebrating Libya's rich musical heritage through an interactive digital platform that
-              connects people with their cultural roots.
+              {t('footerDescription')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-foreground font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-foreground font-semibold mb-4">{t('quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                  Home
+                  {t('home')}
                 </Link>
               </li>
               <li>
                 <Link href="/library" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                  Library
+                  {t('library')}
                 </Link>
               </li>
               <li>
                 <Link href="/analytics" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                  Analytics
+                  {t('analytics')}
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-                  About
+                  {t('about')}
                 </Link>
               </li>
             </ul>
@@ -66,18 +67,18 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-foreground font-semibold mb-4">Contact</h3>
+            <h3 className="text-foreground font-semibold mb-4">{t('contact')}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Email: info@berwel.ly</li>
               <li>Phone: +218 91 234 5678</li>
-              <li>Tripoli, Libya</li>
+              <li>{t('address')}</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 Berwel. All rights reserved. Preserving Libyan musical heritage.
+            {t('copyright')}
           </p>
         </div>
       </div>

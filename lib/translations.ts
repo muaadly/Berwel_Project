@@ -117,6 +117,32 @@ export interface Translations {
   likeRemoved: string
   profileUpdated: string
   messageSent: string
+  
+  // About page
+  aboutPlatform: string
+  projectTitle: string
+  projectDescription: string
+  projectMission: string
+  libraryTitle: string
+  libraryItems: string[]
+  contributeTitle: string
+  contributeDescription: string
+  contributeItems: string[]
+  contributeEnd: string
+  whyMattersTitle: string
+  whyMattersDescription: string
+  whyMattersEnd: string
+  supportTitle: string
+  supportDescription: string
+  donateButton: string
+  sponsorsTitle: string
+  sponsorsDescription: string
+  
+  // Sponsor names
+  libyanHouseForOudStudies: string
+  boursa: string
+  creativeSolution: string
+  alfadaiaAI: string
 }
 
 export const translations: Record<Language, Translations> = {
@@ -269,9 +295,9 @@ export const translations: Record<Language, Translations> = {
     // Navigation
     home: 'الرئيسية',
     library: 'المكتبة',
-    analytics: 'التحليلات',
-    about: 'حول',
-    contact: 'اتصل بنا',
+    analytics: 'بيانات',
+    about: 'عن المشروع',
+    contact: 'تواصل معنا',
     registerNow: 'سجل الآن',
     signOut: 'تسجيل الخروج',
     toggleTheme: 'تبديل المظهر',
@@ -386,7 +412,7 @@ export const translations: Record<Language, Translations> = {
     // About page
     aboutTitle: 'منصة برول',
     aboutDescription: 'برول هو منصة رقمية تفاعلية متخصصة في الموروث الموسيقي الليبي من أغاني، مالوف، موشحات، وموسيقا شعبية. يسهّل على المهتمين والباحثين والمحبين الوصول إلى هذا التراث ومشاركته مع الأجيال الجديدة والقديمة، عبر تجربة سلسة لاكتشاف الفنانين، الاستماع لأعمالهم الخالدة، وقراءة كلمات الأغاني والمعلومات المتعلقة بها من ملحنين، شعراء، ومؤدين.',
-    aboutPlatform: 'مشروع برول',
+    aboutPlatform: '',
     projectTitle: 'مشروع برول',
     projectDescription: 'جاء مشروع برول انطلاقًا من تنوع فنوننا الشعبية وأهمية الحفاظ عليها وتوثيقها، وهو نتاج مبادرة مجتمعية تحت اسم "مشروع برول". يهدف إلى أرشفة التراث الغنائي الليبي رقميًا، ونشره إلى العالم كجزء حيّ من الهوية الثقافية الليبية، في صورة أرشيف ثقافي نابض يعكس تنوّع وبراعة الفنانين الليبيين، ويمثّل مرجعًا مهمًا للباحثين والموسيقيين والمهتمين في دراساتهم ومشاريعهم.',
     projectMission: '📅 كيف بدأ؟ انطلقت فكرة برول عام 2021 بعد ملاحظة الغياب شبه التام لأرشيف رقمي شامل يوثق جماليات الأغنية الليبية بمختلف ألوانها. دفعنا هذا الغياب إلى التحرك بدافع الشغف والتراث، وبدأنا رحلة طويلة في جمع الأغاني والمعلومات من مصادر متفرقة: من الإنترنت، والكتب، والباحثين المختصين. بعد سنوات من الجهد والعمل في الظل، يخرج هذا المشروع اليوم إلى النور كبوابة إلكترونية تتيح للجميع تذوّق جمال الألحان والكلمات، والوصول إلى هذا الفن من منظور حديث، يربط الماضي بالحاضر ويعرّف العالم بروح ليبيا.',
@@ -404,11 +430,17 @@ export const translations: Record<Language, Translations> = {
     whyMattersTitle: 'لماذا تهمنا مساهمتك؟',
     whyMattersDescription: 'تتنوع التقاليد الموسيقية في ليبيا بتنوع جغرافيتها ولهجاتها ومجتمعاتها. لكن عقودًا من الاضطراب والإهمال، إلى جانب غياب الأرشفة الرسمية، جعلت هذا التراث عرضة للضياع. يسعى برول إلى تغيير ذلك — لا بمجرد إنقاذ الماضي، بل بجعله جزءًا من المستقبل.',
     whyMattersEnd: 'هذا المشروع هو مشروع للدار الليبية لدراسات العود، بدعم من شركة بورصة المالية، وشركة الحل البديع للدعاية والإعلان، وتطوير الموقع الالكتروني من قبل شركة الفضائية.',
-    supportTitle: '💚 Support Berwel on GoFundMe',
-    supportDescription: 'Help us document and preserve the metadata of traditional Libyan music. Your support makes a difference!',
-    donateButton: 'Donate on GoFundMe',
-    sponsorsTitle: 'Sponsors',
-    sponsorsDescription: 'This is a Libyan House for Oud Studies project, with support from Boursa for trading and investment, Creative Solution for advertising, and Alfadaia AI for Software Development.',
+    supportTitle: '💚 ادعم برول على GoFundMe',
+    supportDescription: 'ساعدنا في توثيق والحفاظ على البيانات الوصفية للموسيقى الليبية التقليدية. دعمك يحدث فرقاً!',
+    donateButton: 'تبرع على GoFundMe',
+    sponsorsTitle: 'الرعاة',
+    sponsorsDescription: 'هذا مشروع للدار الليبية لدراسات العود، بدعم من بورصة للتجارة والاستثمار، الحل البديع للدعاية والإعلان، وتطوير الموقع الإلكتروني من قبل الفضائية الذكية.',
+    
+    // Sponsor names
+    libyanHouseForOudStudies: 'الدار الليبية لدراسات العود',
+    boursa: 'بورصة',
+    creativeSolution: 'الحل البديع',
+    alfadaiaAI: 'الفضائية الذكية',
   }
 }
 

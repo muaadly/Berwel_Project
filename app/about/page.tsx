@@ -22,9 +22,7 @@ export default function AboutPage() {
           <p className="text-lg mb-4 text-center text-foreground">
             {t('aboutDescription')}
           </p>
-          <p className="mb-4 text-foreground">
-            {t('aboutPlatform')}
-          </p>
+
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors duration-200">{t('projectTitle')}</h2>
@@ -91,7 +89,7 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Libyan Houes.png" alt="Libyan House for Oud Studies" className="max-h-28 md:max-h-36 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Libyan House for Oud Studies</span>
+              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('libyanHouseForOudStudies')}</span>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
@@ -99,7 +97,7 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Boursa AII.png" alt="Boursa" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Boursa</span>
+              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('boursa')}</span>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
@@ -107,7 +105,7 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Alfadaia ai.png" alt="Alfadaia AI" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Alfadaia AI</span>
+              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('alfadaiaAI')}</span>
             </div>
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
@@ -115,7 +113,7 @@ export default function AboutPage() {
                   <img src="/Partners Logos/Creative Solution Logo.png" alt="Creative Solution" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
               </div>
-              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">Creative Solution</span>
+              <span className="block text-foreground text-base font-semibold text-center mt-3 mb-2 transition-colors duration-200 group-hover:text-primary hover:text-primary cursor-pointer">{t('creativeSolution')}</span>
             </div>
           </div>
         </div>
