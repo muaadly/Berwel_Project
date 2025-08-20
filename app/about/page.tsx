@@ -2,7 +2,8 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer"
 import { useState } from "react"
-import { useTranslations, useLanguage } from "@/lib/translations"
+import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 
 export default function AboutPage() {
   const [searchOpen, setSearchOpen] = useState(false)
