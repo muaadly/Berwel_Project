@@ -40,6 +40,12 @@ export interface Translations {
   berwelSoundcloudPlaylist: string
   listenOnSoundcloud: string
   soundcloudDescription: string
+  contactUs: string
+  name: string
+  email: string
+  subject: string
+  message: string
+  sendMessage: string
   
   // Library
   libyanSongs: string
@@ -195,6 +201,12 @@ export const translations: Record<Language, Translations> = {
     berwelSoundcloudPlaylist: 'Berwel Soundcloud Playlist',
     listenOnSoundcloud: 'Listen on SoundCloud',
     soundcloudDescription: 'Discover Berwel\'s curated Libyan music playlist and more on our official SoundCloud channel.',
+    contactUs: 'Contact Us',
+    name: 'Name',
+    email: 'Email',
+    subject: 'Subject',
+    message: 'Message',
+    sendMessage: 'Send Message',
     
     // Library
     libyanSongs: 'Libyan Songs',
@@ -349,6 +361,12 @@ export const translations: Record<Language, Translations> = {
     berwelSoundcloudPlaylist: 'قائمة تشغيل برول على SoundCloud',
     listenOnSoundcloud: 'استمع على SoundCloud',
     soundcloudDescription: 'اكتشف قائمة تشغيل برول المختارة للموسيقى الليبية والمزيد على قناتنا الرسمية على SoundCloud.',
+    contactUs: 'تواصل معنا',
+    name: 'الاسم',
+    email: 'البريد الإلكتروني',
+    subject: 'الموضوع',
+    message: 'الرسالة',
+    sendMessage: 'إرسال الرسالة',
     
     // Library
     libyanSongs: 'الأغاني الليبية',

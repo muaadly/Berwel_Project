@@ -32,7 +32,7 @@ export default function SingersSection() {
   return (
     <section className="bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
+        <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
           <h2 className={`text-3xl font-bold text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('singers')}</h2>
           <div className="flex space-x-2">
             <Button
