@@ -43,31 +43,32 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
           <VisuallyHidden>Global Search</VisuallyHidden>
         </DialogTitle>
         <Command className="w-full">
-          <div className="flex flex-col items-center w-full p-8 pt-8">
+          <div className="flex flex-col items-center w-full p-8 pt-8" style={{ flexDirection: 'column' }}>
             {/* Logo at the top center */}
             <div className="w-full flex justify-center mb-6">
               <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
             {/* Search bar with icon */}
-            <div className="w-full mb-8 flex items-center border-b border-border px-3">
+            <div className="w-full mb-8 flex items-center border-b border-border px-3" style={{ flexDirection: 'row' }}>
               <Search className="mr-3 h-8 w-8 text-primary" />
               <CommandInput
                 autoFocus
                 value={searchValue}
                 onValueChange={onSearchValueChange}
-                className={`flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 ${language === 'ar' ? 'text-right' : 'text-left'}`}
+                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0"
+                style={{ textAlign: language === 'ar' ? 'right' : 'left' }}
                 placeholder={t('searchBerwel')}
               />
             </div>
             <div className="w-full">
-              <div className="text-foreground text-lg font-semibold mb-4">{t('quickLinks')}</div>
+              <div className="text-foreground text-lg font-semibold mb-4" style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>{t('quickLinks')}</div>
               <CommandList>
                 <CommandGroup>
                   <CommandItem asChild>
-                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors">{t('libyanSongs')}</a>
+                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors" style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>{t('libyanSongs')}</a>
                   </CommandItem>
                   <CommandItem asChild>
-                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors">{t('maloofEntries')}</a>
+                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors" style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>{t('maloofEntries')}</a>
                   </CommandItem>
                 </CommandGroup>
                 {/* Suggestions will be rendered here by children */}
