@@ -210,6 +210,8 @@ export const translations: Record<Language, Translations> = {
     sendMessage: 'Send Message',
     
     // Library
+    discoverTitle: 'Discover the Libyan Songs and Maloof Entries',
+    discoverSubtitle: 'Explore our rich collection of traditional and contemporary Libyan music',
     libyanSongs: 'Libyan Songs',
     maloofEntries: 'Maloof Entries',
     singers: 'Singers',
@@ -220,6 +222,13 @@ export const translations: Record<Language, Translations> = {
     newest: 'Newest',
     oldest: 'Oldest',
     alphabetical: 'Alphabetical',
+    searchLibyanSongs: 'ابحث في الأغاني الليبية...',
+    showFilters: 'إظهار المرشحات',
+    clearFilter: 'مسح المرشح',
+    play: 'تشغيل',
+    category: 'الفئة',
+    singerName: 'اسم المطرب',
+    songName: 'اسم الأغنية',
     
     // Song details
     songBy: 'by',
@@ -371,6 +380,8 @@ export const translations: Record<Language, Translations> = {
     sendMessage: 'إرسال الرسالة',
     
     // Library
+    discoverTitle: 'اكتشف الأغاني الليبية ومداخل الملوف',
+    discoverSubtitle: 'استكشف مجموعتنا الغنية من الموسيقى الليبية التقليدية والمعاصرة',
     libyanSongs: 'الأغاني الليبية',
     maloofEntries: 'مداخل الملوف',
     singers: 'المطربون',

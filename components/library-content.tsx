@@ -8,10 +8,14 @@ import Link from "next/link"
 import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
 import { useRouter, useSearchParams } from "next/navigation"
 import React from "react"
+import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 
 const ITEMS_PER_PAGE = 8
 
 export default function LibraryContent() {
+  const { t } = useTranslations()
+  const { language } = useLanguage()
   const [activeTab, setActiveTab] = useState<"songs" | "maloof">("songs")
   const [playingId, setPlayingId] = useState<number | null>(null)
   const [songsCurrentPage, setSongsCurrentPage] = useState(1)
@@ -382,12 +386,12 @@ export default function LibraryContent() {
     <div className="min-h-screen bg-background py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <div className="text-center mb-12">
+        <div className={`text-center mb-12 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Discover the Libyan Songs and Maloof Entries
+            {t('discoverTitle')}
           </h1>
           <p className="text-muted-foreground text-lg">
-            Explore our rich collection of traditional and contemporary Libyan music
+            {t('discoverSubtitle')}
           </p>
         </div>
 
@@ -402,7 +406,7 @@ export default function LibraryContent() {
                   : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
-              Libyan Songs ({libyanSongs.length})
+              {t('libyanSongs')} ({libyanSongs.length})
             </Button>
             <Button
               onClick={() => setActiveTab("maloof")}
@@ -412,7 +416,7 @@ export default function LibraryContent() {
                   : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
-              Maloof Entries ({maloofEntries.length})
+              {t('maloofEntries')} ({maloofEntries.length})
             </Button>
           </div>
         </div>
@@ -425,18 +429,18 @@ export default function LibraryContent() {
               {activeTab === "songs" ? (
                 <input
                   type="text"
-                  placeholder="Search Libyan songs..."
+                  placeholder={t('searchLibyanSongs')}
                   value={songSearch}
                   onChange={e => setSongSearch(e.target.value)}
-                  className="w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring"
+                  className={`w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring ${language === 'ar' ? 'text-right' : 'text-left'}`}
                 />
               ) : (
                 <input
                   type="text"
-                  placeholder="Search Maloof entries..."
+                  placeholder={t('searchLibyanSongs')}
                   value={maloofSearch}
                   onChange={e => setMaloofSearch(e.target.value)}
-                  className="w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring"
+                  className={`w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring ${language === 'ar' ? 'text-right' : 'text-left'}`}
                 />
               )}
             </div>
@@ -446,7 +450,7 @@ export default function LibraryContent() {
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors w-full md:w-auto"
                 onClick={() => setShowFilters((prev) => !prev)}
               >
-                {showFilters ? "Hide Filters" : "Show Filters"}
+                {showFilters ? "إخفاء المرشحات" : t('showFilters')}
               </Button>
               <Button
                 variant="outline"
@@ -463,7 +467,7 @@ export default function LibraryContent() {
                   }
                 }}
               >
-                Clear Filter
+                {t('clearFilter')}
               </Button>
             </div>
           </div>
@@ -533,17 +537,17 @@ export default function LibraryContent() {
                 <table className="w-full">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Song Name
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {t('songName')}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Singer Name
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {t('singerName')}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Category
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {t('category')}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Play
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {t('play')}
                       </th>
                     </tr>
                   </thead>
@@ -554,15 +558,15 @@ export default function LibraryContent() {
                         className={`hover:bg-muted transition-colors ${index % 2 === 0 ? "bg-card" : "bg-background"} cursor-pointer`}
                         onClick={() => router.push(`/songs/${song.id}`)}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <span className="text-foreground font-medium hover:text-primary transition-colors cursor-pointer">
                             {song.songName}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <div className="text-foreground">{song.singer}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
                             {song.category}
                           </span>
