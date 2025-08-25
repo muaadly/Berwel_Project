@@ -388,10 +388,10 @@ export default function LibraryContent() {
         {/* Title */}
         <div className={`text-center mb-12 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {t('discoverTitle')}
+            {language === 'ar' ? t('discoverTitle') : 'Discover the Libyan Songs and Maloof Entries'}
           </h1>
           <p className="text-muted-foreground text-lg">
-            {t('discoverSubtitle')}
+            {language === 'ar' ? t('discoverSubtitle') : 'Explore our rich collection of traditional and contemporary Libyan music'}
           </p>
         </div>
 
@@ -406,7 +406,7 @@ export default function LibraryContent() {
                   : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
-              {t('libyanSongs')} ({libyanSongs.length})
+              {language === 'ar' ? t('libyanSongs') : 'Libyan Songs'} ({libyanSongs.length})
             </Button>
             <Button
               onClick={() => setActiveTab("maloof")}
@@ -416,7 +416,7 @@ export default function LibraryContent() {
                   : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
-              {t('maloofEntries')} ({maloofEntries.length})
+              {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'} ({maloofEntries.length})
             </Button>
           </div>
         </div>
@@ -429,7 +429,7 @@ export default function LibraryContent() {
               {activeTab === "songs" ? (
                 <input
                   type="text"
-                  placeholder={t('searchLibyanSongs')}
+                  placeholder={language === 'ar' ? t('searchLibyanSongs') : "Search Libyan songs..."}
                   value={songSearch}
                   onChange={e => setSongSearch(e.target.value)}
                   className={`w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring ${language === 'ar' ? 'text-right' : 'text-left'}`}
@@ -437,7 +437,7 @@ export default function LibraryContent() {
               ) : (
                 <input
                   type="text"
-                  placeholder={t('searchLibyanSongs')}
+                  placeholder={language === 'ar' ? t('searchLibyanSongs') : "Search Maloof entries..."}
                   value={maloofSearch}
                   onChange={e => setMaloofSearch(e.target.value)}
                   className={`w-full px-4 py-2 rounded-md bg-muted text-foreground placeholder-muted-foreground border border-input focus:outline-none focus:ring-2 focus:ring-ring ${language === 'ar' ? 'text-right' : 'text-left'}`}
@@ -450,7 +450,7 @@ export default function LibraryContent() {
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors w-full md:w-auto"
                 onClick={() => setShowFilters((prev) => !prev)}
               >
-                {showFilters ? "إخفاء المرشحات" : t('showFilters')}
+                {showFilters ? (language === 'ar' ? "إخفاء المرشحات" : "Hide Filters") : (language === 'ar' ? t('showFilters') : "Show Filters")}
               </Button>
               <Button
                 variant="outline"
@@ -467,7 +467,7 @@ export default function LibraryContent() {
                   }
                 }}
               >
-                {t('clearFilter')}
+                {language === 'ar' ? t('clearFilter') : "Clear Filter"}
               </Button>
             </div>
           </div>
@@ -538,16 +538,16 @@ export default function LibraryContent() {
                   <thead className="bg-muted">
                     <tr>
                       <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {t('songName')}
+                        {language === 'ar' ? t('songName') : 'Song Name'}
                       </th>
                       <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {t('singerName')}
+                        {language === 'ar' ? t('singerName') : 'Singer Name'}
                       </th>
                       <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {t('category')}
+                        {language === 'ar' ? t('category') : 'Category'}
                       </th>
                       <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                        {t('play')}
+                        {language === 'ar' ? t('play') : 'Play'}
                       </th>
                     </tr>
                   </thead>
