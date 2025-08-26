@@ -86,6 +86,8 @@ export interface Translations {
   songInformation: string
   addLyrics: string
   lyricsStatus: string
+  otherSongs: string
+  otherSingers: string
   
   // Maloof details
   maloofEntry: string
@@ -292,6 +294,8 @@ export const translations: Record<Language, Translations> = {
     songInformation: 'Song Information',
     addLyrics: 'Add Lyrics',
     lyricsStatus: 'Lyrics Status',
+    otherSongs: 'Other Songs',
+    otherSingers: 'Other Singers',
     
     // Maloof details
     maloofEntry: 'Maloof Entry',
@@ -497,6 +501,8 @@ export const translations: Record<Language, Translations> = {
     songInformation: 'معلومات الأغنية',
     addLyrics: 'إضافة كلمات',
     lyricsStatus: 'حالة الكلمات',
+    otherSongs: 'أغاني أخرى',
+    otherSingers: 'مطربون آخرون',
     
     // Maloof details
     maloofEntry: 'مدخل الملوف',

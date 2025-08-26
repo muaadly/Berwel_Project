@@ -473,14 +473,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Comments Section */}
         <div className="mt-8">
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">Comments</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">
+              {language === 'ar' ? t('comments') : 'Comments'}
+            </h2>
             
             {/* Comment Input */}
             <div className="mb-4">
               <Textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="Add a comment..."
+                placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
                 className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
               />
@@ -488,14 +490,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 onClick={handleCommentSubmit}
                 className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                Post Comment
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
               </Button>
             </div>
 
             {/* Comments List */}
             <div className="space-y-4">
               {comments.length === 0 ? (
-                <p className="text-muted-foreground">No comments yet. Be the first to comment!</p>
+                <p className="text-muted-foreground">
+                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet. Be the first to comment!'}
+                </p>
               ) : (
                 comments.map((comment, index) => (
                   <div key={index} className="bg-muted rounded-lg p-4">
@@ -593,7 +597,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Section 1: Other Songs */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-foreground">Other Songs</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {language === 'ar' ? t('otherSongs') : 'Other Songs'}
+            </h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
@@ -640,7 +646,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Section 2: Other Singers */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-foreground">Other Singers</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              {language === 'ar' ? t('otherSingers') : 'Other Singers'}
+            </h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
