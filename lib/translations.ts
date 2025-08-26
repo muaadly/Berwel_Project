@@ -103,6 +103,14 @@ export interface Translations {
   noCommentsYet: string
   beFirstToComment: string
   noNoteAvailable: string
+  edit: string
+  delete: string
+  save: string
+  cancel: string
+  otherEntries: string
+  maloofEntries: string
+  noOtherEntriesFound: string
+  download: string
   
   // Analytics
   analyticsTitle: string
@@ -298,6 +306,14 @@ export const translations: Record<Language, Translations> = {
     noCommentsYet: 'No comments yet.',
     beFirstToComment: 'Be the first to comment!',
     noNoteAvailable: 'No note available for this entry.',
+    edit: 'Edit',
+    delete: 'Delete',
+    save: 'Save',
+    cancel: 'Cancel',
+    otherEntries: 'Other Entries',
+    maloofEntries: 'Maloof Entries',
+    noOtherEntriesFound: 'No other entries found.',
+    download: 'Download',
     
     // Analytics
     analyticsTitle: 'Analytics',
@@ -492,6 +508,14 @@ export const translations: Record<Language, Translations> = {
     noCommentsYet: 'لا توجد تعليقات بعد.',
     beFirstToComment: 'كن أول من يعلق!',
     noNoteAvailable: 'لا توجد ملاحظة متاحة لهذا المدخل.',
+    edit: 'تعديل',
+    delete: 'حذف',
+    save: 'حفظ',
+    cancel: 'إلغاء',
+    otherEntries: 'مداخل أخرى',
+    maloofEntries: 'مداخل الملوف',
+    noOtherEntriesFound: 'لم يتم العثور على مداخل أخرى.',
+    download: 'تحميل',
     
     // Analytics
     analyticsTitle: 'التحليلات',

@@ -560,7 +560,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                                 size="sm"
                                 className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
                               >
-                                Save
+                                {language === 'ar' ? t('save') : 'Save'}
                               </Button>
                               <Button
                                 onClick={handleCancelEdit}
@@ -568,7 +568,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                                 variant="outline"
                                 className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
                               >
-                                Cancel
+                                {language === 'ar' ? t('cancel') : 'Cancel'}
                               </Button>
                             </>
                           ) : (
@@ -578,14 +578,14 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                                 size="sm"
                                 className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
                               >
-                                Edit
+                                {language === 'ar' ? t('edit') : 'Edit'}
                               </Button>
                               <Button
                                 onClick={() => handleDeleteComment(index)}
                                 size="sm"
                                 className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
                               >
-                                Delete
+                                {language === 'ar' ? t('delete') : 'Delete'}
                               </Button>
                             </>
                           )}
@@ -614,8 +614,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Other Entries Section */}
         <div className="mt-12">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-foreground">Other Entries</h2>
+          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+            <h2 className="text-2xl font-bold text-foreground">
+              {language === 'ar' ? t('otherEntries') : 'Other Entries'}
+            </h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
@@ -638,7 +640,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
           <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
               {otherEntries.length === 0 ? (
-                <div className="text-muted-foreground">No other entries found.</div>
+                <div className="text-muted-foreground">
+                  {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}
+                </div>
               ) : (
                 otherEntries.map(e => (
                   <Link key={e.id} href={`/maloof/${e.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
@@ -664,8 +668,10 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Maloof Entries Section */}
         <div className="mt-12">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-foreground">Maloof Entries</h2>
+          <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+            <h2 className="text-3xl font-bold text-foreground">
+              {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'}
+            </h2>
             <div className="flex space-x-2">
               <Button
                 variant="outline"
