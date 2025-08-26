@@ -58,6 +58,20 @@ export interface Translations {
   newest: string
   oldest: string
   alphabetical: string
+  searchLibyanSongs: string
+  showFilters: string
+  clearFilter: string
+  play: string
+  category: string
+  singerName: string
+  songName: string
+  entryNumber: string
+  entryRhythm: string
+  entryType: string
+  entryName: string
+  showingEntries: string
+  previous: string
+  next: string
   
   // Song details
   songBy: string
@@ -222,13 +236,20 @@ export const translations: Record<Language, Translations> = {
     newest: 'Newest',
     oldest: 'Oldest',
     alphabetical: 'Alphabetical',
-    searchLibyanSongs: 'ابحث في الأغاني الليبية...',
-    showFilters: 'إظهار المرشحات',
-    clearFilter: 'مسح المرشح',
-    play: 'تشغيل',
-    category: 'الفئة',
-    singerName: 'اسم المطرب',
-    songName: 'اسم الأغنية',
+    searchLibyanSongs: 'Search Libyan songs...',
+    showFilters: 'Show Filters',
+    clearFilter: 'Clear Filter',
+    play: 'Play',
+    category: 'Category',
+    singerName: 'Singer Name',
+    songName: 'Song Name',
+    entryNumber: 'Entry Number',
+    entryRhythm: 'Entry Rhythm',
+    entryType: 'Entry Type',
+    entryName: 'Entry Name',
+    showingEntries: 'Showing {from} to {to} of {total} Entries',
+    previous: 'Previous',
+    next: 'Next',
     
     // Song details
     songBy: 'by',
@@ -392,6 +413,20 @@ export const translations: Record<Language, Translations> = {
     newest: 'الأحدث',
     oldest: 'الأقدم',
     alphabetical: 'أبجدي',
+    searchLibyanSongs: 'ابحث في الأغاني الليبية...',
+    showFilters: 'إظهار المرشحات',
+    clearFilter: 'مسح المرشح',
+    play: 'تشغيل',
+    category: 'الفئة',
+    singerName: 'اسم المطرب',
+    songName: 'اسم الأغنية',
+    entryNumber: 'رقم المدخل',
+    entryRhythm: 'إيقاع المدخل',
+    entryType: 'نوع المدخل',
+    entryName: 'اسم المدخل',
+    showingEntries: 'عرض {from} إلى {to} من {total} مدخل',
+    previous: 'السابق',
+    next: 'التالي',
     
     // Song details
     songBy: 'لـ',

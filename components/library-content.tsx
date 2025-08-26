@@ -181,7 +181,10 @@ export default function LibraryContent() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between px-4 md:px-6 py-4 bg-muted border-t border-border">
         <div className="hidden md:flex items-center text-sm text-foreground">
           <span>
-            Showing {startItem} to {endItem} of {totalItems} {itemType}
+            {language === 'ar' 
+              ? t('showingEntries').replace('{from}', startItem.toString()).replace('{to}', endItem.toString()).replace('{total}', totalItems.toString())
+              : `Showing ${startItem} to ${endItem} of ${totalItems} ${itemType}`
+            }
           </span>
         </div>
 
@@ -194,7 +197,7 @@ export default function LibraryContent() {
             className="text-foreground hover:text-primary-foreground hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="h-4 w-4 md:mr-1" />
-            <span className="hidden md:inline">Previous</span>
+            <span className="hidden md:inline">{language === 'ar' ? t('previous') : 'Previous'}</span>
           </Button>
 
           <div className="flex items-center space-x-1">
@@ -288,7 +291,7 @@ export default function LibraryContent() {
             size="sm"
             className="text-foreground hover:text-primary-foreground hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span className="hidden md:inline">Next</span>
+            <span className="hidden md:inline">{language === 'ar' ? t('next') : 'Next'}</span>
             <ChevronRight className="h-4 w-4 md:ml-1" />
           </Button>
         </div>
@@ -658,17 +661,17 @@ export default function LibraryContent() {
                 <table className="w-full">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Entry Name
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {language === 'ar' ? t('entryName') : 'Entry Name'}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Entry Type
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {language === 'ar' ? t('entryType') : 'Entry Type'}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Entry Rhythm
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {language === 'ar' ? t('entryRhythm') : 'Entry Rhythm'}
                       </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                        Entry Number
+                      <th className={`px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                        {language === 'ar' ? t('entryNumber') : 'Entry Number'}
                       </th>
                     </tr>
                   </thead>
@@ -679,20 +682,20 @@ export default function LibraryContent() {
                         className={`hover:bg-muted transition-colors cursor-pointer ${index % 2 === 0 ? "bg-card" : "bg-background"}`}
                         onClick={() => router.push(`/maloof/${entry.id}`)}
                       >
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <span className="text-foreground font-medium hover:text-primary transition-colors cursor-pointer">
                             {entry.entryName}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
                             {entry.entryType}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <div className="text-foreground">{entry.entryRhythm}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className={`px-6 py-4 whitespace-nowrap ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                           <div className="text-foreground">{entry.entryNumber}</div>
                         </td>
                       </tr>
