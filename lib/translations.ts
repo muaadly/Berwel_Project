@@ -105,6 +105,15 @@ export interface Translations {
   popularSongs: string
   popularEntries: string
   recentActivity: string
+  uniqueSingers: string
+  fullyWrittenSongs: string
+  maloofEntries: string
+  songsNotYetWritten: string
+  songsWithOnlyBeginningWritten: string
+  viewAllSongsWithoutLyrics: string
+  viewAllSongsWithPartialLyrics: string
+  dataSource: string
+  exploreLibrary: string
   
   // About
   aboutTitle: string
@@ -283,6 +292,15 @@ export const translations: Record<Language, Translations> = {
     popularSongs: 'Popular Songs',
     popularEntries: 'Popular Entries',
     recentActivity: 'Recent Activity',
+    uniqueSingers: 'Unique Singers',
+    fullyWrittenSongs: 'Fully Written Songs',
+    maloofEntries: 'Maloof Entries',
+    songsNotYetWritten: 'Songs Not Yet Written',
+    songsWithOnlyBeginningWritten: 'Songs with Only Beginning Written',
+    viewAllSongsWithoutLyrics: 'View All Songs Without Lyrics',
+    viewAllSongsWithPartialLyrics: 'View All Songs with Partial Lyrics',
+    dataSource: 'Data is sourced from the Libyan Songs and Maloof Entries collections.',
+    exploreLibrary: 'Explore the library for more details and enjoy the music archive!',
     
     // About
     aboutTitle: 'About Berwel',
@@ -460,6 +478,15 @@ export const translations: Record<Language, Translations> = {
     popularSongs: 'الأغاني الشائعة',
     popularEntries: 'المداخل الشائعة',
     recentActivity: 'النشاط الأخير',
+    uniqueSingers: 'المطربون الفريدون',
+    fullyWrittenSongs: 'الأغاني المكتوبة بالكامل',
+    maloofEntries: 'مداخل الملوف',
+    songsNotYetWritten: 'الأغاني غير المكتوبة بعد',
+    songsWithOnlyBeginningWritten: 'الأغاني المكتوبة جزئياً',
+    viewAllSongsWithoutLyrics: 'عرض جميع الأغاني بدون كلمات',
+    viewAllSongsWithPartialLyrics: 'عرض جميع الأغاني ذات الكلمات الجزئية',
+    dataSource: 'البيانات مستمدة من مجموعات الأغاني الليبية ومداخل الملوف.',
+    exploreLibrary: 'استكشف المكتبة للمزيد من التفاصيل واستمتع بأرشيف الموسيقى!',
     
     // About
     aboutTitle: 'حول برول',
