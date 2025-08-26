@@ -8,6 +8,7 @@ import { Heart, Share2, BookOpen, Clock, LinkIcon, Facebook, MessageSquare, Inst
 import { LibyanSong, fetchLibyanSongById, fetchLibyanSongs } from "@/lib/data"
 import Link from "next/link"
 import { useAuth } from "./auth-provider"
+import { useTranslations } from "@/lib/translations"
 type CommentWithUser = {
   id: string
   userId: string
@@ -26,6 +27,7 @@ interface SongDetailProps {
 
 export default function SongDetail({ songId }: SongDetailProps) {
   const { user, isLoading } = useAuth()
+  const { t, language } = useTranslations()
   const [song, setSong] = useState<LibyanSong | null>(null)
   const [otherSongs, setOtherSongs] = useState<LibyanSong[]>([])
   const [otherSingers, setOtherSingers] = useState<LibyanSong[]>([])
@@ -106,7 +108,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
   const BackButton = () => (
     <Link href="/library" className="inline-flex items-center text-orange-500 hover:text-orange-400 mb-4">
       <ChevronLeft className="h-4 w-4 mr-1" />
-      Back to Library
+      {language === 'ar' ? t('backToLibrary') : 'Back to Library'}
     </Link>
   )
 
@@ -314,10 +316,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
             {song.soundcloudLink && (
               <div className="mb-6">
                 <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Listen on SoundCloud
-                  </a>
+                                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  {language === 'ar' ? t('listenOnSoundcloud') : 'Listen on SoundCloud'}
+                </a>
                 </Button>
               </div>
             )}
@@ -326,7 +328,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
             <div className="bg-card border border-border rounded-lg overflow-hidden">
               {/* Stretched Lyrics Tab */}
               <div className="w-full bg-card border border-border rounded-t-lg">
-                <h2 className="text-foreground font-bold text-center py-3">Lyrics</h2>
+                <h2 className="text-foreground font-bold text-center py-3">
+                  {language === 'ar' ? t('lyrics') : 'Lyrics'}
+                </h2>
               </div>
 
               <div className="p-6">
@@ -353,18 +357,18 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       }`}
                     >
                       <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-                      {isLiked ? 'Liked' : 'Like'}
+                      {isLiked ? (language === 'ar' ? t('liked') : 'Liked') : (language === 'ar' ? t('like') : 'Like')}
                     </Button>
                     {/* Share Button */}
                     <Button 
                       onClick={handleShare}
                       className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                     >
-                      <Share2 className="h-4 w-4" /> Share
+                      <Share2 className="h-4 w-4" /> {language === 'ar' ? t('share') : 'Share'}
                     </Button>
                     {/* Add Lyrics Button */}
                     <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
-                      <BookOpen className="h-4 w-4" /> Add Lyrics
+                      <BookOpen className="h-4 w-4" /> {language === 'ar' ? t('addLyrics') : 'Add Lyrics'}
                     </Button>
                   </div>
 
@@ -385,20 +389,20 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         }`}
                       >
                         <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-                        {isLiked ? 'Liked' : 'Like'}
+                        {isLiked ? (language === 'ar' ? t('liked') : 'Liked') : (language === 'ar' ? t('like') : 'Like')}
                       </Button>
                       {/* Share Button */}
                       <Button 
                         onClick={handleShare}
                         className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                       >
-                        <Share2 className="h-4 w-4" /> Share
+                        <Share2 className="h-4 w-4" /> {language === 'ar' ? t('share') : 'Share'}
                       </Button>
                     </div>
                     {/* Second Row: Add Lyrics Button (full width) */}
                     <div className="flex justify-center">
                       <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
-                        <BookOpen className="h-4 w-4" /> Add Lyrics
+                        <BookOpen className="h-4 w-4" /> {language === 'ar' ? t('addLyrics') : 'Add Lyrics'}
                       </Button>
                     </div>
                   </div>
@@ -411,40 +415,56 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Song Details (Full Width) */}
         <div className="mt-8">
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">Song Information</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">
+              {language === 'ar' ? t('songInformation') : 'Song Information'}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="border-r border-border pr-4">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Singer</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('singer') : 'Singer'}
+                </h3>
                 <p className="text-foreground">{song.singer}</p>
               </div>
               <div className="border-r border-border pr-4">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Category</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('category') : 'Category'}
+                </h3>
                 <p className="text-foreground">{song.category}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Year</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('year') : 'Year'}
+                </h3>
                 <p className="text-foreground">{song.year}</p>
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
               <div className="border-r border-border pr-4">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Writer</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('writer') : 'Writer'}
+                </h3>
                 <p className="text-foreground">{song.writer || 'Unknown'}</p>
               </div>
               <div className="border-r border-border pr-4">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Composer</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('composer') : 'Composer'}
+                </h3>
                 <p className="text-foreground">{song.composer || 'Unknown'}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Recording Status</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('recordingStatus') : 'Recording Status'}
+                </h3>
                 <p className="text-foreground">{song.recordingStatus}</p>
               </div>
             </div>
 
             {/* Lyrics Status */}
             <div className="mt-6">
-              <h3 className="text-sm font-semibold text-muted-foreground mb-1">Lyrics Status</h3>
+              <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                {language === 'ar' ? t('lyricsStatus') : 'Lyrics Status'}
+              </h3>
               <p className="text-foreground">{song.lyricsStatus}</p>
             </div>
           </div>

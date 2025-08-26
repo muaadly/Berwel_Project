@@ -83,6 +83,9 @@ export interface Translations {
   writer: string
   recordingStatus: string
   listenOnSoundcloud: string
+  songInformation: string
+  addLyrics: string
+  lyricsStatus: string
   
   // Maloof details
   maloofEntry: string
@@ -286,6 +289,9 @@ export const translations: Record<Language, Translations> = {
     writer: 'Writer',
     recordingStatus: 'Recording Status',
     listenOnSoundcloud: 'Listen on SoundCloud',
+    songInformation: 'Song Information',
+    addLyrics: 'Add Lyrics',
+    lyricsStatus: 'Lyrics Status',
     
     // Maloof details
     maloofEntry: 'Maloof Entry',
@@ -488,6 +494,9 @@ export const translations: Record<Language, Translations> = {
     writer: 'الكاتب',
     recordingStatus: 'حالة التسجيل',
     listenOnSoundcloud: 'استمع على SoundCloud',
+    songInformation: 'معلومات الأغنية',
+    addLyrics: 'إضافة كلمات',
+    lyricsStatus: 'حالة الكلمات',
     
     // Maloof details
     maloofEntry: 'مدخل الملوف',
