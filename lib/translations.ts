@@ -125,6 +125,7 @@ export interface Translations {
   // Contact
   contactTitle: string
   contactDescription: string
+  contactIntro: string
   name: string
   email: string
   message: string
@@ -312,6 +313,7 @@ export const translations: Record<Language, Translations> = {
     // Contact
     contactTitle: 'Contact Us',
     contactDescription: 'Get in touch with us for any questions or feedback',
+    contactIntro: 'Have a question, suggestion, or want to get involved? Fill out the form below and we\'ll get back to you soon.',
     name: 'Name',
     email: 'Email',
     message: 'Message',
@@ -498,6 +500,7 @@ export const translations: Record<Language, Translations> = {
     // Contact
     contactTitle: 'اتصل بنا',
     contactDescription: 'تواصل معنا لأي أسئلة أو ملاحظات',
+    contactIntro: 'هل لديك سؤال أو اقتراح أو تريد المشاركة؟ املأ النموذج أدناه وسنرد عليك قريباً.',
     name: 'الاسم',
     email: 'البريد الإلكتروني',
     message: 'الرسالة',
