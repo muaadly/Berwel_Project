@@ -8,6 +8,8 @@ import { Heart, Share2, BookOpen, Clock, LinkIcon, Facebook, MessageSquare, Inst
 import { MaloofEntry, fetchMaloofEntryById, fetchMaloofEntries } from "@/lib/data"
 import Link from "next/link"
 import { useAuth } from "./auth-provider"
+import { useTranslations } from "@/lib/translations"
+import { useLanguage } from "@/components/language-provider"
 type CommentWithUser = {
   id: string
   userId: string
@@ -25,6 +27,8 @@ interface MaloofDetailProps {
 }
 
 export default function MaloofDetail({ entryId }: MaloofDetailProps) {
+  const { t } = useTranslations()
+  const { language } = useLanguage()
   const { user, isLoading } = useAuth()
   const [entry, setEntry] = useState<MaloofEntry | null>(null)
   const [otherEntries, setOtherEntries] = useState<MaloofEntry[]>([])
@@ -106,7 +110,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   const BackButton = () => (
     <Link href="/library" className="inline-flex items-center text-orange-500 hover:text-orange-400 mb-4">
       <ChevronLeft className="h-4 w-4 mr-1" />
-      Back to Library
+      {language === 'ar' ? t('backToLibrary') : 'Back to Library'}
     </Link>
   )
 
@@ -331,18 +335,18 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                   }`}
                 >
                   <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-                  {isLiked ? 'Liked' : 'Like'}
+                  {isLiked ? (language === 'ar' ? t('liked') : 'Liked') : (language === 'ar' ? t('like') : 'Like')}
                 </Button>
                 {/* Share Button */}
                 <Button 
                   onClick={handleShare}
                   className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                 >
-                  <Share2 className="h-4 w-4" /> Share
+                  <Share2 className="h-4 w-4" /> {language === 'ar' ? t('share') : 'Share'}
                 </Button>
                 {/* Add Notes Button */}
                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2">
-                  <BookOpen className="h-4 w-4" /> Add Notes
+                  <BookOpen className="h-4 w-4" /> {language === 'ar' ? t('addNotes') : 'Add Notes'}
                 </Button>
               </div>
 
@@ -363,20 +367,20 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                     }`}
                   >
                     <Heart className={`h-4 w-4 ${isLiked ? 'fill-current' : ''}`} />
-                    {isLiked ? 'Liked' : 'Like'}
+                    {isLiked ? (language === 'ar' ? t('liked') : 'Liked') : (language === 'ar' ? t('like') : 'Like')}
                   </Button>
                   {/* Share Button */}
                   <Button 
                     onClick={handleShare}
                     className="bg-primary hover:bg-primary/90 text-primary-foreground transition-colors flex items-center gap-2"
                   >
-                    <Share2 className="h-4 w-4" /> Share
+                    <Share2 className="h-4 w-4" /> {language === 'ar' ? t('share') : 'Share'}
                   </Button>
                 </div>
                 {/* Second Row: Add Notes Button (full width) */}
                 <div className="flex justify-center">
                   <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 rounded-lg transition-colors flex items-center gap-2 w-full max-w-xs">
-                    <BookOpen className="h-4 w-4" /> Add Notes
+                    <BookOpen className="h-4 w-4" /> {language === 'ar' ? t('addNotes') : 'Add Notes'}
                   </Button>
                 </div>
               </div>
@@ -387,14 +391,20 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Entry Details */}
         <div className="mt-8">
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">Entry Information</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">
+              {language === 'ar' ? t('entryInformation') : 'Entry Information'}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Entry Type</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('entryType') : 'Entry Type'}
+                </h3>
                 <p className="text-foreground">{entry.entryType}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-muted-foreground mb-1">Entry Rhythm</h3>
+                <h3 className="text-sm font-semibold text-muted-foreground mb-1">
+                  {language === 'ar' ? t('entryRhythm') : 'Entry Rhythm'}
+                </h3>
                 <p className="text-foreground">{entry.entryRhythm}</p>
               </div>
             </div>
@@ -414,7 +424,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                     : 'bg-card text-foreground hover:bg-muted'
                 }`}
               >
-                Lyrics
+                {language === 'ar' ? t('entryLyrics') : 'Lyrics'}
               </button>
               <button
                 onClick={() => setActiveTab('notes')}
@@ -424,7 +434,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                     : 'bg-card text-foreground hover:bg-muted'
                 }`}
               >
-                Note
+                {language === 'ar' ? t('notes') : 'Note'}
               </button>
             </div>
 
@@ -432,7 +442,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             <div className="p-6">
               {activeTab === 'lyrics' && entry.entryLyrics && (
                 <div>
-                  <h2 className="text-xl font-bold text-foreground mb-4">Entry Lyrics</h2>
+                  <h2 className="text-xl font-bold text-foreground mb-4">
+                    {language === 'ar' ? t('entryLyrics') : 'Entry Lyrics'}
+                  </h2>
                   <div className="bg-muted rounded-lg p-4">
                     <p className="text-foreground text-lg leading-relaxed whitespace-pre-line font-arabic">
                       {entry.entryLyrics}
@@ -443,7 +455,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">Note</h2>
+                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">
+                    {language === 'ar' ? t('notes') : 'Note'}
+                  </h2>
                   <div className="bg-muted rounded-lg p-4">
                     <img
                       src={getNoteImagePath(entry.noteImageName)}
@@ -460,9 +474,13 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
               {activeTab === 'notes' && !entry.noteImageName && (
                 <div>
-                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">Note</h2>
+                  <h2 className="text-xl font-bold text-foreground mb-4 !border-none !outline-none">
+                    {language === 'ar' ? t('notes') : 'Note'}
+                  </h2>
                   <div className="bg-muted rounded-lg p-4">
-                    <p className="text-muted-foreground text-center">No note available for this entry.</p>
+                    <p className="text-muted-foreground text-center">
+                      {language === 'ar' ? t('noNoteAvailable') : 'No note available for this entry.'}
+                    </p>
                   </div>
                 </div>
               )}
@@ -473,14 +491,16 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Comments Section */}
         <div className="mt-8">
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">Comments</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">
+              {language === 'ar' ? t('comments') : 'Comments'}
+            </h2>
             
             {/* Comment Input */}
             <div className="mb-4">
               <Textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="Add a comment..."
+                placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
                 className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
               />
@@ -488,14 +508,16 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 onClick={handleCommentSubmit}
                 className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                Post Comment
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
               </Button>
             </div>
 
             {/* Comments List */}
             <div className="space-y-4">
               {comments.length === 0 ? (
-                <p className="text-muted-foreground">No comments yet. Be the first to comment!</p>
+                <p className="text-muted-foreground">
+                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}
+                </p>
               ) : (
                 comments.map((comment, index) => (
                   <div key={index} className="bg-muted rounded-lg p-4">

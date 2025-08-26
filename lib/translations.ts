@@ -96,6 +96,13 @@ export interface Translations {
   comments: string
   addComment: string
   commentPlaceholder: string
+  backToLibrary: string
+  entryInformation: string
+  addNotes: string
+  postComment: string
+  noCommentsYet: string
+  beFirstToComment: string
+  noNoteAvailable: string
   
   // Analytics
   analyticsTitle: string
@@ -284,6 +291,13 @@ export const translations: Record<Language, Translations> = {
     comments: 'Comments',
     addComment: 'Add Comment',
     commentPlaceholder: 'Write your comment...',
+    backToLibrary: 'Back to Library',
+    entryInformation: 'Entry Information',
+    addNotes: 'Add Notes',
+    postComment: 'Post Comment',
+    noCommentsYet: 'No comments yet.',
+    beFirstToComment: 'Be the first to comment!',
+    noNoteAvailable: 'No note available for this entry.',
     
     // Analytics
     analyticsTitle: 'Analytics',
@@ -471,6 +485,13 @@ export const translations: Record<Language, Translations> = {
     comments: 'التعليقات',
     addComment: 'أضف تعليق',
     commentPlaceholder: 'اكتب تعليقك...',
+    backToLibrary: 'العودة إلى المكتبة',
+    entryInformation: 'معلومات المدخل',
+    addNotes: 'إضافة ملاحظات',
+    postComment: 'نشر التعليق',
+    noCommentsYet: 'لا توجد تعليقات بعد.',
+    beFirstToComment: 'كن أول من يعلق!',
+    noNoteAvailable: 'لا توجد ملاحظة متاحة لهذا المدخل.',
     
     // Analytics
     analyticsTitle: 'التحليلات',
