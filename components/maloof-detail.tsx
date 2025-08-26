@@ -614,7 +614,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Other Entries Section */}
         <div className="mt-12">
-          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold text-foreground">
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
@@ -668,7 +668,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
 
         {/* Maloof Entries Section */}
         <div className="mt-12">
-          <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+          <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold text-foreground">
               {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'}
             </h2>
