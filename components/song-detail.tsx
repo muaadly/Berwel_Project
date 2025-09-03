@@ -654,6 +654,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
               </>
             )}
           </div>
+          {/* Debug: Current language is {language} */}
           <div ref={otherSongsScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
               {otherSongs.length === 0 ? (
