@@ -324,10 +324,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
             {song.soundcloudLink && (
               <div className="mb-6">
                 <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  {language === 'ar' ? t('listenOnSoundcloud') : 'Listen on SoundCloud'}
-                </a>
+                  <a href={song.soundcloudLink} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {language === 'ar' ? t('listenOnSoundcloud') : 'Listen on SoundCloud'}
+                  </a>
                 </Button>
               </div>
             )}
