@@ -517,11 +517,11 @@ export default function SongDetail({ songId }: SongDetailProps) {
                           />
                         </div>
                         {/* User Info */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-col items-start">
                           <span className="text-foreground font-semibold text-sm">
                             {comment.user?.name || 'Anonymous User'}
                           </span>
-                          <span className="text-muted-foreground text-xs">
+                          <span className="text-muted-foreground text-xs mt-1">
                             {new Date(comment.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
