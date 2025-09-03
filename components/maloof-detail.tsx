@@ -521,8 +521,25 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               ) : (
                 comments.map((comment, index) => (
                   <div key={index} className="bg-muted rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-start justify-between mb-3">
+                      {/* Comment Text - Left Side */}
+                      <div className="flex-1 mr-4">
+                        {editingCommentIndex === index ? (
+                          <div className="space-y-2">
+                            <Textarea
+                              value={editingCommentText}
+                              onChange={(e) => setEditingCommentText(e.target.value)}
+                              className="bg-muted border-border text-foreground placeholder-muted-foreground"
+                              rows={2}
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
+                        )}
+                      </div>
+                      
+                      {/* User Info - Right Side */}
+                      <div className="flex items-center gap-3 flex-shrink-0">
                         {/* User Avatar */}
                         <div className="flex-shrink-0">
                           <img

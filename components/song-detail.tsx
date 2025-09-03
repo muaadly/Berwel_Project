@@ -603,7 +603,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Section 1: Other Songs */}
         <div className="mt-12">
-          <div className="flex items-center justify-between mb-4">
+          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
             <h2 className="text-2xl font-bold text-foreground">
               {language === 'ar' ? t('otherSongs') : 'Other Songs'}
             </h2>
@@ -654,7 +654,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Section 2: Other Singers */}
         <div className="mt-12">
-          <div className="flex items-center justify-between mb-4">
+          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
             <h2 className="text-2xl font-bold text-foreground">
               {language === 'ar' ? t('otherSingers') : 'Other Singers'}
             </h2>
