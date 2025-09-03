@@ -603,28 +603,56 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Section 1: Other Songs */}
         <div className="mt-12">
-          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-            <h2 className="text-2xl font-bold text-foreground">
-              {language === 'ar' ? t('otherSongs') : 'Other Songs'}
-            </h2>
-            <div className="flex space-x-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherSongsScrollRef, 'left')}
-              >
-                <ChevronLeft className="h-4 w-4 text-primary" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherSongsScrollRef, 'right')}
-              >
-                <ChevronRight className="h-4 w-4 text-primary" />
-              </Button>
-            </div>
+          <div className="flex items-center justify-between mb-4">
+            {language === 'ar' ? (
+              <>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSongsScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSongsScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </div>
+                <h2 className="text-2xl font-bold text-foreground">
+                  {t('otherSongs')}
+                </h2>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-foreground">
+                  Other Songs
+                </h2>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSongsScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSongsScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
           <div ref={otherSongsScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
@@ -654,28 +682,56 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
         {/* Section 2: Other Singers */}
         <div className="mt-12">
-          <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-            <h2 className="text-2xl font-bold text-foreground">
-              {language === 'ar' ? t('otherSingers') : 'Other Singers'}
-            </h2>
-            <div className="flex space-x-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherSingersScrollRef, 'left')}
-              >
-                <ChevronLeft className="h-4 w-4 text-primary" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherSingersScrollRef, 'right')}
-              >
-                <ChevronRight className="h-4 w-4 text-primary" />
-              </Button>
-            </div>
+          <div className="flex items-center justify-between mb-4">
+            {language === 'ar' ? (
+              <>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSingersScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSingersScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </div>
+                <h2 className="text-2xl font-bold text-foreground">
+                  {t('otherSingers')}
+                </h2>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-foreground">
+                  Other Singers
+                </h2>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSingersScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherSingersScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
           <div ref={otherSingersScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
