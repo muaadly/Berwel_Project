@@ -503,8 +503,25 @@ export default function SongDetail({ songId }: SongDetailProps) {
               ) : (
                 comments.map((comment, index) => (
                   <div key={index} className="bg-muted rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-start justify-between mb-3">
+                      {/* Comment Text - Left Side */}
+                      <div className="flex-1 mr-4">
+                        {editingCommentIndex === index ? (
+                          <div className="space-y-2">
+                            <Textarea
+                              value={editingCommentText}
+                              onChange={(e) => setEditingCommentText(e.target.value)}
+                              className="bg-muted border-border text-foreground placeholder-muted-foreground"
+                              rows={2}
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
+                        )}
+                      </div>
+                      
+                      {/* User Info - Right Side */}
+                      <div className="flex items-center gap-3 flex-shrink-0">
                         {/* User Avatar */}
                         <div className="flex-shrink-0">
                           <img
@@ -532,61 +549,51 @@ export default function SongDetail({ songId }: SongDetailProps) {
                           </span>
                         </div>
                       </div>
-                      {/* Edit/Delete Buttons */}
-                      {user && (comment.userId === user.id || comment.userId === user.email) && (
-                        <div className="flex gap-2">
-                          {editingCommentIndex === index ? (
-                            <>
-                              <Button
-                                onClick={handleSaveEdit}
-                                size="sm"
-                                className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
-                              >
-                                Save
-                              </Button>
-                              <Button
-                                onClick={handleCancelEdit}
-                                size="sm"
-                                variant="outline"
-                                className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
-                              >
-                                Cancel
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                onClick={() => handleEditComment(index, comment.text)}
-                                size="sm"
-                                className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
-                              >
-                                Edit
-                              </Button>
-                              <Button
-                                onClick={() => handleDeleteComment(index)}
-                                size="sm"
-                                className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
-                              >
-                                Delete
-                              </Button>
-                            </>
-                          )}
-                        </div>
-                      )}
                     </div>
-                    {/* Comment Text */}
-                    {editingCommentIndex === index ? (
-                      <div className="space-y-2">
-                        <Textarea
-                          value={editingCommentText}
-                          onChange={(e) => setEditingCommentText(e.target.value)}
-                          className="bg-muted border-border text-foreground placeholder-muted-foreground"
-                          rows={2}
-                        />
+                    
+                    {/* Edit/Delete Buttons - Below */}
+                    {user && (comment.userId === user.id || comment.userId === user.email) && (
+                      <div className="flex gap-2 mt-3">
+                        {editingCommentIndex === index ? (
+                          <>
+                            <Button
+                              onClick={handleSaveEdit}
+                              size="sm"
+                              className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
+                            >
+                              Save
+                            </Button>
+                            <Button
+                              onClick={() => handleCancelEdit}
+                              size="sm"
+                              variant="outline"
+                              className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
+                            >
+                              Cancel
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button
+                              onClick={() => handleEditComment(index, comment.text)}
+                              size="sm"
+                              className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
+                            >
+                              Edit
+                            </Button>
+                            <Button
+                              onClick={() => handleDeleteComment(index)}
+                              size="sm"
+                              className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
+                            >
+                              Delete
+                            </Button>
+                          </>
+                        )}
                       </div>
-                    ) : (
-                      <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
                     )}
+                  </div>
+
                   </div>
                 ))
               )}
