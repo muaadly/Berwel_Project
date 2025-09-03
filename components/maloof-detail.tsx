@@ -535,11 +535,11 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                           />
                         </div>
                         {/* User Info */}
-                        <div className="flex flex-col items-start">
-                          <span className="text-foreground font-semibold text-sm block">
+                        <div className="flex flex-col items-start" style={{ direction: 'ltr', textAlign: 'left' }}>
+                          <span className="text-foreground font-semibold text-sm block w-full">
                             {comment.user?.name || 'Anonymous User'}
                           </span>
-                          <span className="text-muted-foreground text-xs block mt-1">
+                          <span className="text-muted-foreground text-xs block w-full mt-1">
                             {new Date(comment.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
