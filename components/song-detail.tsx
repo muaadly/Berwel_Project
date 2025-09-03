@@ -265,12 +265,20 @@ export default function SongDetail({ songId }: SongDetailProps) {
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
     if (ref.current) {
-      const scrollAmount = 300
-      const currentScroll = ref.current.scrollLeft
-      const newScroll = direction === 'left' 
-        ? Math.max(0, currentScroll - scrollAmount)
-        : currentScroll + scrollAmount
-      ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+      const container = ref.current
+      const scrollAmount = container.clientWidth * 0.8 // Scroll 80% of container width
+      const currentScroll = container.scrollLeft
+      const maxScroll = container.scrollWidth - container.clientWidth
+      
+      let newScroll
+      if (direction === 'left') {
+        newScroll = Math.max(0, currentScroll - scrollAmount)
+      } else {
+        newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
+      }
+      
+      console.log(`Scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      container.scrollTo({ left: newScroll, behavior: 'smooth' })
     }
   }
 
@@ -611,7 +619,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     variant="outline"
                     size="icon"
                     className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherSongsScrollRef, 'left')}
+                    onClick={() => {
+                      console.log('Arabic Left button clicked, ref:', otherSongsScrollRef.current)
+                      scroll(otherSongsScrollRef, 'left')
+                    }}
                   >
                     <ChevronLeft className="h-4 w-4 text-primary" />
                   </Button>
@@ -619,7 +630,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     variant="outline"
                     size="icon"
                     className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherSongsScrollRef, 'right')}
+                    onClick={() => {
+                      console.log('Arabic Right button clicked, ref:', otherSongsScrollRef.current)
+                      scroll(otherSongsScrollRef, 'right')
+                    }}
                   >
                     <ChevronRight className="h-4 w-4 text-primary" />
                   </Button>
