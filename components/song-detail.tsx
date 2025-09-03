@@ -517,11 +517,11 @@ export default function SongDetail({ songId }: SongDetailProps) {
                           />
                         </div>
                         {/* User Info */}
-                        <div className="flex flex-col items-start" style={{ direction: 'ltr', textAlign: 'left' }}>
-                          <span className="text-foreground font-semibold text-sm block w-full">
+                        <div className="flex items-center gap-2">
+                          <span className="text-foreground font-semibold text-sm">
                             {comment.user?.name || 'Anonymous User'}
                           </span>
-                          <span className="text-muted-foreground text-xs block w-full mt-1">
+                          <span className="text-muted-foreground text-xs">
                             {new Date(comment.createdAt).toLocaleDateString('en-US', {
                               year: 'numeric',
                               month: 'short',
