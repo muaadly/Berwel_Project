@@ -625,16 +625,18 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 <div className="text-muted-foreground">No other songs found.</div>
               ) : (
                 otherSongs.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
-                    <div className="flex flex-col items-center justify-center">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
+                    <div className="flex items-center space-x-4">
                       <img
                         src={getSingerImagePath(s.imageName)}
                         alt={s.singer}
-                        className="w-24 h-24 object-cover rounded mb-4 bg-muted"
+                        className="w-20 h-20 object-cover rounded bg-muted flex-shrink-0"
                         onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
                       />
-                      <div className="text-foreground font-bold text-lg text-center mb-1 group-hover:text-primary transition-colors">{s.songName}</div>
-                      <div className="text-muted-foreground text-sm text-center">{s.singer}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-foreground font-bold text-lg mb-1 group-hover:text-primary transition-colors truncate">{s.songName}</div>
+                        <div className="text-muted-foreground text-sm truncate">{s.singer}</div>
+                      </div>
                     </div>
                   </Link>
                 ))
@@ -674,16 +676,18 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 <div className="text-muted-foreground">No other singers found.</div>
               ) : (
                 otherSingers.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[220px] max-w-[220px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
-                    <div className="flex flex-col items-center justify-center">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
+                    <div className="flex items-center space-x-4">
                       <img
                         src={getSingerImagePath(s.imageName)}
                         alt={s.singer}
-                        className="w-24 h-24 object-cover rounded mb-4 bg-muted"
+                        className="w-20 h-20 object-cover rounded bg-muted flex-shrink-0"
                         onError={ev => { (ev.target as HTMLImageElement).src = '/placeholder-user.jpg' }}
                       />
-                      <div className="text-foreground font-bold text-lg text-center mb-1 group-hover:text-primary transition-colors">{s.singer}</div>
-                      <div className="text-muted-foreground text-sm text-center">{s.category}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-foreground font-bold text-lg mb-1 group-hover:text-primary transition-colors truncate">{s.singer}</div>
+                        <div className="text-muted-foreground text-sm truncate">{s.category}</div>
+                      </div>
                     </div>
                   </Link>
                 ))
