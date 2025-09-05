@@ -237,7 +237,7 @@ export const translations: Record<Language, Translations> = {
     // Home page
     heroTitle: 'Berwel - A Website for Libyan Music',
     heroSubtitle: 'Preserving and celebrating Libya\'s rich musical heritage',
-    heroDescription: 'An interactive digital platform that connects people with their cultural roots through traditional Libyan music and Maloof entries.',
+    heroDescription: 'An interactive digital platform that connects people with their cultural roots through traditional Libyan music and Malouf entries.',
     exploreButton: 'Explore Library',
     learnMoreButton: 'Learn More',
     searchOurLibrary: 'Search Our Library',
