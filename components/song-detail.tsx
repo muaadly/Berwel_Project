@@ -601,8 +601,6 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       </div>
                     )}
                   </div>
-
-                  </div>
                 ))
               )}
             </div>
@@ -669,13 +667,21 @@ export default function SongDetail({ songId }: SongDetailProps) {
             )}
           </div>
           {/* Debug: Current language is {language} */}
-          <div ref={otherSongsScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
+          <div 
+            ref={otherSongsScrollRef} 
+            className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide" 
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap min-w-max">
               {otherSongs.length === 0 ? (
                 <div className="text-muted-foreground">No other songs found.</div>
               ) : (
                 otherSongs.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors flex-shrink-0">
                     <div className="flex items-center space-x-4">
                       <img
                         src={getSingerImagePath(s.imageName)}
@@ -748,13 +754,21 @@ export default function SongDetail({ songId }: SongDetailProps) {
               </>
             )}
           </div>
-          <div ref={otherSingersScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
+          <div 
+            ref={otherSingersScrollRef} 
+            className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide" 
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap min-w-max">
               {otherSingers.length === 0 ? (
                 <div className="text-muted-foreground">No other singers found.</div>
               ) : (
                 otherSingers.map(s => (
-                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors">
+                  <Link key={s.id} href={`/songs/${s.id}`} className="min-w-[280px] max-w-[280px] block group border border-border rounded-lg p-4 bg-card hover:border-primary transition-colors flex-shrink-0">
                     <div className="flex items-center space-x-4">
                       <img
                         src={getSingerImagePath(s.imageName)}
