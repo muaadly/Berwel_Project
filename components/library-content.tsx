@@ -391,10 +391,10 @@ export default function LibraryContent() {
         {/* Title */}
         <div className={`text-center mb-12 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {language === 'ar' ? t('discoverTitle') : 'Discover the Libyan Songs and Maloof Entries'}
+            {t('discoverTitle')}
           </h1>
           <p className="text-muted-foreground text-lg">
-            {language === 'ar' ? t('discoverSubtitle') : 'Explore our rich collection of traditional and contemporary Libyan music'}
+            {t('discoverSubtitle')}
           </p>
         </div>
 
