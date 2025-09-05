@@ -48,6 +48,8 @@ export interface Translations {
   sendMessage: string
   
   // Library
+  discoverTitle: string
+  discoverSubtitle: string
   libyanSongs: string
   maloofEntries: string
   singers: string
