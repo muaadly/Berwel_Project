@@ -254,8 +254,8 @@ export const translations: Record<Language, Translations> = {
     sendMessage: 'Send Message',
     
     // Library
-    discoverTitle: 'Discover the Libyan Songs and Maloof Entries',
-    discoverSubtitle: 'Explore our rich collection of traditional and contemporary Libyan music',
+    discoverTitle: 'Music Library',
+    discoverSubtitle: 'Explore our collection of traditional Libyan songs and Maloof passages',
     libyanSongs: 'Libyan Songs',
     maloofEntries: 'Maloof Entries',
     singers: 'Singers',
@@ -461,8 +461,8 @@ export const translations: Record<Language, Translations> = {
     sendMessage: 'إرسال الرسالة',
     
     // Library
-    discoverTitle: 'اكتشف الأغاني الليبية ومداخل الملوف',
-    discoverSubtitle: 'استكشف مجموعتنا الغنية من الموسيقى الليبية التقليدية والمعاصرة',
+    discoverTitle: 'مكتبة الموسيقى',
+    discoverSubtitle: 'استكشف مجموعتنا من الأغاني الليبية التقليدية ومقاطع الملوف',
     libyanSongs: 'الأغاني الليبية',
     maloofEntries: 'مداخل الملوف',
     singers: 'المطربون',
