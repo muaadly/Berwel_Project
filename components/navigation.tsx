@@ -256,9 +256,9 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
 
       {/* Mobile Drawer Menu */}
       <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <DrawerContent className="bg-card border border-border text-foreground">
+        <DrawerContent className={`bg-card border border-border text-foreground ${language === 'ar' ? 'rtl' : 'ltr'}`}>
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
-          <div className="flex flex-col gap-6 p-6">
+          <div className={`flex flex-col gap-6 p-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             <div className="flex justify-between items-center mb-4">
               <span className="text-2xl font-bold">{t('menu')}</span>
               <DrawerClose asChild>
@@ -313,7 +313,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                     }}
                     className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-md transition-colors"
                   >
-                    Sign Out
+                    {t('signOut')}
                   </Button>
                 </div>
               ) : (
