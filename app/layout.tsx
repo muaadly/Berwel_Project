@@ -47,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/Data/Berwel Data Org/Logoo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/Data/Berwel Data Org/Logoo.png" />

@@ -125,15 +125,16 @@
   font-family: "IBM Plex Sans Arabic", "Amiri", "Times New Roman", serif;
 }
 
-/* Mobile bottom navigation padding */
-@media (max-width: 767px) {
-  body {
-    padding-bottom: 4rem; /* 64px for h-16 */
-  }
+/* Prevent browser UI interference on mobile */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
-@screen md {
+/* Ensure proper mobile viewport */
+@supports (padding: max(0px)) {
   body {
-    padding-bottom: 0;
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
 }
