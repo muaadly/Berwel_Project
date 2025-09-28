@@ -4,6 +4,7 @@ import { AuthProvider } from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/components/language-provider'
 import { RTLProvider } from '@/components/rtl-provider'
+import MobileBottomNav from '@/components/mobile-bottom-nav'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.berwel.ly'),
@@ -65,6 +66,7 @@ export default function RootLayout({
             <RTLProvider>
               <AuthProvider>
                 {children}
+                <MobileBottomNav />
               </AuthProvider>
             </RTLProvider>
           </LanguageProvider>
