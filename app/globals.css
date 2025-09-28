@@ -159,6 +159,21 @@ body {
     overflow-x: hidden;
   }
   
+  /* Completely hide any bottom navigation or UI */
+  nav[style*="bottom"] {
+    display: none !important;
+  }
+  
+  /* Hide any element that might be creating bottom navigation */
+  *[style*="position: fixed"][style*="bottom: 0"] {
+    display: none !important;
+  }
+  
+  /* Hide any bottom navigation bars */
+  .bottom-nav, .mobile-nav, .bottom-navigation {
+    display: none !important;
+  }
+  
   /* Hide any system UI that might appear at bottom */
   body::after {
     content: '';
@@ -166,9 +181,9 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 0;
-    background: transparent;
+    height: 100px;
+    background: var(--background);
     pointer-events: none;
-    z-index: -1;
+    z-index: 9999;
   }
 }
