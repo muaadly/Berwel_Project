@@ -197,4 +197,13 @@ body {
   *:has-text("القائمة"), *:has-text("المكتبة") {
     display: none !important;
   }
+  
+  /* Ensure mobile drawer is always visible when open */
+  [data-vaul-drawer] {
+    z-index: 9999 !important;
+  }
+  
+  [data-vaul-overlay] {
+    z-index: 9998 !important;
+  }
 }

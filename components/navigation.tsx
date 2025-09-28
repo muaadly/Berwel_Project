@@ -256,7 +256,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
 
       {/* Mobile Drawer Menu */}
       <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <DrawerContent className={`bg-card border border-border text-foreground ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+        <DrawerContent className={`bg-card border border-border text-foreground ${language === 'ar' ? 'rtl' : 'ltr'}`} style={{ zIndex: 9999 }}>
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <div className={`flex flex-col gap-6 p-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             <div className="flex justify-between items-center mb-4">
