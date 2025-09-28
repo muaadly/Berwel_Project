@@ -186,4 +186,15 @@ body {
     pointer-events: none;
     z-index: 9999;
   }
+  
+  /* Force hide any bottom navigation completely */
+  * {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+  }
+  
+  /* Hide any element that contains Arabic navigation text */
+  *:has-text("القائمة"), *:has-text("المكتبة") {
+    display: none !important;
+  }
 }
