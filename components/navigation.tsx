@@ -260,7 +260,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
           <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
           <div className="flex flex-col gap-6 p-6">
             <div className="flex justify-between items-center mb-4">
-              <span className="text-2xl font-bold">Menu</span>
+              <span className="text-2xl font-bold">{t('menu')}</span>
               <DrawerClose asChild>
                 <Button variant="ghost" size="icon" aria-label="Close menu" className="text-foreground hover:text-primary hover:bg-muted/50">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -15,6 +15,7 @@ export interface Translations {
   // Common
   loading: string
   search: string
+  menu: string
   searchPlaceholder: string
   noResults: string
   viewMore: string
@@ -222,6 +223,7 @@ export const translations: Record<Language, Translations> = {
     // Common
     loading: 'Loading...',
     search: 'Search',
+    menu: 'Menu',
     searchPlaceholder: 'Search songs, entries, or singers...',
     noResults: 'No results found',
     viewMore: 'View More',
@@ -429,6 +431,7 @@ export const translations: Record<Language, Translations> = {
     // Common
     loading: 'جاري التحميل...',
     search: 'بحث',
+    menu: 'القائمة',
     searchPlaceholder: 'ابحث عن الأغاني أو المداخل أو المطربين...',
     noResults: 'لم يتم العثور على نتائج',
     viewMore: 'عرض المزيد',
