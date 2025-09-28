@@ -138,3 +138,37 @@ html, body {
     padding-right: max(0px, env(safe-area-inset-right));
   }
 }
+
+/* Prevent browser UI interference and bottom navigation */
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide any browser bottom navigation or UI */
+body {
+  -webkit-app-region: no-drag;
+  overscroll-behavior: none;
+}
+
+/* Prevent browser from creating bottom navigation */
+@media (max-width: 768px) {
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Hide any system UI that might appear at bottom */
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
