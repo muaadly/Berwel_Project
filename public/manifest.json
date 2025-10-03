@@ -3,7 +3,7 @@
   "short_name": "Berwel",
   "description": "A website for Libyan music",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "portrait",
@@ -20,8 +20,10 @@
       "type": "image/png"
     }
   ],
-  "display_override": ["window-controls-overlay"],
+  "display_override": ["window-controls-overlay", "minimal-ui"],
   "edge_side_panel": {
     "preferred_width": 400
-  }
+  },
+  "prefer_related_applications": false,
+  "related_applications": []
 }
