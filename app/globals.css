@@ -169,6 +169,7 @@ body {
     display: none !important;
   }
   
+  
   /* Hide any bottom navigation bars */
   .bottom-nav, .mobile-nav, .bottom-navigation {
     display: none !important;
@@ -193,14 +194,11 @@ body {
     -webkit-user-select: none !important;
   }
   
-  /* Hide any element that contains Arabic navigation text */
-  *:has-text("القائمة"), *:has-text("المكتبة") {
-    display: none !important;
-  }
   
   /* Ensure mobile drawer is always visible when open */
   [data-vaul-drawer] {
     z-index: 9999 !important;
+    display: flex !important;
   }
   
   [data-vaul-overlay] {
