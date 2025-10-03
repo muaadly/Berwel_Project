@@ -160,7 +160,6 @@ body {
   body {
     position: relative;
     overflow-x: hidden;
-    padding-bottom: 80px; /* Add padding for mobile navigation */
   }
   
   /* Completely hide any bottom navigation or UI */
