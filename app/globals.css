@@ -220,16 +220,6 @@ body {
     z-index: 999999;
   }
   
-  /* Hide any element that contains the exact Arabic navigation text */
-  *:contains("القائمة"),
-  *:contains("الرئيسية"),
-  *:contains("المكتبة"),
-  *:contains("بيانات"),
-  *:contains("عن المشروع"),
-  *:contains("تواصل معنا"),
-  *:contains("سجل الآن") {
-    display: none !important;
-  }
   
   /* Additional overlay to hide bottom navigation */
   body::before {
@@ -244,11 +234,6 @@ body {
     z-index: 999998;
   }
   
-  /* Hide any browser-generated navigation completely */
-  *[style*="position: absolute"][style*="bottom"],
-  *[style*="position: relative"][style*="bottom"] {
-    display: none !important;
-  }
   
   /* Nuclear option: Hide everything at the bottom */
   *[style*="position: fixed"][style*="bottom"] {
