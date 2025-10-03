@@ -184,7 +184,21 @@ body {
   .navigation,
   .nav-menu,
   .mobile-menu,
-  .bottom-menu {
+  .bottom-menu,
+  /* Hide any elements containing Arabic navigation text */
+  *:has-text("القائمة"),
+  *:has-text("الرئيسية"),
+  *:has-text("المكتبة"),
+  *:has-text("بيانات"),
+  *:has-text("عن المشروع"),
+  *:has-text("تواصل معنا"),
+  *:has-text("سجل الآن"),
+  /* Hide any horizontal navigation bars */
+  [style*="flex-direction: row"],
+  [style*="display: flex"][style*="bottom"],
+  /* Hide any PWA navigation */
+  [data-pwa="navigation"],
+  [data-pwa="menu"] {
     display: none !important;
   }
   
@@ -213,10 +227,22 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 150px;
+    height: 200px;
     background: var(--background);
     pointer-events: none;
     z-index: 99998;
+  }
+  
+  /* Nuclear option: Hide everything at the bottom */
+  *[style*="position: fixed"][style*="bottom"] {
+    display: none !important;
+  }
+  
+  /* Hide any element that might be a navigation bar */
+  div[style*="bottom: 0"],
+  nav[style*="bottom: 0"],
+  section[style*="bottom: 0"] {
+    display: none !important;
   }
   
   /* Force hide any bottom navigation completely */
