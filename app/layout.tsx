@@ -4,6 +4,7 @@ import { AuthProvider } from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LanguageProvider } from '@/components/language-provider'
 import { RTLProvider } from '@/components/rtl-provider'
+import MobileNavigation from '@/components/mobile-navigation'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.berwel.ly'),
@@ -68,50 +69,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            // AGGRESSIVE solution: Find and hide horizontal navigation
-            function hideBottomNavigation() {
-              // Only run on mobile
-              if (window.innerWidth > 768) return;
-              
-              // Find ALL elements
-              const elements = document.querySelectorAll('*');
-              elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                const text = el.textContent || '';
-                
-                // Check if element contains Arabic navigation text
-                if (text.includes('القائمة') || text.includes('الرئيسية') || text.includes('المكتبة') || text.includes('بيانات')) {
-                  // Check if it's positioned at the bottom
-                  if (rect.bottom > window.innerHeight - 150 || 
-                      el.style.position === 'fixed' || 
-                      el.style.position === 'absolute' ||
-                      rect.top > window.innerHeight - 100) {
-                    el.style.display = 'none';
-                    el.style.visibility = 'hidden';
-                    el.style.opacity = '0';
-                    el.style.height = '0';
-                    el.style.overflow = 'hidden';
-                  }
-                }
-                
-                // Also check for horizontal flex layouts at bottom
-                const styles = window.getComputedStyle(el);
-                if (styles.display === 'flex' && 
-                    (styles.flexDirection === 'row' || styles.flexDirection === 'row-reverse') &&
-                    rect.bottom > window.innerHeight - 100) {
-                  el.style.display = 'none';
-                }
-              });
-            }
-            
-            // Run when page loads
-            window.addEventListener('load', hideBottomNavigation);
-            // Run after a short delay to catch dynamic elements
-            setTimeout(hideBottomNavigation, 2000);
-          `
-        }} />
       </head>
       <body>
         <ThemeProvider
@@ -124,6 +81,7 @@ export default function RootLayout({
             <RTLProvider>
               <AuthProvider>
                 {children}
+                <MobileNavigation />
               </AuthProvider>
             </RTLProvider>
           </LanguageProvider>

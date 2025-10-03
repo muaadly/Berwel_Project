@@ -160,6 +160,7 @@ body {
   body {
     position: relative;
     overflow-x: hidden;
+    padding-bottom: 80px; /* Add padding for mobile navigation */
   }
   
   /* Completely hide any bottom navigation or UI */
@@ -178,27 +179,13 @@ body {
     display: none !important;
   }
   
-  /* Hide any browser-generated navigation elements */
-  nav[role="navigation"], 
-  [role="navigation"],
-  .navigation,
-  .nav-menu,
-  .mobile-menu,
-  .bottom-menu,
-  /* Hide any elements containing Arabic navigation text */
-  *:has-text("القائمة"),
-  *:has-text("الرئيسية"),
-  *:has-text("المكتبة"),
-  *:has-text("بيانات"),
-  *:has-text("عن المشروع"),
-  *:has-text("تواصل معنا"),
-  *:has-text("سجل الآن"),
-  /* Hide any horizontal navigation bars */
-  [style*="flex-direction: row"],
-  [style*="display: flex"][style*="bottom"],
-  /* Hide any PWA navigation */
-  [data-pwa="navigation"],
-  [data-pwa="menu"] {
+  /* Hide any browser-generated navigation elements except our mobile nav */
+  nav[role="navigation"]:not(.mobile-nav),
+  [role="navigation"]:not(.mobile-nav),
+  .navigation:not(.mobile-nav),
+  .nav-menu:not(.mobile-nav),
+  .mobile-menu:not(.mobile-nav),
+  .bottom-menu:not(.mobile-nav) {
     display: none !important;
   }
   
