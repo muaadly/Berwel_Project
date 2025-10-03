@@ -1,0 +1,27 @@
+{
+  "name": "Berwel - Libyan Music Library",
+  "short_name": "Berwel",
+  "description": "A website for Libyan music",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/Data/Berwel Data Org/Logoo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Data/Berwel Data Org/Logoo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display_override": ["window-controls-overlay"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}
