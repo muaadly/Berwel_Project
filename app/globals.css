@@ -220,6 +220,17 @@ body {
     z-index: 999999;
   }
   
+  /* Hide any element that contains the exact Arabic navigation text */
+  *:contains("القائمة"),
+  *:contains("الرئيسية"),
+  *:contains("المكتبة"),
+  *:contains("بيانات"),
+  *:contains("عن المشروع"),
+  *:contains("تواصل معنا"),
+  *:contains("سجل الآن") {
+    display: none !important;
+  }
+  
   /* Additional overlay to hide bottom navigation */
   body::before {
     content: '';

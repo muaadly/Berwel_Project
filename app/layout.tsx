@@ -61,6 +61,33 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Hide any horizontal navigation with Arabic text
+            function hideArabicNavigation() {
+              const arabicNavTexts = ['القائمة', 'الرئيسية', 'المكتبة', 'بيانات', 'عن المشروع', 'تواصل معنا', 'سجل الآن'];
+              arabicNavTexts.forEach(text => {
+                const elements = document.querySelectorAll('*');
+                elements.forEach(el => {
+                  if (el.textContent && el.textContent.includes(text) && el.style.position !== 'static') {
+                    if (el.style.position === 'fixed' || el.style.position === 'absolute' || 
+                        el.style.bottom === '0px' || el.style.bottom === '0' ||
+                        el.getBoundingClientRect().bottom > window.innerHeight - 100) {
+                      el.style.display = 'none';
+                      el.style.visibility = 'hidden';
+                    }
+                  }
+                });
+              });
+            }
+            
+            // Run immediately and on DOM changes
+            hideArabicNavigation();
+            document.addEventListener('DOMContentLoaded', hideArabicNavigation);
+            window.addEventListener('load', hideArabicNavigation);
+            setInterval(hideArabicNavigation, 1000);
+          `
+        }} />
       </head>
       <body>
         <ThemeProvider
