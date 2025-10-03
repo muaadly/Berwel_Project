@@ -70,22 +70,38 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Simple solution: Hide only elements at the very bottom of the screen
+            // AGGRESSIVE solution: Find and hide horizontal navigation
             function hideBottomNavigation() {
               // Only run on mobile
               if (window.innerWidth > 768) return;
               
-              // Find elements at the bottom of the screen
+              // Find ALL elements
               const elements = document.querySelectorAll('*');
               elements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                // Only hide elements that are at the very bottom (last 100px)
-                if (rect.bottom > window.innerHeight - 100 && rect.top < window.innerHeight) {
-                  // Check if it contains Arabic navigation text
-                  const text = el.textContent || '';
-                  if (text.includes('القائمة') || text.includes('الرئيسية') || text.includes('المكتبة') || text.includes('بيانات')) {
+                const text = el.textContent || '';
+                
+                // Check if element contains Arabic navigation text
+                if (text.includes('القائمة') || text.includes('الرئيسية') || text.includes('المكتبة') || text.includes('بيانات')) {
+                  // Check if it's positioned at the bottom
+                  if (rect.bottom > window.innerHeight - 150 || 
+                      el.style.position === 'fixed' || 
+                      el.style.position === 'absolute' ||
+                      rect.top > window.innerHeight - 100) {
                     el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                    el.style.opacity = '0';
+                    el.style.height = '0';
+                    el.style.overflow = 'hidden';
                   }
+                }
+                
+                // Also check for horizontal flex layouts at bottom
+                const styles = window.getComputedStyle(el);
+                if (styles.display === 'flex' && 
+                    (styles.flexDirection === 'row' || styles.flexDirection === 'row-reverse') &&
+                    rect.bottom > window.innerHeight - 100) {
+                  el.style.display = 'none';
                 }
               });
             }

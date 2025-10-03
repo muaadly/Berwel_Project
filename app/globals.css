@@ -262,6 +262,26 @@ body {
     display: none !important;
   }
   
+  /* FINAL SOLUTION: Hide any horizontal navigation bar */
+  div[style*="display: flex"][style*="flex-direction: row"],
+  nav[style*="display: flex"][style*="flex-direction: row"],
+  section[style*="display: flex"][style*="flex-direction: row"],
+  div[style*="display: flex"][style*="flex-direction: row-reverse"],
+  nav[style*="display: flex"][style*="flex-direction: row-reverse"],
+  section[style*="display: flex"][style*="flex-direction: row-reverse"] {
+    display: none !important;
+  }
+  
+  /* Hide any element with horizontal flex layout at bottom */
+  *[style*="display: flex"]:not([data-vaul-drawer]):not([data-vaul-overlay]) {
+    position: relative;
+  }
+  
+  *[style*="display: flex"][style*="position: fixed"],
+  *[style*="display: flex"][style*="position: absolute"] {
+    display: none !important;
+  }
+  
   /* Force hide any bottom navigation completely */
   * {
     -webkit-touch-callout: none !important;
