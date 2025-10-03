@@ -214,7 +214,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 150px;
+    height: 80px;
     background: var(--background);
     pointer-events: none;
     z-index: 999999;
@@ -228,7 +228,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 250px;
+    height: 100px;
     background: var(--background);
     pointer-events: none;
     z-index: 999998;
@@ -244,6 +244,21 @@ body {
   div[style*="bottom: 0"],
   nav[style*="bottom: 0"],
   section[style*="bottom: 0"] {
+    display: none !important;
+  }
+  
+  /* Hide any horizontal navigation bar at the bottom */
+  div[style*="position: fixed"][style*="bottom: 0px"],
+  nav[style*="position: fixed"][style*="bottom: 0px"],
+  section[style*="position: fixed"][style*="bottom: 0px"],
+  div[style*="position: fixed"][style*="bottom: 0"],
+  nav[style*="position: fixed"][style*="bottom: 0"],
+  section[style*="position: fixed"][style*="bottom: 0"] {
+    display: none !important;
+  }
+  
+  /* Hide any element that might contain Arabic navigation text at the very bottom */
+  *[style*="position: fixed"]:not([data-vaul-drawer]):not([data-vaul-overlay]) {
     display: none !important;
   }
   
