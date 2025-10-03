@@ -144,6 +144,9 @@ html {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
+  /* Prevent browser from generating navigation based on content */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 /* Hide any browser bottom navigation or UI */
@@ -175,6 +178,21 @@ body {
     display: none !important;
   }
   
+  /* Hide any browser-generated navigation elements */
+  nav[role="navigation"], 
+  [role="navigation"],
+  .navigation,
+  .nav-menu,
+  .mobile-menu,
+  .bottom-menu {
+    display: none !important;
+  }
+  
+  /* Hide any elements that might contain Arabic navigation text at bottom */
+  *[style*="position: fixed"][style*="bottom"]:not([data-vaul-drawer]):not([data-vaul-overlay]) {
+    display: none !important;
+  }
+  
   /* Hide any system UI that might appear at bottom */
   body::after {
     content: '';
@@ -182,10 +200,23 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 120px;
     background: var(--background);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999;
+  }
+  
+  /* Additional overlay to hide bottom navigation */
+  body::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: var(--background);
+    pointer-events: none;
+    z-index: 99998;
   }
   
   /* Force hide any bottom navigation completely */
