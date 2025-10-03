@@ -68,6 +68,34 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Simple solution: Hide only elements at the very bottom of the screen
+            function hideBottomNavigation() {
+              // Only run on mobile
+              if (window.innerWidth > 768) return;
+              
+              // Find elements at the bottom of the screen
+              const elements = document.querySelectorAll('*');
+              elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                // Only hide elements that are at the very bottom (last 100px)
+                if (rect.bottom > window.innerHeight - 100 && rect.top < window.innerHeight) {
+                  // Check if it contains Arabic navigation text
+                  const text = el.textContent || '';
+                  if (text.includes('القائمة') || text.includes('الرئيسية') || text.includes('المكتبة') || text.includes('بيانات')) {
+                    el.style.display = 'none';
+                  }
+                }
+              });
+            }
+            
+            // Run when page loads
+            window.addEventListener('load', hideBottomNavigation);
+            // Run after a short delay to catch dynamic elements
+            setTimeout(hideBottomNavigation, 2000);
+          `
+        }} />
       </head>
       <body>
         <ThemeProvider
