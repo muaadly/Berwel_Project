@@ -4,8 +4,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Dispatch, SetStateAction, useState } from "react"
-import { Drawer, DrawerContent, DrawerClose } from "@/components/ui/drawer"
-import { DialogTitle } from "@radix-ui/react-dialog"
 import { CommandDialog } from "@/components/ui/command"
 import { Search, LogOut, User, Moon, Sun, Languages } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -30,7 +28,6 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
   const { language, setLanguage } = useLanguage()
   const { t } = useTranslations()
   const [mounted, setMounted] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [libyanSongs, setLibyanSongs] = useState<LibyanSong[]>([])
   const [maloofEntries, setMaloofEntries] = useState<MaloofEntry[]>([])
 
@@ -194,20 +191,6 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               )
             )}
           </div>
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-              <Button
-                variant="ghost"
-                className="text-foreground hover:text-primary hover:bg-transparent focus-visible:ring-0"
-                size="sm"
-                onClick={() => setMobileMenuOpen(true)}
-                aria-label="Open menu"
-              >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </Button>
-          </div>
         </div>
       </div>
       </div>
@@ -254,83 +237,6 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
         )}
       </CommandDialog>
 
-      {/* Mobile Drawer Menu */}
-      <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <DrawerContent className={`bg-card border border-border text-foreground ${language === 'ar' ? 'rtl' : 'ltr'}`} style={{ zIndex: 9999 }}>
-          <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
-          <div className={`flex flex-col gap-6 p-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-2xl font-bold">{t('menu')}</span>
-              <DrawerClose asChild>
-                <Button variant="ghost" size="icon" aria-label="Close menu" className="text-foreground hover:text-primary hover:bg-muted/50">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </Button>
-              </DrawerClose>
-            </div>
-            <Link href="/" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              {t('home')}
-            </Link>
-            <Link href="/library" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              {t('library')}
-            </Link>
-            <Link href="/analytics" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              {t('analytics')}
-            </Link>
-            <Link href="/about" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              {t('about')}
-            </Link>
-            <Link href="/contact" className="text-foreground hover:text-primary text-lg font-medium" onClick={() => setMobileMenuOpen(false)}>
-              {t('contact')}
-            </Link>
-            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setLanguage(language === "en" ? "ar" : "en")}
-                className="text-foreground hover:text-primary hover:bg-muted/50 transition-colors"
-              >
-                <Languages className="h-4 w-4 mr-2" />
-                {language === "en" ? "العربية" : "English"}
-              </Button>
-            </div>
-            {!isLoading && (
-              user ? (
-                <div className="flex items-center gap-2 mt-4">
-                  <Image
-                    src={user.image}
-                    alt={user.name}
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                  <span className="text-foreground">{user.name}</span>
-                  <Button
-                    onClick={() => {
-                      handleSignOut()
-                      setMobileMenuOpen(false)
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white font-medium px-4 py-2 rounded-md transition-colors"
-                  >
-                    {t('signOut')}
-                  </Button>
-                </div>
-              ) : (
-                <Button
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors mt-4"
-                  onClick={() => {
-                    handleSignIn()
-                    setMobileMenuOpen(false)
-                  }}
-                >
-                  {t('registerNow')}
-                </Button>
-              )
-            )}
-          </div>
-        </DrawerContent>
-      </Drawer>
     </nav>
   )
 }
