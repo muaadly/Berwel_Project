@@ -61,7 +61,7 @@ export default function MobileNavigation() {
             <div className={`flex justify-between items-center mb-6 ${
               language === 'ar' ? 'flex-row-reverse' : 'flex-row'
             }`}>
-              <h2 className="text-xl font-bold">{t('menu')}</h2>
+              <h2 className={`text-xl font-bold ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('menu')}</h2>
               <button
                 onClick={closeMenu}
                 className="p-2 hover:bg-muted rounded-full transition-colors"
@@ -85,7 +85,7 @@ export default function MobileNavigation() {
                     }`}
                   >
                     <Icon className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-lg font-medium">{item.label}</span>
+                    <span className={`text-lg font-medium ${language === 'ar' ? 'text-right' : 'text-left'}`}>{item.label}</span>
                   </Link>
                 )
               })}
@@ -99,7 +99,7 @@ export default function MobileNavigation() {
                   }`}
                 >
                   <User className="h-5 w-5 text-muted-foreground" />
-                  <span className="text-lg font-medium">
+                  <span className={`text-lg font-medium ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                     {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
                   </span>
                 </Link>
