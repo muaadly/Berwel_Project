@@ -454,7 +454,7 @@ export const translations: Record<Language, Translations> = {
     searchBerwel: 'ابحث في برول...',
     quickLinks: 'روابط سريعة',
     libyanSongs: 'الأغاني الليبية',
-    maloofEntries: 'مداخل الملوف',
+    maloofEntries: 'مداخل المالوف',
     berwelSoundcloudPlaylist: 'قائمة تشغيل برول على SoundCloud',
     listenOnSoundcloud: 'استمع على SoundCloud',
     soundcloudDescription: 'اكتشف قائمة تشغيل برول المختارة للموسيقى الليبية والمزيد على قناتنا الرسمية على SoundCloud.',
@@ -467,9 +467,9 @@ export const translations: Record<Language, Translations> = {
     
     // Library
     discoverTitle: 'مكتبة الموسيقى',
-    discoverSubtitle: 'استكشف مجموعتنا من الأغاني الليبية التقليدية ومقاطع الملوف',
+    discoverSubtitle: 'استكشف مجموعتنا من الأغاني الليبية التقليدية ومقاطع المالوف',
     libyanSongs: 'الأغاني الليبية',
-    maloofEntries: 'مداخل الملوف',
+    maloofEntries: 'مداخل المالوف',
     singers: 'المطربون',
     categories: 'الفئات',
     allCategories: 'جميع الفئات',
@@ -510,7 +510,7 @@ export const translations: Record<Language, Translations> = {
     otherSingers: 'مطربون آخرون',
     
     // Maloof details
-    maloofEntry: 'مدخل الملوف',
+    maloofEntry: 'مدخل المالوف',
     entryType: 'نوع المدخل',
     entryRhythm: 'إيقاع المدخل',
     entryLyrics: 'كلمات المدخل',
@@ -533,7 +533,7 @@ export const translations: Record<Language, Translations> = {
     save: 'حفظ',
     cancel: 'إلغاء',
     otherEntries: 'مداخل أخرى',
-    maloofEntries: 'مداخل الملوف',
+    maloofEntries: 'مداخل المالوف',
     noOtherEntriesFound: 'لم يتم العثور على مداخل أخرى.',
     download: 'تحميل',
     
@@ -547,12 +547,12 @@ export const translations: Record<Language, Translations> = {
     recentActivity: 'النشاط الأخير',
     uniqueSingers: 'المطربون الفريدون',
     fullyWrittenSongs: 'الأغاني المكتوبة بالكامل',
-    maloofEntries: 'مداخل الملوف',
+    maloofEntries: 'مداخل المالوف',
     songsNotYetWritten: 'الأغاني غير المكتوبة بعد',
     songsWithOnlyBeginningWritten: 'الأغاني المكتوبة جزئياً',
     viewAllSongsWithoutLyrics: 'عرض جميع الأغاني بدون كلمات',
     viewAllSongsWithPartialLyrics: 'عرض جميع الأغاني ذات الكلمات الجزئية',
-    dataSource: 'البيانات مستمدة من مجموعات الأغاني الليبية ومداخل الملوف.',
+    dataSource: 'البيانات مستمدة من مجموعات الأغاني الليبية ومداخل المالوف.',
     exploreLibrary: 'استكشف المكتبة للمزيد من التفاصيل واستمتع بأرشيف الموسيقى!',
     
     // About
