@@ -480,7 +480,7 @@ export const translations: Record<Language, Translations> = {
     alphabetical: 'أبجدي',
     searchLibyanSongs: 'ابحث في الأغاني الليبية...',
     showFilters: 'إظهار الفلتر',
-    clearFilter: 'مسح الفلتر',
+    clearFilter: 'مسح',
     play: 'تشغيل',
     category: 'الفئة',
     singerName: 'اسم المطرب',
