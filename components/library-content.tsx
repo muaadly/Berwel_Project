@@ -453,7 +453,7 @@ export default function LibraryContent() {
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors w-full md:w-auto"
                 onClick={() => setShowFilters((prev) => !prev)}
               >
-                {showFilters ? (language === 'ar' ? "إخفاء المرشحات" : "Hide Filters") : (language === 'ar' ? t('showFilters') : "Show Filters")}
+                {showFilters ? (language === 'ar' ? "إخفاء الفلتر" : "Hide Filters") : (language === 'ar' ? t('showFilters') : "Show Filters")}
               </Button>
               <Button
                 variant="outline"
