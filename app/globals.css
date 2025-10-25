@@ -958,6 +958,202 @@ html, body {
   background-color: #dc2626 !important;
 }
 
+/* Enhanced Arabic Comments Section Layout */
+.rtl .song-comments-section .bg-card {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 0.5rem !important;
+  padding: 1.5rem !important;
+}
+
+.rtl .song-comments-section .text-xl.font-bold {
+  color: white !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+  text-align: left !important;
+}
+
+.rtl .song-comments-section .bg-muted.border-border {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.375rem !important;
+  color: white !important;
+  padding: 0.75rem !important;
+  width: 100% !important;
+  resize: vertical !important;
+}
+
+.rtl .song-comments-section .bg-muted.border-border::placeholder {
+  color: #9ca3af !important;
+}
+
+.rtl .song-comments-section .bg-primary {
+  background: #f97316 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.375rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500 !important;
+  margin-top: 0.5rem !important;
+  transition: background-color 0.2s !important;
+}
+
+.rtl .song-comments-section .bg-primary:hover {
+  background: #ea580c !important;
+}
+
+.rtl .song-comments-section .space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+.rtl .song-comments-section .bg-muted.rounded-lg.p-4 {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 0 !important;
+}
+
+.rtl .song-comments-section .flex.items-start.justify-between {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.rtl .song-comments-section .flex-1.mr-4 {
+  flex: 1 !important;
+  margin-right: 1rem !important;
+  margin-left: 0 !important;
+  min-width: 0 !important;
+}
+
+.rtl .song-comments-section .flex.items-center.gap-3 {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+}
+
+.rtl .song-comments-section .w-10.h-10 {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid #444 !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+.rtl .song-comments-section .flex.flex-col.items-start {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.25rem !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+.rtl .song-comments-section .text-foreground.font-semibold {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rtl .song-comments-section .text-muted-foreground.text-xs {
+  color: #9ca3af !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rtl .song-comments-section .text-foreground.text-sm {
+  color: white !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.rtl .song-comments-section .flex.gap-2.mt-3 {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem !important;
+  margin-top: 0.75rem !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+.rtl .song-comments-section .bg-blue-600 {
+  background: #2563eb !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s !important;
+}
+
+.rtl .song-comments-section .bg-blue-600:hover {
+  background: #1d4ed8 !important;
+}
+
+.rtl .song-comments-section .bg-green-600 {
+  background: #16a34a !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s !important;
+}
+
+.rtl .song-comments-section .bg-green-600:hover {
+  background: #15803d !important;
+}
+
+.rtl .song-comments-section .bg-red-600 {
+  background: #dc2626 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s !important;
+}
+
+.rtl .song-comments-section .bg-red-600:hover {
+  background: #b91c1c !important;
+}
+
+.rtl .song-comments-section .border-border {
+  border-color: #444 !important;
+}
+
+.rtl .song-comments-section .border-border:hover {
+  border-color: #555 !important;
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
