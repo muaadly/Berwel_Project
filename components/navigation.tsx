@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Dispatch, SetStateAction, useState } from "react"
 import { CommandDialog } from "@/components/ui/command"
-import { Search, LogOut, User, Moon, Sun, Languages } from "lucide-react"
+import { Search, LogOut, User, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { fetchLibyanSongs, fetchMaloofEntries, LibyanSong, MaloofEntry } from "@/lib/data"
@@ -94,12 +94,11 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             </Button>
             <Button
               variant="ghost"
-              size="icon"
+              size="sm"
               onClick={() => setLanguage(language === "en" ? "ar" : "en")}
-              className="ml-2 text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
+              className="ml-2 text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors px-3 py-2"
             >
-              <Languages className="h-5 w-5" />
-              <span className="sr-only">Toggle language</span>
+              {language === "ar" ? "ENG" : "ARB"}
             </Button>
           </div>
 
