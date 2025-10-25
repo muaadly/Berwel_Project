@@ -503,65 +503,58 @@ export default function SongDetail({ songId }: SongDetailProps) {
             </div>
 
             {/* Comments List */}
-            <div className="space-y-4">
+            <div className={`space-y-4 ${language === 'ar' ? 'comments-section' : ''}`}>
               {comments.length === 0 ? (
                 <p className="text-muted-foreground">
-                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet. Be the first to comment!'}
+                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}
                 </p>
               ) : (
                 comments.map((comment, index) => (
-                  <div key={index} className="bg-muted rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      {/* Comment Text - Left Side */}
-                      <div className="flex-1 mr-4">
-                        {editingCommentIndex === index ? (
-                          <div className="space-y-2">
-                            <Textarea
-                              value={editingCommentText}
-                              onChange={(e) => setEditingCommentText(e.target.value)}
-                              className="bg-muted border-border text-foreground placeholder-muted-foreground"
-                              rows={2}
-                            />
-                          </div>
-                        ) : (
-                          <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
-                        )}
-                      </div>
-                      
-                      {/* User Info - Right Side */}
-                      <div className="flex items-center gap-3 flex-shrink-0">
-                        {/* User Avatar */}
-                        <div className="flex-shrink-0">
-                          <img
-                            src={comment.user?.image || '/placeholder-user.jpg'}
-                            alt={comment.user?.name || 'User'}
-                            className="w-10 h-10 rounded-full object-cover border-2 border-border"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
-                            }}
-                          />
-                        </div>
-                        {/* User Info */}
-                        <div className="flex flex-col items-start">
-                          <span className="text-foreground font-semibold text-sm">
-                            {comment.user?.name || 'Anonymous User'}
-                          </span>
-                          <span className="text-muted-foreground text-xs mt-1">
-                            {new Date(comment.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit'
-                            })}
-                          </span>
-                        </div>
+                  <div key={index} className="bg-muted rounded-lg p-4 mb-4">
+                    {/* User Info Header */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <img
+                        src={comment.user?.image || '/placeholder-user.jpg'}
+                        alt={comment.user?.name || 'User'}
+                        className="w-8 h-8 rounded-full object-cover border-2 border-border"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
+                        }}
+                      />
+                      <div className="flex-1">
+                        <span className="text-foreground font-semibold text-sm">
+                          {comment.user?.name || 'Anonymous User'}
+                        </span>
+                        <span className="text-muted-foreground text-xs ml-2">
+                          {new Date(comment.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </span>
                       </div>
                     </div>
                     
-                    {/* Edit/Delete Buttons - Below */}
+                    {/* Comment Content */}
+                    <div className="mb-3">
+                      {editingCommentIndex === index ? (
+                        <div className="space-y-2">
+                          <Textarea
+                            value={editingCommentText}
+                            onChange={(e) => setEditingCommentText(e.target.value)}
+                            className="bg-muted border-border text-foreground placeholder-muted-foreground"
+                            rows={2}
+                          />
+                        </div>
+                      ) : (
+                        <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
+                      )}
+                    </div>
+                    {/* Edit/Delete Buttons */}
                     {user && (comment.userId === user.id || comment.userId === user.email) && (
-                      <div className="flex gap-2 mt-3">
+                      <div className="flex justify-end gap-2">
                         {editingCommentIndex === index ? (
                           <>
                             <Button
@@ -569,15 +562,15 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               size="sm"
                               className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
                             >
-                              Save
+                              {language === 'ar' ? t('save') : 'Save'}
                             </Button>
                             <Button
-                              onClick={() => handleCancelEdit}
+                              onClick={handleCancelEdit}
                               size="sm"
                               variant="outline"
                               className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
                             >
-                              Cancel
+                              {language === 'ar' ? t('cancel') : 'Cancel'}
                             </Button>
                           </>
                         ) : (
@@ -587,14 +580,14 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               size="sm"
                               className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
                             >
-                              Edit
+                              {language === 'ar' ? t('edit') : 'Edit'}
                             </Button>
                             <Button
                               onClick={() => handleDeleteComment(index)}
                               size="sm"
                               className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
                             >
-                              Delete
+                              {language === 'ar' ? t('delete') : 'Delete'}
                             </Button>
                           </>
                         )}
