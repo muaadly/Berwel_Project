@@ -96,7 +96,6 @@ export default function Footer() {
             <h3 className="text-foreground font-semibold mb-4">{t('contact')}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>{t('email')}: info@berwel.ly</li>
-              <li>{t('phone')}: +218 91 234 5678</li>
               <li>{t('address')}</li>
             </ul>
           </div>
