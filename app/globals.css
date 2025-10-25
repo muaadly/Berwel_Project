@@ -1418,12 +1418,15 @@ html, body {
   background: #b91c1c !important;
 }
 
-/* NUCLEAR OPTION - Force horizontal text rendering */
+/* AGGRESSIVE FINAL FIX - Force horizontal text rendering */
+.rtl .song-comments-section,
+.rtl .song-comments-section *,
 .rtl .song-comments-section p,
 .rtl .song-comments-section span,
 .rtl .song-comments-section div,
 .rtl .song-comments-section textarea,
-.rtl .song-comments-section input {
+.rtl .song-comments-section input,
+.rtl .song-comments-section *[class*="text-"] {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   direction: ltr !important;
@@ -1439,10 +1442,25 @@ html, body {
   position: static !important;
   float: none !important;
   clear: none !important;
+  line-height: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  text-indent: 0 !important;
+  text-rendering: auto !important;
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-text-size-adjust: none !important;
+  -moz-text-size-adjust: none !important;
+  -ms-text-size-adjust: none !important;
+  text-size-adjust: none !important;
 }
 
-/* Force all text content to be horizontal */
-.rtl .song-comments-section *[class*="text-"] {
+/* Force specific comment text elements */
+.rtl .song-comments-section .text-foreground.text-sm,
+.rtl .song-comments-section p.text-foreground.text-sm,
+.rtl .song-comments-section span.text-foreground.text-sm {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   direction: ltr !important;
@@ -1451,6 +1469,32 @@ html, body {
   white-space: normal !important;
   word-spacing: normal !important;
   letter-spacing: normal !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform: none !important;
+  position: static !important;
+  float: none !important;
+  clear: none !important;
+  line-height: 1.5 !important;
+  font-size: 0.875rem !important;
+  color: white !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  text-indent: 0 !important;
+  text-rendering: auto !important;
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-text-size-adjust: none !important;
+  -moz-text-size-adjust: none !important;
+  -ms-text-size-adjust: none !important;
+  text-size-adjust: none !important;
 }
 
 /* Ensure proper mobile viewport */
