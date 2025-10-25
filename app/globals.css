@@ -470,17 +470,29 @@ html, body {
 /* Fix Arabic home page sections - ensure images are visible */
 .rtl .singers-section,
 .rtl .maloof-section {
-  direction: ltr !important; /* Force LTR for image carousels */
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.rtl .singers-section *,
+.rtl .maloof-section * {
+  direction: ltr !important;
+  text-align: left !important;
 }
 
 .rtl .singers-section .flex.w-max,
 .rtl .maloof-section .flex.w-max {
   direction: ltr !important;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
 }
 
 .rtl .singers-section .flex-shrink-0,
 .rtl .maloof-section .flex-shrink-0 {
   direction: ltr !important;
+  display: block !important;
+  text-align: center !important;
 }
 
 .rtl .singers-section img,
@@ -491,11 +503,19 @@ html, body {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  position: static !important;
+  z-index: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 .rtl .singers-section .overflow-x-auto,
 .rtl .maloof-section .overflow-x-auto {
   direction: ltr !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 .rtl .singers-section .scrollbar-hide,
@@ -518,6 +538,13 @@ html, body {
   .rtl .singers-section,
   .rtl .maloof-section {
     direction: ltr !important;
+    text-align: left !important;
+  }
+  
+  .rtl .singers-section *,
+  .rtl .maloof-section * {
+    direction: ltr !important;
+    text-align: left !important;
   }
   
   .rtl .singers-section .flex.w-max,
@@ -525,12 +552,16 @@ html, body {
     direction: ltr !important;
     display: flex !important;
     flex-direction: row !important;
+    justify-content: flex-start !important;
+    width: max-content !important;
   }
   
   .rtl .singers-section .flex-shrink-0,
   .rtl .maloof-section .flex-shrink-0 {
     direction: ltr !important;
     display: block !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
   }
   
   .rtl .singers-section img,
@@ -541,8 +572,20 @@ html, body {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    position: relative !important;
-    z-index: 1 !important;
+    position: static !important;
+    z-index: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+  
+  .rtl .singers-section .overflow-x-auto,
+  .rtl .maloof-section .overflow-x-auto {
+    direction: ltr !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-behavior: smooth !important;
   }
 }
 

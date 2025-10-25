@@ -36,8 +36,10 @@ export default function MaloofSection() {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current
       const scrollAmount = clientWidth * 0.8
+      // For Arabic, ensure we're always scrolling in the correct direction
+      const newScrollLeft = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount
       scrollRef.current.scrollTo({
-        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        left: Math.max(0, newScrollLeft),
         behavior: 'smooth',
       })
     }
