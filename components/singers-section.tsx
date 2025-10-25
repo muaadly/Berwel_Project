@@ -30,7 +30,7 @@ export default function SingersSection() {
   }
 
   return (
-    <section className="bg-background py-16 px-4">
+    <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'singers-section' : ''}`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           {language === 'ar' ? (

@@ -467,6 +467,41 @@ html, body {
   }
 }
 
+/* Fix Arabic home page sections - ensure images are visible */
+@media (max-width: 768px) {
+  .rtl .singers-section,
+  .rtl .maloof-section {
+    direction: ltr; /* Keep LTR for image carousels */
+  }
+  
+  .rtl .singers-section .flex.w-max,
+  .rtl .maloof-section .flex.w-max {
+    direction: ltr;
+  }
+  
+  .rtl .singers-section .flex-shrink-0,
+  .rtl .maloof-section .flex-shrink-0 {
+    direction: ltr;
+  }
+  
+  .rtl .singers-section img,
+  .rtl .maloof-section img {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .rtl .singers-section .overflow-x-auto,
+  .rtl .maloof-section .overflow-x-auto {
+    direction: ltr;
+  }
+  
+  .rtl .singers-section .scrollbar-hide,
+  .rtl .maloof-section .scrollbar-hide {
+    direction: ltr;
+  }
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
