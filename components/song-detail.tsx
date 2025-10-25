@@ -669,7 +669,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
           {/* Debug: Current language is {language} */}
           <div 
             ref={otherSongsScrollRef} 
-            className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide" 
+            className={`w-full overflow-x-auto overflow-y-hidden scrollbar-hide ${language === 'ar' ? 'song-detail-section' : ''}`}
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
@@ -756,7 +756,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
           </div>
           <div 
             ref={otherSingersScrollRef} 
-            className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide" 
+            className={`w-full overflow-x-auto overflow-y-hidden scrollbar-hide ${language === 'ar' ? 'song-detail-section' : ''}`}
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',

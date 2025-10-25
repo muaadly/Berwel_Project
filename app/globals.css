@@ -734,6 +734,74 @@ html, body {
   padding: 0 !important;
 }
 
+/* Fix Song Detail Page - أغاني أخري and مطربون أخرون sections */
+.rtl .song-detail-section {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .song-detail-section * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .song-detail-section .flex.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: max-content !important;
+  min-width: 100% !important;
+}
+
+.rtl .song-detail-section .flex-shrink-0 {
+  flex-shrink: 0 !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+.rtl .song-detail-section .overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  direction: ltr !important;
+  scroll-behavior: smooth !important;
+}
+
+.rtl .song-detail-section img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rtl .song-detail-section .w-20.h-20 {
+  background: transparent !important;
+  border: none !important;
+}
+
+.rtl .song-detail-section .w-20.h-20 img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
