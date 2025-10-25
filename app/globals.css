@@ -1331,7 +1331,7 @@ html, body {
   display: flex !important;
 }
 
-/* User Name - MAKE VERTICAL */
+/* User Name - NORMAL HORIZONTAL */
 .rtl .song-comments-section .text-foreground.font-semibold {
   color: white !important;
   font-weight: 600 !important;
@@ -1342,19 +1342,19 @@ html, body {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: normal !important;
-  writing-mode: vertical-rl !important;
-  text-orientation: upright !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
   white-space: nowrap !important;
   overflow: visible !important;
   text-overflow: unset !important;
   visibility: visible !important;
   opacity: 1 !important;
-  display: block !important;
+  display: inline !important;
   width: auto !important;
   height: auto !important;
 }
 
-/* Timestamp - MAKE VERTICAL */
+/* Timestamp - NORMAL HORIZONTAL */
 .rtl .song-comments-section .text-muted-foreground.text-xs {
   color: #9ca3af !important;
   font-size: 0.75rem !important;
@@ -1364,12 +1364,12 @@ html, body {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: normal !important;
-  writing-mode: vertical-rl !important;
-  text-orientation: upright !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
   white-space: nowrap !important;
   visibility: visible !important;
   opacity: 1 !important;
-  display: block !important;
+  display: inline !important;
   width: auto !important;
   height: auto !important;
 }
@@ -1440,15 +1440,8 @@ html, body {
   background: #b91c1c !important;
 }
 
-/* AGGRESSIVE FINAL FIX - Force horizontal text rendering */
-.rtl .song-comments-section,
-.rtl .song-comments-section *,
-.rtl .song-comments-section p,
-.rtl .song-comments-section span,
-.rtl .song-comments-section div,
-.rtl .song-comments-section textarea,
-.rtl .song-comments-section input,
-.rtl .song-comments-section *[class*="text-"] {
+/* SIMPLE FIX - Override all song-comments-section CSS */
+.rtl .song-comments-section * {
   writing-mode: horizontal-tb !important;
   text-orientation: mixed !important;
   direction: ltr !important;
@@ -1457,8 +1450,8 @@ html, body {
   white-space: normal !important;
   word-spacing: normal !important;
   letter-spacing: normal !important;
-  display: block !important;
-  width: 100% !important;
+  display: revert !important;
+  width: auto !important;
   height: auto !important;
   transform: none !important;
   position: static !important;
@@ -1477,6 +1470,16 @@ html, body {
   -moz-text-size-adjust: none !important;
   -ms-text-size-adjust: none !important;
   text-size-adjust: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 /* Force specific comment text elements */
