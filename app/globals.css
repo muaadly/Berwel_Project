@@ -306,6 +306,133 @@ html, body {
     flex: 1;
     min-width: 0;
   }
+  
+  /* Fix mobile RTL layout overlap issues */
+  .rtl .flex.flex-col {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .rtl .flex.flex-col > * {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Fix mobile RTL image and text spacing */
+  .rtl .flex-shrink-0 {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  /* Fix mobile RTL text container */
+  .rtl .flex-1 {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Fix mobile RTL button layouts */
+  .rtl .flex.items-center.justify-center.gap-4 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  /* Fix mobile RTL button spacing */
+  .rtl .flex.items-center.gap-2 {
+    gap: 0.5rem;
+  }
+  
+  /* Fix mobile RTL text alignment */
+  .rtl h1, .rtl h2, .rtl h3, .rtl p {
+    text-align: right;
+    direction: rtl;
+  }
+  
+  /* Fix mobile RTL image sizing */
+  .rtl img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Fix mobile RTL container padding */
+  .rtl .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Fix mobile RTL margin issues */
+  .rtl .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .rtl .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .rtl .mb-8 {
+    margin-bottom: 2rem;
+  }
+  
+  /* Fix mobile RTL maloof detail specific issues */
+  .rtl .flex.flex-col.md\\:flex-row {
+    flex-direction: column !important;
+    gap: 2rem;
+  }
+  
+  .rtl .flex.flex-col.md\\:flex-row > .flex-shrink-0 {
+    order: 1;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .rtl .flex.flex-col.md\\:flex-row > .flex-1 {
+    order: 2;
+    width: 100%;
+    text-align: right;
+  }
+  
+  /* Fix mobile RTL image sizing in maloof detail */
+  .rtl .w-64.h-64 {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 1;
+  }
+  
+  /* Fix mobile RTL text sizing */
+  .rtl .text-4xl {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .rtl .text-2xl {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  /* Fix mobile RTL button container */
+  .rtl .flex.items-center.justify-center.gap-4.mb-3 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Fix mobile RTL full width button */
+  .rtl .flex.justify-center {
+    justify-content: center;
+  }
+  
+  .rtl .w-full.max-w-xs {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Ensure proper mobile viewport */
