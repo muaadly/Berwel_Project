@@ -489,7 +489,7 @@ export const translations: Record<Language, Translations> = {
     entryRhythm: 'الإيقاع',
     entryType: 'الطبع',
     entryName: 'اسم الدخلة',
-    showingEntries: 'عرض {from} إلى {to} من {total} دخلة',
+    showingEntries: 'عرض {from} إلى {to} من {total} أغنية',
     previous: 'السابق',
     next: 'التالي',
     
