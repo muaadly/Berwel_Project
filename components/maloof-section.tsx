@@ -31,6 +31,9 @@ export default function MaloofSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const { t } = useTranslations()
   const { language } = useLanguage()
+  
+  console.log('MaloofSection - Language:', language)
+  console.log('MaloofSection - Entry images:', entryImages)
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {

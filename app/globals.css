@@ -589,6 +589,27 @@ html, body {
   }
 }
 
+/* Force image display for Arabic sections */
+.rtl .singers-section .w-32.h-32,
+.rtl .maloof-section .w-48.h-48 {
+  background: transparent !important;
+  border: none !important;
+}
+
+.rtl .singers-section .w-32.h-32 img,
+.rtl .maloof-section .w-48.h-48 img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {

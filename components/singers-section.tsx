@@ -15,7 +15,10 @@ export default function SingersSection() {
   const { language } = useLanguage()
 
   useEffect(() => {
-    fetchSingers().then(setSingers)
+    fetchSingers().then(singers => {
+      console.log('Fetched singers:', singers)
+      setSingers(singers)
+    })
   }, [])
 
   const scroll = (direction: 'left' | 'right') => {
