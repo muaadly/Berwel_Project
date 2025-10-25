@@ -64,7 +64,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-card border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Theme Toggle */}
@@ -72,11 +72,11 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <Link href="/" className="flex items-center">
               {mounted && (
                 <Image 
-                  src="/images/Creative_Solution_Logo.png" 
-                  alt="Creative Solution Advertising Logo" 
-                  width={120} 
-                  height={40} 
-                  className="object-contain" 
+                  src={resolvedTheme === "light" ? "/images/Light_Mode_Logo.jpeg" : "/images/Dark_Mode_Logo.png"} 
+                  alt="Berwel Logo" 
+                  width={60} 
+                  height={60} 
+                  className="rounded" 
                   priority
                 />
               )}
@@ -85,8 +85,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               variant="ghost"
               size="icon"
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              className="ml-2 text-white hover:text-white transition-colors"
-              style={{ backgroundColor: '#044294' }}
+              className="ml-2 text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
             >
               {/* Show icon for the mode you can switch TO (sun in dark, moon in light) */}
               <Sun className="h-5 w-5 rotate-0 scale-0 transition-all dark:scale-100" />
@@ -97,8 +96,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               variant="ghost"
               size="icon"
               onClick={() => setLanguage(language === "en" ? "ar" : "en")}
-              className="ml-2 text-white hover:text-white transition-colors"
-              style={{ backgroundColor: '#044294' }}
+              className="ml-2 text-muted-foreground hover:text-primary hover:bg-muted/50 transition-colors"
             >
               <Languages className="h-5 w-5" />
               <span className="sr-only">Toggle language</span>
@@ -110,36 +108,31 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <div className="ml-10 flex items-baseline space-x-8">
               <Link
                 href="/"
-                className="text-white hover:text-white px-3 py-2 text-sm font-medium transition-colors rounded"
-                style={{ backgroundColor: '#044294' }}
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 {t('home')}
               </Link>
               <Link
                 href="/library"
-                className="text-white hover:text-white px-3 py-2 text-sm font-medium transition-colors rounded"
-                style={{ backgroundColor: '#044294' }}
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-primary"
               >
                 {t('library')}
               </Link>
               <Link
                 href="/analytics"
-                className="text-white hover:text-white px-3 py-2 text-sm font-medium transition-colors rounded"
-                style={{ backgroundColor: '#044294' }}
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 {t('analytics')}
               </Link>
               <Link
                 href="/about"
-                className="text-white hover:text-white px-3 py-2 text-sm font-medium transition-colors rounded"
-                style={{ backgroundColor: '#044294' }}
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 {t('about')}
               </Link>
               <Link
                 href="/contact"
-                className="text-white hover:text-white px-3 py-2 text-sm font-medium transition-colors rounded"
-                style={{ backgroundColor: '#044294' }}
+                className="text-foreground hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 {t('contact')}
               </Link>
@@ -152,8 +145,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:text-white focus-visible:ring-0"
-              style={{ backgroundColor: '#044294' }}
+              className="text-foreground hover:text-primary hover:bg-transparent focus-visible:ring-0"
               aria-label="Open search"
               onClick={() => setSearchOpen(true)}
             >
@@ -192,8 +184,7 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
               ) : (
                 <Button
                   onClick={handleSignIn}
-                  className="text-white font-medium px-6 py-2 rounded-md transition-colors"
-                  style={{ backgroundColor: '#044294' }}
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-md transition-colors"
                 >
                   {t('registerNow')}
                 </Button>
