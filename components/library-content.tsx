@@ -182,7 +182,9 @@ export default function LibraryContent() {
         <div className="hidden md:flex items-center text-sm text-foreground">
           <span>
             {language === 'ar' 
-              ? t('showingEntries').replace('{from}', startItem.toString()).replace('{to}', endItem.toString()).replace('{total}', totalItems.toString())
+              ? (activeTab === 'songs' 
+                  ? `عرض ${startItem} إلى ${endItem} من ${totalItems} أغنية`
+                  : `عرض ${startItem} إلى ${endItem} من ${totalItems} دخلة`)
               : `Showing ${startItem} to ${endItem} of ${totalItems} ${itemType}`
             }
           </span>
