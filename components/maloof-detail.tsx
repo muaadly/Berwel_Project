@@ -513,7 +513,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             </div>
 
             {/* Comments List */}
-            <div className="space-y-4">
+            <div className={`space-y-4 ${language === 'ar' ? 'comments-section' : ''}`}>
               {comments.length === 0 ? (
                 <p className="text-muted-foreground">
                   {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}

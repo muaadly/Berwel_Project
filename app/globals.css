@@ -435,6 +435,38 @@ html, body {
   }
 }
 
+/* Desktop RTL comments layout fixes */
+@media (min-width: 768px) {
+  .rtl .comments-section {
+    direction: rtl;
+  }
+  
+  .rtl .comments-section .flex.items-center.gap-3 {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  
+  .rtl .comments-section .flex-1 {
+    text-align: right;
+  }
+  
+  .rtl .comments-section .text-foreground {
+    text-align: right;
+  }
+  
+  .rtl .comments-section .text-muted-foreground {
+    text-align: right;
+  }
+  
+  .rtl .comments-section .flex.justify-end {
+    justify-content: flex-start;
+  }
+  
+  .rtl .comments-section .flex.gap-2 {
+    flex-direction: row-reverse;
+  }
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
