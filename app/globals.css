@@ -1331,7 +1331,7 @@ html, body {
   display: flex !important;
 }
 
-/* User Name - MAKE VISIBLE */
+/* User Name - MAKE VERTICAL */
 .rtl .song-comments-section .text-foreground.font-semibold {
   color: white !important;
   font-weight: 600 !important;
@@ -1342,16 +1342,19 @@ html, body {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: normal !important;
-  writing-mode: horizontal-tb !important;
+  writing-mode: vertical-rl !important;
+  text-orientation: mixed !important;
   white-space: nowrap !important;
   overflow: visible !important;
   text-overflow: unset !important;
   visibility: visible !important;
   opacity: 1 !important;
   display: block !important;
+  width: auto !important;
+  height: auto !important;
 }
 
-/* Timestamp - MAKE VISIBLE */
+/* Timestamp - MAKE VERTICAL */
 .rtl .song-comments-section .text-muted-foreground.text-xs {
   color: #9ca3af !important;
   font-size: 0.75rem !important;
@@ -1361,11 +1364,14 @@ html, body {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: normal !important;
-  writing-mode: horizontal-tb !important;
+  writing-mode: vertical-rl !important;
+  text-orientation: mixed !important;
   white-space: nowrap !important;
   visibility: visible !important;
   opacity: 1 !important;
   display: block !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 /* Comment Text - FIX VERTICAL RENDERING */
