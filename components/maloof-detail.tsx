@@ -667,7 +667,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         </div>
 
         {/* Maloof Entries Section */}
-        <div className="mt-12">
+        <div className={`mt-12 ${language === 'ar' ? 'maloof-detail-section' : ''}`}>
           <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
             <h2 className="text-3xl font-bold text-foreground">
               {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'}

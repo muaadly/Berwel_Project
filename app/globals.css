@@ -684,6 +684,56 @@ html, body {
   scroll-behavior: smooth !important;
 }
 
+/* Fix Maloof Detail Page - دخلات مالوف section */
+.rtl .maloof-detail-section {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .maloof-detail-section * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .maloof-detail-section .flex.w-max {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: max-content !important;
+  min-width: 100% !important;
+}
+
+.rtl .maloof-detail-section .flex-shrink-0 {
+  flex-shrink: 0 !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+.rtl .maloof-detail-section .overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  direction: ltr !important;
+  scroll-behavior: smooth !important;
+}
+
+.rtl .maloof-detail-section img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
