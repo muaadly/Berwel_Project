@@ -1314,7 +1314,7 @@ html, body {
   display: block !important;
 }
 
-/* User Details */
+/* User Details - MAKE VISIBLE */
 .rtl .song-comments-section .flex.flex-col.items-start {
   display: flex !important;
   flex-direction: column !important;
@@ -1326,9 +1326,12 @@ html, body {
   text-align: left !important;
   unicode-bidi: normal !important;
   writing-mode: horizontal-tb !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: flex !important;
 }
 
-/* User Name */
+/* User Name - MAKE VISIBLE */
 .rtl .song-comments-section .text-foreground.font-semibold {
   color: white !important;
   font-weight: 600 !important;
@@ -1341,11 +1344,14 @@ html, body {
   unicode-bidi: normal !important;
   writing-mode: horizontal-tb !important;
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
-/* Timestamp */
+/* Timestamp - MAKE VISIBLE */
 .rtl .song-comments-section .text-muted-foreground.text-xs {
   color: #9ca3af !important;
   font-size: 0.75rem !important;
@@ -1357,6 +1363,9 @@ html, body {
   unicode-bidi: normal !important;
   writing-mode: horizontal-tb !important;
   white-space: nowrap !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 /* Comment Text - FIX VERTICAL RENDERING */
