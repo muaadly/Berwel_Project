@@ -487,7 +487,7 @@ export const translations: Record<Language, Translations> = {
     songName: 'اسم الأغنية',
     entryNumber: 'رقم الدخلة',
     entryRhythm: 'الإيقاع',
-    entryType: 'الطبع',
+    entryType: 'طبع الدخلة',
     entryName: 'اسم الدخلة',
     showingEntries: 'عرض {from} إلى {to} من {total} دخلة',
     previous: 'السابق',
@@ -511,7 +511,7 @@ export const translations: Record<Language, Translations> = {
     
     // Maloof details
     maloofEntry: 'مدخل المالوف',
-    entryType: 'الطبع',
+    entryType: 'طبع الدخلة',
     entryRhythm: 'الإيقاع',
     entryLyrics: 'كلمات الدخلة',
     notes: 'الملاحظات',
