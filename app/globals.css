@@ -1343,7 +1343,7 @@ html, body {
   text-align: left !important;
   unicode-bidi: normal !important;
   writing-mode: vertical-rl !important;
-  text-orientation: mixed !important;
+  text-orientation: upright !important;
   white-space: nowrap !important;
   overflow: visible !important;
   text-overflow: unset !important;
@@ -1365,7 +1365,7 @@ html, body {
   text-align: left !important;
   unicode-bidi: normal !important;
   writing-mode: vertical-rl !important;
-  text-orientation: mixed !important;
+  text-orientation: upright !important;
   white-space: nowrap !important;
   visibility: visible !important;
   opacity: 1 !important;
