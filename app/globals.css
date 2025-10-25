@@ -583,6 +583,35 @@ html, body {
   unicode-bidi: normal !important;
 }
 
+/* Fix carousel display - ensure all items are visible */
+.rtl .singers-section .flex.w-max,
+.rtl .maloof-section .flex.w-max {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: max-content !important;
+  min-width: 100% !important;
+}
+
+.rtl .singers-section .flex-shrink-0,
+.rtl .maloof-section .flex-shrink-0 {
+  flex-shrink: 0 !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+/* Fix overflow containers */
+.rtl .singers-section .overflow-x-auto,
+.rtl .maloof-section .overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  direction: ltr !important;
+  scroll-behavior: smooth !important;
+}
+
 /* Force all images to display */
 .rtl .singers-section img,
 .rtl .maloof-section img,
@@ -629,6 +658,30 @@ html, body {
   border: none !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+/* Force LTR carousel fixes */
+.force-ltr .flex.w-max {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  width: max-content !important;
+  min-width: 100% !important;
+}
+
+.force-ltr .flex-shrink-0 {
+  flex-shrink: 0 !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+.force-ltr .overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
 }
 
 /* Ensure proper mobile viewport */
