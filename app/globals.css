@@ -468,37 +468,81 @@ html, body {
 }
 
 /* Fix Arabic home page sections - ensure images are visible */
+.rtl .singers-section,
+.rtl .maloof-section {
+  direction: ltr !important; /* Force LTR for image carousels */
+}
+
+.rtl .singers-section .flex.w-max,
+.rtl .maloof-section .flex.w-max {
+  direction: ltr !important;
+}
+
+.rtl .singers-section .flex-shrink-0,
+.rtl .maloof-section .flex-shrink-0 {
+  direction: ltr !important;
+}
+
+.rtl .singers-section img,
+.rtl .maloof-section img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.rtl .singers-section .overflow-x-auto,
+.rtl .maloof-section .overflow-x-auto {
+  direction: ltr !important;
+}
+
+.rtl .singers-section .scrollbar-hide,
+.rtl .maloof-section .scrollbar-hide {
+  direction: ltr !important;
+}
+
+.rtl .singers-section .bg-card,
+.rtl .maloof-section .bg-card {
+  direction: ltr !important;
+}
+
+.rtl .singers-section .flex.items-center,
+.rtl .maloof-section .flex.items-center {
+  direction: ltr !important;
+}
+
+/* Mobile specific fixes */
 @media (max-width: 768px) {
   .rtl .singers-section,
   .rtl .maloof-section {
-    direction: ltr; /* Keep LTR for image carousels */
+    direction: ltr !important;
   }
   
   .rtl .singers-section .flex.w-max,
   .rtl .maloof-section .flex.w-max {
-    direction: ltr;
+    direction: ltr !important;
+    display: flex !important;
+    flex-direction: row !important;
   }
   
   .rtl .singers-section .flex-shrink-0,
   .rtl .maloof-section .flex-shrink-0 {
-    direction: ltr;
+    direction: ltr !important;
+    display: block !important;
   }
   
   .rtl .singers-section img,
   .rtl .maloof-section img {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  .rtl .singers-section .overflow-x-auto,
-  .rtl .maloof-section .overflow-x-auto {
-    direction: ltr;
-  }
-  
-  .rtl .singers-section .scrollbar-hide,
-  .rtl .maloof-section .scrollbar-hide {
-    direction: ltr;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
 }
 

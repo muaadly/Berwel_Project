@@ -110,6 +110,13 @@ export default function MaloofSection() {
                       src={`/images/maloof/${img}`}
                       alt={`Maloof Entry ${idx + 1}`}
                       className="w-full h-full object-cover rounded-lg"
+                      onError={(e) => {
+                        console.log('Maloof image failed to load:', `/images/maloof/${img}`)
+                        ;(e.target as HTMLImageElement).src = '/placeholder.jpg'
+                      }}
+                      onLoad={() => {
+                        console.log('Maloof image loaded successfully:', `/images/maloof/${img}`)
+                      }}
                     />
                   </div>
                 </Link>

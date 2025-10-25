@@ -94,6 +94,13 @@ export default function SingersSection() {
                     src={getSingerImagePath(singer.imageName) || "/placeholder-user.jpg"}
                     alt={singer.name}
                     className="w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      console.log('Singer image failed to load:', getSingerImagePath(singer.imageName))
+                      ;(e.target as HTMLImageElement).src = '/placeholder-user.jpg'
+                    }}
+                    onLoad={() => {
+                      console.log('Singer image loaded successfully:', getSingerImagePath(singer.imageName))
+                    }}
                   />
                 </div>
                 <p className="text-foreground text-sm font-medium group-hover:text-primary transition-colors">
