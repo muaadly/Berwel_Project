@@ -125,6 +125,77 @@
   font-family: "IBM Plex Sans Arabic", "Amiri", "Times New Roman", serif;
 }
 
+/* Mobile RTL fixes */
+@media (max-width: 768px) {
+  .rtl {
+    /* Ensure proper mobile RTL layout */
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Fix mobile RTL flex layouts */
+  .rtl .flex {
+    flex-direction: row-reverse;
+  }
+  
+  /* Fix mobile RTL margins and padding */
+  .rtl .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  
+  .rtl .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+  
+  .rtl .pl-4 {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+  
+  .rtl .pr-4 {
+    padding-right: 0;
+    padding-left: 1rem;
+  }
+  
+  /* Fix mobile RTL positioning */
+  .rtl .right-6 {
+    right: auto;
+    left: 1.5rem;
+  }
+  
+  .rtl .left-0 {
+    left: auto;
+    right: 0;
+  }
+  
+  /* Fix mobile navigation button positioning for RTL */
+  .rtl .fixed.bottom-6.right-6 {
+    right: auto;
+    left: 1.5rem;
+  }
+  
+  /* Fix mobile RTL menu panel positioning */
+  .rtl .absolute.bottom-0.left-0.right-0 {
+    direction: rtl;
+  }
+  
+  /* Ensure mobile RTL content doesn't overflow */
+  .rtl .overflow-x-auto {
+    direction: rtl;
+  }
+  
+  /* Fix mobile RTL text alignment */
+  .rtl .text-left {
+    text-align: right;
+  }
+  
+  .rtl .text-right {
+    text-align: left;
+  }
+}
+
 /* Prevent browser UI interference on mobile */
 html, body {
   height: 100%;
