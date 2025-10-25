@@ -1261,12 +1261,12 @@ html, body {
   text-align: left !important;
 }
 
-/* Comment Layout - User Info and Content */
+/* Comment Layout - User Info and Content - FIX ALIGNMENT */
 .rtl .song-comments-section .flex.items-start.justify-between {
   display: flex !important;
   flex-direction: row !important;
   align-items: flex-start !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   width: 100% !important;
   margin-bottom: 0.75rem !important;
   direction: ltr !important;
@@ -1376,13 +1376,13 @@ html, body {
   position: static !important;
 }
 
-/* Action Buttons */
+/* Action Buttons - FIX ALIGNMENT */
 .rtl .song-comments-section .flex.gap-2.mt-3 {
   display: flex !important;
   flex-direction: row !important;
   gap: 0.5rem !important;
   margin-top: 0.75rem !important;
-  justify-content: flex-end !important;
+  justify-content: flex-start !important;
   align-items: center !important;
   direction: ltr !important;
 }
