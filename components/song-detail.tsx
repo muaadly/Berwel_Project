@@ -479,7 +479,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
         </div>
 
         {/* Comments Section */}
-        <div className="mt-8">
+        <div className={`mt-8 ${language === 'ar' ? 'song-comments-section' : ''}`}>
           <div className="bg-card border border-border rounded-lg p-6">
             <h2 className="text-xl font-bold text-foreground mb-4">
               {language === 'ar' ? t('comments') : 'Comments'}

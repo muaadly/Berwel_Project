@@ -845,6 +845,119 @@ html, body {
   opacity: 1 !important;
 }
 
+/* Fix Song Detail Comments Section - Arabic */
+.rtl .song-comments-section {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .song-comments-section * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+.rtl .song-comments-section .bg-muted.rounded-lg {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.rtl .song-comments-section .flex.items-start.justify-between {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.rtl .song-comments-section .flex-1.mr-4 {
+  flex: 1 !important;
+  margin-right: 1rem !important;
+  margin-left: 0 !important;
+}
+
+.rtl .song-comments-section .flex.items-center.gap-3 {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  flex-shrink: 0 !important;
+}
+
+.rtl .song-comments-section .w-10.h-10 {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid #333 !important;
+  flex-shrink: 0 !important;
+}
+
+.rtl .song-comments-section .flex.flex-col.items-start {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.25rem !important;
+}
+
+.rtl .song-comments-section .text-foreground.font-semibold {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.rtl .song-comments-section .text-muted-foreground.text-xs {
+  color: #9ca3af !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+
+.rtl .song-comments-section .text-foreground.text-sm {
+  color: white !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rtl .song-comments-section .flex.gap-2.mt-3 {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem !important;
+  margin-top: 0.75rem !important;
+  justify-content: flex-end !important;
+}
+
+.rtl .song-comments-section .bg-blue-600,
+.rtl .song-comments-section .bg-green-600,
+.rtl .song-comments-section .bg-red-600 {
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+  border-radius: 0.25rem !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.rtl .song-comments-section .bg-blue-600:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.rtl .song-comments-section .bg-green-600:hover {
+  background-color: #16a34a !important;
+}
+
+.rtl .song-comments-section .bg-red-600:hover {
+  background-color: #dc2626 !important;
+}
+
 /* Ensure proper mobile viewport */
 @supports (padding: max(0px)) {
   body {
