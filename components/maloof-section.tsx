@@ -49,7 +49,7 @@ export default function MaloofSection() {
   }
 
   return (
-    <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'maloof-section' : ''}`}>
+    <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'maloof-section force-ltr' : ''}`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           {language === 'ar' ? (
