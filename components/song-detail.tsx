@@ -637,7 +637,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   </Button>
                 </div>
                 <h2 className="text-2xl font-bold text-foreground">
-                  {t('otherSongs')}
+                  {language === 'ar' ? 'أغاني أخرى' : 'Other Songs'}
                 </h2>
               </>
             ) : (
@@ -725,7 +725,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   </Button>
                 </div>
                 <h2 className="text-2xl font-bold text-foreground">
-                  {t('otherSingers')}
+                  {language === 'ar' ? 'مطربون آخرون' : 'Other Singers'}
                 </h2>
               </>
             ) : (
