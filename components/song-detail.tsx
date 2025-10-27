@@ -501,11 +501,14 @@ export default function SongDetail({ songId }: SongDetailProps) {
                     padding: '1rem', 
                     marginBottom: '1rem' 
                   }}>
-                    {/* User Info Header - FORCE LEFT ALIGNMENT */}
+                    {/* User Info Header - FORCE VISIBLE ON MOBILE */}
                     <div className="flex items-center gap-3 mb-3" style={{ 
                       alignItems: 'center', 
                       justifyContent: 'flex-start', 
-                      marginBottom: '0.75rem' 
+                      marginBottom: '0.75rem',
+                      display: 'flex !important',
+                      visibility: 'visible !important',
+                      opacity: '1 !important'
                     }}>
                       <img
                         src={comment.user?.image || '/placeholder-user.jpg'}
@@ -514,20 +517,38 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                         }}
-                        style={{ width: '2rem', height: '2rem', borderRadius: '50%' }}
+                        style={{ 
+                          width: '2rem', 
+                          height: '2rem', 
+                          borderRadius: '50%',
+                          display: 'block !important',
+                          visibility: 'visible !important',
+                          opacity: '1 !important'
+                        }}
                       />
-                      <div className="flex-1" style={{ textAlign: 'left' }}>
+                      <div className="flex-1" style={{ 
+                        textAlign: 'left',
+                        display: 'block !important',
+                        visibility: 'visible !important',
+                        opacity: '1 !important'
+                      }}>
                         <span className="text-foreground font-semibold text-sm" style={{ 
                           color: 'white', 
                           fontWeight: '600', 
-                          textAlign: 'left' 
+                          textAlign: 'left',
+                          display: 'block !important',
+                          visibility: 'visible !important',
+                          opacity: '1 !important'
                         }}>
                           {comment.user?.name || 'Anonymous User'}
                         </span>
                         <span className="text-muted-foreground text-xs ml-2" style={{ 
                           color: '#9ca3af', 
                           textAlign: 'left', 
-                          marginLeft: '0.5rem' 
+                          marginLeft: '0.5rem',
+                          display: 'inline !important',
+                          visibility: 'visible !important',
+                          opacity: '1 !important'
                         }}>
                           {new Date(comment.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
@@ -540,8 +561,13 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       </div>
                     </div>
                     
-                    {/* Comment Content - FORCE LEFT ALIGNMENT */}
-                    <div className="mb-3" style={{ marginBottom: '0.75rem' }}>
+                    {/* Comment Content - FORCE VISIBLE ON MOBILE */}
+                    <div className="mb-3" style={{ 
+                      marginBottom: '0.75rem',
+                      display: 'block !important',
+                      visibility: 'visible !important',
+                      opacity: '1 !important'
+                    }}>
                       {editingCommentIndex === index ? (
                         <div className="space-y-2">
                           <Textarea
@@ -561,7 +587,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         <p className="text-foreground text-sm leading-relaxed" style={{ 
                           color: 'white', 
                           textAlign: 'left', 
-                          lineHeight: '1.5' 
+                          lineHeight: '1.5',
+                          display: 'block !important',
+                          visibility: 'visible !important',
+                          opacity: '1 !important'
                         }}>
                           {comment.text}
                         </p>

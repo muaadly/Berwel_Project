@@ -2073,8 +2073,14 @@ body {
   text-align: center !important;
 }
 
-/* URGENT FIX - Mobile comments visibility */
+/* NUCLEAR FIX - Mobile comments visibility - OVERRIDE EVERYTHING */
 @media (max-width: 768px) {
+  .song-comments-section * {
+    display: revert !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
   .song-comments-section .bg-muted.rounded-lg {
     background: #2a2a2a !important;
     border: 1px solid #444 !important;
@@ -2084,6 +2090,9 @@ body {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100px !important;
   }
   
   .song-comments-section .flex.items-center.gap-3 {
@@ -2093,6 +2102,8 @@ body {
     margin-bottom: 0.75rem !important;
     visibility: visible !important;
     opacity: 1 !important;
+    width: 100% !important;
+    height: auto !important;
   }
   
   .song-comments-section img {
@@ -2102,6 +2113,7 @@ body {
     width: 2rem !important;
     height: 2rem !important;
     border-radius: 50% !important;
+    flex-shrink: 0 !important;
   }
   
   .song-comments-section .flex-1 {
@@ -2109,6 +2121,9 @@ body {
     visibility: visible !important;
     opacity: 1 !important;
     text-align: left !important;
+    width: auto !important;
+    height: auto !important;
+    flex: 1 !important;
   }
   
   .song-comments-section .text-foreground.font-semibold {
@@ -2118,6 +2133,10 @@ body {
     color: white !important;
     font-weight: 600 !important;
     text-align: left !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   .song-comments-section .text-muted-foreground.text-xs {
@@ -2127,6 +2146,8 @@ body {
     color: #9ca3af !important;
     text-align: left !important;
     margin-left: 0.5rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
   }
   
   .song-comments-section .text-foreground.text-sm {
@@ -2137,6 +2158,9 @@ body {
     text-align: left !important;
     line-height: 1.5 !important;
     margin-bottom: 0.75rem !important;
+    font-size: 0.875rem !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
   }
   
   .song-comments-section .flex.justify-end.gap-2 {
@@ -2145,5 +2169,28 @@ body {
     opacity: 1 !important;
     justify-content: flex-end !important;
     margin-top: 0.75rem !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Force all spans to be visible */
+  .song-comments-section span {
+    display: inline !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force all divs to be visible */
+  .song-comments-section div {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force all paragraphs to be visible */
+  .song-comments-section p {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
