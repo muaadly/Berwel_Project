@@ -504,7 +504,7 @@ html, body {
 /* Mobile RTL Contact Form */
 @media (max-width: 768px) {
   .rtl .contact-form label {
-    text-align: right !important;
+    text-align: center !important;
     direction: rtl !important;
   }
   
