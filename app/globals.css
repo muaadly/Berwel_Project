@@ -1760,18 +1760,20 @@ body {
 
 /* Specific profile section layout fixes */
 .rtl .profile-section .flex {
-  flex-direction: row-reverse !important;
+  flex-direction: row !important; /* Keep normal row direction for RTL */
   align-items: center !important;
   gap: 1.5rem !important;
 }
 
 .rtl .profile-section .flex-shrink-0 {
   flex-shrink: 0 !important;
+  order: 2 !important; /* Move profile picture to right */
 }
 
 .rtl .profile-section .flex-1 {
   flex: 1 !important;
   min-width: 0 !important;
+  order: 1 !important; /* Move text to left */
 }
 
 .rtl .profile-section .text-right {
