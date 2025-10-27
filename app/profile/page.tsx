@@ -70,7 +70,7 @@ export default function ProfilePage() {
       
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Profile Header */}
-        <Card className={`bg-card border-border mb-8 ${language === 'ar' ? 'profile-section' : ''}`}>
+        <Card className="bg-card border-border mb-8 profile-section">
           <CardHeader>
             <div className={`flex items-center gap-6 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
               <div className="flex-shrink-0">

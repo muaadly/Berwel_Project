@@ -1799,45 +1799,54 @@ body {
   margin-right: 0.5rem !important; /* Increase spacing from 0.25rem to 0.5rem */
 }
 
-/* Mobile-specific profile section - hide picture and center text for both languages */
+/* URGENT FIX - Mobile profile section for both languages */
 @media (max-width: 768px) {
-  /* Hide profile picture in mobile view for both languages */
+  /* FORCE HIDE profile picture in mobile view - BOTH LANGUAGES */
   .profile-section .flex-shrink-0,
-  .rtl .profile-section .flex-shrink-0 {
+  .profile-section img,
+  .profile-section .rounded-full {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
-  /* Center text elements for both languages */
-  .profile-section .flex,
-  .rtl .profile-section .flex {
+  /* FORCE CENTER text elements - BOTH LANGUAGES */
+  .profile-section .flex {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
     gap: 1rem !important;
+    width: 100% !important;
   }
   
-  .profile-section .flex-1,
-  .rtl .profile-section .flex-1 {
+  .profile-section .flex-1 {
     order: 1 !important;
     text-align: center !important;
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    justify-content: center !important;
   }
   
   .profile-section .text-right,
-  .profile-section .text-left,
-  .rtl .profile-section .text-right,
-  .rtl .profile-section .text-left {
+  .profile-section .text-left {
     text-align: center !important;
   }
   
   .profile-section .justify-end,
-  .profile-section .justify-start,
-  .rtl .profile-section .justify-end,
-  .rtl .profile-section .justify-start {
+  .profile-section .justify-start {
     justify-content: center !important;
+  }
+  
+  .profile-section h3,
+  .profile-section p,
+  .profile-section div {
+    text-align: center !important;
   }
 }
