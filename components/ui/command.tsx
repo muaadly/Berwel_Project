@@ -50,14 +50,16 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
             </div>
             {/* Search bar with icon - centered */}
             <div className="w-full mb-8 flex items-center justify-center border-b border-border px-3" style={{ flexDirection: 'row' }}>
-              <Search className="mr-3 h-8 w-8 text-primary" />
-              <CommandInput
-                autoFocus
-                value={searchValue}
-                onValueChange={onSearchValueChange}
-                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 text-center"
-                placeholder={t('searchBerwel')}
-              />
+              <div className="flex items-center justify-center w-full">
+                <Search className="mr-3 h-8 w-8 text-primary" />
+                <CommandInput
+                  autoFocus
+                  value={searchValue}
+                  onValueChange={onSearchValueChange}
+                  className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 text-center"
+                  placeholder={t('searchBerwel')}
+                />
+              </div>
             </div>
             <div className="w-full">
               <div className="text-foreground text-lg font-semibold mb-4 text-center">{t('quickLinks')}</div>
