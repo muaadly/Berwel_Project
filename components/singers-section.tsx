@@ -22,8 +22,10 @@ export default function SingersSection() {
   }, [])
 
   const scroll = (direction: 'left' | 'right') => {
+    console.log('Scroll function called with direction:', direction)
     if (scrollRef.current) {
       const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current
+      console.log('Scroll values:', { scrollLeft, clientWidth, scrollWidth })
       const scrollAmount = clientWidth * 0.8
       
       let newScrollLeft
@@ -33,10 +35,13 @@ export default function SingersSection() {
         newScrollLeft = Math.min(scrollWidth - clientWidth, scrollLeft + scrollAmount)
       }
       
+      console.log('Scrolling to:', newScrollLeft)
       scrollRef.current.scrollTo({
         left: newScrollLeft,
         behavior: 'smooth',
       })
+    } else {
+      console.log('scrollRef.current is null')
     }
   }
 
@@ -52,18 +57,18 @@ export default function SingersSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
                   onClick={() => scroll('left')}
                 >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
+                  <ChevronLeft className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
                   onClick={() => scroll('right')}
                 >
-                  <ChevronRight className="h-4 w-4 text-primary" />
+                  <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
             </>
@@ -74,18 +79,18 @@ export default function SingersSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
                   onClick={() => scroll('left')}
                 >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
+                  <ChevronLeft className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
                   onClick={() => scroll('right')}
                 >
-                  <ChevronRight className="h-4 w-4 text-primary" />
+                  <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
             </>
