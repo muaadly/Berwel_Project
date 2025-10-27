@@ -478,20 +478,35 @@ export default function SongDetail({ songId }: SongDetailProps) {
           </div>
         </div>
 
-        {/* Comments Section */}
-        <div className={`mt-8 ${language === 'ar' ? 'song-comments-section' : ''}`}>
-          <div className="bg-card border border-border rounded-lg p-6">
+        {/* Comments Section - FORCE ENGLISH STRUCTURE FOR ARABIC */}
+        <div className="mt-8">
+          <div className="bg-card border border-border rounded-lg p-6" style={{ 
+            backgroundColor: '#1a1a1a', 
+            border: '1px solid #333', 
+            borderRadius: '0.75rem', 
+            padding: '1.5rem' 
+          }}>
             {/* Comments List */}
-            <div className={`space-y-4 ${language === 'ar' ? 'comments-section' : ''}`}>
+            <div className="space-y-4">
               {comments.length === 0 ? (
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground" style={{ color: '#9ca3af', textAlign: 'left' }}>
                   {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}
                 </p>
               ) : (
                 comments.map((comment, index) => (
-                  <div key={index} className="bg-muted rounded-lg p-4 mb-4">
-                    {/* User Info Header */}
-                    <div className="flex items-center gap-3 mb-3">
+                  <div key={index} className="bg-muted rounded-lg p-4 mb-4" style={{ 
+                    backgroundColor: '#2a2a2a', 
+                    border: '1px solid #444', 
+                    borderRadius: '0.5rem', 
+                    padding: '1rem', 
+                    marginBottom: '1rem' 
+                  }}>
+                    {/* User Info Header - FORCE LEFT ALIGNMENT */}
+                    <div className="flex items-center gap-3 mb-3" style={{ 
+                      alignItems: 'center', 
+                      justifyContent: 'flex-start', 
+                      marginBottom: '0.75rem' 
+                    }}>
                       <img
                         src={comment.user?.image || '/placeholder-user.jpg'}
                         alt={comment.user?.name || 'User'}
@@ -499,12 +514,21 @@ export default function SongDetail({ songId }: SongDetailProps) {
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                         }}
+                        style={{ width: '2rem', height: '2rem', borderRadius: '50%' }}
                       />
-                      <div className="flex-1">
-                        <span className="text-foreground font-semibold text-sm">
+                      <div className="flex-1" style={{ textAlign: 'left' }}>
+                        <span className="text-foreground font-semibold text-sm" style={{ 
+                          color: 'white', 
+                          fontWeight: '600', 
+                          textAlign: 'left' 
+                        }}>
                           {comment.user?.name || 'Anonymous User'}
                         </span>
-                        <span className="text-muted-foreground text-xs ml-2">
+                        <span className="text-muted-foreground text-xs ml-2" style={{ 
+                          color: '#9ca3af', 
+                          textAlign: 'left', 
+                          marginLeft: '0.5rem' 
+                        }}>
                           {new Date(comment.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
@@ -516,8 +540,8 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       </div>
                     </div>
                     
-                    {/* Comment Content */}
-                    <div className="mb-3">
+                    {/* Comment Content - FORCE LEFT ALIGNMENT */}
+                    <div className="mb-3" style={{ marginBottom: '0.75rem' }}>
                       {editingCommentIndex === index ? (
                         <div className="space-y-2">
                           <Textarea
@@ -525,21 +549,42 @@ export default function SongDetail({ songId }: SongDetailProps) {
                             onChange={(e) => setEditingCommentText(e.target.value)}
                             className="bg-muted border-border text-foreground placeholder-muted-foreground"
                             rows={2}
+                            style={{ 
+                              backgroundColor: '#2a2a2a', 
+                              border: '1px solid #444', 
+                              color: 'white', 
+                              textAlign: 'left' 
+                            }}
                           />
                         </div>
                       ) : (
-                        <p className="text-foreground text-sm leading-relaxed">{comment.text}</p>
+                        <p className="text-foreground text-sm leading-relaxed" style={{ 
+                          color: 'white', 
+                          textAlign: 'left', 
+                          lineHeight: '1.5' 
+                        }}>
+                          {comment.text}
+                        </p>
                       )}
                     </div>
-                    {/* Edit/Delete Buttons */}
+                    {/* Edit/Delete Buttons - FORCE RIGHT ALIGNMENT */}
                     {user && (comment.userId === user.id || comment.userId === user.email) && (
-                      <div className="flex justify-end gap-2">
+                      <div className="flex justify-end gap-2" style={{ 
+                        justifyContent: 'flex-end', 
+                        marginTop: '0.75rem' 
+                      }}>
                         {editingCommentIndex === index ? (
                           <>
                             <Button
                               onClick={handleSaveEdit}
                               size="sm"
                               className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
+                              style={{ 
+                                backgroundColor: '#16a34a', 
+                                color: 'white', 
+                                fontSize: '0.75rem', 
+                                padding: '0.25rem 0.75rem' 
+                              }}
                             >
                               {language === 'ar' ? t('save') : 'Save'}
                             </Button>
@@ -548,6 +593,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               size="sm"
                               variant="outline"
                               className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
+                              style={{ 
+                                border: '1px solid #444', 
+                                color: 'white', 
+                                fontSize: '0.75rem', 
+                                padding: '0.25rem 0.75rem' 
+                              }}
                             >
                               {language === 'ar' ? t('cancel') : 'Cancel'}
                             </Button>
@@ -558,6 +609,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               onClick={() => handleEditComment(index, comment.text)}
                               size="sm"
                               className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
+                              style={{ 
+                                backgroundColor: '#2563eb', 
+                                color: 'white', 
+                                fontSize: '0.75rem', 
+                                padding: '0.25rem 0.75rem' 
+                              }}
                             >
                               {language === 'ar' ? t('edit') : 'Edit'}
                             </Button>
@@ -565,6 +622,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
                               onClick={() => handleDeleteComment(index)}
                               size="sm"
                               className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
+                              style={{ 
+                                backgroundColor: '#dc2626', 
+                                color: 'white', 
+                                fontSize: '0.75rem', 
+                                padding: '0.25rem 0.75rem' 
+                              }}
                             >
                               {language === 'ar' ? t('delete') : 'Delete'}
                             </Button>
@@ -577,9 +640,15 @@ export default function SongDetail({ songId }: SongDetailProps) {
               )}
             </div>
 
-            {/* Comment Input - Moved to bottom */}
-            <div className="mt-6">
-              <h2 className="text-xl font-bold text-foreground mb-4">
+            {/* Comment Input - FORCE LEFT ALIGNMENT */}
+            <div className="mt-6" style={{ marginTop: '1.5rem' }}>
+              <h2 className="text-xl font-bold text-foreground mb-4" style={{ 
+                color: 'white', 
+                fontSize: '1.25rem', 
+                fontWeight: '700', 
+                marginBottom: '1rem', 
+                textAlign: 'left' 
+              }}>
                 {language === 'ar' ? t('comments') : 'Comments'}
               </h2>
               <Textarea
@@ -588,10 +657,26 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
                 className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
+                style={{ 
+                  backgroundColor: '#2a2a2a', 
+                  border: '1px solid #444', 
+                  color: 'white', 
+                  textAlign: 'left', 
+                  width: '100%', 
+                  padding: '0.75rem', 
+                  borderRadius: '0.5rem' 
+                }}
               />
               <Button
                 onClick={handleCommentSubmit}
                 className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+                style={{ 
+                  backgroundColor: '#f97316', 
+                  color: 'white', 
+                  marginTop: '0.5rem', 
+                  padding: '0.5rem 1rem', 
+                  borderRadius: '0.5rem' 
+                }}
               >
                 {language === 'ar' ? t('postComment') : 'Post Comment'}
               </Button>
