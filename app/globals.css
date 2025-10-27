@@ -1850,3 +1850,17 @@ body {
     text-align: center !important;
   }
 }
+
+/* Center contact page title and paragraph in Arabic */
+.rtl .contact-page h1,
+.rtl .contact-page h2,
+.rtl .contact-page p {
+  text-align: center !important;
+}
+
+/* Override existing text alignment classes for contact page */
+.rtl .contact-page .text-center,
+.rtl .contact-page .text-right,
+.rtl .contact-page .md\\:text-right {
+  text-align: center !important;
+}

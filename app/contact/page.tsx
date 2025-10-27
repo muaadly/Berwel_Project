@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   return (
-    <main className="min-h-screen bg-background text-foreground pb-16">
+    <main className={`min-h-screen bg-background text-foreground pb-16 ${language === 'ar' ? 'contact-page' : ''}`}>
       <Navigation
         searchOpen={searchOpen}
         setSearchOpen={setSearchOpen}
