@@ -27,42 +27,42 @@ export default function AboutPage() {
 
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('projectTitle')}</h2>
-          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{t('projectTitle')}</h2>
+          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('projectDescription')}
           </p>
-          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('projectMission')}
           </p>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('libraryTitle')}</h2>
+          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{t('libraryTitle')}</h2>
           <div className="mb-0 text-foreground space-y-2">
             {t('libraryItems').map((item, index) => (
-              <p key={index} className={`text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{item}</p>
+              <p key={index} className={`text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{item}</p>
             ))}
           </div>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('contributeTitle')}</h2>
-          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{t('contributeTitle')}</h2>
+          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('contributeDescription')}
           </p>
           <div className="mb-4 text-foreground space-y-4">
             {t('contributeItems').map((item, index) => (
-              <p key={index} className={`text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>{item}</p>
+              <p key={index} className={`text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{item}</p>
             ))}
           </div>
-          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('contributeEnd')}
           </p>
         </div>
         <div className="bg-card border-2 border-border rounded-lg p-8 shadow-lg transition-colors duration-200 group hover:border-primary">
-          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-right' : 'text-left'}`}>{t('whyMattersTitle')}</h2>
-          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <h2 className={`text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-200 ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>{t('whyMattersTitle')}</h2>
+          <p className={`mb-4 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('whyMattersDescription')}
           </p>
-          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+          <p className={`mb-0 text-foreground ${language === 'ar' ? 'text-left md:text-right' : 'text-left'}`}>
             {t('whyMattersEnd')}
           </p>
         </div>
