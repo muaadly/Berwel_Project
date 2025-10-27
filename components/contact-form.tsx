@@ -34,7 +34,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
   }
 
   return (
-    <section className="bg-background py-16 px-4">
+    <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'contact-form' : ''}`}>
       <div className="max-w-2xl mx-auto">
         {!hideHeading && (
           <h2 className={`text-3xl font-bold text-foreground mb-8 ${language === 'ar' ? 'text-right' : 'text-center'}`}>{t('contactUs')}</h2>
@@ -43,7 +43,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-muted border border-border rounded-lg p-4">
-                <label htmlFor="name" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right' : ''}`}>
+                <label htmlFor="name" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right md:text-right' : ''}`}>
                   {t('name')}
                 </label>
                 <Input
@@ -58,7 +58,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
               </div>
 
               <div className="bg-muted border border-border rounded-lg p-4">
-                <label htmlFor="email" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right' : ''}`}>
+                <label htmlFor="email" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right md:text-right' : ''}`}>
                   {t('email')}
                 </label>
                 <Input
@@ -74,7 +74,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
             </div>
 
             <div className="bg-muted border border-border rounded-lg p-4">
-              <label htmlFor="subject" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right' : ''}`}>
+              <label htmlFor="subject" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right md:text-right' : ''}`}>
                 {t('subject')}
               </label>
               <Input
@@ -89,7 +89,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
             </div>
 
             <div className="bg-muted border border-border rounded-lg p-4">
-              <label htmlFor="message" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right' : ''}`}>
+              <label htmlFor="message" className={`block text-sm font-medium text-foreground mb-2 ${language === 'ar' ? 'text-right md:text-right' : ''}`}>
                 {t('message')}
               </label>
               <Textarea

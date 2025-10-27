@@ -501,6 +501,20 @@ html, body {
   direction: ltr !important;
 }
 
+/* Mobile RTL Contact Form */
+@media (max-width: 768px) {
+  .rtl .contact-form label {
+    text-align: right !important;
+    direction: rtl !important;
+  }
+  
+  .rtl .contact-form input,
+  .rtl .contact-form textarea {
+    text-align: right !important;
+    direction: rtl !important;
+  }
+}
+
 .rtl .singers-section img,
 .rtl .maloof-section img {
   display: block !important;
