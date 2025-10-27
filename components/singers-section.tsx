@@ -27,7 +27,7 @@ export default function SingersSection() {
     
     if (scrollRef.current) {
       const container = scrollRef.current
-      const scrollAmount = container.clientWidth * 0.8 // Scroll 80% of container width
+      const scrollAmount = 300 // Fixed scroll amount instead of percentage
       const currentScroll = container.scrollLeft
       const maxScroll = container.scrollWidth - container.clientWidth
       
@@ -45,7 +45,13 @@ export default function SingersSection() {
         scrollLeft: container.scrollLeft
       })
       
-      container.scrollTo({ left: newScroll, behavior: 'smooth' })
+      // Try multiple scroll methods
+      try {
+        container.scrollTo({ left: newScroll, behavior: 'smooth' })
+      } catch (e) {
+        console.log('scrollTo failed, trying scrollLeft:', e)
+        container.scrollLeft = newScroll
+      }
     } else {
       console.error('scrollRef.current is null - cannot scroll')
     }
@@ -104,7 +110,7 @@ export default function SingersSection() {
         </div>
 
         {/* Singers Carousel */}
-        <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" ref={scrollRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 overflow-x-auto scrollbar-hide" ref={scrollRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex w-max space-x-6 pb-4">
             {singers.map((singer, idx) => (
               <Link

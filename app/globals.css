@@ -616,6 +616,16 @@ html, body {
   overflow-y: hidden !important;
   direction: ltr !important;
   scroll-behavior: smooth !important;
+  white-space: nowrap !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Ensure scroll container works on desktop */
+.singers-section .overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-behavior: smooth !important;
+  white-space: nowrap !important;
 }
 
 /* Force all images to display */
