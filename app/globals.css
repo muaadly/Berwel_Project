@@ -1760,24 +1760,28 @@ body {
 
 /* Specific profile section layout fixes */
 .rtl .profile-section .flex {
-  flex-direction: row !important; /* Keep normal row direction for RTL */
+  flex-direction: column !important; /* Change to column for centering */
   align-items: center !important;
+  justify-content: center !important;
   gap: 1.5rem !important;
+  text-align: center !important;
 }
 
 .rtl .profile-section .flex-shrink-0 {
   flex-shrink: 0 !important;
-  order: 2 !important; /* Move profile picture to right */
+  order: 1 !important; /* Profile picture first */
 }
 
 .rtl .profile-section .flex-1 {
   flex: 1 !important;
   min-width: 0 !important;
-  order: 1 !important; /* Move text to left */
+  order: 2 !important; /* Text second */
+  text-align: center !important;
+  width: 100% !important;
 }
 
 .rtl .profile-section .text-right {
-  text-align: right !important;
+  text-align: center !important; /* Center text instead of right-align */
   direction: rtl !important;
 }
 
@@ -1787,5 +1791,10 @@ body {
 }
 
 .rtl .profile-section .justify-end {
-  justify-content: flex-end !important;
+  justify-content: center !important; /* Center instead of flex-end */
+}
+
+/* Add spacing between icon and text in member badge */
+.rtl .profile-section .mr-1 {
+  margin-right: 0.5rem !important; /* Increase spacing from 0.25rem to 0.5rem */
 }
