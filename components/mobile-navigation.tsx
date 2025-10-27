@@ -80,8 +80,8 @@ export default function MobileNavigation() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className={`flex items-center space-x-4 p-3 rounded-lg hover:bg-muted transition-colors ${
-                      language === 'ar' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
+                    className={`flex items-center p-3 rounded-lg hover:bg-muted transition-colors ${
+                      language === 'ar' ? 'flex-row-reverse justify-center space-x-6' : 'flex-row space-x-4'
                     }`}
                   >
                     {language === 'ar' ? (
@@ -103,8 +103,8 @@ export default function MobileNavigation() {
                 <Link
                   href="/profile"
                   onClick={closeMenu}
-                  className={`flex items-center space-x-4 p-3 rounded-lg hover:bg-muted transition-colors ${
-                    language === 'ar' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
+                  className={`flex items-center p-3 rounded-lg hover:bg-muted transition-colors ${
+                    language === 'ar' ? 'flex-row-reverse justify-center space-x-6' : 'flex-row space-x-4'
                   }`}
                 >
                   {language === 'ar' ? (
