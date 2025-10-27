@@ -1799,15 +1799,17 @@ body {
   margin-right: 0.5rem !important; /* Increase spacing from 0.25rem to 0.5rem */
 }
 
-/* Mobile-specific profile section - hide picture and center text */
+/* Mobile-specific profile section - hide picture and center text for both languages */
 @media (max-width: 768px) {
-  /* Hide profile picture in mobile view */
-  .profile-section .flex-shrink-0 {
+  /* Hide profile picture in mobile view for both languages */
+  .profile-section .flex-shrink-0,
+  .rtl .profile-section .flex-shrink-0 {
     display: none !important;
   }
   
   /* Center text elements for both languages */
-  .profile-section .flex {
+  .profile-section .flex,
+  .rtl .profile-section .flex {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1815,7 +1817,8 @@ body {
     gap: 1rem !important;
   }
   
-  .profile-section .flex-1 {
+  .profile-section .flex-1,
+  .rtl .profile-section .flex-1 {
     order: 1 !important;
     text-align: center !important;
     width: 100% !important;
@@ -1825,12 +1828,16 @@ body {
   }
   
   .profile-section .text-right,
-  .profile-section .text-left {
+  .profile-section .text-left,
+  .rtl .profile-section .text-right,
+  .rtl .profile-section .text-left {
     text-align: center !important;
   }
   
   .profile-section .justify-end,
-  .profile-section .justify-start {
+  .profile-section .justify-start,
+  .rtl .profile-section .justify-end,
+  .rtl .profile-section .justify-start {
     justify-content: center !important;
   }
 }
