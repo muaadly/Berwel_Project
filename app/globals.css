@@ -1798,3 +1798,36 @@ body {
 .rtl .profile-section .mr-1 {
   margin-right: 0.5rem !important; /* Increase spacing from 0.25rem to 0.5rem */
 }
+
+/* Mobile-specific profile section centering */
+@media (max-width: 768px) {
+  .rtl .profile-section .flex {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 1rem !important;
+  }
+  
+  .rtl .profile-section .flex-shrink-0 {
+    order: 1 !important;
+    margin: 0 auto !important;
+  }
+  
+  .rtl .profile-section .flex-1 {
+    order: 2 !important;
+    text-align: center !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .rtl .profile-section .text-right {
+    text-align: center !important;
+  }
+  
+  .rtl .profile-section .justify-end {
+    justify-content: center !important;
+  }
+}
