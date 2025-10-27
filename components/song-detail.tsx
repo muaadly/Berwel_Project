@@ -640,31 +640,14 @@ export default function SongDetail({ songId }: SongDetailProps) {
               )}
             </div>
 
-            {/* Post Comment Button - Moved to top */}
-            <div className="mt-6" style={{ marginTop: '1.5rem' }}>
-              <Button
-                onClick={handleCommentSubmit}
-                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-                style={{ 
-                  backgroundColor: '#f97316', 
-                  color: 'white', 
-                  marginTop: '0.5rem', 
-                  padding: '0.5rem 1rem', 
-                  borderRadius: '0.5rem' 
-                }}
-              >
-                {language === 'ar' ? t('postComment') : 'Post Comment'}
-              </Button>
-            </div>
-
-            {/* Comment Input - Moved to bottom after button */}
+            {/* Comment Input - NORMAL ORDER: Header → Input → Button */}
             <div className="mt-6" style={{ marginTop: '1.5rem' }}>
               <h2 className="text-xl font-bold text-foreground mb-4" style={{ 
                 color: 'white', 
                 fontSize: '1.25rem', 
                 fontWeight: '700', 
                 marginBottom: '1rem', 
-                textAlign: 'left' 
+                textAlign: language === 'ar' ? 'right' : 'left' 
               }}>
                 {language === 'ar' ? t('comments') : 'Comments'}
               </h2>
@@ -678,12 +661,25 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   backgroundColor: '#2a2a2a', 
                   border: '1px solid #444', 
                   color: 'white', 
-                  textAlign: 'left', 
+                  textAlign: language === 'ar' ? 'right' : 'left', 
                   width: '100%', 
                   padding: '0.75rem', 
                   borderRadius: '0.5rem' 
                 }}
               />
+              <Button
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+                style={{ 
+                  backgroundColor: '#f97316', 
+                  color: 'white', 
+                  marginTop: '0.5rem', 
+                  padding: '0.5rem 1rem', 
+                  borderRadius: '0.5rem' 
+                }}
+              >
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
+              </Button>
             </div>
           </div>
         </div>

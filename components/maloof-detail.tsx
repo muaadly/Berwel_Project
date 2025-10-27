@@ -587,19 +587,11 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               )}
             </div>
 
-            {/* Post Comment Button - Moved to top */}
+            {/* Comment Input - NORMAL ORDER: Header → Input → Button */}
             <div className="mt-6">
-              <Button
-                onClick={handleCommentSubmit}
-                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                {language === 'ar' ? t('postComment') : 'Post Comment'}
-              </Button>
-            </div>
-
-            {/* Comment Input - Moved to bottom after button */}
-            <div className="mt-6">
-              <h2 className="text-xl font-bold text-foreground mb-4">
+              <h2 className="text-xl font-bold text-foreground mb-4" style={{ 
+                textAlign: language === 'ar' ? 'right' : 'left' 
+              }}>
                 {language === 'ar' ? t('comments') : 'Comments'}
               </h2>
               <Textarea
@@ -608,7 +600,16 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
                 className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
+                style={{ 
+                  textAlign: language === 'ar' ? 'right' : 'left' 
+                }}
               />
+              <Button
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
+              </Button>
             </div>
           </div>
         </div>
