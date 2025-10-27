@@ -84,8 +84,17 @@ export default function MobileNavigation() {
                       language === 'ar' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
                     }`}
                   >
-                    <Icon className="h-5 w-5 text-muted-foreground" />
-                    <span className={`text-lg font-medium ${language === 'ar' ? 'text-right' : 'text-left'}`}>{item.label}</span>
+                    {language === 'ar' ? (
+                      <>
+                        <span className="text-lg font-medium text-right">{item.label}</span>
+                        <Icon className="h-5 w-5 text-muted-foreground" />
+                      </>
+                    ) : (
+                      <>
+                        <Icon className="h-5 w-5 text-muted-foreground" />
+                        <span className="text-lg font-medium text-left">{item.label}</span>
+                      </>
+                    )}
                   </Link>
                 )
               })}
@@ -98,10 +107,21 @@ export default function MobileNavigation() {
                     language === 'ar' ? 'flex-row-reverse space-x-reverse' : 'flex-row'
                   }`}
                 >
-                  <User className="h-5 w-5 text-muted-foreground" />
-                  <span className={`text-lg font-medium ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                    {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
-                  </span>
+                  {language === 'ar' ? (
+                    <>
+                      <span className="text-lg font-medium text-right">
+                        {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                      </span>
+                      <User className="h-5 w-5 text-muted-foreground" />
+                    </>
+                  ) : (
+                    <>
+                      <User className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-lg font-medium text-left">
+                        {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                      </span>
+                    </>
+                  )}
                 </Link>
               )}
             </div>
