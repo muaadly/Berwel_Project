@@ -375,7 +375,7 @@ export const translations: Record<Language, Translations> = {
     phone: '+218 91 234 5678',
     
     // Footer
-    footerDescription: 'Preserving and celebrating Libya\'s rich musical heritage through an interactive digital platform that connects people with their cultural roots.',
+    footerDescription: 'A name for a high-tempo musical rhythm, that exists in most Libyan musical folklore.',
     quickLinks: 'Quick Links',
     socialMedia: 'Social Media',
     copyright: '© 2025 Berwel. All rights reserved. Preserving Libyan musical heritage.',
@@ -587,7 +587,7 @@ export const translations: Record<Language, Translations> = {
     phone: '+218 91 234 5678',
     
     // Footer
-    footerDescription: 'الحفاظ على التراث الموسيقي الليبي الغني والاحتفال به من خلال منصة رقمية تفاعلية تربط الناس بجذورهم الثقافية.',
+    footerDescription: 'برول هو مسمى إيقاع سريع وحماسي، موجود في أغلب الفنون الغنائية الليبية.',
     quickLinks: 'روابط سريعة',
     socialMedia: 'وسائل التواصل الاجتماعي',
     copyright: '© 2025 برول. جميع الحقوق محفوظة. الحفاظ على التراث الموسيقي الليبي.',
