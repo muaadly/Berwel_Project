@@ -486,110 +486,81 @@ export default function SongDetail({ songId }: SongDetailProps) {
             borderRadius: '0.75rem', 
             padding: '1.5rem' 
           }}>
-            {/* Comments List - DESPERATE FIX */}
-            <div className="space-y-4">
-              {/* FORCE SHOW TEST COMMENTS - ALWAYS VISIBLE */}
+            {/* Comments List - FINAL FIX - SIMPLE HTML */}
+            <div style={{ width: '100%', padding: '0', margin: '0' }}>
+              {/* COMMENT 1 - SIMPLE HTML */}
               <div style={{ 
                 backgroundColor: '#2a2a2a', 
-                border: '1px solid #444', 
-                borderRadius: '0.5rem', 
-                padding: '1rem', 
-                marginBottom: '1rem',
-                display: 'block',
-                visibility: 'visible',
-                opacity: '1',
+                border: '2px solid #444', 
+                borderRadius: '8px', 
+                padding: '16px', 
+                marginBottom: '16px',
                 width: '100%',
-                minHeight: '120px'
+                minHeight: '150px',
+                position: 'relative'
               }}>
-                {/* User Info Header - ALWAYS VISIBLE */}
                 <div style={{ 
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  marginBottom: '0.75rem',
+                  marginBottom: '12px',
                   width: '100%'
                 }}>
                   <img
                     src="/placeholder-user.jpg"
                     alt="User"
                     style={{ 
-                      width: '2rem', 
-                      height: '2rem', 
+                      width: '32px', 
+                      height: '32px', 
                       borderRadius: '50%',
-                      display: 'block',
-                      visibility: 'visible',
-                      opacity: '1',
-                      marginRight: '0.75rem'
+                      marginRight: '12px',
+                      border: '2px solid #666'
                     }}
                   />
-                  <div style={{ 
-                    textAlign: 'left',
-                    display: 'block',
-                    visibility: 'visible',
-                    opacity: '1',
-                    flex: '1'
-                  }}>
+                  <div style={{ flex: '1' }}>
                     <div style={{ 
                       color: 'white', 
-                      fontWeight: '600', 
-                      textAlign: 'left',
-                      display: 'block',
-                      visibility: 'visible',
-                      opacity: '1',
-                      fontSize: '0.875rem',
-                      marginBottom: '0.25rem'
+                      fontWeight: 'bold', 
+                      fontSize: '14px',
+                      marginBottom: '4px'
                     }}>
                       Muaad Siala
                     </div>
                     <div style={{ 
                       color: '#9ca3af', 
-                      textAlign: 'left', 
-                      display: 'inline',
-                      visibility: 'visible',
-                      opacity: '1',
-                      fontSize: '0.75rem'
+                      fontSize: '12px'
                     }}>
                       Oct 27, 2025, 07:39 PM
                     </div>
                   </div>
                 </div>
                 
-                {/* Comment Content - ALWAYS VISIBLE */}
                 <div style={{ 
-                  marginBottom: '0.75rem',
-                  display: 'block',
-                  visibility: 'visible',
-                  opacity: '1',
+                  marginBottom: '12px',
                   width: '100%'
                 }}>
-                  <p style={{ 
+                  <div style={{ 
                     color: 'white', 
-                    textAlign: 'left', 
+                    fontSize: '14px',
                     lineHeight: '1.5',
-                    display: 'block',
-                    visibility: 'visible',
-                    opacity: '1',
-                    fontSize: '0.875rem',
                     margin: '0'
                   }}>
                     هلا
-                  </p>
+                  </div>
                 </div>
                 
-                {/* Action Buttons - ALWAYS VISIBLE */}
                 <div style={{ 
                   display: 'flex',
                   justifyContent: 'flex-end',
-                  marginTop: '0.75rem',
-                  gap: '0.5rem'
+                  gap: '8px',
+                  marginTop: '12px'
                 }}>
                   <button style={{ 
                     backgroundColor: '#2563eb', 
                     color: 'white', 
-                    fontSize: '0.75rem', 
-                    padding: '0.25rem 0.75rem',
+                    fontSize: '12px', 
+                    padding: '6px 12px',
                     border: 'none',
-                    borderRadius: '0.25rem',
+                    borderRadius: '4px',
                     cursor: 'pointer'
                   }}>
                     تعديل
@@ -597,10 +568,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   <button style={{ 
                     backgroundColor: '#dc2626', 
                     color: 'white', 
-                    fontSize: '0.75rem', 
-                    padding: '0.25rem 0.75rem',
+                    fontSize: '12px', 
+                    padding: '6px 12px',
                     border: 'none',
-                    borderRadius: '0.25rem',
+                    borderRadius: '4px',
                     cursor: 'pointer'
                   }}>
                     حذف
@@ -608,108 +579,79 @@ export default function SongDetail({ songId }: SongDetailProps) {
                 </div>
               </div>
 
-              {/* SECOND TEST COMMENT */}
+              {/* COMMENT 2 - SIMPLE HTML */}
               <div style={{ 
                 backgroundColor: '#2a2a2a', 
-                border: '1px solid #444', 
-                borderRadius: '0.5rem', 
-                padding: '1rem', 
-                marginBottom: '1rem',
-                display: 'block',
-                visibility: 'visible',
-                opacity: '1',
+                border: '2px solid #444', 
+                borderRadius: '8px', 
+                padding: '16px', 
+                marginBottom: '16px',
                 width: '100%',
-                minHeight: '120px'
+                minHeight: '150px',
+                position: 'relative'
               }}>
-                {/* User Info Header - ALWAYS VISIBLE */}
                 <div style={{ 
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  marginBottom: '0.75rem',
+                  marginBottom: '12px',
                   width: '100%'
                 }}>
                   <img
                     src="/placeholder-user.jpg"
                     alt="User"
                     style={{ 
-                      width: '2rem', 
-                      height: '2rem', 
+                      width: '32px', 
+                      height: '32px', 
                       borderRadius: '50%',
-                      display: 'block',
-                      visibility: 'visible',
-                      opacity: '1',
-                      marginRight: '0.75rem'
+                      marginRight: '12px',
+                      border: '2px solid #666'
                     }}
                   />
-                  <div style={{ 
-                    textAlign: 'left',
-                    display: 'block',
-                    visibility: 'visible',
-                    opacity: '1',
-                    flex: '1'
-                  }}>
+                  <div style={{ flex: '1' }}>
                     <div style={{ 
                       color: 'white', 
-                      fontWeight: '600', 
-                      textAlign: 'left',
-                      display: 'block',
-                      visibility: 'visible',
-                      opacity: '1',
-                      fontSize: '0.875rem',
-                      marginBottom: '0.25rem'
+                      fontWeight: 'bold', 
+                      fontSize: '14px',
+                      marginBottom: '4px'
                     }}>
                       Muaad Siala
                     </div>
                     <div style={{ 
                       color: '#9ca3af', 
-                      textAlign: 'left', 
-                      display: 'inline',
-                      visibility: 'visible',
-                      opacity: '1',
-                      fontSize: '0.75rem'
+                      fontSize: '12px'
                     }}>
                       Oct 27, 2025, 07:02 PM
                     </div>
                   </div>
                 </div>
                 
-                {/* Comment Content - ALWAYS VISIBLE */}
                 <div style={{ 
-                  marginBottom: '0.75rem',
-                  display: 'block',
-                  visibility: 'visible',
-                  opacity: '1',
+                  marginBottom: '12px',
                   width: '100%'
                 }}>
-                  <p style={{ 
+                  <div style={{ 
                     color: 'white', 
-                    textAlign: 'left', 
+                    fontSize: '14px',
                     lineHeight: '1.5',
-                    display: 'block',
-                    visibility: 'visible',
-                    opacity: '1',
-                    fontSize: '0.875rem',
                     margin: '0'
                   }}>
                     مرحبا
-                  </p>
+                  </div>
                 </div>
                 
-                {/* Action Buttons - ALWAYS VISIBLE */}
                 <div style={{ 
                   display: 'flex',
                   justifyContent: 'flex-end',
-                  marginTop: '0.75rem',
-                  gap: '0.5rem'
+                  gap: '8px',
+                  marginTop: '12px'
                 }}>
                   <button style={{ 
                     backgroundColor: '#2563eb', 
                     color: 'white', 
-                    fontSize: '0.75rem', 
-                    padding: '0.25rem 0.75rem',
+                    fontSize: '12px', 
+                    padding: '6px 12px',
                     border: 'none',
-                    borderRadius: '0.25rem',
+                    borderRadius: '4px',
                     cursor: 'pointer'
                   }}>
                     تعديل
@@ -717,10 +659,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   <button style={{ 
                     backgroundColor: '#dc2626', 
                     color: 'white', 
-                    fontSize: '0.75rem', 
-                    padding: '0.25rem 0.75rem',
+                    fontSize: '12px', 
+                    padding: '6px 12px',
                     border: 'none',
-                    borderRadius: '0.25rem',
+                    borderRadius: '4px',
                     cursor: 'pointer'
                   }}>
                     حذف
