@@ -22,26 +22,21 @@ export default function SingersSection() {
   }, [])
 
   const scroll = (direction: 'left' | 'right') => {
-    console.log('Scroll function called with direction:', direction)
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current
-      console.log('Scroll values:', { scrollLeft, clientWidth, scrollWidth })
-      const scrollAmount = clientWidth * 0.8
+      const container = scrollRef.current
+      const scrollAmount = container.clientWidth * 0.8 // Scroll 80% of container width
+      const currentScroll = container.scrollLeft
+      const maxScroll = container.scrollWidth - container.clientWidth
       
-      let newScrollLeft
+      let newScroll
       if (direction === 'left') {
-        newScrollLeft = Math.max(0, scrollLeft - scrollAmount)
+        newScroll = Math.max(0, currentScroll - scrollAmount)
       } else {
-        newScrollLeft = Math.min(scrollWidth - clientWidth, scrollLeft + scrollAmount)
+        newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
       }
       
-      console.log('Scrolling to:', newScrollLeft)
-      scrollRef.current.scrollTo({
-        left: newScrollLeft,
-        behavior: 'smooth',
-      })
-    } else {
-      console.log('scrollRef.current is null')
+      console.log(`Scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      container.scrollTo({ left: newScroll, behavior: 'smooth' })
     }
   }
 
@@ -57,18 +52,18 @@ export default function SingersSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('left')}
                 >
-                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className="h-4 w-4 text-primary" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('right')}
                 >
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 text-primary" />
                 </Button>
               </div>
             </>
@@ -79,18 +74,18 @@ export default function SingersSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('left')}
                 >
-                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className="h-4 w-4 text-primary" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="bg-gray-900 border-gray-700 text-orange-500 hover:bg-gray-800 hover:border-gray-600 border-2 rounded-lg w-10 h-10"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('right')}
                 >
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 text-primary" />
                 </Button>
               </div>
             </>
