@@ -3,7 +3,6 @@
 import * as React from "react"
 import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
-import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
@@ -48,9 +47,8 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
             <div className="w-full flex justify-center mb-6">
               <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
-            {/* Search bar with icon - FORCE CENTER LIKE ENGLISH */}
+            {/* Search bar without icon - FORCE CENTER LIKE ENGLISH */}
             <div className="w-full mb-8 flex items-center border-b border-border px-3">
-              <Search className="mr-3 h-8 w-8 text-primary flex-shrink-0" />
               <CommandInput
                 autoFocus
                 value={searchValue}
