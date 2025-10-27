@@ -1811,23 +1811,23 @@ body {
   
   .rtl .profile-section .flex-shrink-0 {
     order: 1 !important;
-    margin: 0 auto !important;
+    margin: 0 auto !important; /* Center only the profile picture */
   }
   
   .rtl .profile-section .flex-1 {
     order: 2 !important;
-    text-align: center !important;
+    text-align: right !important; /* Keep text right-aligned */
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;
+    align-items: flex-end !important; /* Align text to the right */
   }
   
   .rtl .profile-section .text-right {
-    text-align: center !important;
+    text-align: right !important; /* Keep text right-aligned */
   }
   
   .rtl .profile-section .justify-end {
-    justify-content: center !important;
+    justify-content: flex-end !important; /* Keep badge right-aligned */
   }
 }
