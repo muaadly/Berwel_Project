@@ -57,6 +57,10 @@ export interface Translations {
   categories: string
   allCategories: string
   filterBy: string
+  filterByEntryType: string
+  filterByEntryRhythm: string
+  filterBySinger: string
+  filterByCategory: string
   sortBy: string
   newest: string
   oldest: string
@@ -266,6 +270,10 @@ export const translations: Record<Language, Translations> = {
     categories: 'Categories',
     allCategories: 'All Categories',
     filterBy: 'Filter by',
+    filterByEntryType: 'Filter by Entry Type',
+    filterByEntryRhythm: 'Filter by Entry Rhythm',
+    filterBySinger: 'Filter by Singer',
+    filterByCategory: 'Filter by Category',
     sortBy: 'Sort by',
     newest: 'Newest',
     oldest: 'Oldest',
@@ -474,6 +482,10 @@ export const translations: Record<Language, Translations> = {
     categories: 'الفئات',
     allCategories: 'جميع الفئات',
     filterBy: 'تصفية حسب',
+    filterByEntryType: 'فلترة حسب الطبع',
+    filterByEntryRhythm: 'فلترة حسب الإيقاع',
+    filterBySinger: 'فلترة حسب المطرب',
+    filterByCategory: 'فلترة حسب التصنيف',
     sortBy: 'ترتيب حسب',
     newest: 'الأحدث',
     oldest: 'الأقدم',

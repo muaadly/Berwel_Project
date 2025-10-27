@@ -499,7 +499,7 @@ export default function LibraryContent() {
               )}
               {/* Singer Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-foreground font-semibold">Filter by Singer:</div>
+                <div className="mb-2 text-foreground font-semibold">{t('filterBySinger')}:</div>
                 <div className="flex flex-wrap gap-2">
                   {allSingers.map(singer => (
                     <button
@@ -518,7 +518,7 @@ export default function LibraryContent() {
               </div>
               {/* Category Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-foreground font-semibold">Filter by Category:</div>
+                <div className="mb-2 text-foreground font-semibold">{t('filterByCategory')}:</div>
                 <div className="flex flex-wrap gap-2">
                   {allCategories.map(category => (
                     <button
@@ -620,7 +620,7 @@ export default function LibraryContent() {
               )}
               {/* Entry Type Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-foreground font-semibold">Filter by Entry Type:</div>
+                <div className="mb-2 text-foreground font-semibold">{t('filterByEntryType')}:</div>
                 <div className="flex flex-wrap gap-2">
                   {allEntryTypes.map(type => (
                     <button
@@ -639,7 +639,7 @@ export default function LibraryContent() {
               </div>
               {/* Entry Rhythm Filter */}
               <div className="mb-4">
-                <div className="mb-2 text-foreground font-semibold">Filter by Entry Rhythm:</div>
+                <div className="mb-2 text-foreground font-semibold">{t('filterByEntryRhythm')}:</div>
                 <div className="flex flex-wrap gap-2">
                   {allEntryRhythms.map(rhythm => (
                     <button
