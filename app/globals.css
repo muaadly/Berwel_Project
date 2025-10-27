@@ -513,6 +513,15 @@ html, body {
     text-align: right !important;
     direction: rtl !important;
   }
+  
+  .rtl .contact-form h1,
+  .rtl .contact-form h2 {
+    text-align: center !important;
+  }
+  
+  .rtl .contact-form .text-center {
+    text-align: center !important;
+  }
 }
 
 .rtl .singers-section img,

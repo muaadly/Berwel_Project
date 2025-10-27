@@ -37,7 +37,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
     <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'contact-form' : ''}`}>
       <div className="max-w-2xl mx-auto">
         {!hideHeading && (
-          <h2 className={`text-3xl font-bold text-foreground mb-8 ${language === 'ar' ? 'text-right' : 'text-center'}`}>{t('contactUs')}</h2>
+          <h2 className={`text-3xl font-bold text-foreground mb-8 ${language === 'ar' ? 'text-center md:text-right' : 'text-center'}`}>{t('contactUs')}</h2>
         )}
         <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -103,7 +103,7 @@ export default function ContactForm({ hideHeading = false }: { hideHeading?: boo
               />
             </div>
 
-            <div className={`${language === 'ar' ? 'text-right' : 'text-center'}`}>
+            <div className={`${language === 'ar' ? 'text-center md:text-right' : 'text-center'}`}>
               <Button
                 type="submit"
                 className="font-medium px-8 py-3 rounded-md transition-colors text-white"
