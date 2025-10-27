@@ -1928,68 +1928,147 @@ body {
   text-align: center !important;
 }
 
-/* URGENT FIX - Make Arabic comments section look exactly like English version */
+/* NUCLEAR FIX - Force Arabic comments to look EXACTLY like English version */
+.rtl .song-comments-section * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+/* Force the main comments container */
 .rtl .song-comments-section .bg-card {
   background: #1a1a1a !important;
   border: 1px solid #333 !important;
   border-radius: 0.75rem !important;
   padding: 1.5rem !important;
   margin: 0 !important;
+  direction: ltr !important;
+  text-align: left !important;
 }
 
-/* Force all text in Arabic comments to be left-aligned like English */
-.rtl .song-comments-section h2,
-.rtl .song-comments-section .text-xl,
-.rtl .song-comments-section .font-bold {
+/* Force comments header */
+.rtl .song-comments-section h2 {
+  color: white !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
   text-align: left !important;
   direction: ltr !important;
 }
 
-/* Force comment input to be left-aligned */
-.rtl .song-comments-section textarea,
-.rtl .song-comments-section .bg-muted {
-  text-align: left !important;
-  direction: ltr !important;
-}
-
-.rtl .song-comments-section textarea::placeholder {
-  text-align: left !important;
-  direction: ltr !important;
-}
-
-/* Force comment buttons to be right-aligned within their container */
-.rtl .song-comments-section .flex.justify-end {
-  justify-content: flex-end !important;
-}
-
-/* Force individual comment structure to match English exactly */
+/* Force individual comment cards */
 .rtl .song-comments-section .bg-muted.rounded-lg {
   background: #2a2a2a !important;
   border: 1px solid #444 !important;
   border-radius: 0.5rem !important;
   padding: 1rem !important;
   margin-bottom: 1rem !important;
+  direction: ltr !important;
+  text-align: left !important;
 }
 
-/* Force user info to be left-aligned */
+/* Force user info section */
 .rtl .song-comments-section .flex.items-center.gap-3 {
   align-items: center !important;
   justify-content: flex-start !important;
+  direction: ltr !important;
+  text-align: left !important;
+  margin-bottom: 0.75rem !important;
 }
 
+/* Force user name and date */
 .rtl .song-comments-section .flex-1 {
   text-align: left !important;
   direction: ltr !important;
 }
 
-/* Force comment text to be left-aligned */
-.rtl .song-comments-section .text-foreground.text-sm {
+.rtl .song-comments-section .text-foreground.font-semibold {
+  color: white !important;
+  font-weight: 600 !important;
   text-align: left !important;
   direction: ltr !important;
 }
 
-/* Force action buttons to be right-aligned */
+.rtl .song-comments-section .text-muted-foreground.text-xs {
+  color: #9ca3af !important;
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+/* Force comment text */
+.rtl .song-comments-section .text-foreground.text-sm {
+  color: white !important;
+  text-align: left !important;
+  direction: ltr !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Force action buttons */
 .rtl .song-comments-section .flex.justify-end.gap-2 {
   justify-content: flex-end !important;
   margin-top: 0.75rem !important;
+  direction: ltr !important;
+}
+
+/* Force comment input area */
+.rtl .song-comments-section textarea {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.5rem !important;
+  color: white !important;
+  padding: 0.75rem !important;
+  width: 100% !important;
+  resize: vertical !important;
+  direction: ltr !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.rtl .song-comments-section textarea::placeholder {
+  color: #9ca3af !important;
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Force post comment button */
+.rtl .song-comments-section .bg-primary {
+  background: #f97316 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500 !important;
+  direction: ltr !important;
+  text-align: center !important;
+}
+
+.rtl .song-comments-section .bg-primary:hover {
+  background: #ea580c !important;
+}
+
+/* Force edit/delete buttons */
+.rtl .song-comments-section .bg-blue-600 {
+  background: #2563eb !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  direction: ltr !important;
+  text-align: center !important;
+}
+
+.rtl .song-comments-section .bg-red-600 {
+  background: #dc2626 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  direction: ltr !important;
+  text-align: center !important;
 }
