@@ -108,7 +108,7 @@ export default function SingersSection() {
                     }}
                   />
                 </div>
-                <p className="text-foreground text-sm font-medium group-hover:text-primary transition-colors">
+                <p className="text-foreground text-sm font-medium group-hover:text-primary transition-colors text-center">
                   {singer.name}
                 </p>
               </Link>
