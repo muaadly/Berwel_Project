@@ -48,15 +48,14 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
             <div className="w-full flex justify-center mb-6">
               <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
-            {/* Search bar with icon - exactly like English version */}
-            <div className="w-full mb-8 flex items-center border-b border-border px-3" style={{ flexDirection: 'row' }}>
+            {/* Search bar with icon - centered */}
+            <div className="w-full mb-8 flex items-center justify-center border-b border-border px-3" style={{ flexDirection: 'row' }}>
               <Search className="mr-3 h-8 w-8 text-primary" />
               <CommandInput
                 autoFocus
                 value={searchValue}
                 onValueChange={onSearchValueChange}
-                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0"
-                style={{ textAlign: language === 'ar' ? 'right' : 'left' }}
+                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 text-center"
                 placeholder={t('searchBerwel')}
               />
             </div>
