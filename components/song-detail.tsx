@@ -506,14 +506,17 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   width: '100%'
                 }}>
                   <img
-                    src="/placeholder-user.jpg"
-                    alt="User"
+                    src={user?.image || "/placeholder-user.jpg"}
+                    alt={user?.name || "User"}
                     style={{ 
                       width: '32px', 
                       height: '32px', 
                       borderRadius: '50%',
-                      marginRight: '12px',
+                      marginRight: '20px',
                       border: '2px solid #666'
+                    }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                     }}
                   />
                   <div style={{ flex: '1' }}>
@@ -523,7 +526,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       fontSize: '14px',
                       marginBottom: '4px'
                     }}>
-                      Muaad Siala
+                      {user?.name || 'Muaad Siala'}
                     </div>
                     <div style={{ 
                       color: '#9ca3af', 
@@ -597,14 +600,17 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   width: '100%'
                 }}>
                   <img
-                    src="/placeholder-user.jpg"
-                    alt="User"
+                    src={user?.image || "/placeholder-user.jpg"}
+                    alt={user?.name || "User"}
                     style={{ 
                       width: '32px', 
                       height: '32px', 
                       borderRadius: '50%',
-                      marginRight: '12px',
+                      marginRight: '20px',
                       border: '2px solid #666'
+                    }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
                     }}
                   />
                   <div style={{ flex: '1' }}>
@@ -614,7 +620,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       fontSize: '14px',
                       marginBottom: '4px'
                     }}>
-                      Muaad Siala
+                      {user?.name || 'Muaad Siala'}
                     </div>
                     <div style={{ 
                       color: '#9ca3af', 
