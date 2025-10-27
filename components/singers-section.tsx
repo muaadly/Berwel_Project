@@ -22,6 +22,9 @@ export default function SingersSection() {
   }, [])
 
   const scroll = (direction: 'left' | 'right') => {
+    console.log('Scroll function called with direction:', direction)
+    console.log('scrollRef.current:', scrollRef.current)
+    
     if (scrollRef.current) {
       const container = scrollRef.current
       const scrollAmount = container.clientWidth * 0.8 // Scroll 80% of container width
@@ -36,7 +39,15 @@ export default function SingersSection() {
       }
       
       console.log(`Scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      console.log('Container dimensions:', {
+        clientWidth: container.clientWidth,
+        scrollWidth: container.scrollWidth,
+        scrollLeft: container.scrollLeft
+      })
+      
       container.scrollTo({ left: newScroll, behavior: 'smooth' })
+    } else {
+      console.error('scrollRef.current is null - cannot scroll')
     }
   }
 
@@ -53,17 +64,17 @@ export default function SingersSection() {
                   variant="outline"
                   size="icon"
                   className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                  onClick={() => scroll('left')}
+                  onClick={() => scroll('right')}
                 >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
+                  <ChevronRight className="h-4 w-4 text-primary" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
                   className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                  onClick={() => scroll('right')}
+                  onClick={() => scroll('left')}
                 >
-                  <ChevronRight className="h-4 w-4 text-primary" />
+                  <ChevronLeft className="h-4 w-4 text-primary" />
                 </Button>
               </div>
             </>
