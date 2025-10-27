@@ -73,7 +73,7 @@ export default function ProfilePage() {
         <Card className="bg-card border-border mb-8">
           <CardHeader>
             <div className={`flex items-center gap-6 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
-              <div className="relative">
+              <div className="flex-shrink-0">
                 <Image
                   src={user.image || "/placeholder-user.jpg"}
                   alt={user.name || "User"}
@@ -81,21 +81,18 @@ export default function ProfilePage() {
                   height={120}
                   className="rounded-full border-4 border-border"
                 />
-                <div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-2 border-2 border-card">
-                  <User className="h-4 w-4 text-white" />
-                </div>
               </div>
-              <div className={`flex-1 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-                <CardTitle className="text-3xl font-bold text-foreground mb-2">
+              <div className={`flex-1 min-w-0 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                <CardTitle className="text-3xl font-bold text-foreground mb-2 break-words">
                   {user.name}
                 </CardTitle>
-                <CardDescription className="text-lg text-muted-foreground mb-4">
+                <CardDescription className="text-lg text-muted-foreground mb-4 break-words">
                   {user.email}
                 </CardDescription>
-                <div className="flex items-center gap-2">
+                <div className={`flex items-center gap-2 ${language === 'ar' ? 'justify-end' : 'justify-start'}`}>
                   <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                     <Music className="h-3 w-3 mr-1" />
-                    {language === 'ar' ? 'عضو في برون' : 'Berwel Member'}
+                    {language === 'ar' ? 'عضو في برول' : 'Berwel Member'}
                   </Badge>
                 </div>
               </div>
