@@ -587,7 +587,17 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               )}
             </div>
 
-            {/* Comment Input - Moved to bottom */}
+            {/* Post Comment Button - Moved to top */}
+            <div className="mt-6">
+              <Button
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
+              </Button>
+            </div>
+
+            {/* Comment Input - Moved to bottom after button */}
             <div className="mt-6">
               <h2 className="text-xl font-bold text-foreground mb-4">
                 {language === 'ar' ? t('comments') : 'Comments'}
@@ -599,12 +609,6 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 className="bg-muted border-border text-foreground placeholder-muted-foreground"
                 rows={3}
               />
-              <Button
-                onClick={handleCommentSubmit}
-                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                {language === 'ar' ? t('postComment') : 'Post Comment'}
-              </Button>
             </div>
           </div>
         </div>

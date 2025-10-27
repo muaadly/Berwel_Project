@@ -640,7 +640,24 @@ export default function SongDetail({ songId }: SongDetailProps) {
               )}
             </div>
 
-            {/* Comment Input - FORCE LEFT ALIGNMENT */}
+            {/* Post Comment Button - Moved to top */}
+            <div className="mt-6" style={{ marginTop: '1.5rem' }}>
+              <Button
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+                style={{ 
+                  backgroundColor: '#f97316', 
+                  color: 'white', 
+                  marginTop: '0.5rem', 
+                  padding: '0.5rem 1rem', 
+                  borderRadius: '0.5rem' 
+                }}
+              >
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
+              </Button>
+            </div>
+
+            {/* Comment Input - Moved to bottom after button */}
             <div className="mt-6" style={{ marginTop: '1.5rem' }}>
               <h2 className="text-xl font-bold text-foreground mb-4" style={{ 
                 color: 'white', 
@@ -667,19 +684,6 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   borderRadius: '0.5rem' 
                 }}
               />
-              <Button
-                onClick={handleCommentSubmit}
-                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-                style={{ 
-                  backgroundColor: '#f97316', 
-                  color: 'white', 
-                  marginTop: '0.5rem', 
-                  padding: '0.5rem 1rem', 
-                  borderRadius: '0.5rem' 
-                }}
-              >
-                {language === 'ar' ? t('postComment') : 'Post Comment'}
-              </Button>
             </div>
           </div>
         </div>
