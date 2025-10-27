@@ -23,12 +23,18 @@ export default function SingersSection() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current
+      const { scrollLeft, clientWidth, scrollWidth } = scrollRef.current
       const scrollAmount = clientWidth * 0.8
-      // For Arabic, ensure we're always scrolling in the correct direction
-      const newScrollLeft = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount
+      
+      let newScrollLeft
+      if (direction === 'left') {
+        newScrollLeft = Math.max(0, scrollLeft - scrollAmount)
+      } else {
+        newScrollLeft = Math.min(scrollWidth - clientWidth, scrollLeft + scrollAmount)
+      }
+      
       scrollRef.current.scrollTo({
-        left: Math.max(0, newScrollLeft),
+        left: newScrollLeft,
         behavior: 'smooth',
       })
     }
@@ -37,54 +43,7 @@ export default function SingersSection() {
   return (
     <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'singers-section force-ltr' : ''}`}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          {language === 'ar' ? (
-            <>
-              <div className="flex space-x-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-                  onClick={() => scroll('left')}
-                >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-                  onClick={() => scroll('right')}
-                >
-                  <ChevronRight className="h-4 w-4 text-primary" />
-                </Button>
-              </div>
-              <h2 className="text-3xl font-bold text-foreground text-right">{t('singers')}</h2>
-            </>
-          ) : (
-            <>
-              <h2 className="text-3xl font-bold text-foreground text-left">{t('singers')}</h2>
-              <div className="flex space-x-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-                  onClick={() => scroll('left')}
-                >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-                  onClick={() => scroll('right')}
-                >
-                  <ChevronRight className="h-4 w-4 text-primary" />
-                </Button>
-              </div>
-            </>
-          )}
-        </div>
-
+        {/* Singers Carousel */}
         <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" ref={scrollRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex w-max space-x-6 pb-4">
             {singers.map((singer, idx) => (
@@ -114,6 +73,55 @@ export default function SingersSection() {
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Title and Navigation - Moved Below */}
+        <div className="flex items-center justify-between mt-6">
+          {language === 'ar' ? (
+            <>
+              <h2 className="text-3xl font-bold text-foreground text-right">{t('singers')}</h2>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('left')}
+                >
+                  <ChevronLeft className="h-4 w-4 text-primary" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('right')}
+                >
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="text-3xl font-bold text-foreground text-left">{t('singers')}</h2>
+              <div className="flex space-x-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('left')}
+                >
+                  <ChevronLeft className="h-4 w-4 text-primary" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  onClick={() => scroll('right')}
+                >
+                  <ChevronRight className="h-4 w-4 text-primary" />
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <style jsx global>{`
