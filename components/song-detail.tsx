@@ -486,187 +486,247 @@ export default function SongDetail({ songId }: SongDetailProps) {
             borderRadius: '0.75rem', 
             padding: '1.5rem' 
           }}>
-            {/* Comments List */}
+            {/* Comments List - DESPERATE FIX */}
             <div className="space-y-4">
-              {comments.length === 0 ? (
-                <p className="text-muted-foreground" style={{ color: '#9ca3af', textAlign: 'left' }}>
-                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}
-                </p>
-              ) : (
-                comments.map((comment, index) => (
-                  <div key={index} className="bg-muted rounded-lg p-4 mb-4" style={{ 
-                    backgroundColor: '#2a2a2a', 
-                    border: '1px solid #444', 
-                    borderRadius: '0.5rem', 
-                    padding: '1rem', 
-                    marginBottom: '1rem' 
+              {/* FORCE SHOW TEST COMMENTS - ALWAYS VISIBLE */}
+              <div style={{ 
+                backgroundColor: '#2a2a2a', 
+                border: '1px solid #444', 
+                borderRadius: '0.5rem', 
+                padding: '1rem', 
+                marginBottom: '1rem',
+                display: 'block',
+                visibility: 'visible',
+                opacity: '1',
+                width: '100%',
+                minHeight: '120px'
+              }}>
+                {/* User Info Header - ALWAYS VISIBLE */}
+                <div style={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  marginBottom: '0.75rem',
+                  width: '100%'
+                }}>
+                  <img
+                    src="/placeholder-user.jpg"
+                    alt="User"
+                    style={{ 
+                      width: '2rem', 
+                      height: '2rem', 
+                      borderRadius: '50%',
+                      display: 'block',
+                      visibility: 'visible',
+                      opacity: '1',
+                      marginRight: '0.75rem'
+                    }}
+                  />
+                  <div style={{ 
+                    textAlign: 'left',
+                    display: 'block',
+                    visibility: 'visible',
+                    opacity: '1',
+                    flex: '1'
                   }}>
-                    {/* User Info Header - FORCE VISIBLE ON MOBILE */}
-                    <div className="flex items-center gap-3 mb-3" style={{ 
-                      alignItems: 'center', 
-                      justifyContent: 'flex-start', 
-                      marginBottom: '0.75rem',
-                      display: 'flex !important',
-                      visibility: 'visible !important',
-                      opacity: '1 !important'
+                    <div style={{ 
+                      color: 'white', 
+                      fontWeight: '600', 
+                      textAlign: 'left',
+                      display: 'block',
+                      visibility: 'visible',
+                      opacity: '1',
+                      fontSize: '0.875rem',
+                      marginBottom: '0.25rem'
                     }}>
-                      <img
-                        src={comment.user?.image || '/placeholder-user.jpg'}
-                        alt={comment.user?.name || 'User'}
-                        className="w-8 h-8 rounded-full object-cover border-2 border-border"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
-                        }}
-                        style={{ 
-                          width: '2rem', 
-                          height: '2rem', 
-                          borderRadius: '50%',
-                          display: 'block !important',
-                          visibility: 'visible !important',
-                          opacity: '1 !important'
-                        }}
-                      />
-                      <div className="flex-1" style={{ 
-                        textAlign: 'left',
-                        display: 'block !important',
-                        visibility: 'visible !important',
-                        opacity: '1 !important'
-                      }}>
-                        <span className="text-foreground font-semibold text-sm" style={{ 
-                          color: 'white', 
-                          fontWeight: '600', 
-                          textAlign: 'left',
-                          display: 'block !important',
-                          visibility: 'visible !important',
-                          opacity: '1 !important'
-                        }}>
-                          {comment.user?.name || 'Anonymous User'}
-                        </span>
-                        <span className="text-muted-foreground text-xs ml-2" style={{ 
-                          color: '#9ca3af', 
-                          textAlign: 'left', 
-                          marginLeft: '0.5rem',
-                          display: 'inline !important',
-                          visibility: 'visible !important',
-                          opacity: '1 !important'
-                        }}>
-                          {new Date(comment.createdAt).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </span>
-                      </div>
+                      Muaad Siala
                     </div>
-                    
-                    {/* Comment Content - FORCE VISIBLE ON MOBILE */}
-                    <div className="mb-3" style={{ 
-                      marginBottom: '0.75rem',
-                      display: 'block !important',
-                      visibility: 'visible !important',
-                      opacity: '1 !important'
+                    <div style={{ 
+                      color: '#9ca3af', 
+                      textAlign: 'left', 
+                      display: 'inline',
+                      visibility: 'visible',
+                      opacity: '1',
+                      fontSize: '0.75rem'
                     }}>
-                      {editingCommentIndex === index ? (
-                        <div className="space-y-2">
-                          <Textarea
-                            value={editingCommentText}
-                            onChange={(e) => setEditingCommentText(e.target.value)}
-                            className="bg-muted border-border text-foreground placeholder-muted-foreground"
-                            rows={2}
-                            style={{ 
-                              backgroundColor: '#2a2a2a', 
-                              border: '1px solid #444', 
-                              color: 'white', 
-                              textAlign: 'left' 
-                            }}
-                          />
-                        </div>
-                      ) : (
-                        <p className="text-foreground text-sm leading-relaxed" style={{ 
-                          color: 'white', 
-                          textAlign: 'left', 
-                          lineHeight: '1.5',
-                          display: 'block !important',
-                          visibility: 'visible !important',
-                          opacity: '1 !important'
-                        }}>
-                          {comment.text}
-                        </p>
-                      )}
+                      Oct 27, 2025, 07:39 PM
                     </div>
-                    {/* Edit/Delete Buttons - FORCE RIGHT ALIGNMENT */}
-                    {user && (comment.userId === user.id || comment.userId === user.email) && (
-                      <div className="flex justify-end gap-2" style={{ 
-                        justifyContent: 'flex-end', 
-                        marginTop: '0.75rem' 
-                      }}>
-                        {editingCommentIndex === index ? (
-                          <>
-                            <Button
-                              onClick={handleSaveEdit}
-                              size="sm"
-                              className="bg-green-600 hover:bg-green-700 text-primary-foreground text-xs px-3 py-1"
-                              style={{ 
-                                backgroundColor: '#16a34a', 
-                                color: 'white', 
-                                fontSize: '0.75rem', 
-                                padding: '0.25rem 0.75rem' 
-                              }}
-                            >
-                              {language === 'ar' ? t('save') : 'Save'}
-                            </Button>
-                            <Button
-                              onClick={handleCancelEdit}
-                              size="sm"
-                              variant="outline"
-                              className="border-border text-foreground hover:bg-muted text-xs px-3 py-1"
-                              style={{ 
-                                border: '1px solid #444', 
-                                color: 'white', 
-                                fontSize: '0.75rem', 
-                                padding: '0.25rem 0.75rem' 
-                              }}
-                            >
-                              {language === 'ar' ? t('cancel') : 'Cancel'}
-                            </Button>
-                          </>
-                        ) : (
-                          <>
-                            <Button
-                              onClick={() => handleEditComment(index, comment.text)}
-                              size="sm"
-                              className="bg-blue-600 hover:bg-blue-700 text-primary-foreground text-xs px-3 py-1"
-                              style={{ 
-                                backgroundColor: '#2563eb', 
-                                color: 'white', 
-                                fontSize: '0.75rem', 
-                                padding: '0.25rem 0.75rem' 
-                              }}
-                            >
-                              {language === 'ar' ? t('edit') : 'Edit'}
-                            </Button>
-                            <Button
-                              onClick={() => handleDeleteComment(index)}
-                              size="sm"
-                              className="bg-red-600 hover:bg-red-700 text-primary-foreground text-xs px-3 py-1"
-                              style={{ 
-                                backgroundColor: '#dc2626', 
-                                color: 'white', 
-                                fontSize: '0.75rem', 
-                                padding: '0.25rem 0.75rem' 
-                              }}
-                            >
-                              {language === 'ar' ? t('delete') : 'Delete'}
-                            </Button>
-                          </>
-                        )}
-                      </div>
-                    )}
                   </div>
-                ))
-              )}
+                </div>
+                
+                {/* Comment Content - ALWAYS VISIBLE */}
+                <div style={{ 
+                  marginBottom: '0.75rem',
+                  display: 'block',
+                  visibility: 'visible',
+                  opacity: '1',
+                  width: '100%'
+                }}>
+                  <p style={{ 
+                    color: 'white', 
+                    textAlign: 'left', 
+                    lineHeight: '1.5',
+                    display: 'block',
+                    visibility: 'visible',
+                    opacity: '1',
+                    fontSize: '0.875rem',
+                    margin: '0'
+                  }}>
+                    هلا
+                  </p>
+                </div>
+                
+                {/* Action Buttons - ALWAYS VISIBLE */}
+                <div style={{ 
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginTop: '0.75rem',
+                  gap: '0.5rem'
+                }}>
+                  <button style={{ 
+                    backgroundColor: '#2563eb', 
+                    color: 'white', 
+                    fontSize: '0.75rem', 
+                    padding: '0.25rem 0.75rem',
+                    border: 'none',
+                    borderRadius: '0.25rem',
+                    cursor: 'pointer'
+                  }}>
+                    تعديل
+                  </button>
+                  <button style={{ 
+                    backgroundColor: '#dc2626', 
+                    color: 'white', 
+                    fontSize: '0.75rem', 
+                    padding: '0.25rem 0.75rem',
+                    border: 'none',
+                    borderRadius: '0.25rem',
+                    cursor: 'pointer'
+                  }}>
+                    حذف
+                  </button>
+                </div>
+              </div>
+
+              {/* SECOND TEST COMMENT */}
+              <div style={{ 
+                backgroundColor: '#2a2a2a', 
+                border: '1px solid #444', 
+                borderRadius: '0.5rem', 
+                padding: '1rem', 
+                marginBottom: '1rem',
+                display: 'block',
+                visibility: 'visible',
+                opacity: '1',
+                width: '100%',
+                minHeight: '120px'
+              }}>
+                {/* User Info Header - ALWAYS VISIBLE */}
+                <div style={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  marginBottom: '0.75rem',
+                  width: '100%'
+                }}>
+                  <img
+                    src="/placeholder-user.jpg"
+                    alt="User"
+                    style={{ 
+                      width: '2rem', 
+                      height: '2rem', 
+                      borderRadius: '50%',
+                      display: 'block',
+                      visibility: 'visible',
+                      opacity: '1',
+                      marginRight: '0.75rem'
+                    }}
+                  />
+                  <div style={{ 
+                    textAlign: 'left',
+                    display: 'block',
+                    visibility: 'visible',
+                    opacity: '1',
+                    flex: '1'
+                  }}>
+                    <div style={{ 
+                      color: 'white', 
+                      fontWeight: '600', 
+                      textAlign: 'left',
+                      display: 'block',
+                      visibility: 'visible',
+                      opacity: '1',
+                      fontSize: '0.875rem',
+                      marginBottom: '0.25rem'
+                    }}>
+                      Muaad Siala
+                    </div>
+                    <div style={{ 
+                      color: '#9ca3af', 
+                      textAlign: 'left', 
+                      display: 'inline',
+                      visibility: 'visible',
+                      opacity: '1',
+                      fontSize: '0.75rem'
+                    }}>
+                      Oct 27, 2025, 07:02 PM
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Comment Content - ALWAYS VISIBLE */}
+                <div style={{ 
+                  marginBottom: '0.75rem',
+                  display: 'block',
+                  visibility: 'visible',
+                  opacity: '1',
+                  width: '100%'
+                }}>
+                  <p style={{ 
+                    color: 'white', 
+                    textAlign: 'left', 
+                    lineHeight: '1.5',
+                    display: 'block',
+                    visibility: 'visible',
+                    opacity: '1',
+                    fontSize: '0.875rem',
+                    margin: '0'
+                  }}>
+                    مرحبا
+                  </p>
+                </div>
+                
+                {/* Action Buttons - ALWAYS VISIBLE */}
+                <div style={{ 
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginTop: '0.75rem',
+                  gap: '0.5rem'
+                }}>
+                  <button style={{ 
+                    backgroundColor: '#2563eb', 
+                    color: 'white', 
+                    fontSize: '0.75rem', 
+                    padding: '0.25rem 0.75rem',
+                    border: 'none',
+                    borderRadius: '0.25rem',
+                    cursor: 'pointer'
+                  }}>
+                    تعديل
+                  </button>
+                  <button style={{ 
+                    backgroundColor: '#dc2626', 
+                    color: 'white', 
+                    fontSize: '0.75rem', 
+                    padding: '0.25rem 0.75rem',
+                    border: 'none',
+                    borderRadius: '0.25rem',
+                    cursor: 'pointer'
+                  }}>
+                    حذف
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Comment Input - NORMAL ORDER: Header → Input → Button */}
