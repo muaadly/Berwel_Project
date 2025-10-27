@@ -63,12 +63,12 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
             <div className="w-full">
               <div className="text-foreground text-lg font-semibold mb-4 text-center">{t('quickLinks')}</div>
               <CommandList>
-                <CommandGroup>
-                  <CommandItem asChild>
-                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors text-center block">{t('libyanSongs')}</a>
+                <CommandGroup className="text-center">
+                  <CommandItem asChild className="justify-center">
+                    <a href="/library" className="text-xl font-bold text-foreground hover:text-primary transition-colors text-center block w-full">{t('libyanSongs')}</a>
                   </CommandItem>
-                  <CommandItem asChild>
-                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors text-center block">{t('maloofEntries')}</a>
+                  <CommandItem asChild className="justify-center">
+                    <a href="/library?tab=maloof" className="text-xl font-bold text-foreground hover:text-primary transition-colors text-center block w-full">{t('maloofEntries')}</a>
                   </CommandItem>
                 </CommandGroup>
                 {/* Suggestions will be rendered here by children */}

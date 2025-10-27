@@ -1864,3 +1864,37 @@ body {
 .rtl .contact-page .md\\:text-right {
   text-align: center !important;
 }
+
+/* URGENT FIX - Force center search popup text in Arabic */
+.rtl [data-vaul-drawer] .text-center,
+.rtl [data-vaul-drawer] .text-right,
+.rtl [data-vaul-drawer] .text-left,
+.rtl [data-vaul-drawer] a,
+.rtl [data-vaul-drawer] div,
+.rtl [data-vaul-drawer] span {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Force center all text in command dialog for Arabic */
+.rtl [cmdk-root] .text-center,
+.rtl [cmdk-root] .text-right,
+.rtl [cmdk-root] .text-left,
+.rtl [cmdk-root] a,
+.rtl [cmdk-root] div,
+.rtl [cmdk-root] span {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Force center command dialog content */
+.rtl [cmdk-list] a,
+.rtl [cmdk-group] a,
+.rtl [cmdk-item] a {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
