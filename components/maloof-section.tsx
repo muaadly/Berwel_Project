@@ -36,15 +36,38 @@ export default function MaloofSection() {
   console.log('MaloofSection - Entry images:', entryImages)
 
   const scroll = (direction: 'left' | 'right') => {
+    console.log('Maloof scroll function called with direction:', direction)
+    console.log('scrollRef.current:', scrollRef.current)
+    
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current
-      const scrollAmount = clientWidth * 0.8
-      // For Arabic, ensure we're always scrolling in the correct direction
-      const newScrollLeft = direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount
-      scrollRef.current.scrollTo({
-        left: Math.max(0, newScrollLeft),
-        behavior: 'smooth',
+      const container = scrollRef.current
+      const scrollAmount = 300 // Fixed scroll amount instead of percentage
+      const currentScroll = container.scrollLeft
+      const maxScroll = container.scrollWidth - container.clientWidth
+      
+      let newScroll
+      if (direction === 'left') {
+        newScroll = Math.max(0, currentScroll - scrollAmount)
+      } else {
+        newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
+      }
+      
+      console.log(`Maloof scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      console.log('Container dimensions:', {
+        clientWidth: container.clientWidth,
+        scrollWidth: container.scrollWidth,
+        scrollLeft: container.scrollLeft
       })
+      
+      // Try multiple scroll methods
+      try {
+        container.scrollTo({ left: newScroll, behavior: 'smooth' })
+      } catch (e) {
+        console.log('scrollTo failed, trying scrollLeft:', e)
+        container.scrollLeft = newScroll
+      }
+    } else {
+      console.error('scrollRef.current is null - cannot scroll')
     }
   }
 
@@ -54,25 +77,25 @@ export default function MaloofSection() {
         <div className="flex items-center justify-between mb-8">
           {language === 'ar' ? (
             <>
+              <h2 className="text-3xl font-bold text-foreground text-right">{t('maloofEntries')}</h2>
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
-                  onClick={() => scroll('left')}
-                >
-                  <ChevronLeft className="h-4 w-4 text-primary" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('right')}
                 >
                   <ChevronRight className="h-4 w-4 text-primary" />
                 </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                  onClick={() => scroll('left')}
+                >
+                  <ChevronLeft className="h-4 w-4 text-primary" />
+                </Button>
               </div>
-              <h2 className="text-3xl font-bold text-foreground text-right">{t('maloofEntries')}</h2>
             </>
           ) : (
             <>
@@ -81,7 +104,7 @@ export default function MaloofSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('left')}
                 >
                   <ChevronLeft className="h-4 w-4 text-primary" />
@@ -89,7 +112,7 @@ export default function MaloofSection() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary"
+                  className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
                   onClick={() => scroll('right')}
                 >
                   <ChevronRight className="h-4 w-4 text-primary" />
@@ -99,7 +122,7 @@ export default function MaloofSection() {
           )}
         </div>
 
-        <div ref={scrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div ref={scrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex w-max space-x-6 pb-4">
             {entryImages.map((img, idx) => {
               const entryType = entryTypeMap[img] || "";
