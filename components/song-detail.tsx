@@ -481,27 +481,6 @@ export default function SongDetail({ songId }: SongDetailProps) {
         {/* Comments Section */}
         <div className={`mt-8 ${language === 'ar' ? 'song-comments-section' : ''}`}>
           <div className="bg-card border border-border rounded-lg p-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">
-              {language === 'ar' ? t('comments') : 'Comments'}
-            </h2>
-            
-            {/* Comment Input */}
-            <div className="mb-4">
-              <Textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
-                className="bg-muted border-border text-foreground placeholder-muted-foreground"
-                rows={3}
-              />
-              <Button
-                onClick={handleCommentSubmit}
-                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-              >
-                {language === 'ar' ? t('postComment') : 'Post Comment'}
-              </Button>
-            </div>
-
             {/* Comments List */}
             <div className={`space-y-4 ${language === 'ar' ? 'comments-section' : ''}`}>
               {comments.length === 0 ? (
@@ -596,6 +575,26 @@ export default function SongDetail({ songId }: SongDetailProps) {
                   </div>
                 ))
               )}
+            </div>
+
+            {/* Comment Input - Moved to bottom */}
+            <div className="mt-6">
+              <h2 className="text-xl font-bold text-foreground mb-4">
+                {language === 'ar' ? t('comments') : 'Comments'}
+              </h2>
+              <Textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder={language === 'ar' ? t('commentPlaceholder') : "Add a comment..."}
+                className="bg-muted border-border text-foreground placeholder-muted-foreground"
+                rows={3}
+              />
+              <Button
+                onClick={handleCommentSubmit}
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                {language === 'ar' ? t('postComment') : 'Post Comment'}
+              </Button>
             </div>
           </div>
         </div>
