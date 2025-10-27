@@ -43,40 +43,8 @@ export default function SingersSection() {
   return (
     <section className={`bg-background py-16 px-4 ${language === 'ar' ? 'singers-section force-ltr' : ''}`}>
       <div className="max-w-7xl mx-auto">
-        {/* Singers Carousel */}
-        <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" ref={scrollRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          <div className="flex w-max space-x-6 pb-4">
-            {singers.map((singer, idx) => (
-              <Link
-                key={singer.name + idx}
-                href={{ pathname: "/library", query: { singer: singer.name } }}
-                className="flex-shrink-0 text-center group cursor-pointer"
-                prefetch={false}
-              >
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-3 transition-transform group-hover:scale-105">
-                  <img
-                    src={getSingerImagePath(singer.imageName) || "/placeholder-user.jpg"}
-                    alt={singer.name}
-                    className="w-full h-full object-cover rounded-lg"
-                    onError={(e) => {
-                      console.log('Singer image failed to load:', getSingerImagePath(singer.imageName))
-                      ;(e.target as HTMLImageElement).src = '/placeholder-user.jpg'
-                    }}
-                    onLoad={() => {
-                      console.log('Singer image loaded successfully:', getSingerImagePath(singer.imageName))
-                    }}
-                  />
-                </div>
-                <p className="text-foreground text-sm font-medium group-hover:text-primary transition-colors text-center">
-                  {singer.name}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Title and Navigation - Moved Below */}
-        <div className="flex items-center justify-between mt-6">
+        {/* Title and Navigation - Moved to Top */}
+        <div className="flex items-center justify-between mb-8">
           {language === 'ar' ? (
             <>
               <h2 className="text-3xl font-bold text-foreground text-right">{t('singers')}</h2>
@@ -122,6 +90,38 @@ export default function SingersSection() {
               </div>
             </>
           )}
+        </div>
+
+        {/* Singers Carousel */}
+        <div className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" ref={scrollRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="flex w-max space-x-6 pb-4">
+            {singers.map((singer, idx) => (
+              <Link
+                key={singer.name + idx}
+                href={{ pathname: "/library", query: { singer: singer.name } }}
+                className="flex-shrink-0 text-center group cursor-pointer"
+                prefetch={false}
+              >
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-3 transition-transform group-hover:scale-105">
+                  <img
+                    src={getSingerImagePath(singer.imageName) || "/placeholder-user.jpg"}
+                    alt={singer.name}
+                    className="w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      console.log('Singer image failed to load:', getSingerImagePath(singer.imageName))
+                      ;(e.target as HTMLImageElement).src = '/placeholder-user.jpg'
+                    }}
+                    onLoad={() => {
+                      console.log('Singer image loaded successfully:', getSingerImagePath(singer.imageName))
+                    }}
+                  />
+                </div>
+                <p className="text-foreground text-sm font-medium group-hover:text-primary transition-colors text-center">
+                  {singer.name}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
       <style jsx global>{`
