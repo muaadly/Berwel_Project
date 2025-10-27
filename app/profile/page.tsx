@@ -144,63 +144,16 @@ export default function ProfilePage() {
           </Card>
         </div>
 
-        {/* Profile Actions */}
+        {/* Sign Out Button */}
         <Card className="bg-card border-border">
-          <CardHeader>
-            <CardTitle className="text-foreground">
-              {language === 'ar' ? 'إعدادات الحساب' : 'Account Settings'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-border rounded-lg">
-              <div className={`flex items-center gap-3 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
-                <User className="h-5 w-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium text-foreground">
-                    {language === 'ar' ? 'معلومات الملف الشخصي' : 'Profile Information'}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'ar' 
-                      ? 'إدارة معلوماتك الشخصية وإعدادات الخصوصية' 
-                      : 'Manage your personal information and privacy settings'
-                    }
-                  </p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                {language === 'ar' ? 'تحرير' : 'Edit'}
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-between p-4 border border-border rounded-lg">
-              <div className={`flex items-center gap-3 ${language === 'ar' ? 'flex-row-reverse' : 'flex-row'}`}>
-                <Music className="h-5 w-5 text-muted-foreground" />
-                <div>
-                  <p className="font-medium text-foreground">
-                    {language === 'ar' ? 'المفضلة' : 'Favorites'}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'ar' 
-                      ? 'عرض وإدارة الأغاني والمدخلات المفضلة' 
-                      : 'View and manage your favorite songs and entries'
-                    }
-                  </p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                {language === 'ar' ? 'عرض' : 'View'}
-              </Button>
-            </div>
-
-            <div className="pt-4 border-t border-border">
-              <Button 
-                onClick={() => signOut()}
-                variant="destructive" 
-                className="w-full"
-              >
-                {language === 'ar' ? 'تسجيل الخروج' : 'Sign Out'}
-              </Button>
-            </div>
+          <CardContent className="p-6">
+            <Button 
+              onClick={() => signOut()}
+              variant="destructive" 
+              className="w-full"
+            >
+              {language === 'ar' ? 'تسجيل الخروج' : 'Sign Out'}
+            </Button>
           </CardContent>
         </Card>
       </div>
