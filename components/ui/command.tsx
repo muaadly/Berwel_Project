@@ -43,23 +43,22 @@ const CommandDialog = ({ children, searchValue, onSearchValueChange, ...props }:
           <VisuallyHidden>Global Search</VisuallyHidden>
         </DialogTitle>
         <Command className="w-full">
-          <div className="flex flex-col items-center w-full p-8 pt-8" style={{ flexDirection: 'column' }}>
-            {/* Logo at the top center */}
+          <div className="flex flex-col items-center w-full p-8 pt-8">
+            {/* Logo at the top center - FORCE CENTER */}
             <div className="w-full flex justify-center mb-6">
               <img src="/images/Light_Mode_Logo.jpeg" alt="Berwel Logo" className="h-16 w-16 object-contain" />
             </div>
-            {/* Search bar with icon - centered */}
-            <div className="w-full mb-8 flex items-center justify-center border-b border-border px-3" style={{ flexDirection: 'row' }}>
-              <div className="flex items-center justify-center w-full">
-                <Search className="mr-3 h-8 w-8 text-primary" />
-                <CommandInput
-                  autoFocus
-                  value={searchValue}
-                  onValueChange={onSearchValueChange}
-                  className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0 text-center"
-                  placeholder={t('searchBerwel')}
-                />
-              </div>
+            {/* Search bar with icon - FORCE CENTER LIKE ENGLISH */}
+            <div className="w-full mb-8 flex items-center border-b border-border px-3">
+              <Search className="mr-3 h-8 w-8 text-primary flex-shrink-0" />
+              <CommandInput
+                autoFocus
+                value={searchValue}
+                onValueChange={onSearchValueChange}
+                className="flex-1 h-16 text-3xl font-bold bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground placeholder:font-bold placeholder:text-3xl px-0"
+                style={{ textAlign: 'center' }}
+                placeholder={t('searchBerwel')}
+              />
             </div>
             <div className="w-full">
               <div className="text-foreground text-lg font-semibold mb-4 text-center">{t('quickLinks')}</div>

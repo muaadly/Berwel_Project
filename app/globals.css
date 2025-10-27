@@ -1898,3 +1898,32 @@ body {
   width: 100% !important;
   justify-content: center !important;
 }
+
+/* URGENT FIX - Force center Arabic search popup to match English */
+.rtl [cmdk-root] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.rtl [cmdk-root] > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.rtl [cmdk-root] img {
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+.rtl [cmdk-root] .flex {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.rtl [cmdk-root] input {
+  text-align: center !important;
+}
