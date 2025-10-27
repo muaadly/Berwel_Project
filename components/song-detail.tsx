@@ -512,7 +512,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       width: '32px', 
                       height: '32px', 
                       borderRadius: '50%',
-                      marginRight: '20px',
+                      marginRight: '35px',
                       border: '2px solid #666'
                     }}
                     onError={(e) => {
@@ -606,7 +606,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       width: '32px', 
                       height: '32px', 
                       borderRadius: '50%',
-                      marginRight: '20px',
+                      marginRight: '35px',
                       border: '2px solid #666'
                     }}
                     onError={(e) => {
