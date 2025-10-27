@@ -1799,9 +1799,15 @@ body {
   margin-right: 0.5rem !important; /* Increase spacing from 0.25rem to 0.5rem */
 }
 
-/* Mobile-specific profile section centering */
+/* Mobile-specific profile section - hide picture and center text */
 @media (max-width: 768px) {
-  .rtl .profile-section .flex {
+  /* Hide profile picture in mobile view */
+  .profile-section .flex-shrink-0 {
+    display: none !important;
+  }
+  
+  /* Center text elements for both languages */
+  .profile-section .flex {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1809,25 +1815,22 @@ body {
     gap: 1rem !important;
   }
   
-  .rtl .profile-section .flex-shrink-0 {
+  .profile-section .flex-1 {
     order: 1 !important;
-    margin: 0 auto !important; /* Center only the profile picture */
-  }
-  
-  .rtl .profile-section .flex-1 {
-    order: 2 !important;
-    text-align: right !important; /* Keep text right-aligned */
+    text-align: center !important;
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-end !important; /* Align text to the right */
+    align-items: center !important;
   }
   
-  .rtl .profile-section .text-right {
-    text-align: right !important; /* Keep text right-aligned */
+  .profile-section .text-right,
+  .profile-section .text-left {
+    text-align: center !important;
   }
   
-  .rtl .profile-section .justify-end {
-    justify-content: flex-end !important; /* Keep badge right-aligned */
+  .profile-section .justify-end,
+  .profile-section .justify-start {
+    justify-content: center !important;
   }
 }
