@@ -150,6 +150,47 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
             >
               <Search className="h-6 w-6" />
             </Button>
+            
+            {/* Mobile Register Button or User Profile */}
+            <div className="md:hidden">
+              {!isLoading && (
+                user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="p-0 h-auto">
+                        <Image
+                          src={user.image}
+                          alt={user.name}
+                          width={32}
+                          height={32}
+                          className="rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+                        />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48 bg-card border-border">
+                      <DropdownMenuItem className="text-foreground hover:bg-muted cursor-pointer">
+                        <User className="mr-2 h-4 w-4" />
+                        {user.name}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={handleSignOut}
+                        className="text-white hover:bg-gray-800 cursor-pointer"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        {t('signOut')}
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button
+                    onClick={handleSignIn}
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-md transition-colors text-sm"
+                  >
+                    {language === 'ar' ? 'سجل الآن' : 'Register'}
+                  </Button>
+                )
+              )}
+            </div>
           {/* Register Button or User Profile */}
           <div className="hidden md:block">
             {!isLoading && (
