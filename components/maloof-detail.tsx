@@ -707,8 +707,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
               overflowY: 'hidden',
-              maxWidth: '100%',
-              whiteSpace: 'nowrap'
+              maxWidth: '100%'
             }}
           >
             <div 
@@ -718,7 +717,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
                 minWidth: 'max-content',
                 display: 'flex',
                 flexDirection: 'row',
-                flexWrap: 'nowrap'
+                flexWrap: 'nowrap',
+                whiteSpace: 'nowrap'
               }}
             >
               {otherEntries.length === 0 ? (
