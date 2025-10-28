@@ -676,8 +676,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
           </div>
-          <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex w-max gap-6 pb-2" style={{ minWidth: 'max-content' }}>
+          <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide other-entries-scroll-container" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none', maxWidth: '100%' }}>
+            <div className="flex gap-6 pb-2 other-entries-scroll-content" style={{ width: 'max-content', minWidth: 'max-content' }}>
               {otherEntries.length === 0 ? (
                 <div className="text-muted-foreground">
                   {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}

@@ -2194,3 +2194,26 @@ body {
     opacity: 1 !important;
   }
 }
+
+/* Fix Other Entries scroll container for desktop */
+.other-entries-scroll-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.other-entries-scroll-container::-webkit-scrollbar {
+  display: none !important;
+}
+
+.other-entries-scroll-content {
+  width: max-content !important;
+  min-width: max-content !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 1.5rem !important;
+}
