@@ -676,7 +676,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             <h2 className="text-3xl font-bold text-foreground">
               {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'}
             </h2>
-            <div className="flex space-x-2">
+            <div className={`flex space-x-2 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
               <Button
                 variant="outline"
                 size="icon"
