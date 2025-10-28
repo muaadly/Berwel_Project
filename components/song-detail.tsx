@@ -79,24 +79,46 @@ export default function SongDetail({ songId }: SongDetailProps) {
         console.log('All songs loaded:', allSongs.length)
         console.log('Current song category:', songData.category)
         console.log('Current song singer:', songData.singer)
+        console.log('Current song ID:', songId)
         
-        const sameCategorySongs = allSongs.filter(s => s.category === songData.category && String(s.id) !== String(songId))
+        // For other songs - get songs from same category, excluding current song
+        const sameCategorySongs = allSongs.filter(s => 
+          s.category === songData.category && 
+          String(s.id) !== String(songId)
+        )
         console.log('Same category songs:', sameCategorySongs.length)
-        const shuffledSongs = shuffleArray(sameCategorySongs).slice(0, 10)
-        console.log('Shuffled songs to show:', shuffledSongs.length)
+        
+        // If no songs in same category, get any songs excluding current
+        const fallbackSongs = allSongs.filter(s => String(s.id) !== String(songId))
+        console.log('Fallback songs (any category):', fallbackSongs.length)
+        
+        const songsToShow = sameCategorySongs.length > 0 ? sameCategorySongs : fallbackSongs
+        const shuffledSongs = shuffleArray(songsToShow).slice(0, 10)
+        console.log('Songs to show:', shuffledSongs.length)
         setOtherSongs(shuffledSongs)
         
-        // Get unique singers in the same category (excluding current singer)
+        // For other singers - get unique singers from same category, excluding current singer
         const sameCategorySongsForSingers = allSongs.filter(s => 
           s.category === songData.category && 
           s.singer !== songData.singer &&
-          s.singer.trim() !== '' // Ensure singer name is not empty
+          s.singer && 
+          s.singer.trim() !== ''
         )
         console.log('Same category songs for singers:', sameCategorySongsForSingers.length)
         
+        // If no singers in same category, get any singers excluding current
+        const fallbackSongsForSingers = allSongs.filter(s => 
+          s.singer !== songData.singer &&
+          s.singer && 
+          s.singer.trim() !== ''
+        )
+        console.log('Fallback songs for singers:', fallbackSongsForSingers.length)
+        
+        const songsForSingers = sameCategorySongsForSingers.length > 0 ? sameCategorySongsForSingers : fallbackSongsForSingers
+        
         // Create a Map to ensure unique singers with their first occurrence
         const uniqueSingersMap = new Map<string, LibyanSong>()
-        sameCategorySongsForSingers.forEach(song => {
+        songsForSingers.forEach(song => {
           if (!uniqueSingersMap.has(song.singer)) {
             uniqueSingersMap.set(song.singer, song)
           }
@@ -105,7 +127,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
         const uniqueSingers = Array.from(uniqueSingersMap.values())
         console.log('Unique singers:', uniqueSingers.length)
         const shuffledSingers = shuffleArray(uniqueSingers).slice(0, 10)
-        console.log('Shuffled singers to show:', shuffledSingers.length)
+        console.log('Singers to show:', shuffledSingers.length)
         setOtherSingers(shuffledSingers)
       } catch (error) {
         console.error("Error loading song:", error)
