@@ -95,19 +95,25 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
           setComments(commentsData)
         }
         
-        // Load other entries
-        console.log('=== LOADING OTHER ENTRIES ===')
-        console.log('About to fetch Maloof entries...')
-        const allEntries = await fetchMaloofEntries()
-        console.log('All entries loaded:', allEntries.length)
-        console.log('First few entries:', allEntries.slice(0, 3))
-        console.log('Current entry ID:', entryId)
-        
-        const otherEntriesData = allEntries.filter(e => String(e.id) !== String(entryId)).slice(0, 10)
-        console.log('=== OTHER ENTRIES FILTERED ===')
-        console.log('Count:', otherEntriesData.length, 'entries')
-        console.log('Data:', otherEntriesData)
-        setOtherEntries(otherEntriesData)
+        // Load other entries - EMERGENCY FIX
+        console.log('=== EMERGENCY FIX - LOADING OTHER ENTRIES ===')
+        try {
+          console.log('About to fetch Maloof entries...')
+          const allEntries = await fetchMaloofEntries()
+          console.log('All entries loaded:', allEntries.length)
+          console.log('First few entries:', allEntries.slice(0, 3))
+          console.log('Current entry ID:', entryId)
+          
+          const otherEntriesData = allEntries.filter(e => String(e.id) !== String(entryId)).slice(0, 10)
+          console.log('=== OTHER ENTRIES FILTERED ===')
+          console.log('Count:', otherEntriesData.length, 'entries')
+          console.log('Data:', otherEntriesData)
+          setOtherEntries(otherEntriesData)
+        } catch (dataError) {
+          console.error('EMERGENCY ERROR loading other entries:', dataError)
+          // Set fallback data
+          setOtherEntries([])
+        }
       } catch (error) {
         console.error("Error loading entry:", error)
       }

@@ -73,15 +73,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
           setComments(commentsData)
         }
         
-        // Load other songs and singers
-        console.log('=== LOADING OTHER SONGS AND SINGERS ===')
-        console.log('About to fetch Libyan songs...')
-        const allSongs = await fetchLibyanSongs()
-        console.log('All songs loaded:', allSongs.length)
-        console.log('First few songs:', allSongs.slice(0, 3))
-        console.log('Current song category:', songData.category)
-        console.log('Current song singer:', songData.singer)
-        console.log('Current song ID:', songId)
+        // Load other songs and singers - EMERGENCY FIX
+        console.log('=== EMERGENCY FIX - LOADING OTHER SONGS AND SINGERS ===')
+        try {
+          console.log('About to fetch Libyan songs...')
+          const allSongs = await fetchLibyanSongs()
+          console.log('All songs loaded:', allSongs.length)
+          console.log('First few songs:', allSongs.slice(0, 3))
+          console.log('Current song category:', songData.category)
+          console.log('Current song singer:', songData.singer)
+          console.log('Current song ID:', songId)
         
         // For other songs - get songs from same category, excluding current song
         const sameCategorySongs = allSongs.filter(s => 
@@ -131,6 +132,12 @@ export default function SongDetail({ songId }: SongDetailProps) {
         const shuffledSingers = shuffleArray(uniqueSingers).slice(0, 10)
         console.log('Singers to show:', shuffledSingers.length)
         setOtherSingers(shuffledSingers)
+        } catch (dataError) {
+          console.error('EMERGENCY ERROR loading songs/singers:', dataError)
+          // Set fallback data
+          setOtherSongs([])
+          setOtherSingers([])
+        }
       } catch (error) {
         console.error("Error loading song:", error)
       }
