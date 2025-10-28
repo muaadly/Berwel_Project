@@ -75,8 +75,10 @@ export default function SongDetail({ songId }: SongDetailProps) {
         
         // Load other songs and singers
         console.log('=== LOADING OTHER SONGS AND SINGERS ===')
+        console.log('About to fetch Libyan songs...')
         const allSongs = await fetchLibyanSongs()
         console.log('All songs loaded:', allSongs.length)
+        console.log('First few songs:', allSongs.slice(0, 3))
         console.log('Current song category:', songData.category)
         console.log('Current song singer:', songData.singer)
         console.log('Current song ID:', songId)
