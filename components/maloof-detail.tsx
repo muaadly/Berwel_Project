@@ -257,13 +257,37 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
+    console.log('Maloof scroll function called with direction:', direction)
+    console.log('ref.current:', ref.current)
+    
     if (ref.current) {
       const scrollAmount = 300
       const currentScroll = ref.current.scrollLeft
-      const newScroll = direction === 'left' 
-        ? Math.max(0, currentScroll - scrollAmount)
-        : currentScroll + scrollAmount
-      ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+      const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
+      
+      let newScroll
+      if (direction === 'left') {
+        newScroll = Math.max(0, currentScroll - scrollAmount)
+      } else {
+        newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
+      }
+      
+      console.log(`Maloof scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      console.log('Container dimensions:', {
+        clientWidth: ref.current.clientWidth,
+        scrollWidth: ref.current.scrollWidth,
+        scrollLeft: ref.current.scrollLeft
+      })
+      
+      // Try multiple scroll methods
+      try {
+        ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+      } catch (e) {
+        console.log('scrollTo failed, trying scrollLeft:', e)
+        ref.current.scrollLeft = newScroll
+      }
+    } else {
+      console.error('ref.current is null - cannot scroll')
     }
   }
 
@@ -718,7 +742,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               )}
             </div>
           </div>
-          <div ref={maloofEntriesScrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div ref={maloofEntriesScrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex w-max space-x-6 pb-4">
               {entryImages.map((img, idx) => {
                 const entryType = entryTypeMap[img] || "";
