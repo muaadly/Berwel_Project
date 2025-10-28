@@ -98,8 +98,9 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         // Load other entries
         const allEntries = await fetchMaloofEntries()
         const otherEntriesData = allEntries.filter(e => String(e.id) !== String(entryId)).slice(0, 10)
-        console.log('Other Entries loaded:', otherEntriesData.length, 'entries')
-        console.log('Other Entries data:', otherEntriesData)
+        console.log('=== OTHER ENTRIES LOADED ===')
+        console.log('Count:', otherEntriesData.length, 'entries')
+        console.log('Data:', otherEntriesData)
         setOtherEntries(otherEntriesData)
       } catch (error) {
         console.error("Error loading entry:", error)
@@ -108,6 +109,22 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
     
     loadEntry()
   }, [entryId, user])
+
+  // Debug scroll container when other entries change
+  useEffect(() => {
+    if (otherEntries.length > 0 && otherEntriesScrollRef.current) {
+      console.log('=== SCROLL CONTAINER DEBUG ===')
+      const container = otherEntriesScrollRef.current
+      console.log('Container found:', !!container)
+      console.log('Container dimensions:', {
+        clientWidth: container.clientWidth,
+        scrollWidth: container.scrollWidth,
+        offsetWidth: container.offsetWidth,
+        children: container.children.length
+      })
+      console.log('Can scroll:', container.scrollWidth > container.clientWidth)
+    }
+  }, [otherEntries])
 
   const BackButton = () => (
     <Link href="/library" className="inline-flex items-center text-orange-500 hover:text-orange-400 mb-4">
@@ -259,26 +276,36 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
-    console.log('SCROLL FUNCTION CALLED - Direction:', direction, 'Ref:', ref.current)
+    console.log('=== SCROLL FUNCTION CALLED ===')
+    console.log('Direction:', direction)
+    console.log('Ref:', ref)
+    console.log('Ref.current:', ref.current)
+    console.log('Other entries count:', otherEntries.length)
     
     if (!ref.current) {
-      console.error('REF IS NULL!')
+      console.error('❌ REF IS NULL - CANNOT SCROLL!')
       return
     }
     
-    const scrollAmount = 400
-    const currentScroll = ref.current.scrollLeft
-    const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
+    const container = ref.current
+    const scrollAmount = 300
+    const currentScroll = container.scrollLeft
+    const maxScroll = container.scrollWidth - container.clientWidth
     
-    console.log('SCROLL INFO:', {
-      currentScroll,
-      maxScroll,
-      clientWidth: ref.current.clientWidth,
-      scrollWidth: ref.current.scrollWidth
-    })
+    console.log('=== SCROLL CONTAINER INFO ===')
+    console.log('Current scroll:', currentScroll)
+    console.log('Max scroll:', maxScroll)
+    console.log('Client width:', container.clientWidth)
+    console.log('Scroll width:', container.scrollWidth)
+    console.log('Container children:', container.children.length)
     
     if (maxScroll <= 0) {
-      console.log('NO CONTENT TO SCROLL!')
+      console.log('❌ NO CONTENT TO SCROLL - maxScroll is', maxScroll)
+      console.log('Container dimensions:', {
+        clientWidth: container.clientWidth,
+        scrollWidth: container.scrollWidth,
+        offsetWidth: container.offsetWidth
+      })
       return
     }
     
@@ -289,15 +316,16 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
       newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
     }
     
-    console.log('SCROLLING TO:', newScroll)
+    console.log('=== SCROLLING ===')
+    console.log('From:', currentScroll, 'To:', newScroll)
     
-    // Force scroll immediately
-    ref.current.scrollLeft = newScroll
+    // Force scroll immediately - this MUST work
+    container.scrollLeft = newScroll
     
-    // Also try smooth scroll
-    ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
-    
-    console.log('SCROLL COMPLETE - New position:', ref.current.scrollLeft)
+    // Verify it worked
+    setTimeout(() => {
+      console.log('✅ SCROLL VERIFICATION - New position:', container.scrollLeft)
+    }, 50)
   }
 
   const getEntryImagePath = (imageName: string) => {
@@ -672,8 +700,27 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
           </div>
-          <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex gap-6 pb-2" style={{ width: 'max-content' }}>
+          <div 
+            ref={otherEntriesScrollRef} 
+            className="w-full overflow-x-auto" 
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              overflowY: 'hidden',
+              maxWidth: '100%',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            <div 
+              className="flex gap-6 pb-2" 
+              style={{ 
+                width: 'max-content',
+                minWidth: 'max-content',
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'nowrap'
+              }}
+            >
               {otherEntries.length === 0 ? (
                 <div className="text-muted-foreground">
                   {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}
