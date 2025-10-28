@@ -98,6 +98,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         // Load other entries
         const allEntries = await fetchMaloofEntries()
         const otherEntriesData = allEntries.filter(e => String(e.id) !== String(entryId)).slice(0, 10)
+        console.log('Other Entries loaded:', otherEntriesData.length, 'entries')
+        console.log('Other Entries data:', otherEntriesData)
         setOtherEntries(otherEntriesData)
       } catch (error) {
         console.error("Error loading entry:", error)
@@ -266,6 +268,14 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
       const currentScroll = ref.current.scrollLeft
       const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
       
+      console.log(`${refName} BEFORE scroll - current=${currentScroll}, max=${maxScroll}, clientWidth=${ref.current.clientWidth}, scrollWidth=${ref.current.scrollWidth}`)
+      
+      // Check if there's actually content to scroll
+      if (maxScroll <= 0) {
+        console.log(`${refName} - No content to scroll (maxScroll=${maxScroll})`)
+        return
+      }
+      
       let newScroll
       if (direction === 'left') {
         newScroll = Math.max(0, currentScroll - scrollAmount)
@@ -274,19 +284,21 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
       }
       
       console.log(`${refName} scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
-      console.log('Container dimensions:', {
-        clientWidth: ref.current.clientWidth,
-        scrollWidth: ref.current.scrollWidth,
-        scrollLeft: ref.current.scrollLeft
-      })
       
       // Try multiple scroll methods
       try {
         ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+        console.log(`${refName} - scrollTo successful`)
       } catch (e) {
-        console.log('scrollTo failed, trying scrollLeft:', e)
+        console.log(`${refName} - scrollTo failed, trying scrollLeft:`, e)
         ref.current.scrollLeft = newScroll
+        console.log(`${refName} - scrollLeft set to:`, ref.current.scrollLeft)
       }
+      
+      // Verify the scroll actually happened
+      setTimeout(() => {
+        console.log(`${refName} AFTER scroll - scrollLeft=${ref.current?.scrollLeft}`)
+      }, 100)
     } else {
       console.error(`${refName} ref.current is null - cannot scroll`)
     }
@@ -665,7 +677,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             </h2>
           </div>
           <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex w-max gap-6 pb-2">
+            <div className="flex w-max gap-6 pb-2" style={{ minWidth: 'max-content' }}>
               {otherEntries.length === 0 ? (
                 <div className="text-muted-foreground">
                   {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}
