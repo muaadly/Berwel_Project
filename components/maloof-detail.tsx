@@ -642,50 +642,27 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Other Entries Section */}
         <div className="mt-12">
           <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                onClick={() => scroll(otherEntriesScrollRef, 'left')}
+              >
+                <ChevronLeft className="h-4 w-4 text-primary" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                onClick={() => scroll(otherEntriesScrollRef, 'right')}
+              >
+                <ChevronRight className="h-4 w-4 text-primary" />
+              </Button>
+            </div>
             <h2 className="text-2xl font-bold text-foreground">
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
-            <div className="flex space-x-2">
-              {language === 'ar' ? (
-                <>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherEntriesScrollRef, 'right')}
-                  >
-                    <ChevronRight className="h-4 w-4 text-primary" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherEntriesScrollRef, 'left')}
-                  >
-                    <ChevronLeft className="h-4 w-4 text-primary" />
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherEntriesScrollRef, 'left')}
-                  >
-                    <ChevronLeft className="h-4 w-4 text-primary" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                    onClick={() => scroll(otherEntriesScrollRef, 'right')}
-                  >
-                    <ChevronRight className="h-4 w-4 text-primary" />
-                  </Button>
-                </>
-              )}
-            </div>
           </div>
           <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex w-max gap-6 pb-2">
