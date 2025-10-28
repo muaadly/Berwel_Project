@@ -276,11 +276,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
-    console.log('=== SCROLL FUNCTION CALLED ===')
+    console.log('=== NUCLEAR SCROLL FUNCTION CALLED ===')
     console.log('Direction:', direction)
-    console.log('Ref:', ref)
-    console.log('Ref.current:', ref.current)
-    console.log('Other entries count:', otherEntries.length)
     
     if (!ref.current) {
       console.error('❌ REF IS NULL - CANNOT SCROLL!')
@@ -288,44 +285,42 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
     }
     
     const container = ref.current
-    const scrollAmount = 300
-    const currentScroll = container.scrollLeft
-    const maxScroll = container.scrollWidth - container.clientWidth
+    const innerContainer = container.querySelector('div') // Get the inner flex container
     
-    console.log('=== SCROLL CONTAINER INFO ===')
-    console.log('Current scroll:', currentScroll)
-    console.log('Max scroll:', maxScroll)
-    console.log('Client width:', container.clientWidth)
-    console.log('Scroll width:', container.scrollWidth)
-    console.log('Container children:', container.children.length)
-    
-    if (maxScroll <= 0) {
-      console.log('❌ NO CONTENT TO SCROLL - maxScroll is', maxScroll)
-      console.log('Container dimensions:', {
-        clientWidth: container.clientWidth,
-        scrollWidth: container.scrollWidth,
-        offsetWidth: container.offsetWidth
-      })
+    if (!innerContainer) {
+      console.error('❌ INNER CONTAINER NOT FOUND!')
       return
     }
     
-    let newScroll
+    console.log('=== NUCLEAR SCROLL INFO ===')
+    console.log('Container:', container)
+    console.log('Inner container:', innerContainer)
+    console.log('Current transform:', innerContainer.style.transform)
+    
+    // Get current transform value
+    const currentTransform = innerContainer.style.transform
+    const currentTranslateX = currentTransform.includes('translateX') 
+      ? parseFloat(currentTransform.match(/translateX\(([^)]+)\)/)?.[1] || '0')
+      : 0
+    
+    const scrollAmount = 300
+    let newTranslateX
+    
     if (direction === 'left') {
-      newScroll = Math.max(0, currentScroll - scrollAmount)
+      newTranslateX = Math.max(-(container.scrollWidth - container.clientWidth), currentTranslateX - scrollAmount)
     } else {
-      newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
+      newTranslateX = Math.min(0, currentTranslateX + scrollAmount)
     }
     
-    console.log('=== SCROLLING ===')
-    console.log('From:', currentScroll, 'To:', newScroll)
+    console.log('=== NUCLEAR SCROLLING ===')
+    console.log('Current translateX:', currentTranslateX)
+    console.log('New translateX:', newTranslateX)
     
-    // Force scroll immediately - this MUST work
-    container.scrollLeft = newScroll
+    // Use transform instead of scroll
+    innerContainer.style.transform = `translateX(${newTranslateX}px)`
+    innerContainer.style.transition = 'transform 0.3s ease'
     
-    // Verify it worked
-    setTimeout(() => {
-      console.log('✅ SCROLL VERIFICATION - New position:', container.scrollLeft)
-    }, 50)
+    console.log('✅ NUCLEAR SCROLL APPLIED - New transform:', innerContainer.style.transform)
   }
 
   const getEntryImagePath = (imageName: string) => {
