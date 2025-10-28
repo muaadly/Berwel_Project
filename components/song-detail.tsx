@@ -74,9 +74,16 @@ export default function SongDetail({ songId }: SongDetailProps) {
         }
         
         // Load other songs and singers
+        console.log('=== LOADING OTHER SONGS AND SINGERS ===')
         const allSongs = await fetchLibyanSongs()
+        console.log('All songs loaded:', allSongs.length)
+        console.log('Current song category:', songData.category)
+        console.log('Current song singer:', songData.singer)
+        
         const sameCategorySongs = allSongs.filter(s => s.category === songData.category && String(s.id) !== String(songId))
+        console.log('Same category songs:', sameCategorySongs.length)
         const shuffledSongs = shuffleArray(sameCategorySongs).slice(0, 10)
+        console.log('Shuffled songs to show:', shuffledSongs.length)
         setOtherSongs(shuffledSongs)
         
         // Get unique singers in the same category (excluding current singer)
@@ -85,6 +92,7 @@ export default function SongDetail({ songId }: SongDetailProps) {
           s.singer !== songData.singer &&
           s.singer.trim() !== '' // Ensure singer name is not empty
         )
+        console.log('Same category songs for singers:', sameCategorySongsForSingers.length)
         
         // Create a Map to ensure unique singers with their first occurrence
         const uniqueSingersMap = new Map<string, LibyanSong>()
@@ -95,7 +103,9 @@ export default function SongDetail({ songId }: SongDetailProps) {
         })
         
         const uniqueSingers = Array.from(uniqueSingersMap.values())
+        console.log('Unique singers:', uniqueSingers.length)
         const shuffledSingers = shuffleArray(uniqueSingers).slice(0, 10)
+        console.log('Shuffled singers to show:', shuffledSingers.length)
         setOtherSingers(shuffledSingers)
       } catch (error) {
         console.error("Error loading song:", error)
