@@ -557,14 +557,33 @@ export default function SongDetail({ songId }: SongDetailProps) {
                       marginBottom: '12px',
                       width: '100%'
                     }}>
-                      <div style={{ 
-                        color: 'white', 
-                        fontSize: '14px',
-                        lineHeight: '1.5',
-                        margin: '0'
-                      }}>
-                        {comment.text}
-                      </div>
+                      {editingCommentIndex === index ? (
+                        <textarea
+                          value={editingCommentText}
+                          onChange={(e) => setEditingCommentText(e.target.value)}
+                          style={{ 
+                            width: '100%',
+                            minHeight: '60px',
+                            backgroundColor: '#2a2a2a',
+                            border: '1px solid #444',
+                            borderRadius: '4px',
+                            color: 'white',
+                            fontSize: '14px',
+                            padding: '8px',
+                            resize: 'vertical'
+                          }}
+                          placeholder={language === 'ar' ? 'اكتب تعليقك...' : 'Write your comment...'}
+                        />
+                      ) : (
+                        <div style={{ 
+                          color: 'white', 
+                          fontSize: '14px',
+                          lineHeight: '1.5',
+                          margin: '0'
+                        }}>
+                          {comment.text}
+                        </div>
+                      )}
                     </div>
                     
                     {user && (comment.userId === user.id || comment.userId === user.email) && (
