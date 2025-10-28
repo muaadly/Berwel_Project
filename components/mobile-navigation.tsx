@@ -2,16 +2,29 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTranslations } from "@/lib/translations"
 import { useLanguage } from "./language-provider"
 import { useAuth } from "./auth-provider"
-import { Home, Library, BarChart3, Info, Mail, User, Menu, X } from "lucide-react"
+import { Home, Library, BarChart3, Info, Mail, User, Menu, X, LogOut } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { t } = useTranslations()
   const { language } = useLanguage()
-  const { user } = useAuth()
+  const { user, isLoading, signIn, signOut } = useAuth()
+
+  const handleSignIn = () => {
+    signIn('google')
+    closeMenu()
+  }
+
+  const handleSignOut = () => {
+    signOut()
+    closeMenu()
+  }
 
   const navigationItems = [
     { href: "/", icon: Home, label: t('home') },
@@ -99,30 +112,55 @@ export default function MobileNavigation() {
                 )
               })}
               
-              {user && (
-                <Link
-                  href="/profile"
-                  onClick={closeMenu}
-                  className={`flex items-center p-3 rounded-lg hover:bg-muted transition-colors ${
-                    language === 'ar' ? 'flex-row-reverse justify-center space-x-6' : 'flex-row space-x-4'
-                  }`}
-                >
-                  {language === 'ar' ? (
-                    <>
-                      <span className="text-lg font-medium text-right">
-                        {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
-                      </span>
-                      <User className="h-5 w-5 text-muted-foreground" />
-                    </>
-                  ) : (
-                    <>
-                      <User className="h-5 w-5 text-muted-foreground" />
-                      <span className="text-lg font-medium text-left">
-                        {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
-                      </span>
-                    </>
-                  )}
-                </Link>
+              {/* Authentication Section */}
+              {!isLoading && (
+                user ? (
+                  // User is logged in - Show profile picture with dropdown
+                  <div className="flex items-center justify-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="p-0 h-auto">
+                          <Image
+                            src={user.image || "/placeholder-user.jpg"}
+                            alt={user.name || "User"}
+                            width={40}
+                            height={40}
+                            className="rounded-full cursor-pointer hover:opacity-80 transition-opacity border-2 border-border"
+                          />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="w-48 bg-card border-border">
+                        <DropdownMenuItem className="text-foreground hover:bg-muted cursor-pointer">
+                          <User className="mr-2 h-4 w-4" />
+                          {user.name}
+                        </DropdownMenuItem>
+                        <Link href="/profile" onClick={closeMenu}>
+                          <DropdownMenuItem className="text-foreground hover:bg-muted cursor-pointer">
+                            <User className="mr-2 h-4 w-4" />
+                            {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                          </DropdownMenuItem>
+                        </Link>
+                        <DropdownMenuItem 
+                          onClick={handleSignOut}
+                          className="text-white hover:bg-gray-800 cursor-pointer"
+                        >
+                          <LogOut className="mr-2 h-4 w-4" />
+                          {t('signOut')}
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                ) : (
+                  // User is not logged in - Show Register button
+                  <div className="flex justify-center">
+                    <Button
+                      onClick={handleSignIn}
+                      className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-3 rounded-md transition-colors w-full max-w-xs"
+                    >
+                      {language === 'ar' ? 'سجل الآن' : 'Register'}
+                    </Button>
+                  </div>
+                )
               )}
             </div>
           </div>
