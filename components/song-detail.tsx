@@ -486,195 +486,162 @@ export default function SongDetail({ songId }: SongDetailProps) {
             borderRadius: '0.75rem', 
             padding: '1.5rem' 
           }}>
-            {/* Comments List - FINAL FIX - SIMPLE HTML */}
+            {/* Comments List - DYNAMIC COMMENTS */}
             <div style={{ width: '100%', padding: '0', margin: '0' }}>
-              {/* COMMENT 1 - SIMPLE HTML */}
-              <div style={{ 
-                backgroundColor: '#2a2a2a', 
-                border: '2px solid #444', 
-                borderRadius: '8px', 
-                padding: '16px', 
-                marginBottom: '16px',
-                width: '100%',
-                minHeight: '150px',
-                position: 'relative'
-              }}>
+              {comments.length === 0 ? (
                 <div style={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '12px',
-                  width: '100%'
+                  color: '#9ca3af', 
+                  textAlign: 'left',
+                  padding: '20px',
+                  textAlign: 'center'
                 }}>
-                  <img
-                    src={user?.image || "/placeholder-user.jpg"}
-                    alt={user?.name || "User"}
-                    style={{ 
-                      width: '32px', 
-                      height: '32px', 
-                      borderRadius: '50%',
-                      marginRight: '35px',
-                      border: '2px solid #666'
-                    }}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
-                    }}
-                  />
-                  <div style={{ flex: '1' }}>
+                  {language === 'ar' ? t('noCommentsYet') : 'No comments yet.'} {language === 'ar' ? t('beFirstToComment') : 'Be the first to comment!'}
+                </div>
+              ) : (
+                comments.map((comment, index) => (
+                  <div key={comment.id || index} style={{ 
+                    backgroundColor: '#2a2a2a', 
+                    border: '2px solid #444', 
+                    borderRadius: '8px', 
+                    padding: '16px', 
+                    marginBottom: '16px',
+                    width: '100%',
+                    minHeight: '120px',
+                    position: 'relative'
+                  }}>
                     <div style={{ 
-                      color: 'white', 
-                      fontWeight: 'bold', 
-                      fontSize: '14px',
-                      marginBottom: '4px'
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginBottom: '12px',
+                      width: '100%'
                     }}>
-                      {user?.name || 'Muaad Siala'}
+                      <img
+                        src={comment.user?.image || "/placeholder-user.jpg"}
+                        alt={comment.user?.name || "User"}
+                        style={{ 
+                          width: '32px', 
+                          height: '32px', 
+                          borderRadius: '50%',
+                          marginRight: '35px',
+                          border: '2px solid #666'
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
+                        }}
+                      />
+                      <div style={{ flex: '1' }}>
+                        <div style={{ 
+                          color: 'white', 
+                          fontWeight: 'bold', 
+                          fontSize: '14px',
+                          marginBottom: '4px'
+                        }}>
+                          {comment.user?.name || 'Anonymous User'}
+                        </div>
+                        <div style={{ 
+                          color: '#9ca3af', 
+                          fontSize: '12px'
+                        }}>
+                          {new Date(comment.createdAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </div>
+                      </div>
                     </div>
+                    
                     <div style={{ 
-                      color: '#9ca3af', 
-                      fontSize: '12px'
+                      marginBottom: '12px',
+                      width: '100%'
                     }}>
-                      Oct 27, 2025, 07:39 PM
+                      <div style={{ 
+                        color: 'white', 
+                        fontSize: '14px',
+                        lineHeight: '1.5',
+                        margin: '0'
+                      }}>
+                        {comment.text}
+                      </div>
                     </div>
+                    
+                    {user && (comment.userId === user.id || comment.userId === user.email) && (
+                      <div style={{ 
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        gap: '8px',
+                        marginTop: '12px'
+                      }}>
+                        {editingCommentIndex === index ? (
+                          <>
+                            <button 
+                              onClick={handleSaveEdit}
+                              style={{ 
+                                backgroundColor: '#16a34a', 
+                                color: 'white', 
+                                fontSize: '12px', 
+                                padding: '6px 12px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {language === 'ar' ? t('save') : 'Save'}
+                            </button>
+                            <button 
+                              onClick={handleCancelEdit}
+                              style={{ 
+                                backgroundColor: '#6b7280', 
+                                color: 'white', 
+                                fontSize: '12px', 
+                                padding: '6px 12px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {language === 'ar' ? t('cancel') : 'Cancel'}
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button 
+                              onClick={() => handleEditComment(index, comment.text)}
+                              style={{ 
+                                backgroundColor: '#2563eb', 
+                                color: 'white', 
+                                fontSize: '12px', 
+                                padding: '6px 12px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {language === 'ar' ? t('edit') : 'Edit'}
+                            </button>
+                            <button 
+                              onClick={() => handleDeleteComment(index)}
+                              style={{ 
+                                backgroundColor: '#dc2626', 
+                                color: 'white', 
+                                fontSize: '12px', 
+                                padding: '6px 12px',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {language === 'ar' ? t('delete') : 'Delete'}
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </div>
-                
-                <div style={{ 
-                  marginBottom: '12px',
-                  width: '100%'
-                }}>
-                  <div style={{ 
-                    color: 'white', 
-                    fontSize: '14px',
-                    lineHeight: '1.5',
-                    margin: '0'
-                  }}>
-                    هلا
-                  </div>
-                </div>
-                
-                <div style={{ 
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  gap: '8px',
-                  marginTop: '12px'
-                }}>
-                  <button style={{ 
-                    backgroundColor: '#2563eb', 
-                    color: 'white', 
-                    fontSize: '12px', 
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}>
-                    تعديل
-                  </button>
-                  <button style={{ 
-                    backgroundColor: '#dc2626', 
-                    color: 'white', 
-                    fontSize: '12px', 
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}>
-                    حذف
-                  </button>
-                </div>
-              </div>
-
-              {/* COMMENT 2 - SIMPLE HTML */}
-              <div style={{ 
-                backgroundColor: '#2a2a2a', 
-                border: '2px solid #444', 
-                borderRadius: '8px', 
-                padding: '16px', 
-                marginBottom: '16px',
-                width: '100%',
-                minHeight: '150px',
-                position: 'relative'
-              }}>
-                <div style={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '12px',
-                  width: '100%'
-                }}>
-                  <img
-                    src={user?.image || "/placeholder-user.jpg"}
-                    alt={user?.name || "User"}
-                    style={{ 
-                      width: '32px', 
-                      height: '32px', 
-                      borderRadius: '50%',
-                      marginRight: '35px',
-                      border: '2px solid #666'
-                    }}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/placeholder-user.jpg'
-                    }}
-                  />
-                  <div style={{ flex: '1' }}>
-                    <div style={{ 
-                      color: 'white', 
-                      fontWeight: 'bold', 
-                      fontSize: '14px',
-                      marginBottom: '4px'
-                    }}>
-                      {user?.name || 'Muaad Siala'}
-                    </div>
-                    <div style={{ 
-                      color: '#9ca3af', 
-                      fontSize: '12px'
-                    }}>
-                      Oct 27, 2025, 07:02 PM
-                    </div>
-                  </div>
-                </div>
-                
-                <div style={{ 
-                  marginBottom: '12px',
-                  width: '100%'
-                }}>
-                  <div style={{ 
-                    color: 'white', 
-                    fontSize: '14px',
-                    lineHeight: '1.5',
-                    margin: '0'
-                  }}>
-                    مرحبا
-                  </div>
-                </div>
-                
-                <div style={{ 
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  gap: '8px',
-                  marginTop: '12px'
-                }}>
-                  <button style={{ 
-                    backgroundColor: '#2563eb', 
-                    color: 'white', 
-                    fontSize: '12px', 
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}>
-                    تعديل
-                  </button>
-                  <button style={{ 
-                    backgroundColor: '#dc2626', 
-                    color: 'white', 
-                    fontSize: '12px', 
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}>
-                    حذف
-                  </button>
-                </div>
-              </div>
+                ))
+              )}
             </div>
 
             {/* Comment Input - NORMAL ORDER: Header → Input → Button */}
