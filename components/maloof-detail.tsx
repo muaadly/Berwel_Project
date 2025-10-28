@@ -259,49 +259,45 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
-    const refName = ref === otherEntriesScrollRef ? 'Other Entries' : 'Maloof Entries'
-    console.log(`${refName} scroll function called with direction:`, direction)
-    console.log('ref.current:', ref.current)
+    console.log('SCROLL FUNCTION CALLED - Direction:', direction, 'Ref:', ref.current)
     
-    if (ref.current) {
-      const scrollAmount = 300
-      const currentScroll = ref.current.scrollLeft
-      const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
-      
-      console.log(`${refName} BEFORE scroll - current=${currentScroll}, max=${maxScroll}, clientWidth=${ref.current.clientWidth}, scrollWidth=${ref.current.scrollWidth}`)
-      
-      // Check if there's actually content to scroll
-      if (maxScroll <= 0) {
-        console.log(`${refName} - No content to scroll (maxScroll=${maxScroll})`)
-        return
-      }
-      
-      let newScroll
-      if (direction === 'left') {
-        newScroll = Math.max(0, currentScroll - scrollAmount)
-      } else {
-        newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
-      }
-      
-      console.log(`${refName} scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
-      
-      // Try multiple scroll methods
-      try {
-        ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
-        console.log(`${refName} - scrollTo successful`)
-      } catch (e) {
-        console.log(`${refName} - scrollTo failed, trying scrollLeft:`, e)
-        ref.current.scrollLeft = newScroll
-        console.log(`${refName} - scrollLeft set to:`, ref.current.scrollLeft)
-      }
-      
-      // Verify the scroll actually happened
-      setTimeout(() => {
-        console.log(`${refName} AFTER scroll - scrollLeft=${ref.current?.scrollLeft}`)
-      }, 100)
-    } else {
-      console.error(`${refName} ref.current is null - cannot scroll`)
+    if (!ref.current) {
+      console.error('REF IS NULL!')
+      return
     }
+    
+    const scrollAmount = 400
+    const currentScroll = ref.current.scrollLeft
+    const maxScroll = ref.current.scrollWidth - ref.current.clientWidth
+    
+    console.log('SCROLL INFO:', {
+      currentScroll,
+      maxScroll,
+      clientWidth: ref.current.clientWidth,
+      scrollWidth: ref.current.scrollWidth
+    })
+    
+    if (maxScroll <= 0) {
+      console.log('NO CONTENT TO SCROLL!')
+      return
+    }
+    
+    let newScroll
+    if (direction === 'left') {
+      newScroll = Math.max(0, currentScroll - scrollAmount)
+    } else {
+      newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
+    }
+    
+    console.log('SCROLLING TO:', newScroll)
+    
+    // Force scroll immediately
+    ref.current.scrollLeft = newScroll
+    
+    // Also try smooth scroll
+    ref.current.scrollTo({ left: newScroll, behavior: 'smooth' })
+    
+    console.log('SCROLL COMPLETE - New position:', ref.current.scrollLeft)
   }
 
   const getEntryImagePath = (imageName: string) => {
@@ -676,8 +672,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
           </div>
-          <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide other-entries-scroll-container" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none', maxWidth: '100%' }}>
-            <div className="flex gap-6 pb-2 other-entries-scroll-content" style={{ width: 'max-content', minWidth: 'max-content' }}>
+          <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex gap-6 pb-2" style={{ width: 'max-content' }}>
               {otherEntries.length === 0 ? (
                 <div className="text-muted-foreground">
                   {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}
