@@ -257,7 +257,8 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
   }
 
   const scroll = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
-    console.log('Maloof scroll function called with direction:', direction)
+    const refName = ref === otherEntriesScrollRef ? 'Other Entries' : 'Maloof Entries'
+    console.log(`${refName} scroll function called with direction:`, direction)
     console.log('ref.current:', ref.current)
     
     if (ref.current) {
@@ -272,7 +273,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         newScroll = Math.min(maxScroll, currentScroll + scrollAmount)
       }
       
-      console.log(`Maloof scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
+      console.log(`${refName} scrolling ${direction}: current=${currentScroll}, new=${newScroll}, max=${maxScroll}`)
       console.log('Container dimensions:', {
         clientWidth: ref.current.clientWidth,
         scrollWidth: ref.current.scrollWidth,
@@ -287,7 +288,7 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         ref.current.scrollLeft = newScroll
       }
     } else {
-      console.error('ref.current is null - cannot scroll')
+      console.error(`${refName} ref.current is null - cannot scroll`)
     }
   }
 
@@ -641,30 +642,53 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
         {/* Other Entries Section */}
         <div className="mt-12">
           <div className={`flex items-center justify-between mb-4 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-            <div className="flex space-x-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherEntriesScrollRef, 'left')}
-              >
-                <ChevronLeft className="h-4 w-4 text-primary" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(otherEntriesScrollRef, 'right')}
-              >
-                <ChevronRight className="h-4 w-4 text-primary" />
-              </Button>
-            </div>
             <h2 className="text-2xl font-bold text-foreground">
               {language === 'ar' ? t('otherEntries') : 'Other Entries'}
             </h2>
+            <div className="flex space-x-2">
+              {language === 'ar' ? (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherEntriesScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherEntriesScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherEntriesScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(otherEntriesScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
           <div ref={otherEntriesScrollRef} className="w-full overflow-x-auto scrollbar-hide" style={{ overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <div className="flex flex-row flex-nowrap gap-6 pb-2 whitespace-nowrap">
+            <div className="flex w-max gap-6 pb-2">
               {otherEntries.length === 0 ? (
                 <div className="text-muted-foreground">
                   {language === 'ar' ? t('noOtherEntriesFound') : 'No other entries found.'}
