@@ -172,6 +172,12 @@ export default function Navigation({ searchOpen, setSearchOpen, searchValue, set
                         <User className="mr-2 h-4 w-4" />
                         {user.name}
                       </DropdownMenuItem>
+                      <Link href="/profile">
+                        <DropdownMenuItem className="text-foreground hover:bg-muted cursor-pointer">
+                          <User className="mr-2 h-4 w-4" />
+                          {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem 
                         onClick={handleSignOut}
                         className="text-white hover:bg-gray-800 cursor-pointer"
