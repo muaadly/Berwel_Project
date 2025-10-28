@@ -676,23 +676,46 @@ export default function MaloofDetail({ entryId }: MaloofDetailProps) {
             <h2 className="text-3xl font-bold text-foreground">
               {language === 'ar' ? t('maloofEntries') : 'Maloof Entries'}
             </h2>
-            <div className={`flex space-x-2 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(maloofEntriesScrollRef, 'left')}
-              >
-                <ChevronLeft className="h-4 w-4 text-primary" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
-                onClick={() => scroll(maloofEntriesScrollRef, 'right')}
-              >
-                <ChevronRight className="h-4 w-4 text-primary" />
-              </Button>
+            <div className="flex space-x-2">
+              {language === 'ar' ? (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(maloofEntriesScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(maloofEntriesScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(maloofEntriesScrollRef, 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border text-foreground bg-transparent border-2 hover:bg-transparent hover:text-primary focus-visible:ring-0"
+                    onClick={() => scroll(maloofEntriesScrollRef, 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Button>
+                </>
+              )}
             </div>
           </div>
           <div ref={maloofEntriesScrollRef} className="bg-card border-2 border-border rounded-lg px-8 pt-8 pb-4 shadow-lg transition-colors duration-200 flex items-center gap-8 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
