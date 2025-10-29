@@ -111,7 +111,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center">
               <div className="flex items-center justify-center bg-gray-800 rounded-2xl shadow-lg h-40 md:h-48 w-full transition-colors duration-200 hover:border-2 hover:border-orange-500 hover:bg-orange-950 group focus:outline-none focus:ring-2 focus:ring-orange-500">
                 <a href="https://csmedia.ly" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/Creative_Solution_Logo.png" alt="Creative Solution" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
+                  <img src="/Partners%20Logos/CS_logo_new.png" alt="Creative Solution" className="max-h-36 md:max-h-44 w-auto object-contain mx-auto" />
                 </a>
               </div>
             </div>
